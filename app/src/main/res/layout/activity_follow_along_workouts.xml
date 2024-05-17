@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/main"
     android:orientation="vertical">
 
     <TextView
@@ -10,7 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
         android:paddingBottom="20dp"
-        android:text="Training"
+        android:text="Follow-Along Workouts"
         android:textSize="50sp"
         android:textStyle="bold" />
 
