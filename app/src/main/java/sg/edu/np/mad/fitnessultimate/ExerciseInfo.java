@@ -11,7 +11,7 @@ public class ExerciseInfo implements Parcelable {
     private String muscleGroup;
     private String difficulty;
 
-    public ExerciseInfo(String name, String description, String videoUrl, String imageUrl, String equipment, String muscleGroup, String difficulty, String type) {
+    public ExerciseInfo(String name, String description, String videoUrl, String muscleGroup, String difficulty) {
         this.name = name;
         this.description = description;
         this.videoUrl = videoUrl;
