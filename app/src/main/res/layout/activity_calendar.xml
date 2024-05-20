@@ -22,6 +22,7 @@
             android:orientation="horizontal">
 
             <TextView
+                android:id="@+id/monthYearTV"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="5"
@@ -29,17 +30,17 @@
                 android:textSize="20sp"/>
 
             <Button
+                android:id="@+id/preMonth"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="<"
                 android:textStyle="bold"/>
 
             <Button
+                android:id="@+id/nextMonth"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text=">"
                 android:textStyle="bold"/>
 
         </LinearLayout>
@@ -114,6 +115,7 @@
         </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/calendarRecyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
 
