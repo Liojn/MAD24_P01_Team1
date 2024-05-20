@@ -16,13 +16,13 @@
             android:name=".ExerciseActivity"
             android:exported="false" />
         <activity
-            android:name=".ExerciseCatalogue"
+            android:name=".ExerciseCatalogueActivity"
             android:exported="false" />
         <activity
-            android:name=".FollowAlongWorkouts"
+            android:name=".FollowAlongWorkoutsActivity"
             android:exported="false" />
         <activity
-            android:name=".TrainingMenu"
+            android:name=".TrainingMenuActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

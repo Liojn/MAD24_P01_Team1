@@ -2,7 +2,6 @@ package sg.edu.np.mad.fitnessultimate;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -30,10 +29,15 @@ public class ExerciseActivity extends AppCompatActivity {
 
         TextView exerciseTitle = findViewById(R.id.exerciseTitle);
         TextView exerciseDesc = findViewById(R.id.exerciseDescription);
+        TextView exerciseMuscleGroup = findViewById(R.id.exerciseMuscleGroup);
+        TextView exerciseDifficulty = findViewById(R.id.exerciseDifficulty);
         Button backBtn = findViewById(R.id.backBtn);
 
+        assert exercise != null;
         exerciseTitle.setText(exercise.getName());
         exerciseDesc.setText(exercise.getDescription());
+        exerciseMuscleGroup.setText(String.format("Muscle Group: %s", exercise.getMuscleGroup()));
+        exerciseDifficulty.setText(String.format("Difficulty: %s", exercise.getDifficulty()));
         backBtn.setOnClickListener(v -> finish());
     }
 }

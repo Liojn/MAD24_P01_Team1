@@ -7,13 +7,15 @@ import android.os.Parcelable;
 public class ExerciseInfo implements Parcelable {
     private String name;
     private String description;
+    private String imageUri;
     private String videoUrl;
     private String muscleGroup;
     private String difficulty;
 
-    public ExerciseInfo(String name, String description, String videoUrl, String muscleGroup, String difficulty) {
+    public ExerciseInfo(String name, String description, String imageUri, String videoUrl, String muscleGroup, String difficulty) {
         this.name = name;
         this.description = description;
+        this.imageUri = imageUri;
         this.videoUrl = videoUrl;
         this.muscleGroup = muscleGroup;
         this.difficulty = difficulty;
@@ -22,6 +24,7 @@ public class ExerciseInfo implements Parcelable {
     protected ExerciseInfo(Parcel in) {
         name = in.readString();
         description = in.readString();
+        imageUri = in.readString();
         videoUrl = in.readString();
         muscleGroup = in.readString();
         difficulty = in.readString();
@@ -36,6 +39,7 @@ public class ExerciseInfo implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(name);
         dest.writeString(description);
+        dest.writeString(imageUri);
         dest.writeString(videoUrl);
         dest.writeString(muscleGroup);
         dest.writeString(difficulty);
@@ -59,6 +63,9 @@ public class ExerciseInfo implements Parcelable {
 
     public String getDescription() {
         return description;
+    }
+    public String getImageUri() {
+        return imageUri;
     }
 
     public String getVideoUrl() {

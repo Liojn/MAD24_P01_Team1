@@ -22,9 +22,26 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
-        android:paddingBottom="20dp"
         android:text="EXERCISE HOLDER"
         android:textSize="50sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/exerciseMuscleGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:text="Muscle Group: TEST"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/exerciseDifficulty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:text="Difficulty: TEST"
+        android:textSize="20sp"
         android:textStyle="bold" />
 
     <TextView

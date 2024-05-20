@@ -12,12 +12,9 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.PrintStream;
 import java.util.List;
 
-public class TrainingMenu extends AppCompatActivity {
+public class TrainingMenuActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,11 +36,11 @@ public class TrainingMenu extends AppCompatActivity {
         followAlongWorkouts.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(TrainingMenu.this, FollowAlongWorkouts.class);
+                Intent intent = new Intent(TrainingMenuActivity.this, FollowAlongWorkoutsActivity.class);
                 Log.i(this.getClass().getSimpleName(),
                         String.format("[%s]: redirecting to activity %s",
-                        TrainingMenu.class.getSimpleName(),
-                        FollowAlongWorkouts.class.getSimpleName()));
+                        TrainingMenuActivity.class.getSimpleName(),
+                        FollowAlongWorkoutsActivity.class.getSimpleName()));
                 startActivity(intent);
             }
         });
@@ -51,11 +48,11 @@ public class TrainingMenu extends AppCompatActivity {
         exercises.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(TrainingMenu.this, ExerciseCatalogue.class);
+                Intent intent = new Intent(TrainingMenuActivity.this, ExerciseCatalogueActivity.class);
                 Log.i(this.getClass().getSimpleName(),
                         String.format("[%s]: redirecting to activity %s",
-                                TrainingMenu.class.getSimpleName(),
-                                ExerciseCatalogue.class.getSimpleName()));
+                                TrainingMenuActivity.class.getSimpleName(),
+                                ExerciseCatalogueActivity.class.getSimpleName()));
                 startActivity(intent);
             }
         });

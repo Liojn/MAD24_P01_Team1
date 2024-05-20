@@ -1,42 +1,48 @@
 [
   {
     "name": "Push Ups",
-    "videoUri": "android.resource://your.package.name/raw/push_ups",
+    "imageUri": "android.resource://package.name/raw/push_ups",
+    "videoUrl": "https://youtube.com/sth",
     "description": "Push ups are a basic exercise used in civilian athletic training or physical education and commonly in military physical training.",
     "muscleGroup": "Chest",
     "difficulty": "Intermediate"
   },
   {
     "name": "Squats",
-    "videoUri": "android.resource://your.package.name/raw/squats",
+    "imageUri": "android.resource://package.name/raw/squats",
+    "videoUrl": "https://youtube.com/sth",
     "description": "The squat is a strength exercise in which the trainee lowers their hips from a standing position and then stands back up.",
     "muscleGroup": "Legs",
     "difficulty": "Beginner"
   },
   {
     "name": "Crunches",
-    "videoUri": "android.resource://your.package.name/raw/crunches",
+    "imageUri": "android.resource://package.name/raw/crunches",
+    "videoUrl": "https://youtube.com/sth",
     "description": "The crunch is a popular core move that helps to strengthen your abdominal muscles.",
     "muscleGroup": "Abs",
     "difficulty": "Beginner"
   },
   {
     "name": "Pull Ups",
-    "videoUri": "android.resource://your.package.name/raw/pull_ups",
+    "imageUri": "android.resource://package.name/raw/pull_ups",
+    "videoUrl": "https://youtube.com/sth",
     "description": "A pull-up is an upper-body strength exercise. The pull-up is performed with a palms facing forward position.",
     "muscleGroup": "Back",
     "difficulty": "Advanced"
   },
   {
     "name": "Plank",
-    "videoUri": "android.resource://your.package.name/raw/plank",
+    "imageUri": "android.resource://package.name/raw/plank",
+    "videoUrl": "https://youtube.com/sth",
     "description": "The plank is an isometric core strength exercise that involves maintaining a position similar to a push-up for the maximum possible time.",
     "muscleGroup": "Abs",
     "difficulty": "Beginner"
   },
   {
     "name": "Muscle Ups",
-    "videoUri": "android.resource://your.package.name/raw/muscle_ups",
+    "imageUri": "android.resource://package.name/raw/muscle_ups",
+    "videoUrl": "https://youtube.com/sth",
     "description": "A muscle-up is a calisthenics exercise that combines a pull-up with a dip. It is a combination of strength and technique.",
     "muscleGroup": "Chest",
     "difficulty": "Expert"
