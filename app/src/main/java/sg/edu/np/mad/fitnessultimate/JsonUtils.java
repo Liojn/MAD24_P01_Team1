@@ -39,5 +39,36 @@ public class JsonUtils {
         Type exerciseListType = new TypeToken<List<ExerciseInfo>>() {}.getType();
         return gson.fromJson(json, exerciseListType);
     }
-}
 
+    public static List<Workout> loadWorkouts(Context context) {
+        String currentClass = JsonUtils.class.getSimpleName();
+        String fileName = "workouts.json";
+        String json = null;
+
+        try {
+            AssetManager assetManager = context.getAssets();
+            InputStream is = assetManager.open(fileName);
+            int size = is.available();
+            byte[] buffer = new byte[size];
+            int bytesRead = is.read(buffer);
+            is.close();
+
+            if (bytesRead == -1) {
+                System.err.printf("[%s] failed to read %s file", currentClass, fileName);
+                return null;
+            }
+
+            json = new String(buffer, StandardCharsets.UTF_8);
+        } catch (IOException ex) {
+            System.err.printf("[%s] ioexception when reading %s: %s", currentClass, fileName, ex.getMessage());
+            return null;
+        }
+
+        Gson gson = new Gson();
+        Type workoutListType = new TypeToken<List<Workout>>() {}.getType();
+        List<Workout> workouts = gson.fromJson(json, workoutListType);
+        List<ExerciseInfo> exerciseInfoList = GlobalExerciseList.getInstance().getExerciseList();
+
+        return gson.fromJson(json, workoutListType);
+    }
+}

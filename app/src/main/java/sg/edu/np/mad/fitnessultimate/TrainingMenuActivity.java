@@ -27,16 +27,21 @@ public class TrainingMenuActivity extends AppCompatActivity {
             return insets;
         });
 
-        // note to self: objects in java are passed by reference (i.e &object)
-        List<ExerciseInfo> exerciseList = JsonUtils.loadExercises(this);
+        // populate singleton class with exercise list
+        GlobalExerciseList.getInstance().setExerciseList(JsonUtils.loadExercises(this));
+        List<Workout> workoutList = JsonUtils.loadWorkouts(this);
 
+        // locate buttons
         Button followAlongWorkouts = findViewById(R.id.followAlongWorkouts);
         Button exercises = findViewById(R.id.exercises);
 
+        // set button click listeners
         followAlongWorkouts.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(TrainingMenuActivity.this, FollowAlongWorkoutsActivity.class);
+
+                // logging for debugging purposes
                 Log.i(this.getClass().getSimpleName(),
                         String.format("[%s]: redirecting to activity %s",
                         TrainingMenuActivity.class.getSimpleName(),

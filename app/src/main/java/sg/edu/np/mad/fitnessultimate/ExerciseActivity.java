@@ -25,7 +25,7 @@ public class ExerciseActivity extends AppCompatActivity {
         });
 
         Intent intent = getIntent();
-        ExerciseInfo exercise = intent.getParcelableExtra("exercise");
+        ExerciseInfo exercise = intent.getParcelableExtra("exercise", ExerciseInfo.class);
 
         TextView exerciseTitle = findViewById(R.id.exerciseTitle);
         TextView exerciseDesc = findViewById(R.id.exerciseDescription);

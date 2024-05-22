@@ -1,6 +1,7 @@
 package sg.edu.np.mad.fitnessultimate;
 
 import android.os.Bundle;
+import android.provider.Settings;
 import android.widget.Button;
 
 import androidx.activity.EdgeToEdge;
@@ -30,7 +31,7 @@ public class ExerciseCatalogueActivity extends AppCompatActivity {
         RecyclerView exerciseRecyclerView = findViewById(R.id.exerciseRecyclerView);
         exerciseRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        List<ExerciseInfo> exerciseList = JsonUtils.loadExercises(this);
+        List<ExerciseInfo> exerciseList = GlobalExerciseList.getInstance().getExerciseList();
 
         backBtn.setOnClickListener(v -> finish());
         ExerciseAdapter exerciseAdapter = new ExerciseAdapter(exerciseList);
