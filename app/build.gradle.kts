@@ -8,7 +8,7 @@ android {
 
     defaultConfig {
         applicationId = "sg.edu.np.mad.fitnessultimate"
-        minSdk = 21
+        minSdk = 30
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
