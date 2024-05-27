@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">FitnessUltimate</string>
+    <string name="default_web_client_id">your-client-id.apps.googleusercontent.com</string>
 </resources>
