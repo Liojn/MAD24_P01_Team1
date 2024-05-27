@@ -1,4 +1,4 @@
-package sg.edu.np.mad.fitnessultimate;
+package sg.edu.np.mad.fitnessultimate.activity;
 
 import android.os.Bundle;
 
@@ -7,6 +7,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
+import sg.edu.np.mad.fitnessultimate.R;
 
 public class MainActivity extends AppCompatActivity {
 
