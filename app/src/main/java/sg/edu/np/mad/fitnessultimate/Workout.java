@@ -55,7 +55,7 @@ public class Workout {
             this.name = name;
             this.count = count;
             this.sets = sets;
-            this.exerciseInfo = GlobalExerciseList.getInstance().getExerciseList().stream()
+            this.exerciseInfo = GlobalExerciseData.getInstance().getExerciseList().stream()
                     .filter(exercise -> exercise.getName().equals(name))
                     .findFirst()
                     .orElse(null);

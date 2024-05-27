@@ -8,17 +8,19 @@ import java.util.ArrayList;
     * used to store the list of exercises loaded from json file
  */
 
-public class GlobalExerciseList {
-    private static GlobalExerciseList inst;
+public class GlobalExerciseData {
+    private static GlobalExerciseData inst;
     private List<ExerciseInfo> exerciseList;
+    private List<Workout> workoutList;
 
-    private GlobalExerciseList() {
+    private GlobalExerciseData() {
         exerciseList = new ArrayList<>();
+        workoutList = new ArrayList<>();
     }
 
-    public static synchronized GlobalExerciseList getInstance() {
+    public static synchronized GlobalExerciseData getInstance() {
         if (inst == null) {
-            inst = new GlobalExerciseList();
+            inst = new GlobalExerciseData();
         }
         return inst;
     }
@@ -27,7 +29,15 @@ public class GlobalExerciseList {
         return exerciseList;
     }
 
+    public List<Workout> getWorkoutList() {
+        return workoutList;
+    }
+
     public void setExerciseList(List<ExerciseInfo> exerciseList) {
         this.exerciseList = exerciseList;
+    }
+
+    public void setWorkoutList(List<Workout> workoutList) {
+        this.workoutList = workoutList;
     }
 }

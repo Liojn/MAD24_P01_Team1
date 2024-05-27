@@ -28,7 +28,7 @@ public class TrainingMenuActivity extends AppCompatActivity {
         });
 
         // populate singleton class with exercise list
-        GlobalExerciseList.getInstance().setExerciseList(JsonUtils.loadExercises(this));
+        GlobalExerciseData.getInstance().setExerciseList(JsonUtils.loadExercises(this));
         List<Workout> workoutList = JsonUtils.loadWorkouts(this);
 
         // locate buttons

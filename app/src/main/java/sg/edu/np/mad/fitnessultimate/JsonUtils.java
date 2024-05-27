@@ -67,7 +67,7 @@ public class JsonUtils {
         Gson gson = new Gson();
         Type workoutListType = new TypeToken<List<Workout>>() {}.getType();
         List<Workout> workouts = gson.fromJson(json, workoutListType);
-        List<ExerciseInfo> exerciseInfoList = GlobalExerciseList.getInstance().getExerciseList();
+        List<ExerciseInfo> exerciseInfoList = GlobalExerciseData.getInstance().getExerciseList();
 
         return gson.fromJson(json, workoutListType);
     }
