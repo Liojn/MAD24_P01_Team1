@@ -1,4 +1,4 @@
-package sg.edu.np.mad.fitnessultimate;
+package sg.edu.np.mad.fitnessultimate.training;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,7 +12,11 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import java.util.List;
+import sg.edu.np.mad.fitnessultimate.R;
+import sg.edu.np.mad.fitnessultimate.training.exercises.ExerciseCatalogueActivity;
+import sg.edu.np.mad.fitnessultimate.training.helpers.GlobalExerciseData;
+import sg.edu.np.mad.fitnessultimate.training.helpers.JsonUtils;
+import sg.edu.np.mad.fitnessultimate.training.workouts.WorkoutsCatalogueActivity;
 
 public class TrainingMenuActivity extends AppCompatActivity {
 
@@ -27,9 +31,9 @@ public class TrainingMenuActivity extends AppCompatActivity {
             return insets;
         });
 
-        // populate singleton class with exercise list
+        // populate singleton class with exercise and workout list
         GlobalExerciseData.getInstance().setExerciseList(JsonUtils.loadExercises(this));
-        List<Workout> workoutList = JsonUtils.loadWorkouts(this);
+        GlobalExerciseData.getInstance().setWorkoutList(JsonUtils.loadWorkouts(this));
 
         // locate buttons
         Button followAlongWorkouts = findViewById(R.id.followAlongWorkouts);
@@ -39,13 +43,13 @@ public class TrainingMenuActivity extends AppCompatActivity {
         followAlongWorkouts.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(TrainingMenuActivity.this, FollowAlongWorkoutsActivity.class);
+                Intent intent = new Intent(TrainingMenuActivity.this, WorkoutsCatalogueActivity.class);
 
                 // logging for debugging purposes
                 Log.i(this.getClass().getSimpleName(),
                         String.format("[%s]: redirecting to activity %s",
                         TrainingMenuActivity.class.getSimpleName(),
-                        FollowAlongWorkoutsActivity.class.getSimpleName()));
+                        WorkoutsCatalogueActivity.class.getSimpleName()));
                 startActivity(intent);
             }
         });

@@ -1,7 +1,10 @@
-package sg.edu.np.mad.fitnessultimate;
+package sg.edu.np.mad.fitnessultimate.training.helpers;
 
 import java.util.List;
 import java.util.ArrayList;
+
+import sg.edu.np.mad.fitnessultimate.training.exercises.ExerciseInfo;
+import sg.edu.np.mad.fitnessultimate.training.workouts.Workout;
 
 /*
     * singleton class to store list of exercises

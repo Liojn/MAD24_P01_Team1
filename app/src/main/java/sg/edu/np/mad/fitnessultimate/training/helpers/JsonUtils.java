@@ -1,4 +1,4 @@
-package sg.edu.np.mad.fitnessultimate;
+package sg.edu.np.mad.fitnessultimate.training.helpers;
 
 import android.content.Context;
 import android.content.res.AssetManager;
@@ -9,6 +9,9 @@ import java.io.InputStream;
 import java.lang.reflect.Type;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
+
+import sg.edu.np.mad.fitnessultimate.training.exercises.ExerciseInfo;
+import sg.edu.np.mad.fitnessultimate.training.workouts.Workout;
 
 public class JsonUtils {
     public static List<ExerciseInfo> loadExercises(Context context) {

@@ -1,4 +1,4 @@
-package sg.edu.np.mad.fitnessultimate;
+package sg.edu.np.mad.fitnessultimate.training.workouts;
 
 import android.os.Bundle;
 import android.widget.Button;
@@ -13,13 +13,18 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-public class ExerciseCatalogueActivity extends AppCompatActivity {
+import sg.edu.np.mad.fitnessultimate.R;
+import sg.edu.np.mad.fitnessultimate.training.exercises.ExerciseAdapter;
+import sg.edu.np.mad.fitnessultimate.training.exercises.ExerciseInfo;
+import sg.edu.np.mad.fitnessultimate.training.helpers.GlobalExerciseData;
+
+public class WorkoutsCatalogueActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_exercise_catalogue);
+        setContentView(R.layout.activity_workouts_catalogue);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -27,13 +32,13 @@ public class ExerciseCatalogueActivity extends AppCompatActivity {
         });
 
         Button backBtn = findViewById(R.id.backBtn);
-        RecyclerView exerciseRecyclerView = findViewById(R.id.exerciseRecyclerView);
+        RecyclerView exerciseRecyclerView = findViewById(R.id.workoutsRecyclerView);
         exerciseRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        List<ExerciseInfo> exerciseList = GlobalExerciseData.getInstance().getExerciseList();
+        List<Workout> workoutsList = GlobalExerciseData.getInstance().getWorkoutList();
 
         backBtn.setOnClickListener(v -> finish());
-        ExerciseAdapter exerciseAdapter = new ExerciseAdapter(exerciseList);
-        exerciseRecyclerView.setAdapter(exerciseAdapter);
+        WorkoutAdapter workoutAdapter = new WorkoutAdapter(workoutsList);
+        exerciseRecyclerView.setAdapter(workoutAdapter);
     }
 }

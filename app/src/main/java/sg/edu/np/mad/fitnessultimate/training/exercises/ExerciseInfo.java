@@ -1,4 +1,4 @@
-package sg.edu.np.mad.fitnessultimate;
+package sg.edu.np.mad.fitnessultimate.training.exercises;
 
 import android.os.Parcel;
 import android.os.Parcelable;

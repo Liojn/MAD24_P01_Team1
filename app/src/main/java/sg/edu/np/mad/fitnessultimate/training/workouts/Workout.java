@@ -1,9 +1,15 @@
-package sg.edu.np.mad.fitnessultimate;
+package sg.edu.np.mad.fitnessultimate.training.workouts;
+
+import android.os.Parcelable;
+import android.os.Parcel;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Workout {
+import sg.edu.np.mad.fitnessultimate.training.exercises.ExerciseInfo;
+import sg.edu.np.mad.fitnessultimate.training.helpers.GlobalExerciseData;
+
+public class Workout implements Parcelable {
     private String name;
     private String description;
     private int breakTimeInMinutes;
@@ -23,6 +29,39 @@ public class Workout {
             exerciseInfoList.add(exercise.getExerciseInfo());
         }
     }
+
+    protected Workout(Parcel  in) {
+        name = in.readString();
+        description = in.readString();
+        breakTimeInMinutes = in.readInt();
+        estimatedTimeInMinutes = in.readInt();
+        exercises = new ArrayList<>();
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(name);
+        dest.writeString(description);
+        dest.writeInt(breakTimeInMinutes);
+        dest.writeInt(estimatedTimeInMinutes);
+    }
+
+    public static final Parcelable.Creator<Workout> CREATOR = new Creator<Workout>() {
+        @Override
+        public Workout createFromParcel(Parcel in) {
+            return new Workout(in);
+        }
+
+        @Override
+        public Workout[] newArray(int size) {
+            return new Workout[size];
+        }
+    };
 
     public String getName() {
         return name;

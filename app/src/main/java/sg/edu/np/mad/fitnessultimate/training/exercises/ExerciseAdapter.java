@@ -1,7 +1,6 @@
-package sg.edu.np.mad.fitnessultimate;
+package sg.edu.np.mad.fitnessultimate.training.exercises;
 
 import android.content.Intent;
-import android.os.Parcelable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +10,8 @@ import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import sg.edu.np.mad.fitnessultimate.R;
 
 
 public class ExerciseAdapter extends RecyclerView.Adapter<ExerciseViewHolder> {
