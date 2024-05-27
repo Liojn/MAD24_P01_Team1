@@ -46,5 +46,13 @@
     "description": "A muscle-up is a calisthenics exercise that combines a pull-up with a dip. It is a combination of strength and technique.",
     "muscleGroup": "Chest",
     "difficulty": "Expert"
+  },
+  {
+    "name": "Leg Raises",
+    "imageUri": "android.resource://package.name/raw/leg_raises",
+    "videoUrl": "https://youtube.com/sth",
+    "description": "joever",
+    "muscleGroup": "Core",
+    "difficulty": "Beginner"
   }
 ]

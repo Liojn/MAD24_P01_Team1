@@ -42,8 +42,6 @@ public class WorkoutAdapter extends RecyclerView.Adapter<WorkoutViewHolder> {
 
     @Override
     public int getItemCount() {
-        int size = workoutList.size();
-        Log.i(this.getClass().getSimpleName(), String.format("[%s]: item count: %d", this.getClass().getSimpleName(), size));
-        return size;
+        return workoutList.size();
     }
 }

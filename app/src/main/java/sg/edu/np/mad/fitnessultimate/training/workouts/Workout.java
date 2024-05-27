@@ -2,6 +2,7 @@ package sg.edu.np.mad.fitnessultimate.training.workouts;
 
 import android.os.Parcelable;
 import android.os.Parcel;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +16,6 @@ public class Workout implements Parcelable {
     private int breakTimeInMinutes;
     private int estimatedTimeInMinutes;
     private List<Exercise> exercises;
-    private List<ExerciseInfo> exerciseInfoList = new ArrayList<>();
 
     public Workout(String name, String description, int breakTimeInMinutes, int estimatedTimeInMinutes, List<Exercise> exercises) {
         this.name = name;
@@ -23,19 +23,14 @@ public class Workout implements Parcelable {
         this.breakTimeInMinutes = breakTimeInMinutes;
         this.estimatedTimeInMinutes = estimatedTimeInMinutes;
         this.exercises = exercises;
-
-        // populate exercise info list at initialisation to avoid ensure smooth lookup
-        for (Exercise exercise : exercises) {
-            exerciseInfoList.add(exercise.getExerciseInfo());
-        }
     }
 
-    protected Workout(Parcel  in) {
+    protected Workout(Parcel in) {
         name = in.readString();
         description = in.readString();
         breakTimeInMinutes = in.readInt();
         estimatedTimeInMinutes = in.readInt();
-        exercises = new ArrayList<>();
+        exercises = in.createTypedArrayList(Exercise.CREATOR);
     }
 
     @Override
@@ -49,6 +44,7 @@ public class Workout implements Parcelable {
         dest.writeString(description);
         dest.writeInt(breakTimeInMinutes);
         dest.writeInt(estimatedTimeInMinutes);
+        dest.writeTypedList(exercises);
     }
 
     public static final Parcelable.Creator<Workout> CREATOR = new Creator<Workout>() {
@@ -83,21 +79,21 @@ public class Workout implements Parcelable {
         return exercises;
     }
 
+    public void setExercises(List<Exercise> exercises) {
+        Log.i("Workout", String.format("%s: set %d exercises", name, exercises.size()));
+        this.exercises = exercises;
+    }
+
     // inner class to store exercise info relative to workout
-    public static class Exercise {
+    public static class Exercise implements Parcelable {
         private String name;
         private int count;
         private int sets;
-        private ExerciseInfo exerciseInfo;
 
         public Exercise(String name, int count, int sets) {
             this.name = name;
             this.count = count;
             this.sets = sets;
-            this.exerciseInfo = GlobalExerciseData.getInstance().getExerciseList().stream()
-                    .filter(exercise -> exercise.getName().equals(name))
-                    .findFirst()
-                    .orElse(null);
         }
 
         public String getName() {
@@ -112,8 +108,35 @@ public class Workout implements Parcelable {
             return sets;
         }
 
-        public ExerciseInfo getExerciseInfo() {
-            return exerciseInfo;
+
+        protected Exercise(Parcel in) {
+            name = in.readString();
+            count = in.readInt();
+            sets = in.readInt();
         }
+
+        @Override
+        public int describeContents() {
+            return 0;
+        }
+
+        @Override
+        public void writeToParcel(Parcel dest, int flags) {
+            dest.writeString(name);
+            dest.writeInt(count);
+            dest.writeInt(sets);
+        }
+
+        public static final Parcelable.Creator<Exercise> CREATOR = new Creator<Exercise>() {
+            @Override
+            public Exercise createFromParcel(Parcel in) {
+                return new Exercise(in);
+            }
+
+            @Override
+            public Exercise[] newArray(int size) {
+                return new Exercise[size];
+            }
+        };
     }
 }

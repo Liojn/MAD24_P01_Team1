@@ -15,6 +15,8 @@
         <activity
             android:name=".training.exercises.ExerciseActivity"
             android:exported="false" />
+        <activity android:name=".training.workouts.WorkoutActivity"
+            android:exported="false" />
         <activity
             android:name=".training.exercises.ExerciseCatalogueActivity"
             android:exported="false" />

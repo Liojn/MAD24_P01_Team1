@@ -2,7 +2,13 @@ package sg.edu.np.mad.fitnessultimate.training.helpers;
 
 import android.content.Context;
 import android.content.res.AssetManager;
+import android.util.Log;
+
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
 import java.io.IOException;
 import java.io.InputStream;
@@ -70,8 +76,26 @@ public class JsonUtils {
         Gson gson = new Gson();
         Type workoutListType = new TypeToken<List<Workout>>() {}.getType();
         List<Workout> workouts = gson.fromJson(json, workoutListType);
-        List<ExerciseInfo> exerciseInfoList = GlobalExerciseData.getInstance().getExerciseList();
 
-        return gson.fromJson(json, workoutListType);
+        JsonArray workoutsJsonArray = JsonParser.parseString(json).getAsJsonArray();
+        Type exerciseListType = new TypeToken<List<Workout.Exercise>>() {}.getType();
+        for (JsonElement workoutElement : workoutsJsonArray) {
+            JsonObject workoutObject = workoutElement.getAsJsonObject();
+            JsonArray exercisesJson = workoutObject.getAsJsonArray("exercises");
+            List<Workout.Exercise> exercises = gson.fromJson(exercisesJson, exerciseListType);
+
+            Log.i("JsonUtils", "Workout: " + workoutObject.get("name").getAsString() + " Exercises: " + exercises.size());
+
+            for (Workout workout : workouts) {
+                Log.i("JsonUtils", String.format("workout: %s", workout.getName()));
+                if (workout.getName().equals(workoutObject.get("name").getAsString())) {
+                    Log.i("JsonUtils", "exercises set");
+                    workout.setExercises(exercises);
+                    break;
+                }
+            }
+        }
+
+        return workouts;
     }
 }
