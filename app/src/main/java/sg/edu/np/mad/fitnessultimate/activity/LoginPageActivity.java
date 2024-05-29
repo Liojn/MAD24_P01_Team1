@@ -195,14 +195,11 @@ public class LoginPageActivity extends AppCompatActivity {
                 .build();
 
         client = GoogleSignIn.getClient(this, options);
-        googleSignIn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = client.getSignInIntent();
+        googleSignIn.setOnClickListener(view -> {
+            Intent intent = client.getSignInIntent();
 
-                resultLauncher.launch(new Intent(client.getSignInIntent()));
-                // startActivityForResult(intent, 1234);
-            }
+            resultLauncher.launch(new Intent(client.getSignInIntent()));
+            // startActivityForResult(intent, 1234);
         });
     }
 
@@ -218,17 +215,14 @@ public class LoginPageActivity extends AppCompatActivity {
 
                     AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
                     FirebaseAuth.getInstance().signInWithCredential(credential)
-                            .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                                @Override
-                                public void onComplete(@NonNull Task<AuthResult> task) {
-                                    if (task.isSuccessful()) {
-                                        Toast.makeText(LoginPageActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
-                                        Intent intent = new Intent(getApplicationContext(), ProfilePageActivity.class);
-                                        startActivity(intent);
-                                        finish();
-                                    } else {
-                                        Toast.makeText(LoginPageActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                                    }
+                            .addOnCompleteListener(task1 -> {
+                                if (task1.isSuccessful()) {
+                                    Toast.makeText(LoginPageActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
+                                    Intent intent = new Intent(getApplicationContext(), ProfilePageActivity.class);
+                                    startActivity(intent);
+                                    finish();
+                                } else {
+                                    Toast.makeText(LoginPageActivity.this, task1.getException().getMessage(), Toast.LENGTH_SHORT).show();
                                 }
                             });
                 } catch (ApiException e) {

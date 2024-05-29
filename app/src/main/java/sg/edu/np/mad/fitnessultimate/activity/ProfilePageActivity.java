@@ -1,22 +1,31 @@
 package sg.edu.np.mad.fitnessultimate.activity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
@@ -46,6 +55,13 @@ public class ProfilePageActivity extends AppCompatActivity {
 
         String userId = fAuth.getCurrentUser().getUid();
 
+        // Change Password
+        RelativeLayout resetPassword = findViewById(R.id.changePassword);
+        FirebaseUser user = fAuth.getCurrentUser();
+
+        // Edit Profile
+        Button editProfileBtn = findViewById(R.id.editProfile);
+
         DocumentReference documentReference = fStore.collection("users").document(userId);
         documentReference.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
             @Override
@@ -57,6 +73,65 @@ public class ProfilePageActivity extends AppCompatActivity {
             }
         });
 
+        // Edit Profile
+        editProfileBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ProfilePageActivity.this, EditProfilePageActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        // Change Password
+        resetPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Inflate the custom layout
+                LayoutInflater inflater = LayoutInflater.from(v.getContext());
+                View dialogView = inflater.inflate(R.layout.change_password_dialog, null);
+
+                // Get the EditText from the custom layout
+                final EditText resetPassword = dialogView.findViewById(R.id.dialog_input);
+
+                // Create the AlertDialog and set the custom view
+                final AlertDialog.Builder passwordResetDialog = new AlertDialog.Builder(v.getContext());
+                //passwordResetDialog.setTitle("Reset Password?");
+                passwordResetDialog.setView(dialogView);
+
+                passwordResetDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // Extract the new password and attempt to update it
+                        String newPassword = resetPassword.getText().toString();
+                        if (newPassword.length() <= 6) {
+                            Toast.makeText(ProfilePageActivity.this, "Password must be longer than 6 characters.", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+
+                        user.updatePassword(newPassword).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                Toast.makeText(ProfilePageActivity.this, "Password Reset Successfully.", Toast.LENGTH_SHORT).show();
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(ProfilePageActivity.this, "Password Reset Failed.", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+                });
+
+                passwordResetDialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // Close the dialog
+                    }
+                });
+
+                passwordResetDialog.create().show();
+            }
+        });
     }
     public void logout(View view) {
         // Sign out from Firebase
