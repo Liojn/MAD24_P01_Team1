@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.androidApplication)
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -8,6 +9,7 @@ android {
 
     defaultConfig {
         applicationId = "sg.edu.np.mad.fitnessultimate"
+
         minSdk = 33
         targetSdk = 34
         versionCode = 1
@@ -29,11 +31,12 @@ android {
 }
 
 dependencies {
-
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)
     implementation(libs.constraintlayout)
+    implementation(libs.firebase.firestore)
+    implementation(libs.firebase.auth)
     implementation(libs.gson)
     implementation(libs.roundedimageview)
     implementation(libs.sdp.android)

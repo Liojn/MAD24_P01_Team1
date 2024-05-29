@@ -1,0 +1,76 @@
+{
+  "project_info": {
+    "project_number": "609011869979",
+    "project_id": "login-signup-page-a743e",
+    "storage_bucket": "login-signup-page-a743e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:609011869979:android:35b2da1e369a75b86ecbbe",
+        "android_client_info": {
+          "package_name": "sg.edu.np.mad.fitnessultimate"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "609011869979-6gjvu3tluaggg64ui749iklseoq3svcd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBoWvWa-fKONIQmNCh9sxKVbV9GIZ8yBzM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "609011869979-6gjvu3tluaggg64ui749iklseoq3svcd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:609011869979:android:034dc744c1636f0a6ecbbe",
+        "android_client_info": {
+          "package_name": "sg.edu.np.mad.login_signuppage"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "609011869979-mjm64te1rs1qduskrvgjqen3k844v61s.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "sg.edu.np.mad.login_signuppage",
+            "certificate_hash": "12cbf9579834313fad703ea650fa8a181d8038ba"
+          }
+        },
+        {
+          "client_id": "609011869979-6gjvu3tluaggg64ui749iklseoq3svcd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBoWvWa-fKONIQmNCh9sxKVbV9GIZ8yBzM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "609011869979-6gjvu3tluaggg64ui749iklseoq3svcd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
