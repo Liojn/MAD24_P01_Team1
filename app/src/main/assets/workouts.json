@@ -1,0 +1,25 @@
+[
+    {
+        "name": "30 Minutes Abs Workout",
+        "description": "lorem ipsum",
+        "breakTimeInMinutes": "2",
+        "estimatedTimeInMinutes": "30",
+        "exercises": [
+            {
+                "name": "Crunches",
+                "count": "20",
+                "sets": "3"
+            },
+            {
+                "name": "Leg Raises",
+                "count": "20",
+                "sets": "3"
+            },
+            {
+                "name": "Plank",
+                "count": "30",
+                "sets": "3"
+            }
+        ]
+    }
+]

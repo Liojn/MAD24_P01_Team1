@@ -12,6 +12,21 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FitnessUltimate"
         tools:targetApi="31">
+
+        <activity
+            android:name=".training.exercises.ExerciseActivity"
+            android:exported="false" />
+        <activity android:name=".training.workouts.WorkoutActivity"
+            android:exported="false" />
+        <activity
+            android:name=".training.exercises.ExerciseCatalogueActivity"
+            android:exported="false" />
+        <activity
+            android:name=".training.workouts.WorkoutsCatalogueActivity"
+            android:exported="false" />
+        <activity
+            android:name=".training.TrainingMenuActivity"
+            android:exported="false" />
         <activity
             android:name=".BaseActivity"
             android:exported="false" />
@@ -21,12 +36,19 @@
         <activity
             android:name=".CalendarActivity"
             android:exported="true">
+
+        </activity>
+
+        <activity
+            android:name="sg.edu.np.mad.fitnessultimate.activity.ChatbotActivity"
+            android:exported="true"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
     </application>
 
 </manifest>
