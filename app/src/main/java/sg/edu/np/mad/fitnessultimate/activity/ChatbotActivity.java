@@ -1,5 +1,6 @@
 package sg.edu.np.mad.fitnessultimate.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -36,6 +37,12 @@ public class ChatbotActivity extends AppCompatActivity {
             return insets;
         });
 
+
+        findViewById(R.id.imageBack).setOnClickListener(v ->{
+            Intent MessageActivity = new Intent(ChatbotActivity.this, MainActivity.class);
+            startActivity(MessageActivity);
+        });
+
         userInput = findViewById(R.id.userInput);
         recyclerView = findViewById(R.id.conversation);
         responseMessageList = new ArrayList<>();
@@ -51,9 +58,9 @@ public class ChatbotActivity extends AppCompatActivity {
             public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
                 if (i == EditorInfo.IME_ACTION_SEND) {
                     String userMessage = userInput.getText().toString().toLowerCase();
-                    addMessageToChat(userMessage, true);
+                    addMessageToChat(userMessage, false);
                     String botResponse = getResponseForMessage(userMessage);
-                    addMessageToChat(botResponse, false);
+                    addMessageToChat(botResponse, true);
                     userInput.setText("");  // Clear input field
                 }
                 return false;
@@ -63,14 +70,14 @@ public class ChatbotActivity extends AppCompatActivity {
 
     private void displayFaqMessage() {
         String faqMessage = "Here are some FAQs:\n1) How to do a push up\n2) What is a squat\n3) How to do a plank\n4) What are the benefits of exercise\n";
-        addMessageToChat(faqMessage, false);
+        addMessageToChat(faqMessage, true);
     }
 
     private void addMessageToChat(String message, boolean isUser) {
         ResponseMessage responseMessage = new ResponseMessage(message, isUser);
         responseMessageList.add(responseMessage);
         messageAdapter.notifyDataSetChanged();
-        if (!isLastVisible()) { 
+        if (!isLastVisible()) {
             recyclerView.smoothScrollToPosition(messageAdapter.getItemCount() - 1);
         }
     }
