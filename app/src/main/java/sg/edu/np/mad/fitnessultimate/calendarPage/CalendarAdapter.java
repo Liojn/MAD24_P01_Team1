@@ -1,4 +1,4 @@
-package sg.edu.np.mad.fitnessultimate;
+package sg.edu.np.mad.fitnessultimate.calendarPage;
 
 import android.graphics.Color;
 import android.view.LayoutInflater;
@@ -9,6 +9,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+
+import sg.edu.np.mad.fitnessultimate.R;
 
 class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder>
 {
