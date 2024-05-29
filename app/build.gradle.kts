@@ -34,6 +34,7 @@ dependencies {
     implementation(libs.material)
     implementation(libs.activity)
     implementation(libs.constraintlayout)
+    implementation(libs.gson)
     implementation(libs.roundedimageview)
     implementation(libs.sdp.android)
     implementation(libs.ssp.android)
