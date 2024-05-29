@@ -1,18 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:id="@+id/botProfile"
+        android:layout_width="@dimen/_25sdp"
+        android:layout_height="@dimen/_25sdp"
+        android:background="@drawable/botpfp"
+        android:scaleType="centerCrop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/textMessage"
+        />
+
+    <TextView
         android:id="@+id/textMessage"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         android:elevation="3dp"
         android:background="@drawable/me_bubble"
-        android:layout_alignParentEnd="true"
         android:padding="16dp"
-        android:textColor="#18276e"
-        android:textSize="20sp" />
+        android:textSize="20sp"
+        app:layout_constraintEnd_toStartOf="@+id/botProfile"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.75"/>
 
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

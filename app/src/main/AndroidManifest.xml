@@ -21,7 +21,8 @@
 
         <activity
             android:name="sg.edu.np.mad.fitnessultimate.activity.ChatbotActivity"
-            android:exported="true">
+            android:exported="true"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
