@@ -9,7 +9,7 @@ android {
 
     defaultConfig {
         applicationId = "sg.edu.np.mad.fitnessultimate"
-        minSdk = 30
+        minSdk = 33
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -30,12 +30,18 @@ android {
 }
 
 dependencies {
-
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)
     implementation(libs.constraintlayout)
     implementation(libs.firebase.auth)
+
+    implementation(libs.firebase.firestore)
+    implementation(libs.firebase.auth)
+    implementation(libs.gson)
+    implementation(libs.roundedimageview)
+    implementation(libs.sdp.android)
+    implementation(libs.ssp.android)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
