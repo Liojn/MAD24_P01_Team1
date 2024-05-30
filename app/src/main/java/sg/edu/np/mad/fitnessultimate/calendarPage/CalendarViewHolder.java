@@ -11,12 +11,14 @@ import sg.edu.np.mad.fitnessultimate.R;
 public class CalendarViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener
 {
     public final TextView dayOfMonth;
+    public final View dayOfMonthBg;
     private final CalendarAdapter.OnItemListener onItemListener;
     private DayModel dayModel;
     public CalendarViewHolder(@NonNull View itemView, CalendarAdapter.OnItemListener onItemListener)
     {
         super(itemView);
         dayOfMonth = itemView.findViewById(R.id.cellDayText);
+        dayOfMonthBg = itemView.findViewById(R.id.calenderCellBg);
         this.onItemListener = onItemListener;
         itemView.setOnClickListener(this);
     }

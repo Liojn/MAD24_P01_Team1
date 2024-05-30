@@ -16,9 +16,6 @@
             android:name=".BaseActivity"
             android:exported="false" />
         <activity
-            android:name=".calendarPage.MainActivity"
-            android:exported="true" />
-        <activity
             android:name=".calendarPage.CalendarActivity"
             android:exported="true">
             <intent-filter>
