@@ -6,8 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/bg_gradient"
     android:id="@+id/main"
-    tools:context=".activity.ChatbotActivity">
-
+    tools:context=".chatbot.activity.ChatbotActivity">
 
   <androidx.recyclerview.widget.RecyclerView
       android:id="@+id/conversation"
@@ -15,8 +14,14 @@
       android:layout_height="match_parent"
       android:layout_above="@+id/userInput"
       android:textSize="16sp"
-      tools:layout_editor_absoluteX="0dp"
-      tools:layout_editor_absoluteY="-326dp" />
+       />
+
+  <ImageView
+      android:layout_width="match_parent"
+      android:layout_height="@dimen/_499sdp"
+      android:background="@drawable/chabot_background"
+      app:layout_constraintTop_toTopOf="parent"
+      />
 
   <EditText
       android:id="@+id/userInput"

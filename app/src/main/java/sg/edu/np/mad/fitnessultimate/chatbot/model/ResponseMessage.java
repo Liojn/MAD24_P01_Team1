@@ -1,4 +1,4 @@
-package sg.edu.np.mad.fitnessultimate.model;
+package sg.edu.np.mad.fitnessultimate.chatbot.model;
 
 public class ResponseMessage {
 

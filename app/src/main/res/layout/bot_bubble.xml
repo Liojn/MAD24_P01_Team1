@@ -25,6 +25,6 @@
         android:textSize="20sp"
         app:layout_constraintStart_toEndOf="@+id/botProfile"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintWidth_percent="0.75"/>
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

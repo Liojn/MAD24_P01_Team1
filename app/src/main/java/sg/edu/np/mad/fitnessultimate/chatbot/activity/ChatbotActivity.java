@@ -1,4 +1,4 @@
-package sg.edu.np.mad.fitnessultimate.activity;
+package sg.edu.np.mad.fitnessultimate.chatbot.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,9 +9,11 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import sg.edu.np.mad.fitnessultimate.MainActivity;
 import sg.edu.np.mad.fitnessultimate.R;
-import sg.edu.np.mad.fitnessultimate.adapter.MessageAdapter;
-import sg.edu.np.mad.fitnessultimate.model.ResponseMessage;
+import sg.edu.np.mad.fitnessultimate.chatbot.adapter.MessageAdapter;
+import sg.edu.np.mad.fitnessultimate.chatbot.model.ResponseMessage;
 import android.view.KeyEvent;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;

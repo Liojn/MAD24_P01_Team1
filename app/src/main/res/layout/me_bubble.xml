@@ -10,8 +10,9 @@
         android:layout_height="@dimen/_25sdp"
         android:background="@drawable/botpfp"
         android:scaleType="centerCrop"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf = "parent"
         app:layout_constraintBottom_toBottomOf="@+id/textMessage"
+        app:riv_oval="true"
         />
 
     <TextView
