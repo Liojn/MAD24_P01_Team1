@@ -6,6 +6,7 @@ import android.view.ViewGroup;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+// custom recyclerview that will not scroll
 public class NonScrollableExpandableRecyclerView extends RecyclerView {
     public NonScrollableExpandableRecyclerView(Context context) {
         super(context);

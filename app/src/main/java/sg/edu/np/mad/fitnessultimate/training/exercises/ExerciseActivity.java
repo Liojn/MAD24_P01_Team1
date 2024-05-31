@@ -38,6 +38,7 @@ public class ExerciseActivity extends AppCompatActivity {
         ImageView exerciseImage = findViewById(R.id.exerciseImage);
         Button backBtn = findViewById(R.id.backBtn);
 
+        // stop my ide from crying about exercise being null
         assert exercise != null;
         exerciseTitle.setText(exercise.getName());
 

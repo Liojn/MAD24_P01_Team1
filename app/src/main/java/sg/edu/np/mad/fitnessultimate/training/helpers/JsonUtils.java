@@ -25,6 +25,7 @@ public class JsonUtils {
         String fileName = "exercises.json";
         String json = null;
 
+        // reads contents of json file into a string
         try {
             AssetManager assetManager = context.getAssets();
             InputStream is = assetManager.open(fileName);
@@ -44,6 +45,7 @@ public class JsonUtils {
             return null;
         }
 
+        // use Gson to convert json string to list of ExerciseInfo objects
         Gson gson = new Gson();
         Type exerciseListType = new TypeToken<List<ExerciseInfo>>() {}.getType();
         return gson.fromJson(json, exerciseListType);
@@ -77,15 +79,22 @@ public class JsonUtils {
         Type workoutListType = new TypeToken<List<Workout>>() {}.getType();
         List<Workout> workouts = gson.fromJson(json, workoutListType);
 
+        // secondary parse to get list of exercises for each workout
         JsonArray workoutsJsonArray = JsonParser.parseString(json).getAsJsonArray();
         Type exerciseListType = new TypeToken<List<Workout.Exercise>>() {}.getType();
         for (JsonElement workoutElement : workoutsJsonArray) {
             JsonObject workoutObject = workoutElement.getAsJsonObject();
+
+            // access the exercises value in the workout json
             JsonArray exercisesJson = workoutObject.getAsJsonArray("exercises");
+
+            // same Gson parsing for Exercise class
             List<Workout.Exercise> exercises = gson.fromJson(exercisesJson, exerciseListType);
 
             Log.i("JsonUtils", "Workout: " + workoutObject.get("name").getAsString() + " Exercises: " + exercises.size());
 
+            // set the exercises for the workout by looping through array of workouts.
+            // if the workout name matches the current workout, set the exercises to the current read exercises
             for (Workout workout : workouts) {
                 Log.i("JsonUtils", String.format("workout: %s", workout.getName()));
                 if (workout.getName().equals(workoutObject.get("name").getAsString())) {

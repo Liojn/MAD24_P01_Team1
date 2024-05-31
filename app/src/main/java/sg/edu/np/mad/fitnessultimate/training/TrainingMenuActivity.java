@@ -67,6 +67,7 @@ public class TrainingMenuActivity extends AppCompatActivity {
             }
         });
 
+        // return to previous activity
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

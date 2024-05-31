@@ -27,6 +27,7 @@ public class Workout implements Parcelable {
         this.exercises = exercises;
     }
 
+    // parcelable implementation to pass workout object between activities
     protected Workout(Parcel in) {
         name = in.readString();
         imageUri = in.readString();

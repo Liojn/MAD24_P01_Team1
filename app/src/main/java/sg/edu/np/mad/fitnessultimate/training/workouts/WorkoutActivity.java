@@ -61,6 +61,7 @@ public class WorkoutActivity extends AppCompatActivity {
 
         workoutTitle.setText(workout.getName());
 
+        // resolve image resource to show correct image
         int imageResId = getResources().getIdentifier(workout.getImageUri(), "drawable", getPackageName());
         workoutImage.setImageResource(imageResId);
 
@@ -73,22 +74,12 @@ public class WorkoutActivity extends AppCompatActivity {
         RecyclerView routineRecyclerView = findViewById(R.id.routineRecyclerView);
         RecyclerView exerciseRecyclerView = findViewById(R.id.featuredExerciseRecyclerView);
 
-        class NonScrollableLinearLayoutManager extends LinearLayoutManager {
-            public NonScrollableLinearLayoutManager(Context context) {
-                super(context);
-            }
 
-            @Override
-            public boolean canScrollVertically() {
-                return false;
-            }
-        }
-
-        routineRecyclerView.setLayoutManager(new NonScrollableLinearLayoutManager(this));
+        routineRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         RoutineAdapter routineAdapter = new RoutineAdapter(workout.getExercises());
         routineRecyclerView.setAdapter(routineAdapter);
 
-        exerciseRecyclerView.setLayoutManager(new NonScrollableLinearLayoutManager(this));
+        exerciseRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         ExerciseAdapter exerciseAdapter = new ExerciseAdapter(exerciseInfoList);
         exerciseRecyclerView.setAdapter(exerciseAdapter);
     }

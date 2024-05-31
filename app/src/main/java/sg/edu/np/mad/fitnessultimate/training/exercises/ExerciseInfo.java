@@ -21,6 +21,7 @@ public class ExerciseInfo implements Parcelable {
         this.difficulty = difficulty;
     }
 
+    // parcelable implementation to pass workout object between activities
     protected ExerciseInfo(Parcel in) {
         name = in.readString();
         description = in.readString();
