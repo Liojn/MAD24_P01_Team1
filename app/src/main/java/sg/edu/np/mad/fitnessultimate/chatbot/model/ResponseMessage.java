@@ -22,7 +22,5 @@ public class ResponseMessage {
         return isMe;
     }
 
-    public void setMe(boolean me) {
-        isMe = me;
-    }
+
 }

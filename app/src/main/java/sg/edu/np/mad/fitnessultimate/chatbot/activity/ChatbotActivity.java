@@ -17,6 +17,8 @@ import sg.edu.np.mad.fitnessultimate.chatbot.model.ResponseMessage;
 import android.view.KeyEvent;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +29,8 @@ public class ChatbotActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     MessageAdapter messageAdapter;
     List<ResponseMessage> responseMessageList;
+    FrameLayout layoutSend;
+    ImageView sendIcon;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,39 +43,46 @@ public class ChatbotActivity extends AppCompatActivity {
             return insets;
         });
 
-
-        findViewById(R.id.imageBack).setOnClickListener(v ->{
+        findViewById(R.id.imageBack).setOnClickListener(v -> {
             Intent MessageActivity = new Intent(ChatbotActivity.this, MainActivity.class);
             startActivity(MessageActivity);
         });
 
         userInput = findViewById(R.id.userInput);
         recyclerView = findViewById(R.id.conversation);
+        layoutSend = findViewById(R.id.layoutSend);
+        sendIcon = findViewById(R.id.sendIcon);
+
         responseMessageList = new ArrayList<>();
         messageAdapter = new MessageAdapter(responseMessageList, this);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false));
+        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         recyclerView.setAdapter(messageAdapter);
-
 
         displayFaqMessage();
 
-        userInput.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
-                if (i == EditorInfo.IME_ACTION_SEND) {
-                    String userMessage = userInput.getText().toString().toLowerCase();
-                    addMessageToChat(userMessage, false);
-                    String botResponse = getResponseForMessage(userMessage);
-                    addMessageToChat(botResponse, true);
-                    userInput.setText("");  // Clear input field
-                }
-                return false;
+        userInput.setOnEditorActionListener((textView, i, keyEvent) -> {
+            if (i == EditorInfo.IME_ACTION_SEND) {
+                sendMessage();
+                return true;
             }
+            return false;
         });
+
+        layoutSend.setOnClickListener(v -> sendMessage());
+    }
+
+    private void sendMessage() {
+        String userMessage = userInput.getText().toString().toLowerCase();
+        if (!userMessage.trim().isEmpty()) {
+            addMessageToChat(userMessage, false);
+            String botResponse = getResponseForMessage(userMessage);
+            addMessageToChat(botResponse, true);
+            userInput.setText(""); // Clear input field
+        }
     }
 
     private void displayFaqMessage() {
-        String faqMessage = "Here are some FAQs:\n1) How to do a push up\n2) What is a squat\n3) How to do a plank\n4) What are the benefits of exercise\n";
+        String faqMessage = "Here are some FAQs:\n1) How does the training schedule work?\n2) What is the calendar for?\n3) How to use the food tracking?\n4) What are the benefits of exercise\n5) Display FAQ's again";
         addMessageToChat(faqMessage, true);
     }
 
@@ -85,14 +96,19 @@ public class ChatbotActivity extends AppCompatActivity {
     }
 
     private String getResponseForMessage(String message) {
-        if (message.contains("1") || message.contains("push up")) {
-            return "To do a push up, start in a plank position, lower your body until your chest nearly touches the floor, and then push back up.";
-        } else if (message.contains("2") || message.contains("squat")) {
-            return "A squat is a strength exercise in which you lower your hips from a standing position and then stand back up.";
-        } else if (message.contains("3") || message.contains("plank")) {
-            return "To do a plank, hold your body in a straight line in a push-up position, supporting your weight on your forearms and toes.";
-        } else if (message.contains("4") || message.contains("benefits of exercise")) {
-            return "Exercise has many benefits including improving cardiovascular health, strengthening muscles, and enhancing mental health.";
+        message = message.toLowerCase();
+        if (message.contains("1") || message.contains("training")) {
+            return "You can choose a follow along work out inside has different type of work out sets which you can choose from! Alternatively, you can choose excerises and see how to do each individual excerise.\n\nEnter 5 to see FAQ again";
+        } else if (message.contains("2") || message.contains("calendar")) {
+            return "It displays workouts in a calendar format, allowing users to see their workout history at a glance and differentiates between types of workouts or intensity levels using colour-coding.\n\nEnter 5 to see FAQ again";
+        } else if (message.contains("3") || message.contains("food") || message.contains("tracking")) {
+            return "Users can enter the food they eat by selecting foods from the database and specifying the portion sizes.\n\nEnter 5 to see FAQ again";
+        } else if (message.contains("4") || message.contains("benefits")) {
+            return "Exercise has many benefits including improving cardiovascular health, strengthening muscles, and enhancing mental health.\n\nEnter 5 to see FAQ again";
+        } else if(message.contains("hi") || message.contains("hello")) {
+            return "Hello! I am the Fitness Ultimate's Chatbot, choose a question from the FAQ's and I shall answer!";
+        } else if(message.contains("5") || message.contains("faq")) {
+                return "Here are some FAQs:\n1) How does the training schedule work?\n2) What is the calendar for?\n3) How to use the food tracking?\n4) What are the benefits of exercise\n5) Display FAQ's again";
         } else {
             return "Sorry, I don't have an answer for that. Please ask another question.";
         }

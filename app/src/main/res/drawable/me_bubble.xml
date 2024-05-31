@@ -2,12 +2,12 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
 
         <corners
-            android:topLeftRadius="25dp"
-            android:topRightRadius="25dp"
-            android:bottomLeftRadius="25dp"/>
+            android:topLeftRadius="@dimen/_25sdp"
+            android:topRightRadius="@dimen/_25sdp"
+            android:bottomLeftRadius="@dimen/_25sdp"/>
 
-        <gradient
-            android:startColor="#fff"
-            android:endColor="#fff"/>
+        <solid
+            android:color="#424769"/>
+
 </shape>
 
