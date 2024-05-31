@@ -1,4 +1,4 @@
-package sg.edu.np.mad.fitnessultimate.model;
+package sg.edu.np.mad.fitnessultimate.chatbot.model;
 
 public class ResponseMessage {
 
@@ -22,7 +22,5 @@ public class ResponseMessage {
         return isMe;
     }
 
-    public void setMe(boolean me) {
-        isMe = me;
-    }
+
 }

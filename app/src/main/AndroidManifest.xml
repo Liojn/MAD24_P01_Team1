@@ -51,7 +51,7 @@
         </activity>
 
         <activity
-            android:name="sg.edu.np.mad.fitnessultimate.activity.ChatbotActivity"
+            android:name="sg.edu.np.mad.fitnessultimate.chatbot.activity.ChatbotActivity"
             android:exported="true"
             >
             <intent-filter>

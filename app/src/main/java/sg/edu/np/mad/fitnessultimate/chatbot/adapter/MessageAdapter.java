@@ -1,4 +1,4 @@
-package sg.edu.np.mad.fitnessultimate.adapter;
+package sg.edu.np.mad.fitnessultimate.chatbot.adapter;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -11,7 +11,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import sg.edu.np.mad.fitnessultimate.R;
-import sg.edu.np.mad.fitnessultimate.model.ResponseMessage;
+import sg.edu.np.mad.fitnessultimate.chatbot.model.ResponseMessage;
 
 public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.CustomViewHolder> {
 
