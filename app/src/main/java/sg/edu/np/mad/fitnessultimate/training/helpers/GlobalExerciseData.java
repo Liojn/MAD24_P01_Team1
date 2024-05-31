@@ -7,8 +7,8 @@ import sg.edu.np.mad.fitnessultimate.training.exercises.ExerciseInfo;
 import sg.edu.np.mad.fitnessultimate.training.workouts.Workout;
 
 /*
-    * singleton class to store list of exercises
-    * used to store the list of exercises loaded from json file
+ * singleton class to store list of exercises
+ * used to store the list of exercises loaded from json file
  */
 
 public class GlobalExerciseData {
@@ -21,6 +21,10 @@ public class GlobalExerciseData {
         workoutList = new ArrayList<>();
     }
 
+    // prevent multiple instances of this object from being created at the same time
+    // by returning existing instance if it exists already
+
+    //synchronized to prevent race conditions when writing data
     public static synchronized GlobalExerciseData getInstance() {
         if (inst == null) {
             inst = new GlobalExerciseData();

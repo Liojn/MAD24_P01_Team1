@@ -3,40 +3,74 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/main"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/app_bg" >
 
-    <TextView
-        android:id="@+id/textView"
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/backBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:paddingBottom="20dp"
+        android:drawableLeft="@drawable/baseline_arrow_back_24"
+        android:drawablePadding="10dp"
+        android:text="@string/back_btn"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:textAllCaps="false"
+        android:gravity="start|center_vertical"
+        android:layout_margin="10dp"
+        android:textSize="20sp"
+        android:textColor="@color/black"
+        android:background="@drawable/back_btn" />
+
+    <TextView
+        android:id="@+id/pageTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
         android:text="Training"
-        android:textSize="50sp"
+        android:textColor="#2d3250"
+        android:textSize="80sp"
         android:textStyle="bold" />
 
-    <Button
+    <TextView
+        android:id="@+id/pageSubtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:paddingBottom="20dp"
+        android:text="Your journey starts here"
+        android:textColor="#2d3250"
+        android:textStyle="italic"
+        android:textSize="22sp" />
+
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/followAlongWorkouts"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:padding="20dp"
         android:layout_margin="20dp"
-        android:drawableLeft="@drawable/ic_launcher_background"
+        android:drawableLeft="@drawable/dumbbell_2d"
+        android:drawablePadding="15dp"
         android:background="@drawable/trainingmenu_btn"
         android:text="Follow-Along Workouts"
+        android:textColor="@color/white"
+        android:textAllCaps="false"
         android:textSize="30sp"
         android:textStyle="normal"
         android:gravity="start|center_vertical" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/exercises"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:padding="20dp"
         android:layout_margin="20dp"
-        android:drawableLeft="@drawable/ic_launcher_background"
+        android:drawableLeft="@drawable/exercise_2d"
+        android:drawablePadding="15dp"
         android:background="@drawable/trainingmenu_btn"
         android:text="Exercises"
+        android:textColor="@color/white"
+        android:textAllCaps="false"
         android:textSize="30sp"
         android:textStyle="normal"
         android:gravity="start|center_vertical" />
