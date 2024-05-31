@@ -12,13 +12,15 @@ import sg.edu.np.mad.fitnessultimate.training.helpers.GlobalExerciseData;
 
 public class Workout implements Parcelable {
     private String name;
+    private String imageUri;
     private String description;
     private int breakTimeInMinutes;
     private int estimatedTimeInMinutes;
     private List<Exercise> exercises;
 
-    public Workout(String name, String description, int breakTimeInMinutes, int estimatedTimeInMinutes, List<Exercise> exercises) {
+    public Workout(String name, String imageUri, String description, int breakTimeInMinutes, int estimatedTimeInMinutes, List<Exercise> exercises) {
         this.name = name;
+        this.imageUri = imageUri;
         this.description = description;
         this.breakTimeInMinutes = breakTimeInMinutes;
         this.estimatedTimeInMinutes = estimatedTimeInMinutes;
@@ -27,6 +29,7 @@ public class Workout implements Parcelable {
 
     protected Workout(Parcel in) {
         name = in.readString();
+        imageUri = in.readString();
         description = in.readString();
         breakTimeInMinutes = in.readInt();
         estimatedTimeInMinutes = in.readInt();
@@ -41,6 +44,7 @@ public class Workout implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(name);
+        dest.writeString(imageUri);
         dest.writeString(description);
         dest.writeInt(breakTimeInMinutes);
         dest.writeInt(estimatedTimeInMinutes);
@@ -63,6 +67,9 @@ public class Workout implements Parcelable {
         return name;
     }
 
+    public String getImageUri() {
+        return imageUri;
+    }
     public String getDescription() {
         return description;
     }
@@ -87,12 +94,14 @@ public class Workout implements Parcelable {
     // inner class to store exercise info relative to workout
     public static class Exercise implements Parcelable {
         private String name;
-        private int count;
+        private String count;
+        private String description;
         private int sets;
 
-        public Exercise(String name, int count, int sets) {
+        public Exercise(String name, String count, String description, int sets) {
             this.name = name;
             this.count = count;
+            this.description = description;
             this.sets = sets;
         }
 
@@ -100,7 +109,7 @@ public class Workout implements Parcelable {
             return name;
         }
 
-        public int getCount() {
+        public String getCount() {
             return count;
         }
 
@@ -108,10 +117,14 @@ public class Workout implements Parcelable {
             return sets;
         }
 
+        public String getDescription() {
+            return description;
+        }
 
         protected Exercise(Parcel in) {
             name = in.readString();
-            count = in.readInt();
+            count = in.readString();
+            description = in.readString();
             sets = in.readInt();
         }
 
@@ -123,7 +136,8 @@ public class Workout implements Parcelable {
         @Override
         public void writeToParcel(Parcel dest, int flags) {
             dest.writeString(name);
-            dest.writeInt(count);
+            dest.writeString(count);
+            dest.writeString(description);
             dest.writeInt(sets);
         }
 

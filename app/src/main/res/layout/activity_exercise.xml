@@ -1,21 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/app_bg">
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/backBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:drawableLeft="@drawable/baseline_arrow_back_24"
         android:text="@string/back_btn"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:textAllCaps="false"
         android:gravity="start|center_vertical"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
         android:textSize="20sp"
         android:textColor="@color/black"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        />
+        android:background="@drawable/back_btn" />
+
+    <ImageView
+        android:id="@+id/exerciseImage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/push_ups"
+        android:background="@color/app_primary_text"
+        android:padding="5dp"
+        android:layout_margin="20dp"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop" />
 
     <TextView
         android:id="@+id/exerciseTitle"
@@ -24,7 +41,8 @@
         android:layout_margin="20dp"
         android:text="EXERCISE HOLDER"
         android:textSize="50sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:textColor="@color/app_primary_text" />
 
     <TextView
         android:id="@+id/exerciseMuscleGroup"
@@ -33,7 +51,8 @@
         android:layout_marginStart="20dp"
         android:text="Muscle Group: TEST"
         android:textSize="20sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:textColor="@color/app_primary_text" />
 
     <TextView
         android:id="@+id/exerciseDifficulty"
@@ -42,7 +61,8 @@
         android:layout_marginStart="20dp"
         android:text="Difficulty: TEST"
         android:textSize="20sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:textColor="@color/app_primary_text" />
 
     <TextView
         android:id="@+id/exerciseDescription"
@@ -55,5 +75,6 @@
 Integer id felis tortor. Sed sed lectus quis urna consequat molestie at a nisi. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Proin ac convallis felis. Morbi in blandit ante, at volutpat nisi. Integer varius, libero ut consequat imperdiet, ante ante mattis nisl, nec blandit mi mauris eget orci. Aenean pretium maximus elit nec hendrerit. Suspendisse potenti. Proin eu purus sit amet sapien feugiat consequat in id libero. Pellentesque eu nunc laoreet, molestie tortor sed, semper nibh. Donec pharetra quam tristique magna vulputate, ut tincidunt nisi imperdiet. Donec ac justo fringilla justo aliquet suscipit eu in est.
 
 "
-        android:textSize="20sp" />
+        android:textSize="20sp"
+        android:textColor="@color/app_primary_text" />
 </LinearLayout>

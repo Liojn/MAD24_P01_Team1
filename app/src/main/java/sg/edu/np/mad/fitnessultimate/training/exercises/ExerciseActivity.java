@@ -1,8 +1,10 @@
 package sg.edu.np.mad.fitnessultimate.training.exercises;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
@@ -33,10 +35,15 @@ public class ExerciseActivity extends AppCompatActivity {
         TextView exerciseDesc = findViewById(R.id.exerciseDescription);
         TextView exerciseMuscleGroup = findViewById(R.id.exerciseMuscleGroup);
         TextView exerciseDifficulty = findViewById(R.id.exerciseDifficulty);
+        ImageView exerciseImage = findViewById(R.id.exerciseImage);
         Button backBtn = findViewById(R.id.backBtn);
 
         assert exercise != null;
         exerciseTitle.setText(exercise.getName());
+
+        int imageResId = getResources().getIdentifier(exercise.getImageUri(), "drawable", getPackageName());
+        exerciseImage.setImageResource(imageResId);
+
         exerciseDesc.setText(exercise.getDescription());
         exerciseMuscleGroup.setText(String.format("Muscle Group: %s", exercise.getMuscleGroup()));
         exerciseDifficulty.setText(String.format("Difficulty: %s", exercise.getDifficulty()));

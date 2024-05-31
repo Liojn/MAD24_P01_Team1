@@ -34,7 +34,8 @@ public class RoutineAdapter extends RecyclerView.Adapter<RoutineViewHolder> {
     public void onBindViewHolder(@NonNull RoutineViewHolder holder, int position) {
         Workout.Exercise exercise = exercises.get(position);
         holder.exerciseTitle.setText(exercise.getName());
-        holder.exerciseReps.setText(String.format("%s reps", exercise.getCount()));
+        holder.exerciseDescription.setText(exercise.getDescription());
+        holder.exerciseReps.setText(String.format("%s", exercise.getCount()));
         holder.exerciseSets.setText(String.format("%s sets", exercise.getSets()));
     }
 
