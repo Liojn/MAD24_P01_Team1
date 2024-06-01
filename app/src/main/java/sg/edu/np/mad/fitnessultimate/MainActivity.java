@@ -8,6 +8,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
+import java.util.Calendar;
+
+import sg.edu.np.mad.fitnessultimate.chatbot.activity.ChatbotActivity;
 import sg.edu.np.mad.fitnessultimate.training.TrainingMenuActivity;
 public class MainActivity extends BaseActivity {
 
@@ -23,8 +27,26 @@ public class MainActivity extends BaseActivity {
             return insets;
         });
 
-        Intent intent = new Intent(MainActivity.this, TrainingMenuActivity.class);
-        startActivity(intent);
+        //For Training Schedule
+        findViewById(R.id.nav_fitness).setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, TrainingMenuActivity.class);
+            startActivity(intent);
+        });
+        //For Chatbot
+        findViewById(R.id.chat_button).setOnClickListener(v ->{
+            Intent intent = new Intent(MainActivity.this, ChatbotActivity.class);
+            startActivity(intent);
+        });
+        //For Calendar
+        findViewById(R.id.nav_calendar).setOnClickListener(v ->{
+            Intent intent = new Intent(MainActivity.this, CalendarActivity.class);
+            startActivity(intent);
+        });
+        //For FoodTracker
+        findViewById(R.id.chat_button).setOnClickListener(v ->{
+            Intent intent = new Intent(MainActivity.this, FoodTracker.class);
+            startActivity(intent);
+        });
 
     }
 }
