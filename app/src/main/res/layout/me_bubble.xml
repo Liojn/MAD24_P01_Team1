@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ImageView
+        android:id="@+id/botProfile"
+        android:layout_width="@dimen/_35sdp"
+        android:layout_height="@dimen/_35sdp"
+        android:background="@drawable/bot_profile_pic"
+        android:layout_marginRight="@dimen/_5sdp"
+        android:scaleType="centerCrop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/textMessage"
+        />
+
+    <TextView
+        android:id="@+id/chatbotText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Chatbot"
+        android:textStyle="bold"
+        android:textSize="@dimen/_10sdp"
+        android:layout_marginRight="@dimen/_5sdp"
+        app:layout_constraintBottom_toTopOf="@+id/botProfile"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:textColor="@color/white"
+        />
+
+    <TextView
+        android:id="@+id/textMessage"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:elevation="3dp"
+        android:background="@drawable/me_bubble"
+        android:padding="16dp"
+        android:textSize="20sp"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toStartOf="@+id/botProfile"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.75"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

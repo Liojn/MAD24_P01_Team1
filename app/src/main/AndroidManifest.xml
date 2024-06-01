@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -13,10 +15,49 @@
         android:theme="@style/Theme.FitnessUltimate"
         tools:targetApi="31">
         <activity
+            android:name=".activity.EditProfilePageActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.SignUpPageActivity"
+            android:exported="true" />
+        <activity
+            android:name=".activity.LoginPageActivity"
+            android:exported="true" />
+        <activity
+            android:name=".activity.ProfilePageActivity"
+            android:exported="true" />
+        <activity
+
+        <activity
+            android:name=".activity.SplashActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".training.exercises.ExerciseActivity"
+            android:exported="false" />
+        <activity android:name=".training.workouts.WorkoutActivity"
+            android:exported="false" />
+        <activity
+            android:name=".training.exercises.ExerciseCatalogueActivity"
+            android:exported="false" />
+        <activity
+            android:name=".training.workouts.WorkoutsCatalogueActivity"
+            android:exported="false" />
+        <activity
+            android:name=".training.TrainingMenuActivity"
+            android:exported="false" />
+        <activity
             android:name=".BaseActivity"
             android:exported="false" />
         <activity
             android:name=".calendarPage.CalendarActivity"
+            android:name=".LogDetails"
+            android:exported="false" />
+        <activity
+            android:name=".SearchResultsActivity"
+            android:exported="true" />
+        <activity
+            android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,6 +65,19 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".FoodTracker"
+            android:exported="true"/>
+        <activity
+            android:name=".CalendarActivity"
+            android:exported="true">
+
+        </activity>
+
+        <activity
+            android:name=".chatbot.activity.ChatbotActivity"
+            android:exported="true"/>
+
     </application>
 
 </manifest>

@@ -1,0 +1,29 @@
+[
+    {
+        "name": "30 Minutes Abs Workout",
+        "imageUri": "abs_workout",
+        "description": "Get ready to sculpt your core with this intense 30-minute abs workout! Designed to target all areas of your abdominal muscles, this session is perfect for anyone looking to build strength and definition in their midsection. With minimal equipment needed, you can do this workout anywhere, whether you're at home or in the gym.",
+        "breakTimeInMinutes": "2",
+        "estimatedTimeInMinutes": "30",
+        "exercises": [
+            {
+                "name": "Crunches",
+                "count": "20 reps",
+                "description": "Crunches are a classic exercise that focuses on the upper abdominal muscles. Lie on your back with your knees bent and feet flat on the floor. Place your hands behind your head and lift your shoulders off the ground, squeezing your abs at the top of the movement.",
+                "sets": "3"
+            },
+            {
+                "name": "Leg Raises",
+                "count": "20 reps",
+                "description": "Leg raises target the lower abdominal muscles. Lie flat on your back with your legs extended. Keeping your legs straight, lift them towards the ceiling until they are perpendicular to the floor. Slowly lower them back down without letting them touch the ground.",
+                "sets": "3"
+            },
+            {
+                "name": "Plank",
+                "count": "30 seconds",
+                "description": "Planks are a powerful exercise for the entire core, including the transverse abdominis and lower back. Begin in a forearm plank position with your body in a straight line from head to heels. Hold this position, engaging your core muscles and maintaining proper form.",
+                "sets": "3"
+            }
+        ]
+    }
+]

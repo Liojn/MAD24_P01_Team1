@@ -34,9 +34,22 @@ dependencies {
     implementation(libs.material)
     implementation(libs.activity)
     implementation(libs.constraintlayout)
+
     implementation(libs.firebase.firestore)
     implementation(libs.firebase.auth)
+    implementation(libs.gson)
+    implementation(libs.roundedimageview)
+    implementation(libs.sdp.android)
+    implementation(libs.ssp.android)
     testImplementation(libs.junit)
+    // Import the Firebase BoM
+    implementation(platform("com.google.firebase:firebase-bom:33.0.0"))
+    implementation("com.google.android.gms:play-services-auth:20.2.0")
+    implementation("androidx.activity:activity-ktx:1.6.1")
+    implementation("com.google.android.material:material:1.12.0")
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
-}
+
+    implementation("com.github.bumptech.glide:glide:4.12.0")
+    implementation("com.google.firebase:firebase-storage:21.0.0")
+
