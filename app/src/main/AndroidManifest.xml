@@ -50,6 +50,7 @@
             android:name=".BaseActivity"
             android:exported="false" />
         <activity
+            android:name=".calendarPage.CalendarActivity"
             android:name=".LogDetails"
             android:exported="false" />
         <activity
