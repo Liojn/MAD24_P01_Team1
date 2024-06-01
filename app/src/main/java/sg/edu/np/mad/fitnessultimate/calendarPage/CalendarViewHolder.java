@@ -1,8 +1,5 @@
-<<<<<<<< HEAD:app/src/main/java/sg/edu/np/mad/fitnessultimate/calendar/CalendarViewHolder.java
-package sg.edu.np.mad.fitnessultimate.calendar;
-========
+
 package sg.edu.np.mad.fitnessultimate.calendarPage;
->>>>>>>> c2bf8b5b669f4443abcb052a6ca3a5677416c8e9:app/src/main/java/sg/edu/np/mad/fitnessultimate/calendarPage/CalendarViewHolder.java
 
 import android.view.View;
 import android.widget.TextView;

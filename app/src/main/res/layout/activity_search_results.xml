@@ -5,12 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-<<<<<<< HEAD
     tools:context=".foodtracker.SearchResultsActivity">
-=======
-    android:background="#2D3250"
-    tools:context="food.SearchResultsActivity">
->>>>>>> c2bf8b5b669f4443abcb052a6ca3a5677416c8e9
 
     <!-- Back button to allow users to navigate back to the FoodTracker page -->
     <Button

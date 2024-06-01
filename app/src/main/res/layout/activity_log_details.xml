@@ -5,14 +5,8 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-<<<<<<< HEAD
     tools:context=".foodtracker.LogDetails">
 
-=======
-    android:background="#2D3250"
-    tools:context=".food.LogDetails">
-    <!-- Header -->
->>>>>>> c2bf8b5b669f4443abcb052a6ca3a5677416c8e9
     <TextView
         android:id="@+id/header_title"
         android:layout_width="wrap_content"

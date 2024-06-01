@@ -13,7 +13,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 import sg.edu.np.mad.fitnessultimate.R;
-import sg.edu.np.mad.fitnessultimate.workoutPage.training.workouts.Workout;
+import sg.edu.np.mad.fitnessultimate.training.workouts.Workout;
 
 class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder>
 {

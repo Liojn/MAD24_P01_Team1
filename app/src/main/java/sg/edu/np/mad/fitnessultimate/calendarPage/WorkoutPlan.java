@@ -1,6 +1,6 @@
 package sg.edu.np.mad.fitnessultimate.calendarPage;
 
-import sg.edu.np.mad.fitnessultimate.workoutPage.training.workouts.Workout;
+import sg.edu.np.mad.fitnessultimate.training.workouts.Workout;
 
 public class WorkoutPlan {
     public Long timeSpent;

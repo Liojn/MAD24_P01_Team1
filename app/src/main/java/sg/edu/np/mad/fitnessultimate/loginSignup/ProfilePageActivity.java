@@ -206,7 +206,7 @@ public class ProfilePageActivity extends AppCompatActivity {
             finish();
         }
     }
-    private void retrieveProfileImage() {
+    public void retrieveProfileImage() {
         if (user != null) {
             // Retrieve the user document from Firestore
             DocumentReference userRef = fStore.collection("users").document(user.getUid());

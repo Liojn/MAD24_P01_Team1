@@ -1,8 +1,4 @@
-<<<<<<<< HEAD:app/src/main/java/sg/edu/np/mad/fitnessultimate/foodtracker/LogDetails.java
 package sg.edu.np.mad.fitnessultimate.foodtracker;
-========
-package sg.edu.np.mad.fitnessultimate.food;
->>>>>>>> c2bf8b5b669f4443abcb052a6ca3a5677416c8e9:app/src/main/java/sg/edu/np/mad/fitnessultimate/food/LogDetails.java
 
 import android.app.Activity;
 import android.content.Intent;

@@ -9,14 +9,12 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import sg.edu.np.mad.fitnessultimate.calendar.CalendarActivity;
+import sg.edu.np.mad.fitnessultimate.calendarPage.CalendarActivity;
 import sg.edu.np.mad.fitnessultimate.chatbot.activity.ChatbotActivity;
-import sg.edu.np.mad.fitnessultimate.foodtracker.FoodTracker;
+import sg.edu.np.mad.fitnessultimate.foodtracker.*;
 import sg.edu.np.mad.fitnessultimate.training.TrainingMenuActivity;
 
 public class MainActivity extends AppCompatActivity {
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.nav_home).setOnClickListener(v ->{
             Intent intent = new Intent(MainActivity.this, MainActivity.class);
             startActivity(intent);
+            finish();
         });
 
     }

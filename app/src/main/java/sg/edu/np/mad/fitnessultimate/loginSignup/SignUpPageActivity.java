@@ -31,14 +31,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.HashMap;
 import java.util.Map;
 
-<<<<<<< HEAD
+
 import sg.edu.np.mad.fitnessultimate.MainActivity;
-=======
-<<<<<<< HEAD
-import sg.edu.np.mad.fitnessultimate.MainActivity;
-=======
->>>>>>> main
->>>>>>> c2bf8b5b669f4443abcb052a6ca3a5677416c8e9
 import sg.edu.np.mad.fitnessultimate.R;
 
 public class SignUpPageActivity extends AppCompatActivity {

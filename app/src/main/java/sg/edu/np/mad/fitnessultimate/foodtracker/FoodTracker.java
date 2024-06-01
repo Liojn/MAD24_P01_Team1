@@ -1,8 +1,4 @@
-<<<<<<<< HEAD:app/src/main/java/sg/edu/np/mad/fitnessultimate/foodtracker/FoodTracker.java
 package sg.edu.np.mad.fitnessultimate.foodtracker;
-========
-package sg.edu.np.mad.fitnessultimate.food;
->>>>>>>> c2bf8b5b669f4443abcb052a6ca3a5677416c8e9:app/src/main/java/sg/edu/np/mad/fitnessultimate/food/FoodTracker.java
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -18,13 +14,10 @@ import android.content.Intent;
 import android.view.View;
 import android.widget.TextView;
 
-<<<<<<<< HEAD:app/src/main/java/sg/edu/np/mad/fitnessultimate/foodtracker/FoodTracker.java
-========
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
->>>>>>>> c2bf8b5b669f4443abcb052a6ca3a5677416c8e9:app/src/main/java/sg/edu/np/mad/fitnessultimate/food/FoodTracker.java
 import sg.edu.np.mad.fitnessultimate.R;
 
 

@@ -52,6 +52,7 @@ import com.google.firebase.storage.StorageReference;
 import java.util.HashMap;
 import java.util.Map;
 
+import sg.edu.np.mad.fitnessultimate.loginSignup.ProfilePageActivity;
 import sg.edu.np.mad.fitnessultimate.R;
 
 public class EditProfilePageActivity extends AppCompatActivity {
@@ -94,7 +95,6 @@ public class EditProfilePageActivity extends AppCompatActivity {
 
         fAuth = FirebaseAuth.getInstance();
         fStore = FirebaseFirestore.getInstance();
-
         user = FirebaseAuth.getInstance().getCurrentUser();
 
         storageReference = FirebaseStorage.getInstance().getReference();
@@ -115,7 +115,7 @@ public class EditProfilePageActivity extends AppCompatActivity {
 
         // Disable save button initially if no changes
         saveButton.setEnabled(false);
-        saveButton.setBackgroundColor(0xFFD3D3D3); // Set grey background (disabled color)
+        saveButton.setBackgroundColor(ContextCompat.getColor(this, R.color.disabledButtonColor));
 
         // Add TextChangedListener to EditText fields to enable/disable save button based on changes
         resetUsername.addTextChangedListener(textWatcher);
@@ -130,23 +130,6 @@ public class EditProfilePageActivity extends AppCompatActivity {
             }
         });
 
-        // Initialize the gallery launcher
-        galleryLauncher = registerForActivityResult(new ActivityResultContracts.GetContent(),
-                new ActivityResultCallback<Uri>() {
-                    @Override
-                    public void onActivityResult(Uri result) {
-                        // Handle the picked image URI here
-                        if (result != null) {
-                            // Do something with the picked image URI
-                            changeProfilePic.setImageURI(result);
-                        }
-                    }
-                });
-
-        changeProfilePic.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Open gallery using the activity result launcher
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -242,11 +225,11 @@ public class EditProfilePageActivity extends AppCompatActivity {
                     !resetEmail.getText().toString().equals(originalEmail)) {
                 // Enable save button if there are changes and set blue background
                 saveButton.setEnabled(true);
-                saveButton.setBackgroundColor(0xFFD3D3D3);
+                saveButton.setBackgroundColor(ContextCompat.getColor(EditProfilePageActivity.this, R.color.enabledButtonColor));
             } else {
                 // Disable save button if no changes and set grey background
                 saveButton.setEnabled(false);
-                saveButton.setBackgroundColor(0xFFD3D3D3);
+                saveButton.setBackgroundColor(ContextCompat.getColor(EditProfilePageActivity.this, R.color.disabledButtonColor));
             }
         }
 

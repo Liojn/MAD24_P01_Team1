@@ -39,14 +39,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import sg.edu.np.mad.fitnessultimate.BaseActivity;
+import sg.edu.np.mad.fitnessultimate.MainActivity;
 import sg.edu.np.mad.fitnessultimate.R;
-import sg.edu.np.mad.fitnessultimate.workoutPage.training.helpers.GlobalExerciseData;
-import sg.edu.np.mad.fitnessultimate.workoutPage.training.helpers.JsonUtils;
-import sg.edu.np.mad.fitnessultimate.workoutPage.training.workouts.Workout;
-import sg.edu.np.mad.fitnessultimate.workoutPage.training.workouts.WorkoutActivity;
+import sg.edu.np.mad.fitnessultimate.training.helpers.GlobalExerciseData;
+import sg.edu.np.mad.fitnessultimate.calendarPage.DayModel;
+import sg.edu.np.mad.fitnessultimate.training.workouts.Workout;
+import sg.edu.np.mad.fitnessultimate.training.workouts.WorkoutActivity;
 
-public class CalendarActivity extends BaseActivity implements CalendarAdapter.OnItemListener, HistoryAdapter.OnItemListener2 {
+
+
+public class CalendarActivity extends MainActivity implements CalendarAdapter.OnItemListener, HistoryAdapter.OnItemListener2 {
 
     private static final String TAG = "CalendarActivity";
     private TextView monthYearText;
@@ -65,8 +67,6 @@ public class CalendarActivity extends BaseActivity implements CalendarAdapter.On
             return insets;
         });
 
-        GlobalExerciseData.getInstance().setWorkoutList(JsonUtils.loadWorkouts(this));
-        GlobalExerciseData.getInstance().setExerciseList(JsonUtils.loadExercises(this));
         initWidgets();
         selectedDate = LocalDate.now();
         setMonthView();
@@ -163,63 +163,68 @@ public class CalendarActivity extends BaseActivity implements CalendarAdapter.On
     }
 
     private void getTimeSpentForDate(final FirestoreCallback firestoreCallback) {
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        try {
+            FirebaseFirestore db = FirebaseFirestore.getInstance();
+            String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
-        DocumentReference userDocRef = db.collection("users").document(userId);
-        userDocRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if (task.isSuccessful() && task.getResult() != null) {
-                    DocumentSnapshot document = task.getResult();
-                    String email = document.getString("email");
-                    Log.d("CalendarActivity", "email: " + email);
+            DocumentReference userDocRef = db.collection("users").document(userId);
+            userDocRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                    if (task.isSuccessful() && task.getResult() != null) {
+                        DocumentSnapshot document = task.getResult();
+                        String email = document.getString("email");
+                        Log.d("CalendarActivity", "email: " + email);
 
-                    if (email != null && !email.isEmpty()) {
-                        DocumentReference userTimeSpentDocRef = db.collection("timeSpentTracker").document(email);
-                        CollectionReference paddingCollectionRef = userTimeSpentDocRef.collection("padding");
+                        if (email != null && !email.isEmpty()) {
+                            DocumentReference userTimeSpentDocRef = db.collection("timeSpentTracker").document(email);
+                            CollectionReference paddingCollectionRef = userTimeSpentDocRef.collection("padding");
 
-                        paddingCollectionRef.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                            @Override
-                            public void onComplete(@NonNull Task<QuerySnapshot> task1) {
-                                Map<LocalDate, WorkoutPlan> timeSpentMap = new HashMap<>();
-                                List<Workout> workoutsList = GlobalExerciseData.getInstance().getWorkoutList();
-                                if (task1.isSuccessful()) {
-                                    for (QueryDocumentSnapshot document : task1.getResult()) {
-                                        LocalDate dateId = LocalDate.parse(document.getId());
-                                        Long timeSpent = document.getLong("timeSpent");
+                            paddingCollectionRef.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull Task<QuerySnapshot> task1) {
+                                    Map<LocalDate, WorkoutPlan> timeSpentMap = new HashMap<>();
+                                    List<Workout> workoutsList = GlobalExerciseData.getInstance().getWorkoutList();
+                                    if (task1.isSuccessful()) {
+                                        for (QueryDocumentSnapshot document : task1.getResult()) {
+                                            LocalDate dateId = LocalDate.parse(document.getId());
+                                            Long timeSpent = document.getLong("timeSpent");
 
-                                        Workout workout;
-                                        Map<String, Object> documentData = document.getData();
-                                        if (documentData == null || documentData.get("workout") == null) {
-                                            workout = null;
-                                            Log.d("CalendarActivity", "Workout is null");
-                                        } else {
-                                            Map<String, String> workoutData = (Map<String, String>) documentData.get("workout");
-                                            Log.d("CalendarActivity", "testing here: " + workoutData);
-                                            Log.d("CalendarActivity", "testing here: " + documentData);
-                                            workout = workoutsList.stream()
-                                                    .filter(e -> e.getName().equals(workoutData.get("name")))
-                                                    .findFirst()
-                                                    .orElse(null);
+                                            Workout workout;
+                                            Map<String, Object> documentData = document.getData();
+                                            if (documentData == null || documentData.get("workout") == null) {
+                                                workout = null;
+                                                Log.d("CalendarActivity", "Workout is null");
+                                            } else {
+                                                Map<String, String> workoutData = (Map<String, String>) documentData.get("workout");
+                                                Log.d("CalendarActivity", "testing here: " + workoutData);
+                                                Log.d("CalendarActivity", "testing here: " + documentData);
+                                                workout = workoutsList.stream()
+                                                        .filter(e -> e.getName().equals(workoutData.get("name")))
+                                                        .findFirst()
+                                                        .orElse(null);
 
-                                            Log.d("CalendarActivity", "workout here: " + workout);
-                                            Log.d("CalendarActivity", "dateId: " + dateId + " timeSpent: " + timeSpent + " Workout: " + workout.getName());
+                                                Log.d("CalendarActivity", "workout here: " + workout);
+                                                Log.d("CalendarActivity", "dateId: " + dateId + " timeSpent: " + timeSpent + " Workout: " + workout.getName());
+                                            }
+
+                                            WorkoutPlan workoutPlan = new WorkoutPlan(timeSpent, workout);
+                                            timeSpentMap.put(dateId, workoutPlan);
                                         }
-
-                                        WorkoutPlan workoutPlan = new WorkoutPlan(timeSpent, workout);
-                                        timeSpentMap.put(dateId, workoutPlan);
+                                        firestoreCallback.onCallback(timeSpentMap);
+                                    } else {
+                                        Log.w(TAG, "Error getting documents.", task1.getException());
                                     }
-                                    firestoreCallback.onCallback(timeSpentMap);
-                                } else {
-                                    Log.w(TAG, "Error getting documents.", task1.getException());
                                 }
-                            }
-                        });
+                            });
+                        }
                     }
                 }
-            }
-        });
+            });
+        } catch (Exception e) {
+            Log.e(TAG, "Error: ", e);
+        }
+
     }
 
     private String monthYearFromDate(LocalDate date) {

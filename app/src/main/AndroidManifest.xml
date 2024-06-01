@@ -26,41 +26,46 @@
         <activity
             android:name=".loginSignup.ProfilePageActivity"
             android:exported="true" />
+        <activity android:name=".loginSignup.LoginOrSignUpOption"
+            android:exported="true" />
 
         <activity
-            android:name=".loginSignup.SplashActivity"
+            android:name=".MainActivity"
             android:exported="false" />
 
         <activity
             android:name=".training.exercises.ExerciseActivity"
             android:exported="false" />
+
         <activity android:name=".training.workouts.WorkoutActivity"
             android:exported="false" />
+
         <activity
             android:name=".training.exercises.ExerciseCatalogueActivity"
             android:exported="false" />
+
         <activity
             android:name=".training.workouts.WorkoutsCatalogueActivity"
             android:exported="false" />
+
         <activity
             android:name=".training.TrainingMenuActivity"
             android:exported="false" />
+
         <activity
-            android:name=".BaseActivity"
-            android:exported="false" />
-        <activity
-<<<<<<< HEAD
             android:name=".foodtracker.LogDetails"
-=======
-            android:name=".calendarPage.CalendarActivity"
-            android:name=".LogDetails"
->>>>>>> c2bf8b5b669f4443abcb052a6ca3a5677416c8e9
             android:exported="false" />
+
+        <activity
+            android:name=".calendarPage.CalendarActivity"
+            android:exported="false" />
+
         <activity
             android:name=".foodtracker.SearchResultsActivity"
             android:exported="true" />
+
         <activity
-            android:name=".MainActivity"
+            android:name=".loginSignup.SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -68,19 +73,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".foodtracker.FoodTracker"
             android:exported="true"/>
-        <activity
-            android:name=".calendar.CalendarActivity"
-            android:exported="true">
-
-        </activity>
 
         <activity
             android:name=".chatbot.activity.ChatbotActivity"
             android:exported="true"/>
-
     </application>
 
 </manifest>

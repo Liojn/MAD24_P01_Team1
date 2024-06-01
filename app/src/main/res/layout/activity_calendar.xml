@@ -4,11 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-<<<<<<< HEAD
-    tools:context=".calendar.CalendarActivity">
-=======
+
     tools:context=".calendarPage.CalendarActivity">
->>>>>>> c2bf8b5b669f4443abcb052a6ca3a5677416c8e9
 
     <LinearLayout
         android:id="@+id/calendar"

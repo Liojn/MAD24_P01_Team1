@@ -1,8 +1,4 @@
-<<<<<<<< HEAD:app/src/main/java/sg/edu/np/mad/fitnessultimate/foodtracker/SearchResultsActivity.java
 package sg.edu.np.mad.fitnessultimate.foodtracker;
-========
-package sg.edu.np.mad.fitnessultimate.food;
->>>>>>>> c2bf8b5b669f4443abcb052a6ca3a5677416c8e9:app/src/main/java/sg/edu/np/mad/fitnessultimate/food/SearchResultsActivity.java
 
 import android.content.Intent;
 import android.os.AsyncTask;
