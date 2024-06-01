@@ -48,5 +48,11 @@ public class MainActivity extends BaseActivity {
             startActivity(intent);
         });
 
+        //For HomePage
+        findViewById(R.id.chat_button).setOnClickListener(v ->{
+            Intent intent = new Intent(MainActivity.this, MainActivity.class);
+            startActivity(intent);
+        });
+
     }
 }
