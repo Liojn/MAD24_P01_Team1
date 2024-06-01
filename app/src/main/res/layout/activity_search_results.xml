@@ -5,27 +5,61 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SearchResultsActivity">
+    android:background="#2D3250"
+    tools:context="food.SearchResultsActivity">
 
+    <!-- Back button to allow users to navigate back to the FoodTracker page -->
+    <Button
+        android:id="@+id/backBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="204dp"
+        android:text="Back"
+        android:fontFamily="sans-serif-condensed-medium"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- SearchBar that allows user to enter their search item -->
     <SearchView
         android:id="@+id/searchBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
+        android:layout_margin="10dp"
         android:iconifiedByDefault="false"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toEndOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/backBtn"
+        app:layout_constraintStart_toStartOf="parent" />
 
-
-    <TextView
-        android:id="@+id/resultTextBox"
+    <!-- A layout container that will display the search result -->
+    <LinearLayout
+        android:id="@+id/resultLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="start|top"
-        android:padding="16dp"
-        android:textIsSelectable="true"
+        android:orientation="vertical"
+        android:background="#424769"
+        android:visibility="invisible"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchBar" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/searchBar">
 
+        <TextView
+            android:id="@+id/resultTextBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="start|top"
+            android:padding="16dp"
+            android:textSize="23sp"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:textColor="@color/white"
+            android:textIsSelectable="true" />
+
+        <Button
+            android:id="@+id/addButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:text="+"
+            />
+        </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

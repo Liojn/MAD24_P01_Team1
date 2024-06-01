@@ -5,25 +5,35 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LogDetails">
-
+    android:background="#2D3250"
+    tools:context=".food.LogDetails">
+    <!-- Header -->
     <TextView
         android:id="@+id/header_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
         android:text="Enter the details below:"
+        android:textStyle="bold"
         android:textSize="25sp"
+        android:textColor="@color/white"
+        android:fontFamily="sans-serif-condensed-light"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>
 
+    <!-- Views to ask for the gender of users -->
     <TextView
         android:id="@+id/genderLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="18dp"
+        android:layout_marginLeft="25dp"
         android:text="Gender: "
-        android:textSize="15sp"
+        android:textSize="18sp"
+        android:textColor="@color/white"
+        android:fontFamily="sans-serif-condensed-medium"
         app:layout_constraintTop_toBottomOf="@+id/header_title"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/genderRadio"/>
@@ -42,23 +52,31 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Male"
-            android:textSize="10sp"/>
+            android:textColor="@color/white"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:textSize="15sp"/>
 
         <RadioButton
             android:id="@+id/radioButton2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Female"
-            android:textSize="10sp"/>
+            android:textColor="@color/white"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:textSize="15sp"/>
     </RadioGroup>
 
+    <!-- Views to ask for the user's age -->
     <TextView
         android:id="@+id/ageLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="18dp"
+        android:layout_marginLeft="25dp"
         android:text="Age: "
-        android:textSize="15sp"
+        android:textColor="@color/white"
+        android:fontFamily="sans-serif-condensed-medium"
+        android:textSize="18sp"
         app:layout_constraintTop_toBottomOf="@+id/genderLabel"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/ageText"/>
@@ -68,18 +86,23 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:padding="15dp"
+        android:padding="18dp"
         android:inputType="number"
+        android:textColor="@color/white"
         app:layout_constraintTop_toBottomOf="@+id/genderRadio"
         app:layout_constraintStart_toEndOf="@+id/ageLabel"/>
 
+    <!-- Views to ask for the user's weight -->
     <TextView
         android:id="@+id/weightLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="18dp"
+        android:layout_marginLeft="25dp"
         android:text="Weight (Kg): "
-        android:textSize="15sp"
+        android:textColor="@color/white"
+        android:fontFamily="sans-serif-condensed-medium"
+        android:textSize="18sp"
         app:layout_constraintTop_toBottomOf="@+id/ageLabel"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/weightText"/>
@@ -89,18 +112,23 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:padding="16dp"
+        android:padding="18dp"
+        android:textColor="@color/white"
         android:inputType="numberDecimal"
         app:layout_constraintTop_toBottomOf="@+id/ageText"
         app:layout_constraintStart_toEndOf="@+id/weightLabel"/>
 
+    <!-- Views to ask for the user's height -->
     <TextView
         android:id="@+id/heightLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="18dp"
         android:text="Height (m): "
-        android:textSize="15sp"
+        android:layout_marginLeft="25dp"
+        android:textColor="@color/white"
+        android:fontFamily="sans-serif-condensed-medium"
+        android:textSize="18sp"
         app:layout_constraintTop_toBottomOf="@+id/weightLabel"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/heightText"/>
@@ -110,20 +138,25 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:padding="16dp"
+        android:padding="18dp"
+        android:textColor="@color/white"
         android:inputType="numberDecimal"
         app:layout_constraintTop_toBottomOf="@+id/weightText"
         app:layout_constraintStart_toEndOf="@+id/heightLabel"/>
 
 
+    <!-- Views to ask for the user's activity level -->
     <TextView
         android:id="@+id/activitydef"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="18dp"
+        android:padding="10dp"
+        android:layout_marginLeft="25dp"
+        android:fontFamily="sans-serif-condensed-light"
         android:text="*Please specify activity level with no/low/moderate/high/extreme"
         android:textSize="15sp"
         android:textStyle="italic"
+        android:textColor="@color/white"
         app:layout_constraintTop_toBottomOf="@+id/heightLabel"
         app:layout_constraintStart_toStartOf="parent"/>
 
@@ -132,8 +165,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="18dp"
+        android:layout_marginLeft="25dp"
         android:text="Activity Level: "
-        android:textSize="15sp"
+        android:textColor="@color/white"
+        android:fontFamily="sans-serif-condensed-medium"
+        android:textSize="18sp"
         app:layout_constraintTop_toBottomOf="@+id/activitydef"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/activityText"/>
@@ -143,19 +179,25 @@
        android:id="@+id/activityText"
        android:layout_width="wrap_content"
        android:layout_height="wrap_content"
-       android:padding="16dp"
+       android:padding="18dp"
        android:ems="10"
        android:inputType="text"
+       android:textColor="@color/white"
        app:layout_constraintTop_toBottomOf="@id/activitydef"
        app:layout_constraintStart_toEndOf="@id/activityLabel"/>
 
+    <!-- Views to ask for the user's activeness -->
     <TextView
         android:id="@+id/goalsOption"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="18dp"
+        android:padding="10dp"
+        android:layout_marginTop="3dp"
+        android:layout_marginLeft="25dp"
         android:text="Choose your option: "
-        android:textSize="15sp"
+        android:textColor="@color/white"
+        android:fontFamily="sans-serif-condensed-medium"
+        android:textSize="18sp"
         app:layout_constraintTop_toBottomOf="@+id/activityLabel"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/radioOption"/>
@@ -164,7 +206,7 @@
         android:id="@+id/radioOption"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="5dp"
+        android:padding="2dp"
         android:orientation="horizontal"
         app:layout_constraintTop_toBottomOf="@id/activityText"
         app:layout_constraintStart_toEndOf="@+id/goalsOption">
@@ -174,23 +216,41 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Lose weight"
-        android:textSize="10sp"/>
+        android:textColor="@color/white"
+        android:fontFamily="sans-serif-condensed-medium"
+        android:textSize="14sp"/>
 
         <RadioButton
             android:id="@+id/optionButton2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Gain weight"
-            android:textSize="10sp"/>
+            android:textColor="@color/white"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:textSize="14sp"/>
     </RadioGroup>
 
+    <!-- Button to cancel and navigate back to the previous page -->
+    <Button
+        android:id="@+id/cancelButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cancel"
+        android:fontFamily="sans-serif-condensed-medium"
+        android:layout_marginTop="14dp"
+        app:layout_constraintTop_toBottomOf="@+id/radioOption"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/saveButton"/>
+
+    <!-- Button to save and calculate the total daily calories  -->
     <Button
         android:id="@+id/saveButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Save"
-        android:paddingTop="14dp"
+        android:fontFamily="sans-serif-condensed-medium"
+        android:layout_marginTop="14dp"
         app:layout_constraintTop_toBottomOf="@+id/radioOption"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/cancelButton"
         app:layout_constraintEnd_toEndOf="parent"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

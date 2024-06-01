@@ -1,0 +1,352 @@
+Index: app/src/main/java/sg/edu/np/mad/fitnessultimate/SearchResultsActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/sg/edu/np/mad/fitnessultimate/SearchResultsActivity.java b/app/src/main/java/sg/edu/np/mad/fitnessultimate/food/SearchResultsActivity.java
+rename from app/src/main/java/sg/edu/np/mad/fitnessultimate/SearchResultsActivity.java
+rename to app/src/main/java/sg/edu/np/mad/fitnessultimate/food/SearchResultsActivity.java
+--- a/app/src/main/java/sg/edu/np/mad/fitnessultimate/SearchResultsActivity.java	
++++ b/app/src/main/java/sg/edu/np/mad/fitnessultimate/food/SearchResultsActivity.java	
+@@ -1,7 +1,11 @@
+-package sg.edu.np.mad.fitnessultimate;
++package sg.edu.np.mad.fitnessultimate.food;
+ 
++import android.content.Intent;
+ import android.os.AsyncTask;
+ import android.os.Bundle;
++import android.view.View;
++import android.widget.Button;
++import android.widget.LinearLayout;
+ import android.widget.SearchView;
+ import android.widget.TextView;
+ 
+@@ -17,9 +21,17 @@
+ import java.net.HttpURLConnection;
+ import java.net.URL;
+ 
++import sg.edu.np.mad.fitnessultimate.R;
++
+ public class SearchResultsActivity extends AppCompatActivity {
++
++    //UI elements
+     private TextView resultTextBox;
+     private SearchView searchView;
++    private Button backBtn;
++    private LinearLayout resultLayout;
++
++    //API endpoint and key
+     private String apiUrl;
+     private String apiKey = "sEO/WztkNuDVZfEfyIOLrA==S4xbs1Ybg0QZ5vMd";
+ 
+@@ -28,11 +40,16 @@
+         super.onCreate(savedInstanceState);
+         setContentView(R.layout.activity_search_results);
+ 
++        //Initializing UI elements
+         resultTextBox = findViewById(R.id.resultTextBox);
+         searchView = findViewById(R.id.searchBar);
++        backBtn = findViewById(R.id.backBtn);
++        resultLayout = findViewById(R.id.resultLayout);
+ 
++        //API base URL
+         apiUrl = "https://api.api-ninjas.com/v1/nutrition?query=";
+ 
++        //Setting listener for search view query submission
+         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+             @Override
+             public boolean onQueryTextSubmit(String query) {
+@@ -50,8 +67,19 @@
+                 return false;
+             }
+         });
++
++        //Setting listener for back button click
++        backBtn.setOnClickListener(new View.OnClickListener() {
++            @Override
++            public void onClick(View v) {
++                //Navigate the user back to FoodTracker activity
++                Intent intent = new Intent(SearchResultsActivity.this, FoodTracker.class);
++                startActivity(intent);
++            }
++        });
+     }
+ 
++    //AsyncTask for performing network operation in the background
+     private class FetchDataTask extends AsyncTask<String, Void, String> {
+ 
+         @Override
+@@ -69,6 +97,7 @@
+                 // Set request method
+                 connection.setRequestMethod("GET");
+ 
++                //Set API key header
+                 connection.setRequestProperty("x-api-key", apiKey);
+ 
+                 // Connect to the API
+@@ -104,6 +133,7 @@
+         protected void onPostExecute(String result) {
+             super.onPostExecute(result);
+ 
++            //Clearing the previous result
+             resultTextBox.setText("");
+ 
+             // Check if the result is not null and not empty
+@@ -112,8 +142,12 @@
+                     // Parse the JSON response
+                     JSONArray jsonArray = new JSONArray(result);
+ 
+-                    // Create a StringBuilder to format the data
+-                    StringBuilder formattedData = new StringBuilder();
++                    //Variables to hold the total nutrition values
++                    double totalCalories = 0;
++                    double totalCarbs = 0;
++                    double totalProteins = 0;
++                    double totalFats = 0;
++                    double totalOthers = 0;
+ 
+                     // Iterate through the JSON array
+                     for (int i = 0; i < jsonArray.length(); i++) {
+@@ -127,25 +161,39 @@
+                         double fats = jsonObject.getDouble("fat_total_g");
+                         double others = calories - (carbohydrates + proteins + fats);
+ 
+-                        // Append the formatted data to the StringBuilder
+-                        formattedData.append("Name: ").append(name).append("\n");
+-                        formattedData.append("Total calories: ").append(calories).append(" per 100 g\n");
+-                        formattedData.append("Carbohydrates: ").append(carbohydrates).append("\n");
+-                        formattedData.append("Protein: ").append(proteins).append("\n");
+-                        formattedData.append("Fats: ").append(fats).append("\n");
+-                        formattedData.append("Others: ").append(others).append("\n");
++                        //Adding in each data for total values
++                        totalCalories += calories;
++                        totalCarbs += carbohydrates;
++                        totalProteins += proteins;
++                        totalFats += fats;
++                        totalOthers += others;
++                    }
++
++                    // Create a StringBuilder to format the data
++                    StringBuilder formattedData = new StringBuilder();
++
++                    // Append the formatted data to the StringBuilder
++                    String query = searchView.getQuery().toString();
+ 
+-
+-                    }
++                    formattedData.append("Name: ").append(query).append("\n");
++                    formattedData.append("Total calories: ").append(String.format("%.1f", totalCalories)).append(" kcal per 100 g\n");
++                    formattedData.append("Carbohydrates: ").append(String.format("%.1f",totalCarbs)).append(" g\n");
++                    formattedData.append("Protein: ").append(String.format("%.1f",totalProteins)).append(" g\n");
++                    formattedData.append("Fats: ").append(String.format("%.1f",totalFats)).append(" g\n");
++                    formattedData.append("Others: ").append(String.format("%.1f",totalOthers)).append(" kcal\n");
+ 
+                     // Set the formatted data to the TextView
+                     resultTextBox.setText(formattedData.toString());
+ 
++                    //Make the result layout visible
++                    resultLayout.setVisibility(LinearLayout.VISIBLE);
++
+                 } catch (JSONException e) {
+                     e.printStackTrace();
+                     resultTextBox.setText("Failed to parse data");
+                 }
+             } else {
++                //Display error message if no result is found
+                 resultTextBox.setText("No results found or error fetching data");
+             }
+         }
+Index: app/src/main/java/sg/edu/np/mad/fitnessultimate/LogDetails.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/sg/edu/np/mad/fitnessultimate/LogDetails.java b/app/src/main/java/sg/edu/np/mad/fitnessultimate/food/LogDetails.java
+rename from app/src/main/java/sg/edu/np/mad/fitnessultimate/LogDetails.java
+rename to app/src/main/java/sg/edu/np/mad/fitnessultimate/food/LogDetails.java
+--- a/app/src/main/java/sg/edu/np/mad/fitnessultimate/LogDetails.java	
++++ b/app/src/main/java/sg/edu/np/mad/fitnessultimate/food/LogDetails.java	
+@@ -1,4 +1,4 @@
+-package sg.edu.np.mad.fitnessultimate;
++package sg.edu.np.mad.fitnessultimate.food;
+ 
+ import android.app.Activity;
+ import android.content.Intent;
+@@ -16,6 +16,8 @@
+ import android.widget.RadioButton;
+ import android.widget.RadioGroup;
+ 
++import sg.edu.np.mad.fitnessultimate.R;
++
+ public class LogDetails extends AppCompatActivity {
+ 
+     private double calculatedBMR;
+@@ -39,8 +41,17 @@
+         EditText activityText = findViewById(R.id.activityText);
+         RadioGroup goalsGroup = findViewById(R.id.radioOption);
+         Button saveButton = findViewById(R.id.saveButton);
++        Button cancelButton = findViewById(R.id.cancelButton);
+ 
+-        // Set a click listener for the calculate button
++        // Set a click listener for the cancel button
++        cancelButton.setOnClickListener(new View.OnClickListener() {
++            @Override
++            public void onClick(View v) {
++                finish();
++            }
++        });
++
++        // Set a click listener for the save button
+         saveButton.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View v) {
+@@ -85,20 +96,22 @@
+ 
+                 // Adjust BMR based on goal
+                 if (goal.equals("Lose weight")) {
+-                    bmr -= 500; // Calorie deficit for weight loss
++                    bmr -= 500; // Calorie adjustments for weight loss
+                 } else if (goal.equals("Gain weight")) {
+-                    bmr += 500; // Calorie surplus for weight gain
++                    bmr += 500; // Calorie adjustments for weight gain
+                 }
+-                String formattedBMR = String.format("%.2f", bmr);
++                // Formatting bmr to 1 decimal place and parsing back string to a double
++                String formattedBMR = String.format("%.1f", bmr);
+                 calculatedBMR = Double.parseDouble(formattedBMR);
+-                returnCalculatedBMR();
++                returnCalculatedBMR(); //Calling the activity to return bmr
+             }
+ 
++            //Prepares the result intent with the bmr and finishes the activity
+             private void returnCalculatedBMR() {
+-                Intent resultIntent = new Intent();
++                Intent resultIntent = new Intent(); //Intent to hold the reuslt data
+                 resultIntent.putExtra("bmr", calculatedBMR);
+-                setResult(Activity.RESULT_OK, resultIntent);
+-                finish();
++                setResult(Activity.RESULT_OK, resultIntent); //Set the result of activity to RESULT_OK and attach the intent
++                finish(); //Finish the activity and return to the previous one
+             }
+         });
+     }
+Index: app/src/main/java/sg/edu/np/mad/fitnessultimate/FoodTracker.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/sg/edu/np/mad/fitnessultimate/FoodTracker.java b/app/src/main/java/sg/edu/np/mad/fitnessultimate/food/FoodTracker.java
+rename from app/src/main/java/sg/edu/np/mad/fitnessultimate/FoodTracker.java
+rename to app/src/main/java/sg/edu/np/mad/fitnessultimate/food/FoodTracker.java
+--- a/app/src/main/java/sg/edu/np/mad/fitnessultimate/FoodTracker.java	
++++ b/app/src/main/java/sg/edu/np/mad/fitnessultimate/food/FoodTracker.java	
+@@ -1,7 +1,7 @@
+-package sg.edu.np.mad.fitnessultimate;
++package sg.edu.np.mad.fitnessultimate.food;
+ 
+-import android.app.Activity;
+ import android.os.Bundle;
++import android.os.Handler;
+ 
+ import androidx.activity.EdgeToEdge;
+ import androidx.appcompat.app.AppCompatActivity;
+@@ -14,12 +14,22 @@
+ import android.view.View;
+ import android.widget.TextView;
+ 
++import java.text.SimpleDateFormat;
++import java.util.Date;
++import java.util.Locale;
++
++import sg.edu.np.mad.fitnessultimate.R;
+ 
+ 
+ public class FoodTracker extends AppCompatActivity {
++    //UI elements
+     private static final int REQUEST_CODE_LOG_DETAILS = 1;
+     private TextView totalCalories;
+     private TextView dailyIntake;
++    private TextView textToday;
++    private Handler handler = new Handler();
++    private Runnable runnable;
++
+     //This method is called when the activity is first created.
+     @Override
+     protected void onCreate(Bundle savedInstanceState) {
+@@ -33,6 +43,17 @@
+             return insets;
+         });
+ 
++        //Set up for the date to update every hour
++        textToday = findViewById(R.id.textToday);
++        runnable = new Runnable() {
++            @Override
++            public void run() {
++                textToday.setText(getCurrentDate());
++                handler.postDelayed(this, 3600000);
++            }
++        };
++        handler.post(runnable);
++
+ 
+         //Finds Search Button in the food_tracker layout
+         Button searchButton = findViewById(R.id.btnSearch);
+@@ -47,9 +68,25 @@
+             }
+         });
+ 
++        //Find the add meal button in the food_tracker layout
++        Button addButton = findViewById(R.id.addMeal);
++        //Sets a click listener for the Search Button
++        addButton.setOnClickListener(new View.OnClickListener() {
++            @Override
++            public void onClick(View v) {
++                //Create an intent to start the SearchResultsActivity
++                Intent intent = new Intent(FoodTracker.this, SearchResultsActivity.class);
++                //Starts the next activity
++                startActivity(intent);
++            }
++        });
++
++        //Finds the TextViews and log details button in the layout
+         totalCalories = findViewById(R.id.totalCalories);
+         Button logDetails = findViewById(R.id.btnlogDetails);
+         dailyIntake = findViewById(R.id.dailyCalories);
++
++        //Set a click listener for log details button
+         logDetails.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View v) {
+@@ -59,14 +96,29 @@
+         });
+     }
+ 
++    //Method is called when an activity lunched exists, giving back requestCode, resultCode, and other additional data if it exists
+     @Override
+     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+         super.onActivityResult(requestCode, resultCode, data);
++        //Handles the result from the LogDetails activity
+         if(requestCode == REQUEST_CODE_LOG_DETAILS && resultCode == RESULT_OK) {
+-                double bmr = data.getDoubleExtra("bmr", 0.0);
+-                totalCalories.setText(String.valueOf(bmr) + "kcals");
+-                dailyIntake.setText("0.0 kcals/ ");
++                double bmr = data.getDoubleExtra("bmr", 0.0); //Get bmr value from esult
++                totalCalories.setText(String.valueOf(bmr) + " kcals"); //Update total calories TextView
++                dailyIntake.setText("0.0 kcals/ "); //Update daily intake TextView
+         }
+     }
++
++    //Method is called when the activity is destroyed
++    @Override
++    protected void onDestroy() {
++        super.onDestroy();
++        handler.removeCallbacks(runnable);//Remove the runnable callback to prevent memory leaks
++    }
++
++    //Method to get the current date in the specified format
++    private String getCurrentDate() {
++        SimpleDateFormat sdf = new SimpleDateFormat("MMM d, yyyy (EEEE)", Locale.getDefault());
++        return sdf.format(new Date()); //Return the formatted date
++    }
+ 
+ }

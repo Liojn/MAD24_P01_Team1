@@ -1,5 +1,13 @@
 package sg.edu.np.mad.fitnessultimate.loginSignup;
 
+import android.app.Activity;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Bundle;
+import android.provider.MediaStore;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -16,9 +24,14 @@ import androidx.activity.EdgeToEdge;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
+
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -41,12 +54,12 @@ import java.util.Map;
 
 import sg.edu.np.mad.fitnessultimate.R;
 
-
 public class EditProfilePageActivity extends AppCompatActivity {
     ImageView leftArrow;
     ImageView changeProfilePic;
     EditText resetUsername;
     EditText resetEmail;
+
     Button saveButton;
 
     FirebaseAuth fAuth;
@@ -61,6 +74,7 @@ public class EditProfilePageActivity extends AppCompatActivity {
     private String originalEmail;
 
     // Method to retrieve the profile image URI
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,6 +94,7 @@ public class EditProfilePageActivity extends AppCompatActivity {
 
         fAuth = FirebaseAuth.getInstance();
         fStore = FirebaseFirestore.getInstance();
+
         user = FirebaseAuth.getInstance().getCurrentUser();
 
         storageReference = FirebaseStorage.getInstance().getReference();
@@ -115,6 +130,23 @@ public class EditProfilePageActivity extends AppCompatActivity {
             }
         });
 
+        // Initialize the gallery launcher
+        galleryLauncher = registerForActivityResult(new ActivityResultContracts.GetContent(),
+                new ActivityResultCallback<Uri>() {
+                    @Override
+                    public void onActivityResult(Uri result) {
+                        // Handle the picked image URI here
+                        if (result != null) {
+                            // Do something with the picked image URI
+                            changeProfilePic.setImageURI(result);
+                        }
+                    }
+                });
+
+        changeProfilePic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Open gallery using the activity result launcher
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

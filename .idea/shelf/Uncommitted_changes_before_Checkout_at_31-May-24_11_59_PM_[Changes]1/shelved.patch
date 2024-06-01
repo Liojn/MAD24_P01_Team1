@@ -1,0 +1,2528 @@
+Index: app/src/main/res/layout/activity_log_details.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<androidx.constraintlayout.widget.ConstraintLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:id=\"@+id/main\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\"\r\n    tools:context=\".LogDetails\">\r\n\r\n    <TextView\r\n        android:id=\"@+id/header_title\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:padding=\"10dp\"\r\n        android:text=\"Enter the details below:\"\r\n        android:textSize=\"25sp\"\r\n        app:layout_constraintTop_toTopOf=\"parent\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"/>\r\n\r\n    <TextView\r\n        android:id=\"@+id/genderLabel\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:padding=\"18dp\"\r\n        android:text=\"Gender: \"\r\n        android:textSize=\"15sp\"\r\n        app:layout_constraintTop_toBottomOf=\"@+id/header_title\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintEnd_toStartOf=\"@+id/genderRadio\"/>\r\n\r\n    <RadioGroup\r\n        android:id=\"@+id/genderRadio\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:padding=\"5dp\"\r\n        android:orientation=\"horizontal\"\r\n        app:layout_constraintTop_toBottomOf=\"@id/header_title\"\r\n        app:layout_constraintStart_toEndOf=\"@+id/genderLabel\">\r\n\r\n        <RadioButton\r\n            android:id=\"@+id/radioButton1\"\r\n            android:layout_width=\"wrap_content\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:text=\"Male\"\r\n            android:textSize=\"10sp\"/>\r\n\r\n        <RadioButton\r\n            android:id=\"@+id/radioButton2\"\r\n            android:layout_width=\"wrap_content\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:text=\"Female\"\r\n            android:textSize=\"10sp\"/>\r\n    </RadioGroup>\r\n\r\n    <TextView\r\n        android:id=\"@+id/ageLabel\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:padding=\"18dp\"\r\n        android:text=\"Age: \"\r\n        android:textSize=\"15sp\"\r\n        app:layout_constraintTop_toBottomOf=\"@+id/genderLabel\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintEnd_toStartOf=\"@+id/ageText\"/>\r\n\r\n    <EditText\r\n        android:id=\"@+id/ageText\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:ems=\"10\"\r\n        android:padding=\"15dp\"\r\n        android:inputType=\"number\"\r\n        app:layout_constraintTop_toBottomOf=\"@+id/genderRadio\"\r\n        app:layout_constraintStart_toEndOf=\"@+id/ageLabel\"/>\r\n\r\n    <TextView\r\n        android:id=\"@+id/weightLabel\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:padding=\"18dp\"\r\n        android:text=\"Weight (Kg): \"\r\n        android:textSize=\"15sp\"\r\n        app:layout_constraintTop_toBottomOf=\"@+id/ageLabel\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintEnd_toStartOf=\"@+id/weightText\"/>\r\n\r\n    <EditText\r\n        android:id=\"@+id/weightText\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:ems=\"10\"\r\n        android:padding=\"16dp\"\r\n        android:inputType=\"numberDecimal\"\r\n        app:layout_constraintTop_toBottomOf=\"@+id/ageText\"\r\n        app:layout_constraintStart_toEndOf=\"@+id/weightLabel\"/>\r\n\r\n    <TextView\r\n        android:id=\"@+id/heightLabel\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:padding=\"18dp\"\r\n        android:text=\"Height (m): \"\r\n        android:textSize=\"15sp\"\r\n        app:layout_constraintTop_toBottomOf=\"@+id/weightLabel\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintEnd_toStartOf=\"@+id/heightText\"/>\r\n\r\n    <EditText\r\n        android:id=\"@+id/heightText\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:ems=\"10\"\r\n        android:padding=\"16dp\"\r\n        android:inputType=\"numberDecimal\"\r\n        app:layout_constraintTop_toBottomOf=\"@+id/weightText\"\r\n        app:layout_constraintStart_toEndOf=\"@+id/heightLabel\"/>\r\n\r\n\r\n    <TextView\r\n        android:id=\"@+id/activitydef\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:padding=\"18dp\"\r\n        android:text=\"*Please specify activity level with no/low/moderate/high/extreme\"\r\n        android:textSize=\"15sp\"\r\n        android:textStyle=\"italic\"\r\n        app:layout_constraintTop_toBottomOf=\"@+id/heightLabel\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"/>\r\n\r\n    <TextView\r\n        android:id=\"@+id/activityLabel\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:padding=\"18dp\"\r\n        android:text=\"Activity Level: \"\r\n        android:textSize=\"15sp\"\r\n        app:layout_constraintTop_toBottomOf=\"@+id/activitydef\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintEnd_toStartOf=\"@+id/activityText\"/>\r\n\r\n\r\n   <EditText\r\n       android:id=\"@+id/activityText\"\r\n       android:layout_width=\"wrap_content\"\r\n       android:layout_height=\"wrap_content\"\r\n       android:padding=\"16dp\"\r\n       android:ems=\"10\"\r\n       android:inputType=\"text\"\r\n       app:layout_constraintTop_toBottomOf=\"@id/activitydef\"\r\n       app:layout_constraintStart_toEndOf=\"@id/activityLabel\"/>\r\n\r\n    <TextView\r\n        android:id=\"@+id/goalsOption\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:padding=\"18dp\"\r\n        android:text=\"Choose your option: \"\r\n        android:textSize=\"15sp\"\r\n        app:layout_constraintTop_toBottomOf=\"@+id/activityLabel\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintEnd_toStartOf=\"@+id/radioOption\"/>\r\n\r\n    <RadioGroup\r\n        android:id=\"@+id/radioOption\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:padding=\"5dp\"\r\n        android:orientation=\"horizontal\"\r\n        app:layout_constraintTop_toBottomOf=\"@id/activityText\"\r\n        app:layout_constraintStart_toEndOf=\"@+id/goalsOption\">\r\n\r\n    <RadioButton\r\n        android:id=\"@+id/optionButton1\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:text=\"Lose weight\"\r\n        android:textSize=\"10sp\"/>\r\n\r\n        <RadioButton\r\n            android:id=\"@+id/optionButton2\"\r\n            android:layout_width=\"wrap_content\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:text=\"Gain weight\"\r\n            android:textSize=\"10sp\"/>\r\n    </RadioGroup>\r\n\r\n    <Button\r\n        android:id=\"@+id/saveButton\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:text=\"Save\"\r\n        android:paddingTop=\"14dp\"\r\n        app:layout_constraintTop_toBottomOf=\"@+id/radioOption\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"/>\r\n</androidx.constraintlayout.widget.ConstraintLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/activity_log_details.xml b/app/src/main/res/layout/activity_log_details.xml
+--- a/app/src/main/res/layout/activity_log_details.xml	(revision 343a1e3dc33cd626ba8823fd422085b568494a33)
++++ b/app/src/main/res/layout/activity_log_details.xml	(date 1717165163001)
+@@ -5,25 +5,35 @@
+     android:id="@+id/main"
+     android:layout_width="match_parent"
+     android:layout_height="match_parent"
+-    tools:context=".LogDetails">
+-
++    android:background="#2D3250"
++    tools:context=".food.LogDetails">
++    <!-- Header -->
+     <TextView
+         android:id="@+id/header_title"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:padding="10dp"
++        android:layout_marginTop="20dp"
++        android:layout_marginLeft="20dp"
+         android:text="Enter the details below:"
++        android:textStyle="bold"
+         android:textSize="25sp"
++        android:textColor="@color/white"
++        android:fontFamily="sans-serif-condensed-light"
+         app:layout_constraintTop_toTopOf="parent"
+         app:layout_constraintStart_toStartOf="parent"/>
+ 
++    <!-- Views to ask for the gender of users -->
+     <TextView
+         android:id="@+id/genderLabel"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:padding="18dp"
++        android:layout_marginLeft="25dp"
+         android:text="Gender: "
+-        android:textSize="15sp"
++        android:textSize="18sp"
++        android:textColor="@color/white"
++        android:fontFamily="sans-serif-condensed-medium"
+         app:layout_constraintTop_toBottomOf="@+id/header_title"
+         app:layout_constraintStart_toStartOf="parent"
+         app:layout_constraintEnd_toStartOf="@+id/genderRadio"/>
+@@ -42,23 +52,31 @@
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:text="Male"
+-            android:textSize="10sp"/>
++            android:textColor="@color/white"
++            android:fontFamily="sans-serif-condensed-medium"
++            android:textSize="15sp"/>
+ 
+         <RadioButton
+             android:id="@+id/radioButton2"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:text="Female"
+-            android:textSize="10sp"/>
++            android:textColor="@color/white"
++            android:fontFamily="sans-serif-condensed-medium"
++            android:textSize="15sp"/>
+     </RadioGroup>
+ 
++    <!-- Views to ask for the user's age -->
+     <TextView
+         android:id="@+id/ageLabel"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:padding="18dp"
++        android:layout_marginLeft="25dp"
+         android:text="Age: "
+-        android:textSize="15sp"
++        android:textColor="@color/white"
++        android:fontFamily="sans-serif-condensed-medium"
++        android:textSize="18sp"
+         app:layout_constraintTop_toBottomOf="@+id/genderLabel"
+         app:layout_constraintStart_toStartOf="parent"
+         app:layout_constraintEnd_toStartOf="@+id/ageText"/>
+@@ -68,18 +86,23 @@
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:ems="10"
+-        android:padding="15dp"
++        android:padding="18dp"
+         android:inputType="number"
++        android:textColor="@color/white"
+         app:layout_constraintTop_toBottomOf="@+id/genderRadio"
+         app:layout_constraintStart_toEndOf="@+id/ageLabel"/>
+ 
++    <!-- Views to ask for the user's weight -->
+     <TextView
+         android:id="@+id/weightLabel"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:padding="18dp"
++        android:layout_marginLeft="25dp"
+         android:text="Weight (Kg): "
+-        android:textSize="15sp"
++        android:textColor="@color/white"
++        android:fontFamily="sans-serif-condensed-medium"
++        android:textSize="18sp"
+         app:layout_constraintTop_toBottomOf="@+id/ageLabel"
+         app:layout_constraintStart_toStartOf="parent"
+         app:layout_constraintEnd_toStartOf="@+id/weightText"/>
+@@ -89,18 +112,23 @@
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:ems="10"
+-        android:padding="16dp"
++        android:padding="18dp"
++        android:textColor="@color/white"
+         android:inputType="numberDecimal"
+         app:layout_constraintTop_toBottomOf="@+id/ageText"
+         app:layout_constraintStart_toEndOf="@+id/weightLabel"/>
+ 
++    <!-- Views to ask for the user's height -->
+     <TextView
+         android:id="@+id/heightLabel"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:padding="18dp"
+         android:text="Height (m): "
+-        android:textSize="15sp"
++        android:layout_marginLeft="25dp"
++        android:textColor="@color/white"
++        android:fontFamily="sans-serif-condensed-medium"
++        android:textSize="18sp"
+         app:layout_constraintTop_toBottomOf="@+id/weightLabel"
+         app:layout_constraintStart_toStartOf="parent"
+         app:layout_constraintEnd_toStartOf="@+id/heightText"/>
+@@ -110,20 +138,25 @@
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:ems="10"
+-        android:padding="16dp"
++        android:padding="18dp"
++        android:textColor="@color/white"
+         android:inputType="numberDecimal"
+         app:layout_constraintTop_toBottomOf="@+id/weightText"
+         app:layout_constraintStart_toEndOf="@+id/heightLabel"/>
+ 
+ 
++    <!-- Views to ask for the user's activity level -->
+     <TextView
+         android:id="@+id/activitydef"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+-        android:padding="18dp"
++        android:padding="10dp"
++        android:layout_marginLeft="25dp"
++        android:fontFamily="sans-serif-condensed-light"
+         android:text="*Please specify activity level with no/low/moderate/high/extreme"
+         android:textSize="15sp"
+         android:textStyle="italic"
++        android:textColor="@color/white"
+         app:layout_constraintTop_toBottomOf="@+id/heightLabel"
+         app:layout_constraintStart_toStartOf="parent"/>
+ 
+@@ -132,8 +165,11 @@
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:padding="18dp"
++        android:layout_marginLeft="25dp"
+         android:text="Activity Level: "
+-        android:textSize="15sp"
++        android:textColor="@color/white"
++        android:fontFamily="sans-serif-condensed-medium"
++        android:textSize="18sp"
+         app:layout_constraintTop_toBottomOf="@+id/activitydef"
+         app:layout_constraintStart_toStartOf="parent"
+         app:layout_constraintEnd_toStartOf="@+id/activityText"/>
+@@ -143,19 +179,25 @@
+        android:id="@+id/activityText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+-       android:padding="16dp"
++       android:padding="18dp"
+        android:ems="10"
+        android:inputType="text"
++       android:textColor="@color/white"
+        app:layout_constraintTop_toBottomOf="@id/activitydef"
+        app:layout_constraintStart_toEndOf="@id/activityLabel"/>
+ 
++    <!-- Views to ask for the user's activeness -->
+     <TextView
+         android:id="@+id/goalsOption"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+-        android:padding="18dp"
++        android:padding="10dp"
++        android:layout_marginTop="3dp"
++        android:layout_marginLeft="25dp"
+         android:text="Choose your option: "
+-        android:textSize="15sp"
++        android:textColor="@color/white"
++        android:fontFamily="sans-serif-condensed-medium"
++        android:textSize="18sp"
+         app:layout_constraintTop_toBottomOf="@+id/activityLabel"
+         app:layout_constraintStart_toStartOf="parent"
+         app:layout_constraintEnd_toStartOf="@+id/radioOption"/>
+@@ -164,7 +206,7 @@
+         android:id="@+id/radioOption"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+-        android:padding="5dp"
++        android:padding="2dp"
+         android:orientation="horizontal"
+         app:layout_constraintTop_toBottomOf="@id/activityText"
+         app:layout_constraintStart_toEndOf="@+id/goalsOption">
+@@ -174,23 +216,41 @@
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:text="Lose weight"
+-        android:textSize="10sp"/>
++        android:textColor="@color/white"
++        android:fontFamily="sans-serif-condensed-medium"
++        android:textSize="14sp"/>
+ 
+         <RadioButton
+             android:id="@+id/optionButton2"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:text="Gain weight"
+-            android:textSize="10sp"/>
++            android:textColor="@color/white"
++            android:fontFamily="sans-serif-condensed-medium"
++            android:textSize="14sp"/>
+     </RadioGroup>
+ 
++    <!-- Button to cancel and navigate back to the previous page -->
++    <Button
++        android:id="@+id/cancelButton"
++        android:layout_width="wrap_content"
++        android:layout_height="wrap_content"
++        android:text="Cancel"
++        android:fontFamily="sans-serif-condensed-medium"
++        android:layout_marginTop="14dp"
++        app:layout_constraintTop_toBottomOf="@+id/radioOption"
++        app:layout_constraintStart_toStartOf="parent"
++        app:layout_constraintEnd_toStartOf="@+id/saveButton"/>
++
++    <!-- Button to save and calculate the total daily calories  -->
+     <Button
+         android:id="@+id/saveButton"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:text="Save"
+-        android:paddingTop="14dp"
++        android:fontFamily="sans-serif-condensed-medium"
++        android:layout_marginTop="14dp"
+         app:layout_constraintTop_toBottomOf="@+id/radioOption"
+-        app:layout_constraintStart_toStartOf="parent"
++        app:layout_constraintStart_toEndOf="@+id/cancelButton"
+         app:layout_constraintEnd_toEndOf="parent"/>
+ </androidx.constraintlayout.widget.ConstraintLayout>
+\ No newline at end of file
+Index: README.md
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+># MAD24_P01_Team1\r\n\r\n## Team Members:\r\n\r\nYu Yang\r\n\r\nJovan Lim\r\n\r\nKiefer Yew\r\n\r\nElissa\r\n\r\nThet Mon Kris\r\n\r\n# App Name: Fitness Ultimate: Calisthenics King\r\n\r\n# App Category: Health & Fitness\r\n\r\n## Introduction:\r\n\r\nWelcome to Fitness Ultimate: Calisthenics King, your ultimate fitness companion! Our app is designed to help you track your nutrition, plan your workouts, monitor your sleep, and stay hydrated. Whether you're a seasoned athlete or just starting your fitness journey, Fitness Ultimate has everything you need to reach your goals.\r\n\r\n## Motivation/Objective:\r\n\r\nAt Fitness Ultimate, we understand the importance of maintaining a healthy lifestyle having one of our members being an active in doing calisthenics. Our motivation stems from a desire to empower users to take control of their health and fitness, providing them with the tools and support they need to succeed. By combining advanced technology with user-friendly and useful features, we aim to make achieving fitness goals enjoyable and sustainable.\r\n\r\n## Stage 1 Features: \r\n\r\n1.)Food Tracking (Kris)\r\n\r\n- Users can enter the food they eat by selecting foods from the database and specifying the portion sizes.\r\n\r\n- Enable users to plan their meals in advance by selecting foods and scheduling them for specific meal times.\r\n\r\n- Provides a summary of their daily nutritional intake, including total calories. \r\n\r\n- Users can track their progress towards their dietary goals and make adjustments as needed.\r\n\r\n2.)Training Schedule (Yu Yang) \r\n\r\n- Users can find workouts to follow along\r\n\r\n- Embed example video to provide users a reference to follow (So they know how to do the exercise)\r\n\r\n- Exercise plans will be categorized by type and sorted by difficulty\r\n\r\n- Users are able to set workouts to occur every specific day/interval to serve as a reminder to workout\r\n\r\n3.)User login / sign up + Biometrics (Elissa)\r\n\r\n- Involves users providing a username and password to access their accounts\r\n\r\n- Existing account holders can choose to sign in via a Google Account or fingerprint biometrics\r\n\r\n- New users can sign up for an account \r\n\r\n4.)Chatbot Predefined answers ( kiefer )\r\n\r\n- Users can click on the chatbot icon if they have questions\r\n\r\n- From frequently asked questions, they can choose from the questions in which the chatbot will give a predefined answer.\r\n\r\n- If user is satisfied click on exit option, else they can ask more questions\r\n\r\n5.)Workout Calendar + General Notifications (Jovan)\r\n\r\n- Displays workouts in a calendar format, allowing users to see their workout history at a glance.\r\n\r\n- Each workout entry includes details like workout type (e.g., cardio, strength training), duration, intensity level, and notes.\r\n\r\n- Differentiates between types of workouts or intensity levels using colour-coding.\r\n\r\n- Provides notifications for various aspects of the fitness journey, including workout reminders, goal achievements, progress milestones, upcoming challenges, and community updates.\r\n\r\n- Sends reminders for scheduled workouts based on user-set preferences such as time of day, frequency, and type of activity.\r\n\r\n- Allows users to snooze or reschedule reminders as needed.\r\n\r\n6). Responsive Layout  + Navigate from Android Core ( Kiefer )\r\n\r\nMakes app useable on multiple devices\r\n\r\nMake easy navigation from one screen to another.\r\n\r\n## Stage 2 Features: \r\n\r\n1.)Training Schedule Add On Movement tracking (Yu Yang) ( Offload to api on cloud )\r\n\r\n- Users can use this service to help ensure they are exercising correctly\r\n\r\n- Feature will track user’s body movement and utilise image recognition and AI technologies to determine if an exercise is done correctly\r\n\r\n- Feature will also serve as an automatic rep counter, allowing users to know if they’ve completed the suggested number of repetitions of an exercise\r\n\r\n- AI inference to be done via a cloud-hosted API online (Program used to do it will still be self-made, simply leveraging cloud computing capabilities)\r\n\r\n- Privacy centric - Disclaimer before using feature\r\n\r\n- Privacy centric - Data will be deleted as soon as it is no longer in use, no user data will be stored online\r\n\r\n2.)Widgets (Jovan)\r\n\r\n- The widgets will display the user's progress towards fitness goals and show metrics within a graphic such as a chart or graph ect..\r\n\r\n- Metrics include calories burned, calorie intake, Water intake, active minutes, sleep data and training tracker.\r\n\r\n- This widget will also provide easy access into the specific functions in the app by pressing the different widgets/parts of the widgets.\r\n\r\n- The widget can also provide control over certain features in the app, example pausing and playing the workout\r\n\r\n- The data on the widget will be updated whenever there is a manual input of new data or once every few mins for live fed data.\r\n\r\n3.)Sleep Tracker (Kris)\r\n\r\n- This feature tracks the user’s total time of sleep and develops relevant data such as sleep efficiency, sleep latency, and sleep fragmentation. \r\n\r\n- This feature analyses data from sensors to detect and classify different sleep stages and the sleep pattern will be shown in the graphical view.\r\n\r\n- User’s sleep data will be analysed to provide personalised sleep coaching and recommendations.\r\n\r\n- The sleep environment is also monitored as well as its impact on sleep quality. This will use the help of sensor data in real-time, providing insights into optimal sleep conditions for users. \r\n\r\n4.)Water Tracker (Elissa)\r\n\r\n- Users can set a daily goal for how much water they want to drink\r\n\r\n- To enhance user engagement, users can drag and drop water droplets into a virtual cup. Each water droplet represents 100 ml of water\r\n\r\n- To remind users, the app will send periodic notifications reminding them to drink water if they haven't updated their water intake after a while (e.g., every hour)\r\n\r\n- Fluidity feature that will make the water appear to move and flow as the phone is tilted, creating a motion effect\r\n\r\n5.)AI chatbot (Kiefer)\r\n\r\n- Users can choose from predefined questions from FAQ or they can type their own questions\r\n\r\n- AI chatbot wil check to see if it's a predefined question. It uses the predefined answer. Else the ai will reply to the users own question on their own.\r\n\r\n- Users can retype their question if they are not satisfied with the answer.\r\n\r\n- AI will reply Out of Scope if User asks something not related to the app.\r\n\r\n- If AI cannot reply, direct to live chat\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/README.md b/README.md
+--- a/README.md	(revision 343a1e3dc33cd626ba8823fd422085b568494a33)
++++ b/README.md	(date 1717140749721)
+@@ -28,6 +28,14 @@
+ 
+ 1.)Food Tracking (Kris)
+ 
++- Users can track their progress towards their dietary goals and make adjustments as needed.
++
++- Users are asked to enter some general information for the application to work out their required calories in a day.
++
++- Users are able to search up for the food they eat to find some relevant calories the food contains.
++
++- 
++
+ - Users can enter the food they eat by selecting foods from the database and specifying the portion sizes.
+ 
+ - Enable users to plan their meals in advance by selecting foods and scheduling them for specific meal times.
+Index: app/src/main/res/layout/food_tracker.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<androidx.constraintlayout.widget.ConstraintLayout\r\n    xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:id=\"@+id/main\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\"\r\n    tools:context=\".FoodTracker\">\r\n\r\n\r\n    <TextView\r\n        android:id=\"@+id/tvTitle\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:text=\"Calories Diary\"\r\n        android:padding=\"15dp\"\r\n        android:textSize=\"30dp\"\r\n        android:textStyle=\"bold\"\r\n        app:layout_constraintTop_toTopOf=\"parent\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"/>\r\n\r\n    <LinearLayout\r\n        android:id=\"@+id/header\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:padding=\"10dp\"\r\n        android:gravity=\"center\"\r\n        app:layout_constraintTop_toBottomOf=\"@+id/tvTitle\">\r\n\r\n        <Button\r\n            android:id=\"@+id/btnToday\"\r\n            android:layout_width=\"wrap_content\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_marginStart=\"8dp\"\r\n            android:layout_marginEnd=\"8dp\"\r\n            android:text=\"Today\" />\r\n\r\n    </LinearLayout>\r\n\r\n    <LinearLayout\r\n        android:id=\"@+id/caloriesGoal\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:padding=\"20dp\"\r\n        android:orientation=\"vertical\"\r\n        android:gravity=\"center\"\r\n        app:layout_constraintTop_toBottomOf=\"@+id/header\">\r\n\r\n        <TextView\r\n            android:id=\"@+id/dailyCalories\"\r\n            android:layout_width=\"wrap_content\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:text=\"daily intake /\"\r\n            android:textSize=\"30dp\"/>\r\n\r\n        <TextView\r\n            android:id=\"@+id/totalCalories\"\r\n            android:layout_width=\"wrap_content\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:text=\"total\"\r\n            android:textSize=\"15dp\"/>\r\n\r\n        <Button\r\n            android:id=\"@+id/btnlogDetails\"\r\n            android:layout_width=\"wrap_content\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:text=\"Log Details\"/>\r\n\r\n    </LinearLayout>\r\n\r\n    <LinearLayout\r\n        android:id=\"@+id/nutrients\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:padding=\"16dp\"\r\n        android:orientation=\"horizontal\"\r\n        android:gravity=\"center\"\r\n        app:layout_constraintTop_toBottomOf=\"@+id/caloriesGoal\">\r\n\r\n\r\n        <LinearLayout\r\n            android:id=\"@+id/carbsContainer\"\r\n            android:layout_width=\"wrap_content\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:padding=\"20dp\"\r\n            android:orientation=\"vertical\">\r\n\r\n            <TextView\r\n                android:id=\"@+id/carbs\"\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:text=\"Carbs: \" />\r\n            <ProgressBar\r\n                android:id=\"@+id/progressBarCarbs\"\r\n                style=\"?android:attr/progressBarStyleHorizontal\"\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                />\r\n\r\n        </LinearLayout>\r\n\r\n        <LinearLayout\r\n            android:id=\"@+id/proteinContainer\"\r\n            android:layout_width=\"wrap_content\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:padding=\"20dp\"\r\n            android:orientation=\"vertical\">\r\n\r\n            <TextView\r\n                android:id=\"@+id/protein\"\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:text=\"Protein: \" />\r\n            <ProgressBar\r\n                android:id=\"@+id/progressBarProtein\"\r\n                style=\"?android:attr/progressBarStyleHorizontal\"\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                />\r\n\r\n        </LinearLayout>\r\n\r\n        <LinearLayout\r\n            android:id=\"@+id/fatsContainer\"\r\n            android:layout_width=\"wrap_content\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:padding=\"20dp\"\r\n            android:orientation=\"vertical\">\r\n\r\n            <TextView\r\n                android:id=\"@+id/fats\"\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:text=\"Fats: \" />\r\n            <ProgressBar\r\n                android:id=\"@+id/progressBarFats\"\r\n                style=\"?android:attr/progressBarStyleHorizontal\"\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                />\r\n\r\n        </LinearLayout>\r\n\r\n        <LinearLayout\r\n            android:id=\"@+id/othersContainer\"\r\n            android:layout_width=\"wrap_content\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:padding=\"20dp\"\r\n            android:orientation=\"vertical\">\r\n\r\n            <TextView\r\n                android:id=\"@+id/others\"\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:text=\"Others: \" />\r\n            <ProgressBar\r\n                android:id=\"@+id/progressBarOthers\"\r\n                style=\"?android:attr/progressBarStyleHorizontal\"\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                />\r\n\r\n        </LinearLayout>\r\n    </LinearLayout>\r\n\r\n    <LinearLayout\r\n        android:id=\"@+id/meals\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:padding=\"10dp\"\r\n        android:gravity=\"center\"\r\n        app:layout_constraintTop_toBottomOf=\"@+id/nutrients\">\r\n\r\n\r\n        <Button\r\n            android:id=\"@+id/btnBreakfast\"\r\n            android:layout_width=\"wrap_content\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_marginStart=\"8dp\"\r\n            android:layout_marginEnd=\"8dp\"\r\n            android:text=\"Breakfast\"\r\n            />\r\n\r\n        <Button\r\n            android:id=\"@+id/btnLunch\"\r\n            android:layout_width=\"wrap_content\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_marginStart=\"8dp\"\r\n            android:layout_marginEnd=\"8dp\"\r\n            android:text=\"Lunch\" />\r\n\r\n        <Button\r\n            android:id=\"@+id/btnDinner\"\r\n            android:layout_width=\"wrap_content\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_marginStart=\"8dp\"\r\n            android:layout_marginEnd=\"8dp\"\r\n            android:text=\"Dinner\" />\r\n\r\n    </LinearLayout>\r\n\r\n    <Button\r\n        android:id=\"@+id/addMeal\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:text=\"+\"\r\n        app:layout_constraintBottom_toBottomOf=\"parent\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"/>\r\n\r\n\r\n    <Button\r\n        android:id=\"@+id/btnSearch\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:text=\"Search\"\r\n        app:layout_constraintTop_toTopOf=\"parent\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"/>\r\n\r\n\r\n    <LinearLayout\r\n        android:id=\"@+id/mealContainers\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:padding=\"10dp\"\r\n        android:orientation=\"vertical\"\r\n        app:layout_constraintTop_toBottomOf=\"@+id/meals\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\">\r\n\r\n    </LinearLayout>\r\n\r\n\r\n</androidx.constraintlayout.widget.ConstraintLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/food_tracker.xml b/app/src/main/res/layout/food_tracker.xml
+--- a/app/src/main/res/layout/food_tracker.xml	(revision 343a1e3dc33cd626ba8823fd422085b568494a33)
++++ b/app/src/main/res/layout/food_tracker.xml	(date 1717171170423)
+@@ -6,20 +6,23 @@
+     android:id="@+id/main"
+     android:layout_width="match_parent"
+     android:layout_height="match_parent"
+-    tools:context=".FoodTracker">
++    android:background="#2D3250"
++    tools:context=".food.FoodTracker">
+ 
+-
++    <!-- Title TextView -->
+     <TextView
+         android:id="@+id/tvTitle"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:text="Calories Diary"
+         android:padding="15dp"
+-        android:textSize="30dp"
++        android:textSize="30sp"
+         android:textStyle="bold"
++        android:textColor="@color/white"
++        android:fontFamily="sans-serif-condensed-medium"
+         app:layout_constraintTop_toTopOf="parent"
+         app:layout_constraintStart_toStartOf="parent"/>
+-
++    <!-- Header layout that contain date -->
+     <LinearLayout
+         android:id="@+id/header"
+         android:layout_width="match_parent"
+@@ -28,16 +31,20 @@
+         android:gravity="center"
+         app:layout_constraintTop_toBottomOf="@+id/tvTitle">
+ 
+-        <Button
+-            android:id="@+id/btnToday"
++        <TextView
++            android:id="@+id/textToday"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_marginStart="8dp"
+             android:layout_marginEnd="8dp"
+-            android:text="Today" />
++            android:text="Today"
++            android:textSize="18sp"
++            android:textColor="@color/white"
++            android:fontFamily="sans-serif-condensed-medium" />
+ 
+     </LinearLayout>
+ 
++    <!-- Layout for displaying daily calories goals and a button -->
+     <LinearLayout
+         android:id="@+id/caloriesGoal"
+         android:layout_width="match_parent"
+@@ -52,23 +59,30 @@
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:text="daily intake /"
+-            android:textSize="30dp"/>
++            android:textSize="30sp"
++            android:textColor="@color/white"
++            android:fontFamily="sans-serif-condensed-medium"/>
+ 
+         <TextView
+             android:id="@+id/totalCalories"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:text="total"
+-            android:textSize="15dp"/>
++            android:textSize="20sp"
++            android:textColor="@color/white"
++            android:fontFamily="sans-serif-condensed-medium"/>
+ 
+         <Button
+             android:id="@+id/btnlogDetails"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+-            android:text="Log Details"/>
++            android:text="Log Details"
++            android:textColor="@color/white"
++            android:fontFamily="sans-serif-condensed-medium"/>
+ 
+     </LinearLayout>
+ 
++    <!-- Layout for displaying nutrients information with progress bars -->
+     <LinearLayout
+         android:id="@+id/nutrients"
+         android:layout_width="match_parent"
+@@ -78,7 +92,7 @@
+         android:gravity="center"
+         app:layout_constraintTop_toBottomOf="@+id/caloriesGoal">
+ 
+-
++        <!-- Carbohydrates -->
+         <LinearLayout
+             android:id="@+id/carbsContainer"
+             android:layout_width="wrap_content"
+@@ -90,7 +104,9 @@
+                 android:id="@+id/carbs"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+-                android:text="Carbs: " />
++                android:text="Carbs: "
++                android:textColor="@color/white"
++                android:fontFamily="sans-serif-condensed-medium"/>
+             <ProgressBar
+                 android:id="@+id/progressBarCarbs"
+                 style="?android:attr/progressBarStyleHorizontal"
+@@ -100,6 +116,7 @@
+ 
+         </LinearLayout>
+ 
++        <!-- Proteins -->
+         <LinearLayout
+             android:id="@+id/proteinContainer"
+             android:layout_width="wrap_content"
+@@ -111,7 +128,9 @@
+                 android:id="@+id/protein"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+-                android:text="Protein: " />
++                android:text="Protein: "
++                android:textColor="@color/white"
++                android:fontFamily="sans-serif-condensed-medium"/>
+             <ProgressBar
+                 android:id="@+id/progressBarProtein"
+                 style="?android:attr/progressBarStyleHorizontal"
+@@ -121,6 +140,7 @@
+ 
+         </LinearLayout>
+ 
++        <!-- Fats -->
+         <LinearLayout
+             android:id="@+id/fatsContainer"
+             android:layout_width="wrap_content"
+@@ -132,7 +152,9 @@
+                 android:id="@+id/fats"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+-                android:text="Fats: " />
++                android:text="Fats: "
++                android:textColor="@color/white"
++                android:fontFamily="sans-serif-condensed-medium" />
+             <ProgressBar
+                 android:id="@+id/progressBarFats"
+                 style="?android:attr/progressBarStyleHorizontal"
+@@ -142,6 +164,7 @@
+ 
+         </LinearLayout>
+ 
++        <!-- Others -->
+         <LinearLayout
+             android:id="@+id/othersContainer"
+             android:layout_width="wrap_content"
+@@ -153,7 +176,9 @@
+                 android:id="@+id/others"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+-                android:text="Others: " />
++                android:text="Others: "
++                android:textColor="@color/white"
++                android:fontFamily="sans-serif-condensed-medium"/>
+             <ProgressBar
+                 android:id="@+id/progressBarOthers"
+                 style="?android:attr/progressBarStyleHorizontal"
+@@ -164,6 +189,7 @@
+         </LinearLayout>
+     </LinearLayout>
+ 
++    <!-- Layout for meals buttons -->
+     <LinearLayout
+         android:id="@+id/meals"
+         android:layout_width="match_parent"
+@@ -180,6 +206,7 @@
+             android:layout_marginStart="8dp"
+             android:layout_marginEnd="8dp"
+             android:text="Breakfast"
++            android:fontFamily="sans-serif-condensed-medium"
+             />
+ 
+         <Button
+@@ -188,7 +215,8 @@
+             android:layout_height="wrap_content"
+             android:layout_marginStart="8dp"
+             android:layout_marginEnd="8dp"
+-            android:text="Lunch" />
++            android:text="Lunch"
++            android:fontFamily="sans-serif-condensed-medium"/>
+ 
+         <Button
+             android:id="@+id/btnDinner"
+@@ -196,28 +224,35 @@
+             android:layout_height="wrap_content"
+             android:layout_marginStart="8dp"
+             android:layout_marginEnd="8dp"
+-            android:text="Dinner" />
++            android:text="Dinner"
++            android:fontFamily="sans-serif-condensed-medium"/>
+ 
+     </LinearLayout>
+ 
++    <!-- Button to add food to the meal -->
+     <Button
+         android:id="@+id/addMeal"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+-        android:text="+"
+-        app:layout_constraintBottom_toBottomOf="parent"
+-        app:layout_constraintEnd_toEndOf="parent"/>
++        android:layout_margin="20dp"
++        android:text="Add"
++        android:fontFamily="sans-serif-condensed-medium"
++        app:layout_constraintEnd_toEndOf="parent"
++        app:layout_constraintBottom_toBottomOf="parent"/>
+ 
+ 
++    <!-- Button to search for food and relevant information -->
+     <Button
+         android:id="@+id/btnSearch"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:text="Search"
++        android:layout_margin="20dp"
++        android:fontFamily="sans-serif-condensed-medium"
+         app:layout_constraintTop_toTopOf="parent"
+         app:layout_constraintEnd_toEndOf="parent"/>
+ 
+-
++    <!-- Container to show the added meals -->
+     <LinearLayout
+         android:id="@+id/mealContainers"
+         android:layout_width="wrap_content"
+Index: app/src/main/res/layout/activity_search_results.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<androidx.constraintlayout.widget.ConstraintLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:id=\"@+id/main\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\"\r\n    tools:context=\".SearchResultsActivity\">\r\n\r\n    <SearchView\r\n        android:id=\"@+id/searchBar\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_margin=\"16dp\"\r\n        android:iconifiedByDefault=\"false\"\r\n        app:layout_constraintTop_toTopOf=\"parent\"\r\n        app:layout_constraintStart_toEndOf=\"parent\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\" />\r\n\r\n\r\n    <TextView\r\n        android:id=\"@+id/resultTextBox\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:gravity=\"start|top\"\r\n        android:padding=\"16dp\"\r\n        android:textIsSelectable=\"true\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toBottomOf=\"@+id/searchBar\" />\r\n\r\n</androidx.constraintlayout.widget.ConstraintLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/activity_search_results.xml b/app/src/main/res/layout/activity_search_results.xml
+--- a/app/src/main/res/layout/activity_search_results.xml	(revision 343a1e3dc33cd626ba8823fd422085b568494a33)
++++ b/app/src/main/res/layout/activity_search_results.xml	(date 1717165163018)
+@@ -5,27 +5,61 @@
+     android:id="@+id/main"
+     android:layout_width="match_parent"
+     android:layout_height="match_parent"
+-    tools:context=".SearchResultsActivity">
++    android:background="#2D3250"
++    tools:context="food.SearchResultsActivity">
+ 
++    <!-- Back button to allow users to navigate back to the FoodTracker page -->
++    <Button
++        android:id="@+id/backBtn"
++        android:layout_width="wrap_content"
++        android:layout_height="wrap_content"
++        android:layout_margin="10dp"
++        android:layout_marginStart="36dp"
++        android:layout_marginTop="204dp"
++        android:text="Back"
++        android:fontFamily="sans-serif-condensed-medium"
++        app:layout_constraintStart_toStartOf="parent"
++        app:layout_constraintTop_toTopOf="parent" />
++
++    <!-- SearchBar that allows user to enter their search item -->
+     <SearchView
+         android:id="@+id/searchBar"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+-        android:layout_margin="16dp"
++        android:layout_margin="10dp"
+         android:iconifiedByDefault="false"
+-        app:layout_constraintTop_toTopOf="parent"
+-        app:layout_constraintStart_toEndOf="parent"
+-        app:layout_constraintEnd_toEndOf="parent" />
++        app:layout_constraintTop_toBottomOf="@+id/backBtn"
++        app:layout_constraintStart_toStartOf="parent" />
+ 
++    <!-- A layout container that will display the search result -->
++    <LinearLayout
++        android:id="@+id/resultLayout"
++        android:layout_width="match_parent"
++        android:layout_height="wrap_content"
++        android:orientation="vertical"
++        android:background="#424769"
++        android:visibility="invisible"
++        app:layout_constraintStart_toStartOf="parent"
++        app:layout_constraintEnd_toEndOf="parent"
++        app:layout_constraintTop_toBottomOf="@+id/searchBar">
+ 
+-    <TextView
+-        android:id="@+id/resultTextBox"
+-        android:layout_width="match_parent"
+-        android:layout_height="wrap_content"
+-        android:gravity="start|top"
+-        android:padding="16dp"
+-        android:textIsSelectable="true"
+-        app:layout_constraintStart_toStartOf="parent"
+-        app:layout_constraintTop_toBottomOf="@+id/searchBar" />
++        <TextView
++            android:id="@+id/resultTextBox"
++            android:layout_width="match_parent"
++            android:layout_height="wrap_content"
++            android:gravity="start|top"
++            android:padding="16dp"
++            android:textSize="23sp"
++            android:fontFamily="sans-serif-condensed-medium"
++            android:textColor="@color/white"
++            android:textIsSelectable="true" />
+ 
++        <Button
++            android:id="@+id/addButton"
++            android:layout_width="wrap_content"
++            android:layout_height="wrap_content"
++            android:layout_marginLeft="20dp"
++            android:text="+"
++            />
++        </LinearLayout>
+ </androidx.constraintlayout.widget.ConstraintLayout>
+\ No newline at end of file
+Index: app/src/main/java/sg/edu/np/mad/fitnessultimate/activity/SplashActivity.java
+===================================================================
+diff --git a/app/src/main/java/sg/edu/np/mad/fitnessultimate/activity/SplashActivity.java b/app/src/main/java/sg/edu/np/mad/fitnessultimate/activity/SplashActivity.java
+deleted file mode 100644
+--- a/app/src/main/java/sg/edu/np/mad/fitnessultimate/activity/SplashActivity.java	(revision 343a1e3dc33cd626ba8823fd422085b568494a33)
++++ /dev/null	(revision 343a1e3dc33cd626ba8823fd422085b568494a33)
+@@ -1,47 +0,0 @@
+-package sg.edu.np.mad.fitnessultimate.activity;
+-
+-import android.content.Intent;
+-import android.os.Bundle;
+-import android.os.Handler;
+-
+-import androidx.activity.EdgeToEdge;
+-import androidx.appcompat.app.AppCompatActivity;
+-import androidx.core.graphics.Insets;
+-import androidx.core.view.ViewCompat;
+-import androidx.core.view.WindowInsetsCompat;
+-
+-import com.google.firebase.auth.FirebaseAuth;
+-
+-import sg.edu.np.mad.fitnessultimate.R;
+-
+-public class SplashActivity extends AppCompatActivity {
+-    private static final int SPLASH_DELAY = 1000; // 3 seconds delay
+-
+-    @Override
+-    protected void onCreate(Bundle savedInstanceState) {
+-        super.onCreate(savedInstanceState);
+-        EdgeToEdge.enable(this);
+-        setContentView(R.layout.activity_splash);
+-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+-            return insets;
+-        });
+-
+-        new Handler().postDelayed(new Runnable() {
+-            @Override
+-            public void run() {
+-                // Check if the user is already logged in
+-                FirebaseAuth fAuthLogin = FirebaseAuth.getInstance();
+-                if (fAuthLogin.getCurrentUser() != null) {
+-                    // User is already logged in, redirect to ProfilePageActivity
+-                    startActivity(new Intent(SplashActivity.this, ProfilePageActivity.class));
+-                    finish(); // Close MainActivity
+-                } else {
+-                    // User is not logged in, stay in MainActivity and show login options
+-                    startActivity(new Intent(SplashActivity.this, MainActivity.class));
+-                }
+-            }
+-        }, SPLASH_DELAY);
+-    }
+-}
+\ No newline at end of file
+Index: .idea/vcs.xml
+===================================================================
+diff --git a/.idea/vcs.xml b/.idea/vcs.xml
+deleted file mode 100644
+--- a/.idea/vcs.xml	(revision 343a1e3dc33cd626ba8823fd422085b568494a33)
++++ /dev/null	(revision 343a1e3dc33cd626ba8823fd422085b568494a33)
+@@ -1,6 +0,0 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+-<project version="4">
+-  <component name="VcsDirectoryMappings">
+-    <mapping directory="$PROJECT_DIR$" vcs="Git" />
+-  </component>
+-</project>
+\ No newline at end of file
+Index: .idea/codeStyles/codeStyleConfig.xml
+===================================================================
+diff --git a/.idea/codeStyles/codeStyleConfig.xml b/.idea/codeStyles/codeStyleConfig.xml
+deleted file mode 100644
+--- a/.idea/codeStyles/codeStyleConfig.xml	(revision 343a1e3dc33cd626ba8823fd422085b568494a33)
++++ /dev/null	(revision 343a1e3dc33cd626ba8823fd422085b568494a33)
+@@ -1,5 +0,0 @@
+-<component name="ProjectCodeStyleConfiguration">
+-  <state>
+-    <option name="PREFERRED_PROJECT_CODE_STYLE" value="Default" />
+-  </state>
+-</component>
+\ No newline at end of file
+Index: .idea/gradle.xml
+===================================================================
+diff --git a/.idea/gradle.xml b/.idea/gradle.xml
+deleted file mode 100644
+--- a/.idea/gradle.xml	(revision 343a1e3dc33cd626ba8823fd422085b568494a33)
++++ /dev/null	(revision 343a1e3dc33cd626ba8823fd422085b568494a33)
+@@ -1,19 +0,0 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+-<project version="4">
+-  <component name="GradleMigrationSettings" migrationVersion="1" />
+-  <component name="GradleSettings">
+-    <option name="linkedExternalProjectsSettings">
+-      <GradleProjectSettings>
+-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+-        <option name="gradleJvm" value="#GRADLE_LOCAL_JAVA_HOME" />
+-        <option name="modules">
+-          <set>
+-            <option value="$PROJECT_DIR$" />
+-            <option value="$PROJECT_DIR$/app" />
+-          </set>
+-        </option>
+-        <option name="resolveExternalAnnotations" value="false" />
+-      </GradleProjectSettings>
+-    </option>
+-  </component>
+-</project>
+\ No newline at end of file
+Index: app/src/main/java/sg/edu/np/mad/fitnessultimate/FoodTracker.java
+===================================================================
+diff --git a/app/src/main/java/sg/edu/np/mad/fitnessultimate/FoodTracker.java b/app/src/main/java/sg/edu/np/mad/fitnessultimate/FoodTracker.java
+deleted file mode 100644
+--- a/app/src/main/java/sg/edu/np/mad/fitnessultimate/FoodTracker.java	(revision 343a1e3dc33cd626ba8823fd422085b568494a33)
++++ /dev/null	(revision 343a1e3dc33cd626ba8823fd422085b568494a33)
+@@ -1,72 +0,0 @@
+-package sg.edu.np.mad.fitnessultimate;
+-
+-import android.app.Activity;
+-import android.os.Bundle;
+-
+-import androidx.activity.EdgeToEdge;
+-import androidx.appcompat.app.AppCompatActivity;
+-import androidx.core.graphics.Insets;
+-import androidx.core.view.ViewCompat;
+-import androidx.core.view.WindowInsetsCompat;
+-
+-import android.widget.Button;
+-import android.content.Intent;
+-import android.view.View;
+-import android.widget.TextView;
+-
+-
+-
+-public class FoodTracker extends AppCompatActivity {
+-    private static final int REQUEST_CODE_LOG_DETAILS = 1;
+-    private TextView totalCalories;
+-    private TextView dailyIntake;
+-    //This method is called when the activity is first created.
+-    @Override
+-    protected void onCreate(Bundle savedInstanceState) {
+-        super.onCreate(savedInstanceState);
+-        EdgeToEdge.enable(this); //Enables edge to edge display
+-        setContentView(R.layout.food_tracker); //Sets the content view to food_tracker layout
+-        //Handle system bars
+-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+-            return insets;
+-        });
+-
+-
+-        //Finds Search Button in the food_tracker layout
+-        Button searchButton = findViewById(R.id.btnSearch);
+-        //Sets a click listener for the Search Button
+-        searchButton.setOnClickListener(new View.OnClickListener() {
+-            @Override
+-            public void onClick(View v) {
+-                //Create an intent to start the SearchResultsActivity
+-                Intent intent = new Intent(FoodTracker.this, SearchResultsActivity.class);
+-                //Starts the next activity
+-                startActivity(intent);
+-            }
+-        });
+-
+-        totalCalories = findViewById(R.id.totalCalories);
+-        Button logDetails = findViewById(R.id.btnlogDetails);
+-        dailyIntake = findViewById(R.id.dailyCalories);
+-        logDetails.setOnClickListener(new View.OnClickListener() {
+-            @Override
+-            public void onClick(View v) {
+-                Intent intent = new Intent(FoodTracker.this, LogDetails.class);
+-                startActivityForResult(intent, REQUEST_CODE_LOG_DETAILS);
+-            }
+-        });
+-    }
+-
+-    @Override
+-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+-        super.onActivityResult(requestCode, resultCode, data);
+-        if(requestCode == REQUEST_CODE_LOG_DETAILS && resultCode == RESULT_OK) {
+-                double bmr = data.getDoubleExtra("bmr", 0.0);
+-                totalCalories.setText(String.valueOf(bmr) + "kcals");
+-                dailyIntake.setText("0.0 kcals/ ");
+-        }
+-    }
+-
+-}
+Index: .idea/deploymentTargetDropDown.xml
+===================================================================
+diff --git a/.idea/deploymentTargetDropDown.xml b/.idea/deploymentTargetDropDown.xml
+deleted file mode 100644
+--- a/.idea/deploymentTargetDropDown.xml	(revision 343a1e3dc33cd626ba8823fd422085b568494a33)
++++ /dev/null	(revision 343a1e3dc33cd626ba8823fd422085b568494a33)
+@@ -1,23 +0,0 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+-<project version="4">
+-  <component name="deploymentTargetDropDown">
+-    <value>
+-      <entry key="app">
+-        <State>
+-          <targetSelectedWithDropDown>
+-            <Target>
+-              <type value="QUICK_BOOT_TARGET" />
+-              <deviceKey>
+-                <Key>
+-                  <type value="VIRTUAL_DEVICE_PATH" />
+-                  <value value="$USER_HOME$/.android/avd/Pixel_8_API_34.avd" />
+-                </Key>
+-              </deviceKey>
+-            </Target>
+-          </targetSelectedWithDropDown>
+-          <timeTargetWasSelectedWithDropDown value="2024-05-27T05:40:53.086901Z" />
+-        </State>
+-      </entry>
+-    </value>
+-  </component>
+-</project>
+\ No newline at end of file
+Index: app/src/main/java/sg/edu/np/mad/fitnessultimate/activity/ProfilePageActivity.java
+===================================================================
+diff --git a/app/src/main/java/sg/edu/np/mad/fitnessultimate/activity/ProfilePageActivity.java b/app/src/main/java/sg/edu/np/mad/fitnessultimate/activity/ProfilePageActivity.java
+deleted file mode 100644
+--- a/app/src/main/java/sg/edu/np/mad/fitnessultimate/activity/ProfilePageActivity.java	(revision 343a1e3dc33cd626ba8823fd422085b568494a33)
++++ /dev/null	(revision 343a1e3dc33cd626ba8823fd422085b568494a33)
+@@ -1,173 +0,0 @@
+-package sg.edu.np.mad.fitnessultimate.activity;
+-
+-import android.content.DialogInterface;
+-import android.content.Intent;
+-import android.os.Bundle;
+-import android.view.LayoutInflater;
+-import android.view.View;
+-import android.widget.Button;
+-import android.widget.EditText;
+-import android.widget.RelativeLayout;
+-import android.widget.TextView;
+-import android.widget.Toast;
+-
+-import androidx.activity.EdgeToEdge;
+-import androidx.annotation.NonNull;
+-import androidx.annotation.Nullable;
+-import androidx.appcompat.app.AlertDialog;
+-import androidx.appcompat.app.AppCompatActivity;
+-import androidx.core.graphics.Insets;
+-import androidx.core.view.ViewCompat;
+-import androidx.core.view.WindowInsetsCompat;
+-
+-import com.google.android.gms.tasks.OnCompleteListener;
+-import com.google.android.gms.tasks.OnFailureListener;
+-import com.google.android.gms.tasks.OnSuccessListener;
+-import com.google.android.gms.tasks.Task;
+-import com.google.firebase.auth.FirebaseAuth;
+-import com.google.firebase.auth.FirebaseUser;
+-import com.google.firebase.firestore.DocumentReference;
+-import com.google.firebase.firestore.DocumentSnapshot;
+-import com.google.firebase.firestore.EventListener;
+-import com.google.firebase.firestore.FirebaseFirestore;
+-import com.google.firebase.firestore.FirebaseFirestoreException;
+-
+-import sg.edu.np.mad.fitnessultimate.R;
+-
+-public class ProfilePageActivity extends AppCompatActivity {
+-
+-    @Override
+-    protected void onCreate(Bundle savedInstanceState) {
+-        super.onCreate(savedInstanceState);
+-        EdgeToEdge.enable(this);
+-        setContentView(R.layout.activity_profile_page);
+-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+-            return insets;
+-        });
+-
+-        TextView username = findViewById(R.id.yourUsername);
+-        TextView email = findViewById(R.id.yourEmailAddress);
+-
+-        FirebaseAuth fAuth = FirebaseAuth.getInstance();
+-        FirebaseFirestore fStore = FirebaseFirestore.getInstance();
+-
+-        String userId = fAuth.getCurrentUser().getUid();
+-
+-        // Change Password
+-        RelativeLayout resetPassword = findViewById(R.id.changePassword);
+-        FirebaseUser user = fAuth.getCurrentUser();
+-
+-        // Edit Profile
+-        Button editProfileBtn = findViewById(R.id.editProfile);
+-
+-        DocumentReference documentReference = fStore.collection("users").document(userId);
+-        documentReference.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
+-            @Override
+-            public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+-                if (value != null) { // Check if the document exists
+-                    username.setText(value.getString("uName"));
+-                    email.setText(value.getString("email"));
+-                }
+-            }
+-        });
+-
+-        // Edit Profile
+-        editProfileBtn.setOnClickListener(new View.OnClickListener() {
+-            @Override
+-            public void onClick(View v) {
+-                Intent intent = new Intent(ProfilePageActivity.this, EditProfilePageActivity.class);
+-                startActivity(intent);
+-            }
+-        });
+-
+-        // Change Password
+-        resetPassword.setOnClickListener(new View.OnClickListener() {
+-            @Override
+-            public void onClick(View v) {
+-                // Inflate the custom layout
+-                LayoutInflater inflater = LayoutInflater.from(v.getContext());
+-                View dialogView = inflater.inflate(R.layout.change_password_dialog, null);
+-
+-                // Get the EditText from the custom layout
+-                final EditText resetPassword = dialogView.findViewById(R.id.dialog_input);
+-
+-                // Create the AlertDialog and set the custom view
+-                final AlertDialog.Builder passwordResetDialog = new AlertDialog.Builder(v.getContext());
+-                //passwordResetDialog.setTitle("Reset Password?");
+-                passwordResetDialog.setView(dialogView);
+-
+-                passwordResetDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+-                    @Override
+-                    public void onClick(DialogInterface dialog, int which) {
+-                        // Extract the new password and attempt to update it
+-                        String newPassword = resetPassword.getText().toString();
+-                        if (newPassword.length() <= 6) {
+-                            Toast.makeText(ProfilePageActivity.this, "Password must be longer than 6 characters.", Toast.LENGTH_SHORT).show();
+-                            return;
+-                        }
+-
+-                        user.updatePassword(newPassword).addOnSuccessListener(new OnSuccessListener<Void>() {
+-                            @Override
+-                            public void onSuccess(Void aVoid) {
+-                                Toast.makeText(ProfilePageActivity.this, "Password Reset Successfully.", Toast.LENGTH_SHORT).show();
+-                            }
+-                        }).addOnFailureListener(new OnFailureListener() {
+-                            @Override
+-                            public void onFailure(@NonNull Exception e) {
+-                                Toast.makeText(ProfilePageActivity.this, "Password Reset Failed.", Toast.LENGTH_SHORT).show();
+-                            }
+-                        });
+-                    }
+-                });
+-
+-                passwordResetDialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
+-                    @Override
+-                    public void onClick(DialogInterface dialog, int which) {
+-                        // Close the dialog
+-                    }
+-                });
+-
+-                passwordResetDialog.create().show();
+-            }
+-        });
+-    }
+-    public void logout(View view) {
+-        // Sign out from Firebase
+-        FirebaseAuth.getInstance().signOut();
+-
+-        // Sign out from Google
+-        if (LoginPageActivity.client != null) {
+-            // Clear any existing sessions or cached credentials
+-            LoginPageActivity.client.revokeAccess().addOnCompleteListener(new OnCompleteListener<Void>() {
+-                @Override
+-                public void onComplete(@NonNull Task<Void> task) {
+-                    if (task.isSuccessful()) {
+-                        // After revoking access, sign out from Google
+-                        LoginPageActivity.client.signOut().addOnCompleteListener(new OnCompleteListener<Void>() {
+-                            @Override
+-                            public void onComplete(@NonNull Task<Void> task) {
+-                                // After signing out from Google, navigate to login page
+-                                startActivity(new Intent(ProfilePageActivity.this, MainActivity.class));
+-                                finish();
+-                            }
+-                        });
+-                    } else {
+-                        // Handle case where revoking access failed
+-                        // Redirect to login page
+-                        startActivity(new Intent(ProfilePageActivity.this, LoginPageActivity.class));
+-                        finish();
+-                    }
+-                }
+-            });
+-        } else {
+-            // Handle case where GoogleSignInClient is not initialized
+-            // This may happen if the user did not sign in with Google
+-            // Redirect to login page
+-            startActivity(new Intent(ProfilePageActivity.this, LoginPageActivity.class));
+-            finish();
+-        }
+-    }
+-
+-}
+\ No newline at end of file
+Index: app/src/main/java/sg/edu/np/mad/fitnessultimate/LogDetails.java
+===================================================================
+diff --git a/app/src/main/java/sg/edu/np/mad/fitnessultimate/LogDetails.java b/app/src/main/java/sg/edu/np/mad/fitnessultimate/LogDetails.java
+deleted file mode 100644
+--- a/app/src/main/java/sg/edu/np/mad/fitnessultimate/LogDetails.java	(revision 343a1e3dc33cd626ba8823fd422085b568494a33)
++++ /dev/null	(revision 343a1e3dc33cd626ba8823fd422085b568494a33)
+@@ -1,105 +0,0 @@
+-package sg.edu.np.mad.fitnessultimate;
+-
+-import android.app.Activity;
+-import android.content.Intent;
+-import android.os.Bundle;
+-
+-import androidx.activity.EdgeToEdge;
+-import androidx.appcompat.app.AppCompatActivity;
+-import androidx.core.graphics.Insets;
+-import androidx.core.view.ViewCompat;
+-import androidx.core.view.WindowInsetsCompat;
+-
+-import android.view.View;
+-import android.widget.Button;
+-import android.widget.EditText;
+-import android.widget.RadioButton;
+-import android.widget.RadioGroup;
+-
+-public class LogDetails extends AppCompatActivity {
+-
+-    private double calculatedBMR;
+-
+-    @Override
+-    protected void onCreate(Bundle savedInstanceState) {
+-        super.onCreate(savedInstanceState);
+-        EdgeToEdge.enable(this);
+-        setContentView(R.layout.activity_log_details);
+-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+-            return insets;
+-        });
+-
+-        //Initializing views
+-        RadioGroup genderGroup = findViewById(R.id.genderRadio);
+-        EditText ageText = findViewById(R.id.ageText);
+-        EditText weightText = findViewById(R.id.weightText);
+-        EditText heightText = findViewById(R.id.heightText);
+-        EditText activityText = findViewById(R.id.activityText);
+-        RadioGroup goalsGroup = findViewById(R.id.radioOption);
+-        Button saveButton = findViewById(R.id.saveButton);
+-
+-        // Set a click listener for the calculate button
+-        saveButton.setOnClickListener(new View.OnClickListener() {
+-            @Override
+-            public void onClick(View v) {
+-                // Get user input
+-                int selectedGenderId = genderGroup.getCheckedRadioButtonId();
+-                RadioButton selectedGenderRadioButton = findViewById(selectedGenderId);
+-                String gender = selectedGenderRadioButton.getText().toString();
+-                int age = Integer.parseInt(ageText.getText().toString());
+-                double weight = Double.parseDouble(weightText.getText().toString());
+-                double height = Double.parseDouble(heightText.getText().toString());
+-                String activityLevel = activityText.getText().toString();
+-                int selectedGoalId = goalsGroup.getCheckedRadioButtonId();
+-                RadioButton selectedGoalRadioButton = findViewById(selectedGoalId);
+-                String goal = selectedGoalRadioButton.getText().toString();
+-
+-                // Calculate BMR based on gender
+-                double bmr;
+-                if (gender.equals("Male")) {
+-                    bmr = 88.362 + (13.397 * weight) + (4.799 * height) - (5.677 * age);
+-                } else {
+-                    bmr = 447.593 + (9.247 * weight) + (3.098 * height) - (4.330 * age);
+-                }
+-
+-                // Adjust BMR based on activity level
+-                switch (activityLevel) {
+-                    case "no":
+-                        bmr *= 1.2;
+-                        break;
+-                    case "low":
+-                        bmr *= 1.375;
+-                        break;
+-                    case "moderate":
+-                        bmr *= 1.55;
+-                        break;
+-                    case "high":
+-                        bmr *= 1.725;
+-                        break;
+-                    case "extreme":
+-                        bmr *= 1.9;
+-                        break;
+-                }
+-
+-                // Adjust BMR based on goal
+-                if (goal.equals("Lose weight")) {
+-                    bmr -= 500; // Calorie deficit for weight loss
+-                } else if (goal.equals("Gain weight")) {
+-                    bmr += 500; // Calorie surplus for weight gain
+-                }
+-                String formattedBMR = String.format("%.2f", bmr);
+-                calculatedBMR = Double.parseDouble(formattedBMR);
+-                returnCalculatedBMR();
+-            }
+-
+-            private void returnCalculatedBMR() {
+-                Intent resultIntent = new Intent();
+-                resultIntent.putExtra("bmr", calculatedBMR);
+-                setResult(Activity.RESULT_OK, resultIntent);
+-                finish();
+-            }
+-        });
+-    }
+-}
+\ No newline at end of file
+Index: .idea/misc.xml
+===================================================================
+diff --git a/.idea/misc.xml b/.idea/misc.xml
+deleted file mode 100644
+--- a/.idea/misc.xml	(revision 343a1e3dc33cd626ba8823fd422085b568494a33)
++++ /dev/null	(revision 343a1e3dc33cd626ba8823fd422085b568494a33)
+@@ -1,10 +0,0 @@
+-
+-<project version="4">
+-  <component name="ExternalStorageConfigurationManager" enabled="true" />
+-  <component name="ProjectRootManager" version="2" languageLevel="JDK_17" default="true" project-jdk-name="jbr-17" project-jdk-type="JavaSDK">
+-    <output url="file://$PROJECT_DIR$/build/classes" />
+-  </component>
+-  <component name="ProjectType">
+-    <option name="id" value="Android" />
+-  </component>
+-</project>
+\ No newline at end of file
+Index: app/src/main/java/sg/edu/np/mad/fitnessultimate/activity/SignUpPageActivity.java
+===================================================================
+diff --git a/app/src/main/java/sg/edu/np/mad/fitnessultimate/activity/SignUpPageActivity.java b/app/src/main/java/sg/edu/np/mad/fitnessultimate/activity/SignUpPageActivity.java
+deleted file mode 100644
+--- a/app/src/main/java/sg/edu/np/mad/fitnessultimate/activity/SignUpPageActivity.java	(revision 343a1e3dc33cd626ba8823fd422085b568494a33)
++++ /dev/null	(revision 343a1e3dc33cd626ba8823fd422085b568494a33)
+@@ -1,165 +0,0 @@
+-package sg.edu.np.mad.fitnessultimate.activity;
+-
+-import android.content.Intent;
+-import android.os.Bundle;
+-import android.text.TextUtils;
+-import android.util.Log;
+-import android.view.View;
+-import android.widget.Button;
+-import android.widget.EditText;
+-import android.widget.ImageView;
+-import android.widget.ProgressBar;
+-import android.widget.TextView;
+-import android.widget.Toast;
+-
+-import androidx.activity.EdgeToEdge;
+-import androidx.annotation.NonNull;
+-import androidx.appcompat.app.AppCompatActivity;
+-import androidx.core.graphics.Insets;
+-import androidx.core.view.ViewCompat;
+-import androidx.core.view.WindowInsetsCompat;
+-
+-import com.google.android.gms.tasks.OnCompleteListener;
+-import com.google.android.gms.tasks.OnFailureListener;
+-import com.google.android.gms.tasks.Task;
+-import com.google.android.material.textfield.TextInputLayout;
+-import com.google.firebase.auth.AuthResult;
+-import com.google.firebase.auth.FirebaseAuth;
+-import com.google.firebase.firestore.DocumentReference;
+-import com.google.firebase.firestore.FirebaseFirestore;
+-
+-import java.util.HashMap;
+-import java.util.Map;
+-
+-import sg.edu.np.mad.fitnessultimate.R;
+-
+-public class SignUpPageActivity extends AppCompatActivity {
+-    private static final String TAG = "SignUpPageActivity";
+-    @Override
+-    protected void onCreate(Bundle savedInstanceState) {
+-        super.onCreate(savedInstanceState);
+-        EdgeToEdge.enable(this);
+-        setContentView(R.layout.activity_sign_up_page);
+-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+-            return insets;
+-        });
+-
+-        EditText mUsername = findViewById(R.id.inputUsername);
+-        EditText mEmail = findViewById(R.id.inputEmail);
+-        EditText mPassword = findViewById(R.id.inputPassword);
+-        EditText mConfirmPassword = findViewById(R.id.inputConfirmPassword);
+-        Button mSignUpButton = findViewById(R.id.button_signUp2);
+-
+-        ProgressBar mprogressBar = findViewById(R.id.progressBar);
+-        FirebaseAuth fAuth = FirebaseAuth.getInstance();
+-        FirebaseFirestore fStore = FirebaseFirestore.getInstance();
+-
+-        TextInputLayout mtextInputPassword = findViewById(R.id.textInputPassword);
+-        TextInputLayout mtextInputConfirmPassword = findViewById(R.id.textInputConfirmPassword);
+-
+-
+-        if (fAuth.getCurrentUser() != null) {
+-            startActivity(new Intent(getApplicationContext(), ProfilePageActivity.class));
+-            finish();
+-        }
+-
+-        ImageView btnArrow2 = findViewById(R.id.arrow_left2);
+-        TextView login = findViewById(R.id.login);
+-
+-        btnArrow2.setOnClickListener(new View.OnClickListener() {
+-            @Override
+-            public void onClick(View v) {
+-                // Go back to the Main page when the left arrow button is clicked
+-                Intent intent = new Intent(SignUpPageActivity.this, MainActivity.class);
+-                startActivity(intent);
+-            }
+-        });
+-
+-        login.setOnClickListener(new View.OnClickListener() {
+-            @Override
+-            public void onClick(View v) {
+-                // Go back to the Main page when the left arrow button is clicked
+-                Intent intent = new Intent(SignUpPageActivity.this, LoginPageActivity.class);
+-                startActivity(intent);
+-            }
+-        });
+-
+-        mSignUpButton.setOnClickListener(new View.OnClickListener() {
+-            @Override
+-            public void onClick(View v) {
+-                String username = mUsername.getText().toString();
+-                String email = mEmail.getText().toString().trim();
+-                String password = mPassword.getText().toString().trim();
+-                String confirmPassword = mConfirmPassword.getText().toString().trim();
+-
+-                if (TextUtils.isEmpty(username)) {
+-                    mUsername.setError("Username is Required.");
+-                    return;
+-                }
+-
+-                if (TextUtils.isEmpty(email)) {
+-                    mEmail.setError("Email is Required.");
+-                    return;
+-                }
+-
+-                if (TextUtils.isEmpty(password)) {
+-                    mtextInputPassword.setEndIconMode(TextInputLayout.END_ICON_NONE); // Hide the end icon
+-                    mPassword.setError("Password is Required.");
+-                    return;
+-                }
+-                else {
+-                    // If there is no error, make the end icon visible
+-                    mtextInputPassword.setEndIconMode(TextInputLayout.END_ICON_PASSWORD_TOGGLE);
+-                }
+-
+-                if (password.length() < 6) {
+-                    mtextInputPassword.setEndIconMode(TextInputLayout.END_ICON_NONE); // Hide the end icon
+-                    mPassword.setError("Password must be more than 6 characters");
+-                    return;
+-                } else {
+-                    // If there is no error, make the end icon visible
+-                    mtextInputPassword.setEndIconMode(TextInputLayout.END_ICON_PASSWORD_TOGGLE);
+-                }
+-
+-                if (!password.equals(confirmPassword)) {
+-                    mtextInputConfirmPassword.setEndIconMode(TextInputLayout.END_ICON_NONE); // Hide the end icon
+-                    mConfirmPassword.setError("Password do not match");
+-                    return;
+-                }
+-
+-                mprogressBar.setVisibility(View.VISIBLE);
+-
+-                // register the user in Firebase
+-                fAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+-                    @Override
+-                    public void onComplete(@NonNull Task<AuthResult> task) {
+-                        if (task.isSuccessful()) {
+-                            Toast.makeText(SignUpPageActivity.this, "User Created", Toast.LENGTH_SHORT).show();
+-                            String userID = fAuth.getCurrentUser().getUid();
+-                            DocumentReference documentReference = fStore.collection("users").document(userID);
+-                            Map<String,Object> user = new HashMap<>();
+-                            user.put("uName",username);
+-                            user.put("email", email);
+-                            documentReference.set(user).addOnSuccessListener(aVoid -> {
+-                                Log.d(TAG, "onSuccess: userProfile is created for " + userID);
+-                            }).addOnFailureListener(new OnFailureListener() {
+-                                @Override
+-                                public void onFailure(@NonNull Exception e) {
+-                                    Log.d(TAG, "onFailure: " + e.toString());
+-                                }
+-                            });
+-
+-                            startActivity(new Intent(getApplicationContext(), ProfilePageActivity.class));
+-                        }
+-                        else {
+-                            Toast.makeText(SignUpPageActivity.this, "Error! " + task.getException().getMessage(),Toast.LENGTH_SHORT).show();
+-                            mprogressBar.setVisibility(View.GONE);
+-                        }
+-                    }
+-                });
+-            }
+-        });
+-    }
+-}
+\ No newline at end of file
+Index: .idea/codeStyles/Project.xml
+===================================================================
+diff --git a/.idea/codeStyles/Project.xml b/.idea/codeStyles/Project.xml
+deleted file mode 100644
+--- a/.idea/codeStyles/Project.xml	(revision 343a1e3dc33cd626ba8823fd422085b568494a33)
++++ /dev/null	(revision 343a1e3dc33cd626ba8823fd422085b568494a33)
+@@ -1,117 +0,0 @@
+-<component name="ProjectCodeStyleConfiguration">
+-  <code_scheme name="Project" version="173">
+-    <codeStyleSettings language="XML">
+-      <option name="FORCE_REARRANGE_MODE" value="1" />
+-      <indentOptions>
+-        <option name="CONTINUATION_INDENT_SIZE" value="4" />
+-      </indentOptions>
+-      <arrangement>
+-        <rules>
+-          <section>
+-            <rule>
+-              <match>
+-                <AND>
+-                  <NAME>xmlns:android</NAME>
+-                  <XML_ATTRIBUTE />
+-                  <XML_NAMESPACE>^$</XML_NAMESPACE>
+-                </AND>
+-              </match>
+-            </rule>
+-          </section>
+-          <section>
+-            <rule>
+-              <match>
+-                <AND>
+-                  <NAME>xmlns:.*</NAME>
+-                  <XML_ATTRIBUTE />
+-                  <XML_NAMESPACE>^$</XML_NAMESPACE>
+-                </AND>
+-              </match>
+-              <order>BY_NAME</order>
+-            </rule>
+-          </section>
+-          <section>
+-            <rule>
+-              <match>
+-                <AND>
+-                  <NAME>.*:id</NAME>
+-                  <XML_ATTRIBUTE />
+-                  <XML_NAMESPACE>http://schemas.android.com/apk/res/android</XML_NAMESPACE>
+-                </AND>
+-              </match>
+-            </rule>
+-          </section>
+-          <section>
+-            <rule>
+-              <match>
+-                <AND>
+-                  <NAME>.*:name</NAME>
+-                  <XML_ATTRIBUTE />
+-                  <XML_NAMESPACE>http://schemas.android.com/apk/res/android</XML_NAMESPACE>
+-                </AND>
+-              </match>
+-            </rule>
+-          </section>
+-          <section>
+-            <rule>
+-              <match>
+-                <AND>
+-                  <NAME>name</NAME>
+-                  <XML_ATTRIBUTE />
+-                  <XML_NAMESPACE>^$</XML_NAMESPACE>
+-                </AND>
+-              </match>
+-            </rule>
+-          </section>
+-          <section>
+-            <rule>
+-              <match>
+-                <AND>
+-                  <NAME>style</NAME>
+-                  <XML_ATTRIBUTE />
+-                  <XML_NAMESPACE>^$</XML_NAMESPACE>
+-                </AND>
+-              </match>
+-            </rule>
+-          </section>
+-          <section>
+-            <rule>
+-              <match>
+-                <AND>
+-                  <NAME>.*</NAME>
+-                  <XML_ATTRIBUTE />
+-                  <XML_NAMESPACE>^$</XML_NAMESPACE>
+-                </AND>
+-              </match>
+-              <order>BY_NAME</order>
+-            </rule>
+-          </section>
+-          <section>
+-            <rule>
+-              <match>
+-                <AND>
+-                  <NAME>.*</NAME>
+-                  <XML_ATTRIBUTE />
+-                  <XML_NAMESPACE>http://schemas.android.com/apk/res/android</XML_NAMESPACE>
+-                </AND>
+-              </match>
+-              <order>ANDROID_ATTRIBUTE_ORDER</order>
+-            </rule>
+-          </section>
+-          <section>
+-            <rule>
+-              <match>
+-                <AND>
+-                  <NAME>.*</NAME>
+-                  <XML_ATTRIBUTE />
+-                  <XML_NAMESPACE>.*</XML_NAMESPACE>
+-                </AND>
+-              </match>
+-              <order>BY_NAME</order>
+-            </rule>
+-          </section>
+-        </rules>
+-      </arrangement>
+-    </codeStyleSettings>
+-  </code_scheme>
+-</component>
+\ No newline at end of file
+Index: app/src/main/java/sg/edu/np/mad/fitnessultimate/SearchResultsActivity.java
+===================================================================
+diff --git a/app/src/main/java/sg/edu/np/mad/fitnessultimate/SearchResultsActivity.java b/app/src/main/java/sg/edu/np/mad/fitnessultimate/SearchResultsActivity.java
+deleted file mode 100644
+--- a/app/src/main/java/sg/edu/np/mad/fitnessultimate/SearchResultsActivity.java	(revision 343a1e3dc33cd626ba8823fd422085b568494a33)
++++ /dev/null	(revision 343a1e3dc33cd626ba8823fd422085b568494a33)
+@@ -1,153 +0,0 @@
+-package sg.edu.np.mad.fitnessultimate;
+-
+-import android.os.AsyncTask;
+-import android.os.Bundle;
+-import android.widget.SearchView;
+-import android.widget.TextView;
+-
+-import androidx.appcompat.app.AppCompatActivity;
+-
+-import org.json.JSONArray;
+-import org.json.JSONException;
+-import org.json.JSONObject;
+-
+-import java.io.BufferedReader;
+-import java.io.IOException;
+-import java.io.InputStreamReader;
+-import java.net.HttpURLConnection;
+-import java.net.URL;
+-
+-public class SearchResultsActivity extends AppCompatActivity {
+-    private TextView resultTextBox;
+-    private SearchView searchView;
+-    private String apiUrl;
+-    private String apiKey = "sEO/WztkNuDVZfEfyIOLrA==S4xbs1Ybg0QZ5vMd";
+-
+-    @Override
+-    protected void onCreate(Bundle savedInstanceState) {
+-        super.onCreate(savedInstanceState);
+-        setContentView(R.layout.activity_search_results);
+-
+-        resultTextBox = findViewById(R.id.resultTextBox);
+-        searchView = findViewById(R.id.searchBar);
+-
+-        apiUrl = "https://api.api-ninjas.com/v1/nutrition?query=";
+-
+-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+-            @Override
+-            public boolean onQueryTextSubmit(String query) {
+-                // Concatenate the query with the API URL
+-                String fullUrl = apiUrl + query;
+-
+-                // Execute AsyncTask to perform network operation in the background
+-                new FetchDataTask().execute(fullUrl);
+-
+-                return true;
+-            }
+-
+-            @Override
+-            public boolean onQueryTextChange(String newText) {
+-                return false;
+-            }
+-        });
+-    }
+-
+-    private class FetchDataTask extends AsyncTask<String, Void, String> {
+-
+-        @Override
+-        protected String doInBackground(String... urls) {
+-            // String to hold the JSON response
+-            StringBuilder response = new StringBuilder();
+-
+-            try {
+-                // Create URL object from the provided URL string
+-                URL url = new URL(urls[0]);
+-
+-                // Create HttpURLConnection object
+-                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+-
+-                // Set request method
+-                connection.setRequestMethod("GET");
+-
+-                connection.setRequestProperty("x-api-key", apiKey);
+-
+-                // Connect to the API
+-                connection.connect();
+-
+-                // Check if the response code is successful (200)
+-                if (connection.getResponseCode() == HttpURLConnection.HTTP_OK) {
+-                    // Create BufferedReader to read the response
+-                    BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+-
+-                    // Read the response line by line and append it to the StringBuilder
+-                    String line;
+-                    while ((line = reader.readLine()) != null) {
+-                        response.append(line);
+-                    }
+-
+-                    // Close the reader
+-                    reader.close();
+-                }
+-
+-                // Disconnect the HttpURLConnection
+-                connection.disconnect();
+-
+-            } catch (IOException e) {
+-                e.printStackTrace();
+-            }
+-
+-            // Return the JSON response as a String
+-            return response.toString();
+-        }
+-
+-        @Override
+-        protected void onPostExecute(String result) {
+-            super.onPostExecute(result);
+-
+-            resultTextBox.setText("");
+-
+-            // Check if the result is not null and not empty
+-            if (result != null && !result.isEmpty()) {
+-                try {
+-                    // Parse the JSON response
+-                    JSONArray jsonArray = new JSONArray(result);
+-
+-                    // Create a StringBuilder to format the data
+-                    StringBuilder formattedData = new StringBuilder();
+-
+-                    // Iterate through the JSON array
+-                    for (int i = 0; i < jsonArray.length(); i++) {
+-                        JSONObject jsonObject = jsonArray.getJSONObject(i);
+-
+-                        // Extract data from the JSON object
+-                        String name = jsonObject.getString("name");
+-                        double calories = jsonObject.getDouble("calories");
+-                        double carbohydrates = jsonObject.getDouble("carbohydrates_total_g");
+-                        double proteins = jsonObject.getDouble("protein_g");
+-                        double fats = jsonObject.getDouble("fat_total_g");
+-                        double others = calories - (carbohydrates + proteins + fats);
+-
+-                        // Append the formatted data to the StringBuilder
+-                        formattedData.append("Name: ").append(name).append("\n");
+-                        formattedData.append("Total calories: ").append(calories).append(" per 100 g\n");
+-                        formattedData.append("Carbohydrates: ").append(carbohydrates).append("\n");
+-                        formattedData.append("Protein: ").append(proteins).append("\n");
+-                        formattedData.append("Fats: ").append(fats).append("\n");
+-                        formattedData.append("Others: ").append(others).append("\n");
+-
+-
+-                    }
+-
+-                    // Set the formatted data to the TextView
+-                    resultTextBox.setText(formattedData.toString());
+-
+-                } catch (JSONException e) {
+-                    e.printStackTrace();
+-                    resultTextBox.setText("Failed to parse data");
+-                }
+-            } else {
+-                resultTextBox.setText("No results found or error fetching data");
+-            }
+-        }
+-    }
+-}
+\ No newline at end of file
+Index: .idea/.gitignore
+===================================================================
+diff --git a/.idea/.gitignore b/.idea/.gitignore
+deleted file mode 100644
+--- a/.idea/.gitignore	(revision 343a1e3dc33cd626ba8823fd422085b568494a33)
++++ /dev/null	(revision 343a1e3dc33cd626ba8823fd422085b568494a33)
+@@ -1,3 +0,0 @@
+-# Default ignored files
+-/shelf/
+-/workspace.xml
+Index: app/src/main/java/sg/edu/np/mad/fitnessultimate/activity/LoginPageActivity.java
+===================================================================
+diff --git a/app/src/main/java/sg/edu/np/mad/fitnessultimate/activity/LoginPageActivity.java b/app/src/main/java/sg/edu/np/mad/fitnessultimate/activity/LoginPageActivity.java
+deleted file mode 100644
+--- a/app/src/main/java/sg/edu/np/mad/fitnessultimate/activity/LoginPageActivity.java	(revision 343a1e3dc33cd626ba8823fd422085b568494a33)
++++ /dev/null	(revision 343a1e3dc33cd626ba8823fd422085b568494a33)
+@@ -1,234 +0,0 @@
+-package sg.edu.np.mad.fitnessultimate.activity;
+-
+-import android.content.DialogInterface;
+-import android.content.Intent;
+-import android.os.Bundle;
+-import android.text.TextUtils;
+-import android.view.View;
+-import android.widget.Button;
+-import android.widget.EditText;
+-import android.widget.ImageView;
+-import android.widget.ProgressBar;
+-import android.widget.TextView;
+-import android.widget.Toast;
+-
+-import androidx.activity.EdgeToEdge;
+-import androidx.activity.result.ActivityResultLauncher;
+-import androidx.annotation.NonNull;
+-import androidx.annotation.Nullable;
+-import androidx.appcompat.app.AlertDialog;
+-import androidx.appcompat.app.AppCompatActivity;
+-import androidx.core.graphics.Insets;
+-import androidx.core.view.ViewCompat;
+-import androidx.core.view.WindowInsetsCompat;
+-
+-
+-import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+-import com.google.android.gms.common.SignInButton;
+-import com.google.android.gms.tasks.OnCompleteListener;
+-import com.google.android.gms.tasks.OnFailureListener;
+-import com.google.android.gms.tasks.OnSuccessListener;
+-import com.google.android.gms.tasks.Task;
+-import com.google.android.material.textfield.TextInputLayout;
+-import com.google.firebase.auth.AuthCredential;
+-import com.google.firebase.auth.AuthResult;
+-import com.google.firebase.auth.FirebaseAuth;
+-import com.google.android.gms.auth.api.signin.GoogleSignIn;
+-import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+-
+-import androidx.activity.result.ActivityResult;
+-import androidx.activity.result.ActivityResultCallback;
+-import androidx.activity.result.ActivityResultLauncher;
+-import androidx.activity.result.contract.ActivityResultContracts;
+-import com.google.android.gms.common.api.ApiException;
+-import com.google.android.gms.tasks.Task;
+-import com.google.firebase.auth.FirebaseUser;
+-import com.google.firebase.auth.GoogleAuthProvider;
+-
+-import android.app.Activity;
+-import android.content.Intent;
+-
+-import sg.edu.np.mad.fitnessultimate.R;
+-
+-
+-public class LoginPageActivity extends AppCompatActivity {
+-
+-    //public static final int GOOGLE_SIGN_IN_CODE = 1234;
+-    public static GoogleSignInClient client; // Declare client as static
+-
+-    @Override
+-    protected void onCreate(Bundle savedInstanceState) {
+-        super.onCreate(savedInstanceState);
+-        EdgeToEdge.enable(this);
+-        setContentView(R.layout.activity_login_page);
+-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+-            return insets;
+-        });
+-
+-        EditText mEmailUsername = findViewById(R.id.inputEmailUsername);
+-        EditText mPassword = findViewById(R.id.inputLoginPassword);
+-        Button mSignInBtn = findViewById(R.id.button_signIn);
+-        TextView mForgotPassword = findViewById(R.id.forgotPassword);
+-
+-        TextInputLayout mtextInputLayoutEmailUsername = findViewById(R.id.textInputEmailUsername);
+-        TextInputLayout mtextInputLoginPassword = findViewById(R.id.textInputLoginPassword);
+-
+-        ProgressBar mLoginProgressBar = findViewById(R.id.loginProgressBar);
+-        FirebaseAuth fAuthLogin = FirebaseAuth.getInstance();
+-
+-        ImageView btnArrow1 = findViewById(R.id.arrow_left1);
+-        TextView registerNow = findViewById(R.id.registerNow);
+-
+-
+-        btnArrow1.setOnClickListener(new View.OnClickListener() {
+-            @Override
+-            public void onClick(View v) {
+-                // Go back to the Main page when the left arrow button is clicked
+-                Intent intent = new Intent(LoginPageActivity.this, MainActivity.class);
+-                startActivity(intent);
+-            }
+-        });
+-
+-        registerNow.setOnClickListener(new View.OnClickListener() {
+-            @Override
+-            public void onClick(View v) {
+-                // Go back to the Main page when the left arrow button is clicked
+-                Intent intent = new Intent(LoginPageActivity.this, SignUpPageActivity.class);
+-                startActivity(intent);
+-            }
+-        });
+-
+-        mForgotPassword.setOnClickListener(new View.OnClickListener() {
+-            @Override
+-            public void onClick(View v) {
+-                EditText resetMail = new EditText(v.getContext());
+-                AlertDialog.Builder passwordResetDialog = new AlertDialog.Builder(v.getContext());
+-                passwordResetDialog.setTitle("Reset Password?");
+-                passwordResetDialog.setMessage("Enter Your Email to Receive Reset Link.");
+-
+-                // Set the EditText as the view of the dialog
+-                passwordResetDialog.setView(resetMail);
+-
+-                passwordResetDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+-                    @Override
+-                    public void onClick(DialogInterface dialog, int which) {
+-                        // extract the email and send reset link
+-
+-                        String mail = resetMail.getText().toString();
+-                        fAuthLogin.sendPasswordResetEmail(mail).addOnSuccessListener(new OnSuccessListener<Void>() {
+-                            @Override
+-                            public void onSuccess(Void unused) {
+-                                Toast.makeText(LoginPageActivity.this, "Reset Link Sent To Your Email.", Toast.LENGTH_SHORT).show();
+-                            }
+-                        }).addOnFailureListener(new OnFailureListener() {
+-                            @Override
+-                            public void onFailure(@NonNull Exception e) {
+-                                Toast.makeText(LoginPageActivity.this, "Error! Reset Link is Not Sent." + e.getMessage(), Toast.LENGTH_SHORT).show();
+-                            }
+-                        });
+-                    }
+-                });
+-
+-                passwordResetDialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
+-                    @Override
+-                    public void onClick(DialogInterface dialog, int which) {
+-                        // close the dialog
+-                    }
+-                });
+-
+-                passwordResetDialog.create().show();
+-            }
+-        });
+-
+-        mSignInBtn.setOnClickListener(new View.OnClickListener() {
+-            @Override
+-            public void onClick(View v) {
+-                String emailUsername = mEmailUsername.getText().toString().trim();
+-                String password = mPassword.getText().toString().trim();
+-
+-                if (TextUtils.isEmpty(emailUsername)) {
+-                    mEmailUsername.setError("Username is Required.");
+-                    return;
+-                }
+-
+-                // Check if the input is a valid email address
+-                if (!android.util.Patterns.EMAIL_ADDRESS.matcher(emailUsername).matches()) {
+-                    mEmailUsername.setError("Invalid Email Address");
+-                    return;
+-                }
+-
+-                if (TextUtils.isEmpty(password)) {
+-                    mtextInputLoginPassword.setEndIconMode(TextInputLayout.END_ICON_NONE); // Hide the end icon
+-                    mPassword.setError("Password is Required.");
+-                    return;
+-                } else {
+-                    // If there is no error, make the end icon visible
+-                    mtextInputLoginPassword.setEndIconMode(TextInputLayout.END_ICON_PASSWORD_TOGGLE);
+-                }
+-
+-
+-                mLoginProgressBar.setVisibility(View.VISIBLE);
+-
+-                // authenticate the user
+-                fAuthLogin.signInWithEmailAndPassword(emailUsername, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+-                    @Override
+-                    public void onComplete(@NonNull Task<AuthResult> task) {
+-                        if (task.isSuccessful()) {
+-                            Toast.makeText(LoginPageActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
+-                            startActivity(new Intent(getApplicationContext(), ProfilePageActivity.class));
+-                        } else {
+-                            Toast.makeText(LoginPageActivity.this, "Error! " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+-                            mLoginProgressBar.setVisibility(View.GONE);
+-                        }
+-                    }
+-                });
+-            }
+-        });
+-
+-        SignInButton googleSignIn = findViewById(R.id.googleLogo);
+-        GoogleSignInOptions options = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+-                .requestIdToken(getString(R.string.default_web_client_id))
+-                .requestEmail()
+-                .build();
+-
+-        client = GoogleSignIn.getClient(this, options);
+-        googleSignIn.setOnClickListener(view -> {
+-            Intent intent = client.getSignInIntent();
+-
+-            resultLauncher.launch(new Intent(client.getSignInIntent()));
+-            // startActivityForResult(intent, 1234);
+-        });
+-    }
+-
+-    ActivityResultLauncher<Intent> resultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
+-        @Override
+-        public void onActivityResult(ActivityResult result) {
+-            if (result.getResultCode() == Activity.RESULT_OK) {
+-                Intent data = result.getData();
+-
+-                Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+-                try {
+-                    GoogleSignInAccount account = task.getResult(ApiException.class);
+-
+-                    AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
+-                    FirebaseAuth.getInstance().signInWithCredential(credential)
+-                            .addOnCompleteListener(task1 -> {
+-                                if (task1.isSuccessful()) {
+-                                    Toast.makeText(LoginPageActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
+-                                    Intent intent = new Intent(getApplicationContext(), ProfilePageActivity.class);
+-                                    startActivity(intent);
+-                                    finish();
+-                                } else {
+-                                    Toast.makeText(LoginPageActivity.this, task1.getException().getMessage(), Toast.LENGTH_SHORT).show();
+-                                }
+-                            });
+-                } catch (ApiException e) {
+-                    e.printStackTrace();
+-                }
+-            }
+-        }
+-    });
+-}
+\ No newline at end of file
+Index: .idea/compiler.xml
+===================================================================
+diff --git a/.idea/compiler.xml b/.idea/compiler.xml
+deleted file mode 100644
+--- a/.idea/compiler.xml	(revision 343a1e3dc33cd626ba8823fd422085b568494a33)
++++ /dev/null	(revision 343a1e3dc33cd626ba8823fd422085b568494a33)
+@@ -1,6 +0,0 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+-<project version="4">
+-  <component name="CompilerConfiguration">
+-    <bytecodeTargetLevel target="17" />
+-  </component>
+-</project>
+\ No newline at end of file
+Index: .idea/migrations.xml
+===================================================================
+diff --git a/.idea/migrations.xml b/.idea/migrations.xml
+deleted file mode 100644
+--- a/.idea/migrations.xml	(revision 343a1e3dc33cd626ba8823fd422085b568494a33)
++++ /dev/null	(revision 343a1e3dc33cd626ba8823fd422085b568494a33)
+@@ -1,10 +0,0 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+-<project version="4">
+-  <component name="ProjectMigrations">
+-    <option name="MigrateToGradleLocalJavaHome">
+-      <set>
+-        <option value="$PROJECT_DIR$" />
+-      </set>
+-    </option>
+-  </component>
+-</project>
+\ No newline at end of file
+Index: app/src/main/java/sg/edu/np/mad/fitnessultimate/activity/EditProfilePageActivity.java
+===================================================================
+diff --git a/app/src/main/java/sg/edu/np/mad/fitnessultimate/activity/EditProfilePageActivity.java b/app/src/main/java/sg/edu/np/mad/fitnessultimate/activity/EditProfilePageActivity.java
+deleted file mode 100644
+--- a/app/src/main/java/sg/edu/np/mad/fitnessultimate/activity/EditProfilePageActivity.java	(revision 343a1e3dc33cd626ba8823fd422085b568494a33)
++++ /dev/null	(revision 343a1e3dc33cd626ba8823fd422085b568494a33)
+@@ -1,87 +0,0 @@
+-package sg.edu.np.mad.fitnessultimate.activity;
+-
+-import android.app.Activity;
+-import android.content.Intent;
+-import android.net.Uri;
+-import android.os.Bundle;
+-import android.provider.MediaStore;
+-import android.view.View;
+-import android.widget.EditText;
+-import android.widget.ImageView;
+-
+-import androidx.activity.EdgeToEdge;
+-import androidx.activity.result.ActivityResultCallback;
+-import androidx.activity.result.ActivityResultLauncher;
+-import androidx.activity.result.contract.ActivityResultContracts;
+-import androidx.annotation.Nullable;
+-import androidx.appcompat.app.AppCompatActivity;
+-import androidx.core.graphics.Insets;
+-import androidx.core.view.ViewCompat;
+-import androidx.core.view.WindowInsetsCompat;
+-
+-import com.google.firebase.auth.FirebaseAuth;
+-import com.google.firebase.firestore.FirebaseFirestore;
+-
+-import sg.edu.np.mad.fitnessultimate.R;
+-
+-public class EditProfilePageActivity extends AppCompatActivity {
+-    ImageView leftArrow;
+-    ImageView changeProfilePic;
+-    EditText resetUsername;
+-    EditText resetEmail;
+-
+-    FirebaseAuth fAuth;
+-    FirebaseFirestore fStore;
+-    private ActivityResultLauncher<String> galleryLauncher;
+-
+-    @Override
+-    protected void onCreate(Bundle savedInstanceState) {
+-        super.onCreate(savedInstanceState);
+-        EdgeToEdge.enable(this);
+-        setContentView(R.layout.activity_edit_profile_page);
+-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+-            return insets;
+-        });
+-
+-        // Initialize views and Firebase instances after setting the content view
+-        leftArrow = findViewById(R.id.arrow_left1);
+-        changeProfilePic = findViewById(R.id.editProfilePic);
+-        resetUsername = findViewById(R.id.inputUsername);
+-        resetEmail = findViewById(R.id.inputEmail);
+-
+-        fAuth = FirebaseAuth.getInstance();
+-        fStore = FirebaseFirestore.getInstance();
+-
+-        leftArrow.setOnClickListener(new View.OnClickListener() {
+-            @Override
+-            public void onClick(View v) {
+-                // Go back to the Main page when the left arrow button is clicked
+-                Intent intent = new Intent(EditProfilePageActivity.this, ProfilePageActivity.class);
+-                startActivity(intent);
+-            }
+-        });
+-
+-        // Initialize the gallery launcher
+-        galleryLauncher = registerForActivityResult(new ActivityResultContracts.GetContent(),
+-                new ActivityResultCallback<Uri>() {
+-                    @Override
+-                    public void onActivityResult(Uri result) {
+-                        // Handle the picked image URI here
+-                        if (result != null) {
+-                            // Do something with the picked image URI
+-                            changeProfilePic.setImageURI(result);
+-                        }
+-                    }
+-                });
+-
+-        changeProfilePic.setOnClickListener(new View.OnClickListener() {
+-            @Override
+-            public void onClick(View v) {
+-                // Open gallery using the activity result launcher
+-                galleryLauncher.launch("image/*");
+-            }
+-        });
+-    }
+-}
+\ No newline at end of file
+Index: app/src/main/res/values/strings.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><resources>\r\n    <string name=\"app_name\">Login-SignUp Page</string>\r\n    <string name=\"title_activity_login\">LoginActivity</string>\r\n    <string name=\"prompt_email\">Email</string>\r\n    <string name=\"prompt_password\">Password</string>\r\n    <string name=\"action_sign_in\">Sign in or register</string>\r\n    <string name=\"action_sign_in_short\">Sign in</string>\r\n    <string name=\"welcome\">\"Welcome !\"</string>\r\n    <string name=\"invalid_username\">Not a valid username</string>\r\n    <string name=\"invalid_password\">Password must be >5 characters</string>\r\n    <string name=\"login_failed\">\"Login failed\"</string>\r\n    <string name=\"default_web_client_id\">609011869979-mjm64te1rs1qduskrvgjqen3k844v61s.apps.googleusercontent.com</string>\r\n    <string name=\"app_name\">FitnessUltimate</string>\r\n    <string name=\"back_btn\">back</string>\r\n</resources>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/values/strings.xml b/app/src/main/res/values/strings.xml
+--- a/app/src/main/res/values/strings.xml	(revision 343a1e3dc33cd626ba8823fd422085b568494a33)
++++ b/app/src/main/res/values/strings.xml	(date 1717139651612)
+@@ -1,5 +1,4 @@
+ <resources>
+-    <string name="app_name">Login-SignUp Page</string>
+     <string name="title_activity_login">LoginActivity</string>
+     <string name="prompt_email">Email</string>
+     <string name="prompt_password">Password</string>
+Index: app/src/main/java/sg/edu/np/mad/fitnessultimate/activity/ChatbotActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package sg.edu.np.mad.fitnessultimate.activity;\r\n\r\nimport android.content.Intent;\r\nimport android.os.Bundle;\r\nimport androidx.activity.EdgeToEdge;\r\nimport androidx.appcompat.app.AppCompatActivity;\r\nimport androidx.core.graphics.Insets;\r\nimport androidx.core.view.ViewCompat;\r\nimport androidx.core.view.WindowInsetsCompat;\r\nimport androidx.recyclerview.widget.LinearLayoutManager;\r\nimport androidx.recyclerview.widget.RecyclerView;\r\nimport sg.edu.np.mad.fitnessultimate.R;\r\nimport sg.edu.np.mad.fitnessultimate.adapter.MessageAdapter;\r\nimport sg.edu.np.mad.fitnessultimate.model.ResponseMessage;\r\nimport android.view.KeyEvent;\r\nimport android.view.inputmethod.EditorInfo;\r\nimport android.widget.EditText;\r\nimport android.widget.TextView;\r\nimport java.util.ArrayList;\r\nimport java.util.List;\r\n\r\npublic class ChatbotActivity extends AppCompatActivity {\r\n\r\n    EditText userInput;\r\n    RecyclerView recyclerView;\r\n    MessageAdapter messageAdapter;\r\n    List<ResponseMessage> responseMessageList;\r\n\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        EdgeToEdge.enable(this);\r\n        setContentView(R.layout.activity_chatbot);\r\n        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {\r\n            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());\r\n            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);\r\n            return insets;\r\n        });\r\n\r\n\r\n        findViewById(R.id.imageBack).setOnClickListener(v ->{\r\n            Intent MessageActivity = new Intent(ChatbotActivity.this, MainActivity.class);\r\n            startActivity(MessageActivity);\r\n        });\r\n\r\n        userInput = findViewById(R.id.userInput);\r\n        recyclerView = findViewById(R.id.conversation);\r\n        responseMessageList = new ArrayList<>();\r\n        messageAdapter = new MessageAdapter(responseMessageList, this);\r\n        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false));\r\n        recyclerView.setAdapter(messageAdapter);\r\n\r\n\r\n        displayFaqMessage();\r\n\r\n        userInput.setOnEditorActionListener(new TextView.OnEditorActionListener() {\r\n            @Override\r\n            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {\r\n                if (i == EditorInfo.IME_ACTION_SEND) {\r\n                    String userMessage = userInput.getText().toString().toLowerCase();\r\n                    addMessageToChat(userMessage, false);\r\n                    String botResponse = getResponseForMessage(userMessage);\r\n                    addMessageToChat(botResponse, true);\r\n                    userInput.setText(\"\");  // Clear input field\r\n                }\r\n                return false;\r\n            }\r\n        });\r\n    }\r\n\r\n    private void displayFaqMessage() {\r\n        String faqMessage = \"Here are some FAQs:\\n1) How to do a push up\\n2) What is a squat\\n3) How to do a plank\\n4) What are the benefits of exercise\\n\";\r\n        addMessageToChat(faqMessage, true);\r\n    }\r\n\r\n    private void addMessageToChat(String message, boolean isUser) {\r\n        ResponseMessage responseMessage = new ResponseMessage(message, isUser);\r\n        responseMessageList.add(responseMessage);\r\n        messageAdapter.notifyDataSetChanged();\r\n        if (!isLastVisible()) {\r\n            recyclerView.smoothScrollToPosition(messageAdapter.getItemCount() - 1);\r\n        }\r\n    }\r\n\r\n    private String getResponseForMessage(String message) {\r\n        if (message.contains(\"1\") || message.contains(\"push up\")) {\r\n            return \"To do a push up, start in a plank position, lower your body until your chest nearly touches the floor, and then push back up.\";\r\n        } else if (message.contains(\"2\") || message.contains(\"squat\")) {\r\n            return \"A squat is a strength exercise in which you lower your hips from a standing position and then stand back up.\";\r\n        } else if (message.contains(\"3\") || message.contains(\"plank\")) {\r\n            return \"To do a plank, hold your body in a straight line in a push-up position, supporting your weight on your forearms and toes.\";\r\n        } else if (message.contains(\"4\") || message.contains(\"benefits of exercise\")) {\r\n            return \"Exercise has many benefits including improving cardiovascular health, strengthening muscles, and enhancing mental health.\";\r\n        } else {\r\n            return \"Sorry, I don't have an answer for that. Please ask another question.\";\r\n        }\r\n    }\r\n\r\n    boolean isLastVisible() {\r\n        LinearLayoutManager layoutManager = ((LinearLayoutManager) recyclerView.getLayoutManager());\r\n        int pos = layoutManager.findLastCompletelyVisibleItemPosition();\r\n        int numItems = recyclerView.getAdapter().getItemCount();\r\n        return (pos >= numItems);\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/sg/edu/np/mad/fitnessultimate/activity/ChatbotActivity.java b/app/src/main/java/sg/edu/np/mad/fitnessultimate/activity/ChatbotActivity.java
+--- a/app/src/main/java/sg/edu/np/mad/fitnessultimate/activity/ChatbotActivity.java	(revision 343a1e3dc33cd626ba8823fd422085b568494a33)
++++ b/app/src/main/java/sg/edu/np/mad/fitnessultimate/activity/ChatbotActivity.java	(date 1717139647570)
+@@ -9,6 +9,8 @@
+ import androidx.core.view.WindowInsetsCompat;
+ import androidx.recyclerview.widget.LinearLayoutManager;
+ import androidx.recyclerview.widget.RecyclerView;
++
++import sg.edu.np.mad.fitnessultimate.MainActivity;
+ import sg.edu.np.mad.fitnessultimate.R;
+ import sg.edu.np.mad.fitnessultimate.adapter.MessageAdapter;
+ import sg.edu.np.mad.fitnessultimate.model.ResponseMessage;
+Index: app/src/main/res/layout/activity_sign_up_page.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<androidx.constraintlayout.widget.ConstraintLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:id=\"@+id/main\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\"\r\n    tools:context=\".activity.SignUpPageActivity\">\r\n\r\n    <ImageView\r\n        android:id=\"@+id/arrow_left2\"\r\n        android:layout_width=\"28dp\"\r\n        android:layout_height=\"28dp\"\r\n        android:layout_marginStart=\"48dp\"\r\n        android:layout_marginTop=\"60dp\"\r\n        android:clipToOutline=\"true\"\r\n        android:clickable=\"true\"\r\n        android:src=\"@drawable/arrow\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"parent\" />\r\n\r\n    <TextView\r\n        android:id=\"@+id/signUpheader1\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_marginTop=\"36dp\"\r\n        android:text=\"Let’s Register\"\r\n        android:textSize=\"30sp\"\r\n        android:textStyle=\"bold\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintHorizontal_bias=\"0.265\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toBottomOf=\"@id/arrow_left2\" />\r\n\r\n    <TextView\r\n        android:id=\"@+id/signUpheader2\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:text=\"Account\"\r\n        android:textSize=\"30sp\"\r\n        android:textStyle=\"bold\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintHorizontal_bias=\"0.2\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toBottomOf=\"@id/signUpheader1\" />\r\n\r\n    <TextView\r\n        android:id=\"@+id/signUpBody1\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_marginStart=\"60dp\"\r\n        android:layout_marginTop=\"20dp\"\r\n        android:text=\"Hello user, you have a\"\r\n        android:textSize=\"20sp\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toBottomOf=\"@id/signUpheader2\" />\r\n\r\n    <TextView\r\n        android:id=\"@+id/signUpBody2\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_marginStart=\"60dp\"\r\n        android:text=\"greatful journey\"\r\n        android:textSize=\"20sp\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toBottomOf=\"@id/signUpBody1\" />\r\n\r\n    <com.google.android.material.textfield.TextInputLayout\r\n        android:id=\"@+id/textInputUsername\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        app:cardCornerRadius=\"10dp\"\r\n        android:layout_marginTop=\"35dp\"\r\n        android:layout_marginStart=\"58dp\"\r\n        android:layout_marginEnd=\"58dp\"\r\n        app:boxStrokeColor=\"#900090\"\r\n        app:boxBackgroundColor=\"#DDDDDD\"\r\n        app:endIconMode=\"clear_text\"\r\n        app:layout_constraintTop_toBottomOf=\"@id/signUpBody2\">\r\n\r\n        <com.google.android.material.textfield.TextInputEditText\r\n            android:id=\"@+id/inputUsername\"\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:hint=\"Username\"\r\n            android:singleLine=\"true\" />\r\n    </com.google.android.material.textfield.TextInputLayout>\r\n\r\n    <com.google.android.material.textfield.TextInputLayout\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        app:cardCornerRadius=\"10dp\"\r\n        android:layout_marginTop=\"105dp\"\r\n        android:layout_marginStart=\"58dp\"\r\n        android:layout_marginEnd=\"58dp\"\r\n        app:boxStrokeColor=\"#900090\"\r\n        app:boxBackgroundColor=\"#DDDDDD\"\r\n        app:endIconMode=\"clear_text\"\r\n        app:layout_constraintTop_toBottomOf=\"@id/signUpBody2\">\r\n\r\n        <com.google.android.material.textfield.TextInputEditText\r\n            android:id=\"@+id/inputEmail\"\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:hint=\"Email\"\r\n            android:singleLine=\"true\" />\r\n    </com.google.android.material.textfield.TextInputLayout>\r\n\r\n    <com.google.android.material.textfield.TextInputLayout\r\n        android:id=\"@+id/textInputPassword\"\r\n        style=\"@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_marginTop=\"176dp\"\r\n        android:layout_marginStart=\"58dp\"\r\n        android:layout_marginEnd=\"58dp\"\r\n        app:boxStrokeColor=\"#900090\"\r\n        app:boxBackgroundColor=\"#DDDDDD\"\r\n        app:endIconMode=\"password_toggle\"\r\n        app:layout_constraintTop_toBottomOf=\"@id/signUpBody2\">\r\n\r\n        <com.google.android.material.textfield.TextInputEditText\r\n            android:id=\"@+id/inputPassword\"\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:hint=\"Password\"\r\n            android:inputType=\"textPassword\"\r\n            android:singleLine=\"true\" />\r\n    </com.google.android.material.textfield.TextInputLayout>\r\n\r\n    <com.google.android.material.textfield.TextInputLayout\r\n        android:id=\"@+id/textInputConfirmPassword\"\r\n        style=\"@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_marginTop=\"275dp\"\r\n        android:layout_marginStart=\"58dp\"\r\n        android:layout_marginEnd=\"58dp\"\r\n        app:boxStrokeColor=\"#900090\"\r\n        app:boxBackgroundColor=\"#DDDDDD\"\r\n        app:endIconMode=\"password_toggle\"\r\n        app:layout_constraintTop_toTopOf=\"@id/signUpBody2\">\r\n\r\n        <com.google.android.material.textfield.TextInputEditText\r\n            android:id=\"@+id/inputConfirmPassword\"\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:hint=\"Confirm Password\"\r\n            android:inputType=\"textPassword\"\r\n            android:singleLine=\"true\" />\r\n    </com.google.android.material.textfield.TextInputLayout>\r\n\r\n    <Button\r\n        android:id=\"@+id/button_signUp2\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_marginTop=\"370dp\"\r\n        android:layout_marginStart=\"58dp\"\r\n        android:layout_marginEnd=\"58dp\"\r\n        android:text=\"Sign up\"\r\n        android:backgroundTint=\"#6495ED\"\r\n        app:layout_constraintTop_toBottomOf=\"@id/signUpBody2\" />\r\n\r\n    <TextView\r\n        android:id=\"@+id/accountQn2\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_marginEnd=\"50dp\"\r\n        android:layout_marginTop=\"35dp\"\r\n        android:text=\"Already have an account? \"\r\n        android:textSize=\"13sp\"\r\n        android:textStyle=\"bold\"\r\n        app:layout_constraintTop_toBottomOf=\"@id/button_signUp2\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\" />\r\n\r\n    <TextView\r\n        android:id=\"@+id/login\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_marginStart=\"155dp\"\r\n        android:layout_marginTop=\"35dp\"\r\n        android:clickable=\"true\"\r\n        android:text=\"Login\"\r\n        android:textColor=\"#3C74E1\"\r\n        android:textSize=\"13sp\"\r\n        android:textStyle=\"bold\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintHorizontal_bias=\"0.462\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toBottomOf=\"@id/button_signUp2\" />\r\n\r\n    <ProgressBar\r\n        android:id=\"@+id/progressBar\"\r\n        android:layout_width=\"51dp\"\r\n        android:layout_height=\"41dp\"\r\n        android:layout_marginTop=\"90dp\"\r\n        android:visibility=\"invisible\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toBottomOf=\"@id/button_signUp2\" />\r\n\r\n</androidx.constraintlayout.widget.ConstraintLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/activity_sign_up_page.xml b/app/src/main/res/layout/activity_sign_up_page.xml
+--- a/app/src/main/res/layout/activity_sign_up_page.xml	(revision 343a1e3dc33cd626ba8823fd422085b568494a33)
++++ b/app/src/main/res/layout/activity_sign_up_page.xml	(date 1717139650503)
+@@ -5,7 +5,7 @@
+     android:id="@+id/main"
+     android:layout_width="match_parent"
+     android:layout_height="match_parent"
+-    tools:context=".activity.SignUpPageActivity">
++    tools:context=".loginSignup.SignUpPageActivity">
+ 
+     <ImageView
+         android:id="@+id/arrow_left2"
+Index: app/src/main/res/layout/activity_edit_profile_page.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<androidx.constraintlayout.widget.ConstraintLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:id=\"@+id/main\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\"\r\n    tools:context=\".activity.EditProfilePageActivity\">\r\n\r\n    <ImageView\r\n        android:id=\"@+id/arrow_left1\"\r\n        android:layout_width=\"28dp\"\r\n        android:layout_height=\"28dp\"\r\n        android:layout_marginStart=\"48dp\"\r\n        android:layout_marginTop=\"60dp\"\r\n        android:clipToOutline=\"true\"\r\n        android:clickable=\"true\"\r\n        android:src=\"@drawable/arrow\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"parent\" />\r\n\r\n    <TextView\r\n        android:id=\"@+id/editProfile\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:text=\"Edit Profile\"\r\n        android:textStyle=\"bold\"\r\n        android:textSize=\"22dp\"\r\n        android:layout_marginTop=\"110dp\"\r\n        app:layout_constraintTop_toTopOf=\"parent\"\r\n        app:layout_constraintRight_toRightOf=\"parent\"\r\n        app:layout_constraintLeft_toLeftOf=\"parent\" />\r\n\r\n    <ImageView\r\n        android:id=\"@+id/editProfilePic\"\r\n        android:layout_width=\"130dp\"\r\n        android:layout_height=\"130dp\"\r\n        app:srcCompat=\"@android:drawable/sym_def_app_icon\"\r\n        android:layout_marginTop=\"20dp\"\r\n        app:layout_constraintTop_toBottomOf=\"@id/editProfile\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\" />\r\n\r\n    <com.google.android.material.textfield.TextInputLayout\r\n        android:id=\"@+id/editInputUsername\"\r\n        style=\"@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        app:cardCornerRadius=\"10dp\"\r\n        android:layout_marginTop=\"35dp\"\r\n        android:layout_marginStart=\"58dp\"\r\n        android:layout_marginEnd=\"58dp\"\r\n        app:boxStrokeColor=\"#900090\"\r\n        app:boxBackgroundColor=\"#DDDDDD\"\r\n        app:endIconMode=\"clear_text\"\r\n        app:layout_constraintTop_toBottomOf=\"@id/editProfilePic\">\r\n\r\n        <com.google.android.material.textfield.TextInputEditText\r\n            android:id=\"@+id/inputUsername\"\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:hint=\"Username\"\r\n            android:singleLine=\"true\" />\r\n    </com.google.android.material.textfield.TextInputLayout>\r\n\r\n    <com.google.android.material.textfield.TextInputLayout\r\n        android:id=\"@+id/editInputEmail\"\r\n        style=\"@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_marginTop=\"15dp\"\r\n        android:layout_marginStart=\"58dp\"\r\n        android:layout_marginEnd=\"58dp\"\r\n        app:boxStrokeColor=\"#900090\"\r\n        app:boxBackgroundColor=\"#DDDDDD\"\r\n        app:layout_constraintTop_toBottomOf=\"@id/editInputUsername\">\r\n\r\n        <com.google.android.material.textfield.TextInputEditText\r\n            android:id=\"@+id/inputEmail\"\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:hint=\"Email\"\r\n            android:singleLine=\"true\" />\r\n    </com.google.android.material.textfield.TextInputLayout>\r\n\r\n    <Button\r\n        android:id=\"@+id/saveBtn\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_marginTop=\"540dp\"\r\n        android:text=\"SAVE\"\r\n        android:backgroundTint=\"#141ab8\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toBottomOf=\"@id/editProfile\" />\r\n\r\n\r\n</androidx.constraintlayout.widget.ConstraintLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/activity_edit_profile_page.xml b/app/src/main/res/layout/activity_edit_profile_page.xml
+--- a/app/src/main/res/layout/activity_edit_profile_page.xml	(revision 343a1e3dc33cd626ba8823fd422085b568494a33)
++++ b/app/src/main/res/layout/activity_edit_profile_page.xml	(date 1717139650086)
+@@ -5,7 +5,7 @@
+     android:id="@+id/main"
+     android:layout_width="match_parent"
+     android:layout_height="match_parent"
+-    tools:context=".activity.EditProfilePageActivity">
++    tools:context=".loginSignup.EditProfilePageActivity">
+ 
+     <ImageView
+         android:id="@+id/arrow_left1"
+Index: app/src/main/AndroidManifest.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<manifest xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\">\r\n\r\n    <uses-permission android:name=\"android.permission.INTERNET\" />\r\n\r\n    <application\r\n        android:allowBackup=\"true\"\r\n        android:dataExtractionRules=\"@xml/data_extraction_rules\"\r\n        android:fullBackupContent=\"@xml/backup_rules\"\r\n        android:icon=\"@mipmap/ic_launcher\"\r\n        android:label=\"@string/app_name\"\r\n        android:roundIcon=\"@mipmap/ic_launcher_round\"\r\n        android:supportsRtl=\"true\"\r\n        android:theme=\"@style/Theme.FitnessUltimate\"\r\n        tools:targetApi=\"31\">\r\n        <activity\r\n            android:name=\".activity.EditProfilePageActivity\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".activity.SignUpPageActivity\"\r\n            android:exported=\"true\" />\r\n        <activity\r\n            android:name=\".activity.LoginPageActivity\"\r\n            android:exported=\"true\" />\r\n        <activity\r\n            android:name=\".activity.ProfilePageActivity\"\r\n            android:exported=\"true\" />\r\n        <activity\r\n            android:name=\".training.exercises.ExerciseActivity\"\r\n            android:exported=\"false\" />\r\n        <activity android:name=\".training.workouts.WorkoutActivity\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".training.exercises.ExerciseCatalogueActivity\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".training.workouts.WorkoutsCatalogueActivity\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".training.TrainingMenuActivity\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".BaseActivity\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".LogDetails\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".SearchResultsActivity\"\r\n            android:exported=\"true\" />\r\n        <activity\r\n            android:name=\".MainActivity\"\r\n            android:exported=\"true\" />\r\n        <activity\r\n            android:name=\".FoodTracker\"\r\n            android:exported=\"true\">\r\n        <activity\r\n            android:name=\".CalendarActivity\"\r\n            android:exported=\"true\">\r\n\r\n        </activity>\r\n\r\n        <activity\r\n            android:name=\".activity.ChatbotActivity\"\r\n            android:exported=\"true\" />\r\n        <activity\r\n            android:name=\".activity.SplashActivity\"\r\n            android:exported=\"true\">\r\n            <intent-filter>\r\n                <action android:name=\"android.intent.action.MAIN\" />\r\n\r\n                <category android:name=\"android.intent.category.LAUNCHER\" />\r\n            </intent-filter>\r\n        </activity>\r\n\r\n    </application>\r\n\r\n</manifest>\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/AndroidManifest.xml b/app/src/main/AndroidManifest.xml
+--- a/app/src/main/AndroidManifest.xml	(revision 343a1e3dc33cd626ba8823fd422085b568494a33)
++++ b/app/src/main/AndroidManifest.xml	(date 1717140429854)
+@@ -15,21 +15,25 @@
+         android:theme="@style/Theme.FitnessUltimate"
+         tools:targetApi="31">
+         <activity
+-            android:name=".activity.EditProfilePageActivity"
++            android:name=".loginSignup.LoginOrSignUpOption"
+             android:exported="false" />
+         <activity
+-            android:name=".activity.SignUpPageActivity"
++            android:name=".loginSignup.EditProfilePageActivity"
++            android:exported="true" />
++        <activity
++            android:name=".loginSignup.SignUpPageActivity"
+             android:exported="true" />
+         <activity
+-            android:name=".activity.LoginPageActivity"
++            android:name=".loginSignup.LoginPageActivity"
+             android:exported="true" />
+         <activity
+-            android:name=".activity.ProfilePageActivity"
++            android:name=".loginSignup.ProfilePageActivity"
+             android:exported="true" />
+         <activity
+             android:name=".training.exercises.ExerciseActivity"
+             android:exported="false" />
+-        <activity android:name=".training.workouts.WorkoutActivity"
++        <activity
++            android:name=".training.workouts.WorkoutActivity"
+             android:exported="false" />
+         <activity
+             android:name=".training.exercises.ExerciseCatalogueActivity"
+@@ -44,28 +48,25 @@
+             android:name=".BaseActivity"
+             android:exported="false" />
+         <activity
+-            android:name=".LogDetails"
++            android:name=".food.LogDetails"
+             android:exported="false" />
+         <activity
+-            android:name=".SearchResultsActivity"
++            android:name=".food.SearchResultsActivity"
+             android:exported="true" />
+         <activity
+             android:name=".MainActivity"
+             android:exported="true" />
+-        <activity
+-            android:name=".FoodTracker"
+-            android:exported="true">
+         <activity
+             android:name=".CalendarActivity"
+-            android:exported="true">
+-
+-        </activity>
+-
++            android:exported="true"/>
+         <activity
+             android:name=".activity.ChatbotActivity"
+             android:exported="true" />
+         <activity
+-            android:name=".activity.SplashActivity"
++            android:name=".loginSignup.SplashActivity"
++            android:exported="true"/>
++        <activity
++            android:name=".food.FoodTracker"
+             android:exported="true">
+             <intent-filter>
+                 <action android:name="android.intent.action.MAIN" />
+@@ -73,7 +74,6 @@
+                 <category android:name="android.intent.category.LAUNCHER" />
+             </intent-filter>
+         </activity>
+-
+     </application>
+ 
+-</manifest>
++</manifest>
+\ No newline at end of file
+Index: app/src/main/java/sg/edu/np/mad/fitnessultimate/MainActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package sg.edu.np.mad.fitnessultimate;\r\n\r\nimport android.content.Intent;\r\nimport android.os.Bundle;\r\nimport android.view.View;\r\nimport android.widget.Button;\r\n\r\nimport androidx.activity.EdgeToEdge;\r\nimport androidx.appcompat.app.AppCompatActivity;\r\nimport androidx.core.graphics.Insets;\r\nimport androidx.core.view.ViewCompat;\r\nimport androidx.core.view.WindowInsetsCompat;\r\nimport sg.edu.np.mad.fitnessultimate.training.TrainingMenuActivity;\r\npublic class MainActivity extends BaseActivity {\r\n\r\nimport com.google.firebase.auth.FirebaseAuth;\r\n\r\nimport sg.edu.np.mad.fitnessultimate.R;\r\n\r\n\r\npublic class MainActivity extends AppCompatActivity {\r\n\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        EdgeToEdge.enable(this);\r\n        setContentView(R.layout.activity_main);\r\n        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {\r\n            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());\r\n            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);\r\n            return insets;\r\n        });\r\n\r\n        Button btnLogin = findViewById(R.id.button_login);\r\n        Button btnSignUp = findViewById(R.id.button_signUp);\r\n\r\n        btnLogin.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n                // Start the MainActivity\r\n                Intent intent = new Intent(MainActivity.this, LoginPageActivity.class);\r\n                startActivity(intent);\r\n            }\r\n        });\r\n\r\n        btnSignUp.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n                // Start the SignUpPageActivity\r\n                Intent intent = new Intent(MainActivity.this, SignUpPageActivity.class);\r\n                startActivity(intent);\r\n            }\r\n        });\r\n\r\n        Intent intent = new Intent(MainActivity.this, TrainingMenuActivity.class);\r\n        startActivity(intent);\r\n\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/sg/edu/np/mad/fitnessultimate/MainActivity.java b/app/src/main/java/sg/edu/np/mad/fitnessultimate/MainActivity.java
+--- a/app/src/main/java/sg/edu/np/mad/fitnessultimate/MainActivity.java	(revision 343a1e3dc33cd626ba8823fd422085b568494a33)
++++ b/app/src/main/java/sg/edu/np/mad/fitnessultimate/MainActivity.java	(date 1717139647384)
+@@ -4,22 +4,25 @@
+ import android.os.Bundle;
+ import android.view.View;
+ import android.widget.Button;
++import android.widget.ImageView;
+ 
+ import androidx.activity.EdgeToEdge;
+ import androidx.appcompat.app.AppCompatActivity;
+ import androidx.core.graphics.Insets;
+ import androidx.core.view.ViewCompat;
+ import androidx.core.view.WindowInsetsCompat;
++
++import com.google.firebase.auth.FirebaseAuth;
++import com.google.firebase.auth.FirebaseUser;
++
++import sg.edu.np.mad.fitnessultimate.loginSignup.LoginOrSignUpOption;
++import sg.edu.np.mad.fitnessultimate.loginSignup.LoginPageActivity;
++import sg.edu.np.mad.fitnessultimate.loginSignup.ProfilePageActivity;
++import sg.edu.np.mad.fitnessultimate.loginSignup.SignUpPageActivity;
+ import sg.edu.np.mad.fitnessultimate.training.TrainingMenuActivity;
++
+ public class MainActivity extends BaseActivity {
+ 
+-import com.google.firebase.auth.FirebaseAuth;
+-
+-import sg.edu.np.mad.fitnessultimate.R;
+-
+-
+-public class MainActivity extends AppCompatActivity {
+-
+     @Override
+     protected void onCreate(Bundle savedInstanceState) {
+         super.onCreate(savedInstanceState);
+@@ -31,29 +34,27 @@
+             return insets;
+         });
+ 
+-        Button btnLogin = findViewById(R.id.button_login);
+-        Button btnSignUp = findViewById(R.id.button_signUp);
++        FirebaseAuth fAuth = FirebaseAuth.getInstance();
++        FirebaseUser currentUser = fAuth.getCurrentUser();
+ 
+-        btnLogin.setOnClickListener(new View.OnClickListener() {
+-            @Override
+-            public void onClick(View v) {
+-                // Start the MainActivity
+-                Intent intent = new Intent(MainActivity.this, LoginPageActivity.class);
+-                startActivity(intent);
+-            }
+-        });
++        if (currentUser == null) {
++            // User is not logged in, navigate to LoginOrSignUpOption
++            Intent intent = new Intent(MainActivity.this, LoginOrSignUpOption.class);
++            startActivity(intent);
++            return; // Early return to prevent further execution
++        }
+ 
+-        btnSignUp.setOnClickListener(new View.OnClickListener() {
++        ImageView profileIcon = findViewById(R.id.profileButton);
++        profileIcon.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View v) {
+-                // Start the SignUpPageActivity
+-                Intent intent = new Intent(MainActivity.this, SignUpPageActivity.class);
++                Intent intent = new Intent(MainActivity.this, ProfilePageActivity.class);
+                 startActivity(intent);
+             }
+         });
+ 
+-        Intent intent = new Intent(MainActivity.this, TrainingMenuActivity.class);
+-        startActivity(intent);
++        //Intent intent = new Intent(MainActivity.this, TrainingMenuActivity.class);
++        //startActivity(intent);
+ 
+     }
+ }
+\ No newline at end of file
+Index: gradle/libs.versions.toml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>[versions]\r\nagp = \"8.3.2\"\r\ngson = \"2.10.1\"\r\njunit = \"4.13.2\"\r\njunitVersion = \"1.1.5\"\r\nespressoCore = \"3.5.1\"\r\nappcompat = \"1.6.1\"\r\nmaterial = \"1.12.0\"\r\nactivity = \"1.9.0\"\r\nconstraintlayout = \"2.1.4\"\r\ngoogleServices = \"4.4.1\"\r\nfirebaseAuth = \"23.0.0\"\r\nfirebaseFirestore = \"25.0.0\"\r\nroundedimageview = \"2.3.0\"\r\nsdpAndroid = \"1.1.1\"\r\n\r\n\r\n[libraries]\r\ngson = { module = \"com.google.code.gson:gson\", name = \"gson\", version.ref = \"gson\" }\r\njunit = { group = \"junit\", name = \"junit\", version.ref = \"junit\" }\r\next-junit = { group = \"androidx.test.ext\", name = \"junit\", version.ref = \"junitVersion\" }\r\nespresso-core = { group = \"androidx.test.espresso\", name = \"espresso-core\", version.ref = \"espressoCore\" }\r\nappcompat = { group = \"androidx.appcompat\", name = \"appcompat\", version.ref = \"appcompat\" }\r\nmaterial = { group = \"com.google.android.material\", name = \"material\", version.ref = \"material\" }\r\nactivity = { group = \"androidx.activity\", name = \"activity\", version.ref = \"activity\" }\r\nconstraintlayout = { group = \"androidx.constraintlayout\", name = \"constraintlayout\", version.ref = \"constraintlayout\" }\r\ngoogle-services = { group = \"com.google.gms\", name = \"google-services\", version.ref = \"googleServices\" }\r\nfirebase-auth = { group = \"com.google.firebase\", name = \"firebase-auth\", version.ref = \"firebaseAuth\" }\r\nfirebase-firestore = { group = \"com.google.firebase\", name = \"firebase-firestore\", version.ref = \"firebaseFirestore\" }\r\nroundedimageview = { group = \"com.makeramen\", name = \"roundedimageview\", version.ref = \"roundedimageview\" }\r\nsdp-android = { group = \"com.intuit.sdp\", name = \"sdp-android\", version.ref = \"sdpAndroid\" }\r\nssp-android = { group = \"com.intuit.ssp\", name = \"ssp-android\", version.ref = \"sspAndroid\" }\r\n\r\n\r\n[plugins]\r\nandroidApplication = { id = \"com.android.application\", version.ref = \"agp\" }\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/gradle/libs.versions.toml b/gradle/libs.versions.toml
+--- a/gradle/libs.versions.toml	(revision 343a1e3dc33cd626ba8823fd422085b568494a33)
++++ b/gradle/libs.versions.toml	(date 1717139651987)
+@@ -13,6 +13,7 @@
+ firebaseFirestore = "25.0.0"
+ roundedimageview = "2.3.0"
+ sdpAndroid = "1.1.1"
++sspAndroid = "1.1.1"
+ 
+ 
+ [libraries]
+@@ -30,6 +31,7 @@
+ roundedimageview = { group = "com.makeramen", name = "roundedimageview", version.ref = "roundedimageview" }
+ sdp-android = { group = "com.intuit.sdp", name = "sdp-android", version.ref = "sdpAndroid" }
+ ssp-android = { group = "com.intuit.ssp", name = "ssp-android", version.ref = "sspAndroid" }
++intuit-ssp-android = { group = "com.intuit.ssp", name = "ssp-android", version.ref = "sspAndroid" }
+ 
+ 
+ [plugins]
+Index: app/src/main/res/layout/activity_main.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<androidx.constraintlayout.widget.ConstraintLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:id=\"@+id/main\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\"\r\n    tools:context=\".MainActivity\"\r\n    tools:ignore=\"HardcodedText, ContentDescription\" >\r\n\r\n    <View\r\n        android:id=\"@+id/banner\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"0dp\"\r\n        android:background=\"@drawable/banner_bg\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintHeight_percent=\"0.35\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"parent\" />\r\n\r\n    <ImageView\r\n        android:id=\"@+id/fitness\"\r\n        android:layout_width=\"0dp\"\r\n        android:layout_height=\"45dp\"\r\n        android:background=\"@android:color/transparent\"\r\n        android:layout_marginTop=\"30dp\"\r\n        android:layout_marginStart=\"20dp\"\r\n        app:layout_constraintDimensionRatio=\"3:1\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"parent\"\r\n        app:srcCompat=\"@drawable/fitness_pic\" />\r\n\r\n    <ImageButton\r\n        android:id=\"@+id/notiButton\"\r\n        android:layout_width=\"35dp\"\r\n        android:layout_height=\"0dp\"\r\n        android:background=\"@android:color/transparent\"\r\n        android:padding=\"3dp\"\r\n        android:layout_marginTop=\"40dp\"\r\n        android:layout_marginEnd=\"8dp\"\r\n        android:scaleType=\"centerCrop\"\r\n        app:layout_constraintDimensionRatio=\"1:1\"\r\n        app:layout_constraintTop_toTopOf=\"parent\"\r\n        app:layout_constraintEnd_toStartOf=\"@id/profileButton\"\r\n        app:srcCompat=\"@drawable/noti_pic\" />\r\n\r\n    <ImageButton\r\n        android:id=\"@+id/profileButton\"\r\n        android:layout_width=\"40dp\"\r\n        android:layout_height=\"0dp\"\r\n        android:background=\"@drawable/circle\"\r\n        android:padding=\"0dp\"\r\n        android:layout_marginTop=\"38dp\"\r\n        android:layout_marginEnd=\"15dp\"\r\n        android:scaleType=\"centerCrop\"\r\n        app:layout_constraintDimensionRatio=\"1:1\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"parent\"\r\n        app:srcCompat=\"@drawable/profile_pic\" />\r\n\r\n    <TextView\r\n        android:id=\"@+id/textView\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:text=\"Good Morning ☼\"\r\n        android:textSize=\"30sp\"\r\n        android:textStyle=\"bold\"\r\n        android:textColor=\"@color/black\"\r\n        android:layout_marginTop=\"30dp\"\r\n        android:layout_marginStart=\"60dp\"\r\n        app:layout_constraintStart_toStartOf=\"@+id/banner\"\r\n        app:layout_constraintTop_toBottomOf=\"@+id/fitness\" />\r\n\r\n    <TextView\r\n        android:id=\"@+id/textView2\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:text=\"Welcome back, User!!!!!\\nWhat would you like to do today?\"\r\n        android:textSize=\"20sp\"\r\n        android:textColor=\"@color/black\"\r\n        android:fontFamily=\"sans-serif-medium\"\r\n        android:layout_marginTop=\"15dp\"\r\n        android:layout_marginStart=\"65dp\"\r\n        app:layout_constraintStart_toStartOf=\"@+id/banner\"\r\n        app:layout_constraintTop_toBottomOf=\"@+id/textView\" />\r\n\r\n    <!--    Add buttons for your features here :) -->\r\n\r\n    <!--    -->\r\n\r\n    <ImageButton\r\n        android:id=\"@+id/chat_button\"\r\n        android:layout_width=\"50dp\"\r\n        android:layout_height=\"0dp\"\r\n        android:padding=\"0dp\"\r\n        android:layout_margin=\"20dp\"\r\n        android:scaleType=\"centerCrop\"\r\n        app:layout_constraintDimensionRatio=\"1:1\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintBottom_toTopOf=\"@+id/nav\"\r\n        app:srcCompat=\"@drawable/button_chat\" />\r\n\r\n    <com.google.android.material.bottomnavigation.BottomNavigationView\r\n        android:id=\"@+id/nav\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"65dp\"\r\n        app:layout_constraintBottom_toBottomOf=\"parent\" >\r\n\r\n        <androidx.constraintlayout.widget.ConstraintLayout\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"match_parent\"\r\n            android:paddingTop=\"5dp\"\r\n            android:paddingHorizontal=\"30dp\">\r\n\r\n            <ImageButton\r\n                android:id=\"@+id/nav_home\"\r\n                android:layout_width=\"40dp\"\r\n                android:layout_height=\"0dp\"\r\n                android:padding=\"0dp\"\r\n                android:scaleType=\"centerCrop\"\r\n                app:layout_constraintDimensionRatio=\"1:1\"\r\n                app:layout_constraintStart_toStartOf=\"parent\"\r\n                app:layout_constraintEnd_toStartOf=\"@id/nav_food\"\r\n                app:layout_constraintTop_toTopOf=\"parent\"\r\n                app:layout_constraintHorizontal_chainStyle=\"spread_inside\"\r\n                app:srcCompat=\"@drawable/button_home\" />\r\n\r\n            <ImageButton\r\n                android:id=\"@+id/nav_food\"\r\n                android:layout_width=\"40dp\"\r\n                android:layout_height=\"0dp\"\r\n                android:padding=\"0dp\"\r\n                android:scaleType=\"centerCrop\"\r\n                app:layout_constraintDimensionRatio=\"1:1\"\r\n                app:layout_constraintStart_toEndOf=\"@id/nav_home\"\r\n                app:layout_constraintEnd_toStartOf=\"@id/nav_fitness\"\r\n                app:layout_constraintTop_toTopOf=\"parent\"\r\n                app:layout_constraintHorizontal_chainStyle=\"spread_inside\"\r\n                app:srcCompat=\"@drawable/button_food\" />\r\n\r\n            <ImageButton\r\n                android:id=\"@+id/nav_fitness\"\r\n                android:layout_width=\"40dp\"\r\n                android:layout_height=\"0dp\"\r\n                android:padding=\"0dp\"\r\n                android:scaleType=\"centerCrop\"\r\n                app:layout_constraintDimensionRatio=\"1:1\"\r\n                app:layout_constraintEnd_toStartOf=\"@id/nav_calendar\"\r\n                app:layout_constraintHorizontal_chainStyle=\"spread_inside\"\r\n                app:layout_constraintStart_toEndOf=\"@id/nav_food\"\r\n                app:layout_constraintTop_toTopOf=\"parent\"\r\n                app:srcCompat=\"@drawable/button_dumbbell\" />\r\n\r\n            <ImageButton\r\n                android:id=\"@+id/nav_calendar\"\r\n                android:layout_width=\"40dp\"\r\n                android:layout_height=\"0dp\"\r\n                android:padding=\"0dp\"\r\n                android:scaleType=\"centerCrop\"\r\n                app:layout_constraintDimensionRatio=\"1:1\"\r\n                app:layout_constraintStart_toEndOf=\"@id/nav_fitness\"\r\n                app:layout_constraintEnd_toEndOf=\"parent\"\r\n                app:layout_constraintTop_toTopOf=\"parent\"\r\n                app:layout_constraintHorizontal_chainStyle=\"spread_inside\"\r\n                app:srcCompat=\"@drawable/button_calendar\" />\r\n\r\n        </androidx.constraintlayout.widget.ConstraintLayout>\r\n\r\n    </com.google.android.material.bottomnavigation.BottomNavigationView>\r\n\r\n    <Button\r\n        android:id=\"@+id/button_signUp\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_marginStart=\"10dp\"\r\n        android:layout_marginEnd=\"10dp\"\r\n        android:layout_marginBottom=\"10dp\"\r\n        android:backgroundTint=\"#6495ED\"\r\n        android:padding=\"10sp\"\r\n        android:text=\"SIGN UP\"\r\n        app:layout_constraintBottom_toBottomOf=\"parent\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintHorizontal_bias=\"0.0\"\r\n        app:layout_constraintStart_toStartOf=\"parent\" />\r\n\r\n    <Button\r\n        android:id=\"@+id/button_login\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_marginEnd=\"10dp\"\r\n        android:layout_marginStart=\"10dp\"\r\n        android:layout_marginBottom=\"5dp\"\r\n        android:text=\"LOGIN\"\r\n        android:backgroundTint=\"#87CEFA\"\r\n        android:padding=\"10sp\"\r\n        app:layout_constraintBottom_toTopOf=\"@id/button_signUp\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"/>\r\n\r\n    <androidx.cardview.widget.CardView\r\n        android:layout_width=\"250sp\"\r\n        android:layout_height=\"250sp\"\r\n        app:cardCornerRadius=\"20dp\"\r\n        app:cardElevation=\"10dp\"\r\n        app:layout_constraintTop_toTopOf=\"parent\"\r\n        app:layout_constraintBottom_toTopOf=\"@id/button_login\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\">\r\n\r\n        <ImageView\r\n            android:id=\"@+id/appLogo\"\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"match_parent\"\r\n            android:scaleType=\"centerCrop\"\r\n            android:src=\"@drawable/hi\" />\r\n\r\n    </androidx.cardview.widget.CardView>\r\n\r\n\r\n\r\n</androidx.constraintlayout.widget.ConstraintLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/activity_main.xml b/app/src/main/res/layout/activity_main.xml
+--- a/app/src/main/res/layout/activity_main.xml	(revision 343a1e3dc33cd626ba8823fd422085b568494a33)
++++ b/app/src/main/res/layout/activity_main.xml	(date 1717139650395)
+@@ -53,6 +53,7 @@
+         android:layout_marginTop="38dp"
+         android:layout_marginEnd="15dp"
+         android:scaleType="centerCrop"
++        android:clickable="true"
+         app:layout_constraintDimensionRatio="1:1"
+         app:layout_constraintEnd_toEndOf="parent"
+         app:layout_constraintTop_toTopOf="parent"
+@@ -183,39 +184,5 @@
+         app:layout_constraintHorizontal_bias="0.0"
+         app:layout_constraintStart_toStartOf="parent" />
+ 
+-    <Button
+-        android:id="@+id/button_login"
+-        android:layout_width="match_parent"
+-        android:layout_height="wrap_content"
+-        android:layout_marginEnd="10dp"
+-        android:layout_marginStart="10dp"
+-        android:layout_marginBottom="5dp"
+-        android:text="LOGIN"
+-        android:backgroundTint="#87CEFA"
+-        android:padding="10sp"
+-        app:layout_constraintBottom_toTopOf="@id/button_signUp"
+-        app:layout_constraintEnd_toEndOf="parent"
+-        app:layout_constraintStart_toStartOf="parent"/>
+-
+-    <androidx.cardview.widget.CardView
+-        android:layout_width="250sp"
+-        android:layout_height="250sp"
+-        app:cardCornerRadius="20dp"
+-        app:cardElevation="10dp"
+-        app:layout_constraintTop_toTopOf="parent"
+-        app:layout_constraintBottom_toTopOf="@id/button_login"
+-        app:layout_constraintStart_toStartOf="parent"
+-        app:layout_constraintEnd_toEndOf="parent">
+-
+-        <ImageView
+-            android:id="@+id/appLogo"
+-            android:layout_width="match_parent"
+-            android:layout_height="match_parent"
+-            android:scaleType="centerCrop"
+-            android:src="@drawable/hi" />
+-
+-    </androidx.cardview.widget.CardView>
+-
+-
+ 
+ </androidx.constraintlayout.widget.ConstraintLayout>
+\ No newline at end of file
+Index: app/src/main/java/sg/edu/np/mad/fitnessultimate/loginSignup/LoginOrSignUpOption.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/sg/edu/np/mad/fitnessultimate/loginSignup/LoginOrSignUpOption.java b/app/src/main/java/sg/edu/np/mad/fitnessultimate/loginSignup/LoginOrSignUpOption.java
+new file mode 100644
+--- /dev/null	(date 1717139647742)
++++ b/app/src/main/java/sg/edu/np/mad/fitnessultimate/loginSignup/LoginOrSignUpOption.java	(date 1717139647742)
+@@ -0,0 +1,50 @@
++package sg.edu.np.mad.fitnessultimate.loginSignup;
++
++import android.content.Intent;
++import android.os.Bundle;
++import android.view.View;
++import android.widget.Button;
++
++import androidx.activity.EdgeToEdge;
++import androidx.appcompat.app.AppCompatActivity;
++import androidx.core.graphics.Insets;
++import androidx.core.view.ViewCompat;
++import androidx.core.view.WindowInsetsCompat;
++
++import sg.edu.np.mad.fitnessultimate.R;
++import sg.edu.np.mad.fitnessultimate.R.id;
++
++public class LoginOrSignUpOption extends AppCompatActivity {
++    @Override
++    protected void onCreate(Bundle savedInstanceState) {
++        super.onCreate(savedInstanceState);
++        EdgeToEdge.enable(this);
++        setContentView(R.layout.activity_login_or_sign_up_option);
++        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
++            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
++            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
++            return insets;
++        });
++
++        Button btnLogin = findViewById(R.id.button_login);
++        Button btnSignUp = findViewById(R.id.button_signUp);
++
++        btnLogin.setOnClickListener(new View.OnClickListener() {
++            @Override
++            public void onClick(View v) {
++                // Start the MainActivity
++                Intent intent = new Intent(LoginOrSignUpOption.this, LoginPageActivity.class);
++                startActivity(intent);
++            }
++        });
++
++        btnSignUp.setOnClickListener(new View.OnClickListener() {
++            @Override
++            public void onClick(View v) {
++                // Start the SignUpPageActivity
++                Intent intent = new Intent(LoginOrSignUpOption.this, SignUpPageActivity.class);
++                startActivity(intent);
++            }
++        });
++    }
++}
+\ No newline at end of file
+Index: app/src/main/res/layout/activity_login_or_sign_up_option.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/activity_login_or_sign_up_option.xml b/app/src/main/res/layout/activity_login_or_sign_up_option.xml
+new file mode 100644
+--- /dev/null	(date 1717139650318)
++++ b/app/src/main/res/layout/activity_login_or_sign_up_option.xml	(date 1717139650318)
+@@ -0,0 +1,60 @@
++<?xml version="1.0" encoding="utf-8"?>
++<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
++    xmlns:app="http://schemas.android.com/apk/res-auto"
++    xmlns:tools="http://schemas.android.com/tools"
++    android:id="@+id/main"
++    android:layout_width="match_parent"
++    android:layout_height="match_parent"
++    tools:context=".loginSignup.LoginOrSignUpOption">
++
++    <Button
++        android:id="@+id/button_login"
++        android:layout_width="match_parent"
++        android:layout_height="wrap_content"
++        android:layout_marginEnd="10dp"
++        android:layout_marginStart="10dp"
++        android:layout_marginBottom="5dp"
++        android:text="LOGIN"
++        android:backgroundTint="#87CEFA"
++        android:padding="10sp"
++        app:layout_constraintBottom_toTopOf="@id/button_signUp"
++        app:layout_constraintEnd_toEndOf="parent"
++        app:layout_constraintStart_toStartOf="parent"/>
++
++    <Button
++        android:id="@+id/button_signUp"
++        android:layout_width="match_parent"
++        android:layout_height="wrap_content"
++        android:layout_marginStart="10dp"
++        android:layout_marginEnd="10dp"
++        android:layout_marginBottom="10dp"
++        android:backgroundTint="#6495ED"
++        android:padding="10sp"
++        android:text="SIGN UP"
++        app:layout_constraintBottom_toBottomOf="parent"
++        app:layout_constraintEnd_toEndOf="parent"
++        app:layout_constraintHorizontal_bias="0.0"
++        app:layout_constraintStart_toStartOf="parent" />
++
++
++
++    <androidx.cardview.widget.CardView
++        android:layout_width="250sp"
++        android:layout_height="250sp"
++        app:cardCornerRadius="20dp"
++        app:cardElevation="10dp"
++        app:layout_constraintTop_toTopOf="parent"
++        app:layout_constraintBottom_toTopOf="@id/button_login"
++        app:layout_constraintStart_toStartOf="parent"
++        app:layout_constraintEnd_toEndOf="parent">
++
++        <ImageView
++            android:id="@+id/appLogo"
++            android:layout_width="match_parent"
++            android:layout_height="match_parent"
++            android:scaleType="centerCrop"
++            android:src="@drawable/hi" />
++
++    </androidx.cardview.widget.CardView>
++
++</androidx.constraintlayout.widget.ConstraintLayout>
+Index: app/src/main/res/layout/activity_login_page.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<androidx.constraintlayout.widget.ConstraintLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:id=\"@+id/main\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\"\r\n    tools:context=\".activity.LoginPageActivity\">\r\n\r\n    <ImageView\r\n        android:id=\"@+id/arrow_left1\"\r\n        android:layout_width=\"28dp\"\r\n        android:layout_height=\"28dp\"\r\n        android:layout_marginStart=\"48dp\"\r\n        android:layout_marginTop=\"60dp\"\r\n        android:clipToOutline=\"true\"\r\n        android:clickable=\"true\"\r\n        android:src=\"@drawable/arrow\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"parent\" />\r\n\r\n\r\n    <TextView\r\n        android:id=\"@+id/loginHeader1\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_marginTop=\"36dp\"\r\n        android:text=\"Let's Sign you in.\"\r\n        android:textSize=\"30sp\"\r\n        android:textStyle=\"bold\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintHorizontal_bias=\"0.329\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toBottomOf=\"@id/arrow_left1\" />\r\n\r\n    <TextView\r\n        android:id=\"@+id/body1\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_marginStart=\"60dp\"\r\n        android:layout_marginTop=\"20dp\"\r\n        android:text=\"Welcome Back,\"\r\n        android:textSize=\"20sp\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toBottomOf=\"@id/loginHeader1\" />\r\n\r\n    <TextView\r\n        android:id=\"@+id/body2\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_marginStart=\"60dp\"\r\n        android:text=\"you have been missed\"\r\n        android:textSize=\"20sp\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toBottomOf=\"@id/body1\" />\r\n\r\n    <com.google.android.material.textfield.TextInputLayout\r\n        android:id=\"@+id/textInputEmailUsername\"\r\n        style=\"@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        app:cardCornerRadius=\"10dp\"\r\n        android:layout_marginTop=\"35dp\"\r\n        android:layout_marginStart=\"58dp\"\r\n        android:layout_marginEnd=\"58dp\"\r\n        app:boxStrokeColor=\"#900090\"\r\n        app:boxBackgroundColor=\"#DDDDDD\"\r\n        app:endIconMode=\"clear_text\"\r\n        app:layout_constraintTop_toBottomOf=\"@id/body2\">\r\n\r\n        <com.google.android.material.textfield.TextInputEditText\r\n            android:id=\"@+id/inputEmailUsername\"\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:hint=\"Email, Username\"\r\n            android:singleLine=\"true\" />\r\n    </com.google.android.material.textfield.TextInputLayout>\r\n\r\n    <com.google.android.material.textfield.TextInputLayout\r\n        android:id=\"@+id/textInputLoginPassword\"\r\n        style=\"@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_marginTop=\"105dp\"\r\n        android:layout_marginStart=\"58dp\"\r\n        android:layout_marginEnd=\"58dp\"\r\n        app:boxStrokeColor=\"#900090\"\r\n        app:boxBackgroundColor=\"#DDDDDD\"\r\n        app:endIconMode=\"password_toggle\"\r\n        app:layout_constraintTop_toBottomOf=\"@id/body2\">\r\n\r\n        <com.google.android.material.textfield.TextInputEditText\r\n            android:id=\"@+id/inputLoginPassword\"\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:hint=\"Password\"\r\n            android:inputType=\"textPassword\"\r\n            android:singleLine=\"true\" />\r\n    </com.google.android.material.textfield.TextInputLayout>\r\n\r\n    <TextView\r\n        android:id=\"@+id/forgotPassword\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:text=\"Forgot Password?\"\r\n        android:textSize=\"12dp\"\r\n        android:textStyle=\"bold\"\r\n        android:textColor=\"#3C74E1\"\r\n        android:clickable=\"true\"\r\n        android:layout_marginTop=\"10dp\"\r\n        android:layout_marginLeft=\"190dp\"\r\n        app:layout_constraintTop_toBottomOf=\"@id/textInputLoginPassword\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        />\r\n\r\n    <Button\r\n        android:id=\"@+id/button_signIn\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_marginTop=\"205dp\"\r\n        android:layout_marginStart=\"58dp\"\r\n        android:layout_marginEnd=\"58dp\"\r\n        android:text=\"Sign in\"\r\n        android:backgroundTint=\"#6495ED\"\r\n        app:layout_constraintTop_toBottomOf=\"@id/body2\" />\r\n\r\n    <View\r\n        android:id=\"@+id/divider1\"\r\n        android:layout_width=\"140dp\"\r\n        android:layout_height=\"1dp\"\r\n        android:layout_marginTop=\"288dp\"\r\n        android:layout_marginStart=\"40dp\"\r\n        android:background=\"#000000\"\r\n        app:layout_constraintTop_toBottomOf=\"@id/body2\"\r\n        app:layout_constraintStart_toStartOf=\"parent\" />\r\n\r\n    <View\r\n        android:id=\"@+id/divider2\"\r\n        android:layout_width=\"140dp\"\r\n        android:layout_height=\"1dp\"\r\n        android:layout_marginTop=\"288dp\"\r\n        android:layout_marginStart=\"235dp\"\r\n        android:background=\"#000000\"\r\n        app:layout_constraintTop_toBottomOf=\"@id/body2\"\r\n        app:layout_constraintStart_toStartOf=\"parent\" />\r\n\r\n    <TextView\r\n        android:id=\"@+id/or\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_marginTop=\"275dp\"\r\n        android:text=\"or\"\r\n        android:textSize=\"16sp\"\r\n        app:layout_constraintTop_toBottomOf=\"@id/body2\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\" />\r\n\r\n    <com.google.android.gms.common.SignInButton\r\n        android:id=\"@+id/googleLogo\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_marginTop=\"25dp\"\r\n        android:clickable=\"true\"\r\n        app:buttonSize=\"wide\"\r\n        app:layout_constraintTop_toBottomOf=\"@+id/or\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"/>\r\n\r\n    <TextView\r\n        android:id=\"@+id/accountQn1\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_marginTop=\"44dp\"\r\n        android:layout_marginEnd=\"80dp\"\r\n        android:text=\"Don't have an account?  \"\r\n        android:textSize=\"13sp\"\r\n        android:textStyle=\"bold\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintHorizontal_bias=\"0.482\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toBottomOf=\"@id/googleLogo\" />\r\n\r\n    <TextView\r\n        android:id=\"@+id/registerNow\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_marginStart=\"125dp\"\r\n        android:layout_marginTop=\"45dp\"\r\n        android:text=\"Register Now\"\r\n        android:textSize=\"13sp\"\r\n        android:textStyle=\"bold\"\r\n        android:textColor=\"#3C74E1\"\r\n        android:clickable=\"true\"\r\n        app:layout_constraintTop_toBottomOf=\"@id/googleLogo\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\" />\r\n\r\n    <ProgressBar\r\n        android:id=\"@+id/loginProgressBar\"\r\n        android:layout_width=\"51dp\"\r\n        android:layout_height=\"41dp\"\r\n        android:layout_marginTop=\"200dp\"\r\n        android:visibility=\"invisible\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toBottomOf=\"@id/button_signIn\" />\r\n\r\n\r\n</androidx.constraintlayout.widget.ConstraintLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/activity_login_page.xml b/app/src/main/res/layout/activity_login_page.xml
+--- a/app/src/main/res/layout/activity_login_page.xml	(revision 343a1e3dc33cd626ba8823fd422085b568494a33)
++++ b/app/src/main/res/layout/activity_login_page.xml	(date 1717139650362)
+@@ -5,7 +5,7 @@
+     android:id="@+id/main"
+     android:layout_width="match_parent"
+     android:layout_height="match_parent"
+-    tools:context=".activity.LoginPageActivity">
++    tools:context=".loginSignup.LoginPageActivity">
+ 
+     <ImageView
+         android:id="@+id/arrow_left1"
+Index: app/build.gradle.kts
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>plugins {\r\n    alias(libs.plugins.androidApplication)\r\n    id(\"com.google.gms.google-services\")\r\n}\r\n\r\nandroid {\r\n    namespace = \"sg.edu.np.mad.fitnessultimate\"\r\n    compileSdk = 34\r\n\r\n    defaultConfig {\r\n        applicationId = \"sg.edu.np.mad.fitnessultimate\"\r\n        minSdk = 33\r\n        targetSdk = 34\r\n        versionCode = 1\r\n        versionName = \"1.0\"\r\n\r\n        testInstrumentationRunner = \"androidx.test.runner.AndroidJUnitRunner\"\r\n    }\r\n\r\n    buildTypes {\r\n        release {\r\n            isMinifyEnabled = false\r\n            proguardFiles(getDefaultProguardFile(\"proguard-android-optimize.txt\"), \"proguard-rules.pro\")\r\n        }\r\n    }\r\n    compileOptions {\r\n        sourceCompatibility = JavaVersion.VERSION_1_8\r\n        targetCompatibility = JavaVersion.VERSION_1_8\r\n    }\r\n}\r\n\r\ndependencies {\r\n    implementation(libs.appcompat)\r\n    implementation(libs.material)\r\n    implementation(libs.activity)\r\n    implementation(libs.constraintlayout)\r\n    implementation(libs.firebase.auth)\r\n\r\n    implementation(libs.firebase.firestore)\r\n    implementation(libs.firebase.auth)\r\n    implementation(libs.gson)\r\n    implementation(libs.roundedimageview)\r\n    implementation(libs.sdp.android)\r\n    implementation(libs.ssp.android)\r\n    testImplementation(libs.junit)\r\n    androidTestImplementation(libs.ext.junit)\r\n    androidTestImplementation(libs.espresso.core)\r\n    //Import firebase\r\n}\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/build.gradle.kts b/app/build.gradle.kts
+--- a/app/build.gradle.kts	(revision 343a1e3dc33cd626ba8823fd422085b568494a33)
++++ b/app/build.gradle.kts	(date 1717139597570)
+@@ -42,9 +42,13 @@
+     implementation(libs.roundedimageview)
+     implementation(libs.sdp.android)
+     implementation(libs.ssp.android)
++    implementation(libs.intuit.ssp.android)
+     testImplementation(libs.junit)
+     androidTestImplementation(libs.ext.junit)
+     androidTestImplementation(libs.espresso.core)
+-    //Import firebase
++    // Import the Firebase BoM
++    implementation(platform("com.google.firebase:firebase-bom:33.0.0"))
++    implementation("com.google.android.gms:play-services-auth:20.2.0")
++    implementation("androidx.activity:activity-ktx:1.6.1")
+ }
+ 
+Index: app/src/main/res/layout/activity_profile_page.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<androidx.constraintlayout.widget.ConstraintLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:id=\"@+id/main\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\"\r\n    tools:context=\".activity.ProfilePageActivity\">\r\n\r\n    <ImageView\r\n        android:id=\"@+id/arrow_left1\"\r\n        android:layout_width=\"28dp\"\r\n        android:layout_height=\"28dp\"\r\n        android:layout_marginStart=\"48dp\"\r\n        android:layout_marginTop=\"60dp\"\r\n        android:clipToOutline=\"true\"\r\n        android:clickable=\"true\"\r\n        android:src=\"@drawable/arrow\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"parent\" />\r\n\r\n    <TextView\r\n        android:id=\"@+id/yourProfile\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:text=\"Your Profile\"\r\n        android:textStyle=\"bold\"\r\n        android:textSize=\"22dp\"\r\n        android:layout_marginTop=\"110dp\"\r\n        app:layout_constraintTop_toTopOf=\"parent\"\r\n        app:layout_constraintRight_toRightOf=\"parent\"\r\n        app:layout_constraintLeft_toLeftOf=\"parent\" />\r\n\r\n    <ImageView\r\n        android:id=\"@+id/profilePic\"\r\n        android:layout_width=\"130dp\"\r\n        android:layout_height=\"130dp\"\r\n        app:srcCompat=\"@android:drawable/sym_def_app_icon\"\r\n        android:layout_marginTop=\"20dp\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintTop_toBottomOf=\"@+id/yourProfile\" />\r\n\r\n    <TextView\r\n        android:id=\"@+id/yourUsername\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:text=\"Your Username\"\r\n        android:textSize=\"20dp\"\r\n        android:textStyle=\"bold\"\r\n        android:layout_marginTop=\"20dp\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintTop_toBottomOf=\"@+id/profilePic\" />\r\n\r\n    <TextView\r\n        android:id=\"@+id/yourEmailAddress\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:text=\"Your Email Address\"\r\n        android:textSize=\"14dp\"\r\n        android:layout_marginTop=\"10dp\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintTop_toBottomOf=\"@+id/yourUsername\" />\r\n\r\n    <Button\r\n        android:id=\"@+id/logOutBtn\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_marginTop=\"570dp\"\r\n        android:text=\"LOG OUT\"\r\n        android:onClick=\"logout\"\r\n        android:backgroundTint=\"#141ab8\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toBottomOf=\"@id/yourProfile\" />\r\n\r\n    <Button\r\n        android:id=\"@+id/editProfile\"\r\n        android:layout_width=\"130dp\"\r\n        android:layout_height=\"50dp\"\r\n        android:text=\"Edit Profile\"\r\n        android:backgroundTint=\"#87CEFA\"\r\n        android:layout_marginTop=\"15dp\"\r\n        app:layout_constraintTop_toBottomOf=\"@id/yourEmailAddress\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\" />\r\n\r\n    <LinearLayout\r\n        android:id=\"@+id/buttonWidgets\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:orientation=\"vertical\"\r\n        android:layout_marginStart=\"20dp\"\r\n        android:layout_marginEnd=\"20dp\"\r\n        android:layout_marginTop=\"40dp\"\r\n        android:padding=\"15dp\"\r\n        android:clickable=\"true\"\r\n        android:background=\"@drawable/rounded_background\"\r\n        app:layout_constraintTop_toBottomOf=\"@+id/editProfile\">\r\n\r\n        <!-- Change Password-->\r\n        <RelativeLayout\r\n            android:id=\"@+id/changePassword\"\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:clickable=\"true\">\r\n\r\n            <androidx.cardview.widget.CardView\r\n                android:layout_width=\"40dp\"\r\n                android:layout_height=\"40dp\"\r\n                app:cardCornerRadius=\"20dp\"\r\n                app:cardBackgroundColor=\"#60FFFFFF\"\r\n                app:cardElevation=\"0dp\">\r\n\r\n                <ImageView\r\n                    android:id=\"@+id/icon\"\r\n                    android:layout_width=\"match_parent\"\r\n                    android:layout_height=\"match_parent\"\r\n                    android:scaleType=\"centerInside\"\r\n                    android:src=\"@android:drawable/ic_lock_idle_lock\" />\r\n            </androidx.cardview.widget.CardView>\r\n\r\n            <TextView\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_centerVertical=\"true\"\r\n                android:textSize=\"16dp\"\r\n                android:layout_marginLeft=\"60dp\"\r\n                android:text=\"Change Password\"\r\n                android:textStyle=\"bold\" />\r\n\r\n            <ImageView\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:src=\"@drawable/right_arrow_icon\"\r\n                android:layout_alignParentEnd=\"true\"\r\n                android:layout_centerVertical=\"true\"/>\r\n        </RelativeLayout>\r\n    </LinearLayout>\r\n\r\n\r\n\r\n\r\n</androidx.constraintlayout.widget.ConstraintLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/activity_profile_page.xml b/app/src/main/res/layout/activity_profile_page.xml
+--- a/app/src/main/res/layout/activity_profile_page.xml	(revision 343a1e3dc33cd626ba8823fd422085b568494a33)
++++ b/app/src/main/res/layout/activity_profile_page.xml	(date 1717139650422)
+@@ -5,7 +5,7 @@
+     android:id="@+id/main"
+     android:layout_width="match_parent"
+     android:layout_height="match_parent"
+-    tools:context=".activity.ProfilePageActivity">
++    tools:context=".loginSignup.ProfilePageActivity">
+ 
+     <ImageView
+         android:id="@+id/arrow_left1"
+Index: app/src/main/res/layout/activity_splash.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<androidx.constraintlayout.widget.ConstraintLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:id=\"@+id/main\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\"\r\n    tools:context=\".activity.SplashActivity\">\r\n\r\n    <androidx.cardview.widget.CardView\r\n        android:layout_width=\"250sp\"\r\n        android:layout_height=\"250sp\"\r\n        app:cardCornerRadius=\"20dp\"\r\n        app:cardElevation=\"10dp\"\r\n        app:layout_constraintTop_toTopOf=\"parent\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintBottom_toBottomOf=\"parent\">\r\n\r\n        <ImageView\r\n            android:id=\"@+id/appLogo\"\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"match_parent\"\r\n            android:scaleType=\"centerCrop\"\r\n            android:src=\"@drawable/hi\" />\r\n\r\n    </androidx.cardview.widget.CardView>\r\n\r\n</androidx.constraintlayout.widget.ConstraintLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/activity_splash.xml b/app/src/main/res/layout/activity_splash.xml
+--- a/app/src/main/res/layout/activity_splash.xml	(revision 343a1e3dc33cd626ba8823fd422085b568494a33)
++++ b/app/src/main/res/layout/activity_splash.xml	(date 1717139650534)
+@@ -5,7 +5,7 @@
+     android:id="@+id/main"
+     android:layout_width="match_parent"
+     android:layout_height="match_parent"
+-    tools:context=".activity.SplashActivity">
++    tools:context=".loginSignup.SplashActivity">
+ 
+     <androidx.cardview.widget.CardView
+         android:layout_width="250sp"

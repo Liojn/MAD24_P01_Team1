@@ -28,13 +28,11 @@ At Fitness Ultimate, we understand the importance of maintaining a healthy lifes
 
 1.)Food Tracking (Kris)
 
-- Users can enter the food they eat by selecting foods from the database and specifying the portion sizes.
-
-- Enable users to plan their meals in advance by selecting foods and scheduling them for specific meal times.
-
-- Provides a summary of their daily nutritional intake, including total calories. 
-
 - Users can track their progress towards their dietary goals and make adjustments as needed.
+
+- Users are asked to enter some general information for the application to work out their required calories in a day.
+
+- Users can enter the food they eat by selecting foods from the database.
 
 2.)Training Schedule (Yu Yang) 
 
@@ -110,15 +108,16 @@ Make easy navigation from one screen to another.
 
 - The data on the widget will be updated whenever there is a manual input of new data or once every few mins for live fed data.
 
-3.)Sleep Tracker (Kris)
+3.)Advanced Food Tracker (Kris)
 
-- This feature tracks the user’s total time of sleep and develops relevant data such as sleep efficiency, sleep latency, and sleep fragmentation. 
+- Users will be able to add in the meal they had for a day and the application helps to provides a summary of their daily nutritional intake, including total calories.
 
-- This feature analyses data from sensors to detect and classify different sleep stages and the sleep pattern will be shown in the graphical view.
+- The application will show the amount of nutrition users intake.
 
-- User’s sleep data will be analysed to provide personalised sleep coaching and recommendations.
+- Users will also be able to add the food into types of meals with advanced UI.
 
-- The sleep environment is also monitored as well as its impact on sleep quality. This will use the help of sensor data in real-time, providing insights into optimal sleep conditions for users. 
+- The application will be able to recommend planned dietary for the user following their preferences.
+
 
 4.)Water Tracker (Elissa)
 
