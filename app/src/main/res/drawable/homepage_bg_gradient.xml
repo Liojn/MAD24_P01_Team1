@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <shape  xmlns:android="http://schemas.android.com/apk/res/android">
-    <corners android:bottomLeftRadius="120dp" /> <!-- adjust the radius to your liking -->
     <gradient android:startColor="@color/white"
-        android:endColor="#f9b17a"
+        android:endColor="#2d3250"
         android:angle="270"/> <!-- fill color, can be transparent -->
 </shape >

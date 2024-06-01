@@ -27,28 +27,28 @@ public class MainActivity extends BaseActivity {
             return insets;
         });
 
-        //For Training Schedule
+        //For Onclick for Training Schedule
         findViewById(R.id.nav_fitness).setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, TrainingMenuActivity.class);
             startActivity(intent);
         });
-        //For Chatbot
+        //For Onclick for Chatbot
         findViewById(R.id.chat_button).setOnClickListener(v ->{
             Intent intent = new Intent(MainActivity.this, ChatbotActivity.class);
             startActivity(intent);
         });
-        //For Calendar
+        //For Onclick for Calendar
         findViewById(R.id.nav_calendar).setOnClickListener(v ->{
             Intent intent = new Intent(MainActivity.this, CalendarActivity.class);
             startActivity(intent);
         });
-        //For FoodTracker
+        //For Onclick for FoodTracker
         findViewById(R.id.chat_button).setOnClickListener(v ->{
             Intent intent = new Intent(MainActivity.this, FoodTracker.class);
             startActivity(intent);
         });
 
-        //For HomePage
+        //For Onclick for HomePage
         findViewById(R.id.chat_button).setOnClickListener(v ->{
             Intent intent = new Intent(MainActivity.this, MainActivity.class);
             startActivity(intent);
