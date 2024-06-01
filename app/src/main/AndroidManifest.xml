@@ -43,7 +43,7 @@
             android:exported="true" />
         <activity
             android:name=".FoodTracker"
-            android:exported="true">
+            android:exported="true"/>
         <activity
             android:name=".CalendarActivity"
             android:exported="true">
