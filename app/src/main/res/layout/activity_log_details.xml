@@ -5,6 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/app_bg"
     tools:context=".foodtracker.LogDetails">
 
     <TextView
@@ -16,8 +17,8 @@
         android:layout_marginLeft="20dp"
         android:text="Enter the details below:"
         android:textStyle="bold"
-        android:textSize="25sp"
-        android:textColor="@color/white"
+        android:textSize="35sp"
+        android:textColor="@color/app_primary_text"
         android:fontFamily="sans-serif-condensed-light"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>
@@ -31,7 +32,7 @@
         android:layout_marginLeft="25dp"
         android:text="Gender: "
         android:textSize="18sp"
-        android:textColor="@color/white"
+        android:textColor="@color/app_primary_text"
         android:fontFamily="sans-serif-condensed-medium"
         app:layout_constraintTop_toBottomOf="@+id/header_title"
         app:layout_constraintStart_toStartOf="parent"
@@ -51,7 +52,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Male"
-            android:textColor="@color/white"
+            android:textColor="@color/app_primary_text"
             android:fontFamily="sans-serif-condensed-medium"
             android:textSize="15sp"/>
 
@@ -60,7 +61,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Female"
-            android:textColor="@color/white"
+            android:textColor="@color/app_primary_text"
             android:fontFamily="sans-serif-condensed-medium"
             android:textSize="15sp"/>
     </RadioGroup>
@@ -73,7 +74,7 @@
         android:padding="18dp"
         android:layout_marginLeft="25dp"
         android:text="Age: "
-        android:textColor="@color/white"
+        android:textColor="@color/app_primary_text"
         android:fontFamily="sans-serif-condensed-medium"
         android:textSize="18sp"
         app:layout_constraintTop_toBottomOf="@+id/genderLabel"
@@ -87,7 +88,7 @@
         android:ems="10"
         android:padding="18dp"
         android:inputType="number"
-        android:textColor="@color/white"
+        android:textColor="@color/app_primary_text"
         app:layout_constraintTop_toBottomOf="@+id/genderRadio"
         app:layout_constraintStart_toEndOf="@+id/ageLabel"/>
 
@@ -99,7 +100,7 @@
         android:padding="18dp"
         android:layout_marginLeft="25dp"
         android:text="Weight (Kg): "
-        android:textColor="@color/white"
+        android:textColor="@color/app_primary_text"
         android:fontFamily="sans-serif-condensed-medium"
         android:textSize="18sp"
         app:layout_constraintTop_toBottomOf="@+id/ageLabel"
@@ -125,7 +126,7 @@
         android:padding="18dp"
         android:text="Height (m): "
         android:layout_marginLeft="25dp"
-        android:textColor="@color/white"
+        android:textColor="@color/app_primary_text"
         android:fontFamily="sans-serif-condensed-medium"
         android:textSize="18sp"
         app:layout_constraintTop_toBottomOf="@+id/weightLabel"
@@ -138,7 +139,7 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:padding="18dp"
-        android:textColor="@color/white"
+        android:textColor="@color/app_primary_text"
         android:inputType="numberDecimal"
         app:layout_constraintTop_toBottomOf="@+id/weightText"
         app:layout_constraintStart_toEndOf="@+id/heightLabel"/>
@@ -155,7 +156,7 @@
         android:text="*Please specify activity level with no/low/moderate/high/extreme"
         android:textSize="15sp"
         android:textStyle="italic"
-        android:textColor="@color/white"
+        android:textColor="@color/app_primary_text"
         app:layout_constraintTop_toBottomOf="@+id/heightLabel"
         app:layout_constraintStart_toStartOf="parent"/>
 
@@ -166,7 +167,7 @@
         android:padding="18dp"
         android:layout_marginLeft="25dp"
         android:text="Activity Level: "
-        android:textColor="@color/white"
+        android:textColor="@color/app_primary_text"
         android:fontFamily="sans-serif-condensed-medium"
         android:textSize="18sp"
         app:layout_constraintTop_toBottomOf="@+id/activitydef"
@@ -181,7 +182,7 @@
        android:padding="18dp"
        android:ems="10"
        android:inputType="text"
-       android:textColor="@color/white"
+       android:textColor="@color/app_primary_text"
        app:layout_constraintTop_toBottomOf="@id/activitydef"
        app:layout_constraintStart_toEndOf="@id/activityLabel"/>
 
@@ -194,7 +195,7 @@
         android:layout_marginTop="3dp"
         android:layout_marginLeft="25dp"
         android:text="Choose your option: "
-        android:textColor="@color/white"
+        android:textColor="@color/app_primary_text"
         android:fontFamily="sans-serif-condensed-medium"
         android:textSize="18sp"
         app:layout_constraintTop_toBottomOf="@+id/activityLabel"
@@ -215,7 +216,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Lose weight"
-        android:textColor="@color/white"
+        android:textColor="@color/app_primary_text"
         android:fontFamily="sans-serif-condensed-medium"
         android:textSize="14sp"/>
 
@@ -224,7 +225,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Gain weight"
-            android:textColor="@color/white"
+            android:textColor="@color/app_primary_text"
             android:fontFamily="sans-serif-condensed-medium"
             android:textSize="14sp"/>
     </RadioGroup>
