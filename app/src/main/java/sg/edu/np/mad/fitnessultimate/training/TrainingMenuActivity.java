@@ -38,6 +38,7 @@ public class TrainingMenuActivity extends AppCompatActivity {
         // locate buttons
         Button followAlongWorkouts = findViewById(R.id.followAlongWorkouts);
         Button exercises = findViewById(R.id.exercises);
+        Button backBtn = findViewById(R.id.backBtn);
 
         // set button click listeners
         followAlongWorkouts.setOnClickListener(new View.OnClickListener() {
@@ -63,6 +64,14 @@ public class TrainingMenuActivity extends AppCompatActivity {
                                 TrainingMenuActivity.class.getSimpleName(),
                                 ExerciseCatalogueActivity.class.getSimpleName()));
                 startActivity(intent);
+            }
+        });
+
+        // return to previous activity
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
     }

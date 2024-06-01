@@ -12,14 +12,10 @@ googleServices = "4.4.1"
 firebaseAuth = "23.0.0"
 firebaseFirestore = "25.0.0"
 
-googleServices = "4.4.1"
-firebaseFirestore = "25.0.0"
-firebaseAuth = "23.0.0"
 
 roundedimageview = "2.3.0"
 sdpAndroid = "1.1.1"
 sspAndroid = "1.1.1"
-
 
 [libraries]
 gson = { module = "com.google.code.gson:gson", name = "gson", version.ref = "gson" }
@@ -31,6 +27,7 @@ material = { group = "com.google.android.material", name = "material", version.r
 activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
 constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
 google-services = { group = "com.google.gms", name = "google-services", version.ref = "googleServices" }
+
 firebase-firestore = { group = "com.google.firebase", name = "firebase-firestore", version.ref = "firebaseFirestore" }
 firebase-auth = { group = "com.google.firebase", name = "firebase-auth", version.ref = "firebaseAuth" }
 roundedimageview = { group = "com.makeramen", name = "roundedimageview", version.ref = "roundedimageview" }

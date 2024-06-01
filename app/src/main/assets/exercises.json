@@ -1,7 +1,7 @@
 [
   {
     "name": "Push Ups",
-    "imageUri": "android.resource://package.name/raw/push_ups",
+    "imageUri": "push_ups",
     "videoUrl": "https://youtube.com/sth",
     "description": "Push ups are a basic exercise used in civilian athletic training or physical education and commonly in military physical training.",
     "muscleGroup": "Chest",
@@ -9,7 +9,7 @@
   },
   {
     "name": "Squats",
-    "imageUri": "android.resource://package.name/raw/squats",
+    "imageUri": "squats",
     "videoUrl": "https://youtube.com/sth",
     "description": "The squat is a strength exercise in which the trainee lowers their hips from a standing position and then stands back up.",
     "muscleGroup": "Legs",
@@ -17,7 +17,7 @@
   },
   {
     "name": "Crunches",
-    "imageUri": "android.resource://package.name/raw/crunches",
+    "imageUri": "crunches",
     "videoUrl": "https://youtube.com/sth",
     "description": "The crunch is a popular core move that helps to strengthen your abdominal muscles.",
     "muscleGroup": "Abs",
@@ -25,7 +25,7 @@
   },
   {
     "name": "Pull Ups",
-    "imageUri": "android.resource://package.name/raw/pull_ups",
+    "imageUri": "pull_ups",
     "videoUrl": "https://youtube.com/sth",
     "description": "A pull-up is an upper-body strength exercise. The pull-up is performed with a palms facing forward position.",
     "muscleGroup": "Back",
@@ -33,7 +33,7 @@
   },
   {
     "name": "Plank",
-    "imageUri": "android.resource://package.name/raw/plank",
+    "imageUri": "plank",
     "videoUrl": "https://youtube.com/sth",
     "description": "The plank is an isometric core strength exercise that involves maintaining a position similar to a push-up for the maximum possible time.",
     "muscleGroup": "Abs",
@@ -41,7 +41,7 @@
   },
   {
     "name": "Muscle Ups",
-    "imageUri": "android.resource://package.name/raw/muscle_ups",
+    "imageUri": "muscle_ups",
     "videoUrl": "https://youtube.com/sth",
     "description": "A muscle-up is a calisthenics exercise that combines a pull-up with a dip. It is a combination of strength and technique.",
     "muscleGroup": "Chest",
@@ -49,9 +49,9 @@
   },
   {
     "name": "Leg Raises",
-    "imageUri": "android.resource://package.name/raw/leg_raises",
+    "imageUri": "leg_raises",
     "videoUrl": "https://youtube.com/sth",
-    "description": "joever",
+    "description": "Leg raises are an effective abdominal exercise that targets the lower abs, hip flexors, and sometimes the lower back muscles. To perform leg raises, lie flat on your back on a mat with your legs straight and your arms at your sides or underneath your glutes for support. Keeping your legs straight and together, slowly lift them towards the ceiling until your hips are at a 90-degree angle. Lower your legs back down with control, stopping just above the floor to maintain tension in your core. Repeat for the desired number of repetitions. This exercise helps improve core strength, stability, and overall lower body conditioning.",
     "muscleGroup": "Core",
     "difficulty": "Beginner"
   }
