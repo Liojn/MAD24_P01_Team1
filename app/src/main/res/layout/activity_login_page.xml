@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.LoginPageActivity">
+    tools:context=".loginSignup.LoginPageActivity">
 
     <ImageView
         android:id="@+id/arrow_left1"
@@ -122,7 +122,7 @@
         android:layout_marginStart="58dp"
         android:layout_marginEnd="58dp"
         android:text="Sign in"
-        android:backgroundTint="#6495ED"
+        android:backgroundTint="#676F9D"
         app:layout_constraintTop_toBottomOf="@id/body2" />
 
     <View

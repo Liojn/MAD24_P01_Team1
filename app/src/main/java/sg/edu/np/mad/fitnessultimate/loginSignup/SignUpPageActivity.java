@@ -1,4 +1,4 @@
-package sg.edu.np.mad.fitnessultimate.activity;
+package sg.edu.np.mad.fitnessultimate.loginSignup;
 
 import android.content.Intent;
 import android.os.Bundle;

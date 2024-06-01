@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.EditProfilePageActivity">
+    tools:context=".loginSignup.EditProfilePageActivity">
 
     <ImageView
         android:id="@+id/arrow_left1"
@@ -31,15 +31,17 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent" />
 
-    <ImageView
+    <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/editProfilePic"
         android:layout_width="130dp"
         android:layout_height="130dp"
-        app:srcCompat="@android:drawable/sym_def_app_icon"
         android:layout_marginTop="20dp"
+        app:srcCompat="@drawable/baseline_account_circle_24"
         app:layout_constraintTop_toBottomOf="@id/editProfile"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:shapeAppearanceOverlay="@style/ImageViewCircleOverlay" />
+
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/editInputUsername"
@@ -87,9 +89,9 @@
         android:id="@+id/saveBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="540dp"
+        android:layout_marginTop="500dp"
         android:text="SAVE"
-        android:backgroundTint="#141ab8"
+        android:backgroundTint="#676F9D"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/editProfile" />

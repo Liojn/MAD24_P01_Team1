@@ -42,6 +42,9 @@ dependencies {
     implementation(platform("com.google.firebase:firebase-bom:33.0.0"))
     implementation("com.google.android.gms:play-services-auth:20.2.0")
     implementation("androidx.activity:activity-ktx:1.6.1")
+    implementation("com.google.android.material:material:1.12.0")
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
+    implementation("com.github.bumptech.glide:glide:4.12.0")
+    implementation("com.google.firebase:firebase-storage:21.0.0")
 }

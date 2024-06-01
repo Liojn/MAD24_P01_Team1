@@ -1,5 +1,4 @@
 <resources>
-    <string name="app_name">Login-SignUp Page</string>
     <string name="title_activity_login">LoginActivity</string>
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
@@ -10,4 +9,6 @@
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
     <string name="default_web_client_id">609011869979-mjm64te1rs1qduskrvgjqen3k844v61s.apps.googleusercontent.com</string>
+    <string name="app_name">FitnessUltimate</string>
+    <string name="back_btn">back</string>
 </resources>
