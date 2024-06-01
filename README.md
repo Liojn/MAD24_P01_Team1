@@ -44,7 +44,7 @@ At Fitness Ultimate, we understand the importance of maintaining a healthy lifes
 
 - Users are able to set workouts to occur every specific day/interval to serve as a reminder to workout
 
-3.)User login / sign up + Biometrics (Elissa)
+3.)User login / sign up + Profile(Elissa)
 
 - Involves users providing a username and password to access their accounts
 
@@ -52,33 +52,30 @@ At Fitness Ultimate, we understand the importance of maintaining a healthy lifes
 
 - New users can sign up for an account 
 
+- Users are also able to change their username/password once they have logged in and click on the profile icon
+
 4.)Chatbot Predefined answers ( kiefer )
 
 - Users can click on the chatbot icon if they have questions
 
 - From frequently asked questions, they can choose from the questions in which the chatbot will give a predefined answer.
 
-- If user is satisfied click on exit option, else they can ask more questions
+- If user is satisfied click on back option, else they can ask more questions
 
-5.)Workout Calendar + General Notifications (Jovan)
+5.)Workout Calendar (Jovan)
 
-- Displays workouts in a calendar format, allowing users to see their workout history at a glance.
+- Displays workout maker as well as time spent on app heatmap in a calendar format, allowing users to see their workout days as well as an estimated amount of time spent “being fit” at a glance.
 
-- Each workout entry includes details like workout type (e.g., cardio, strength training), duration, intensity level, and notes.
+- The calendar allows switching between months and has an indicator for the current day
 
-- Differentiates between types of workouts or intensity levels using colour-coding.
+- Time spent “being fit” heatmap is colour code with an index below the calendar for easy understanding.
 
-- Provides notifications for various aspects of the fitness journey, including workout reminders, goal achievements, progress milestones, upcoming challenges, and community updates.
+- Clicking on a day in the calendar will show an alert with the date and workout info if any such as workout name and short description
 
-- Sends reminders for scheduled workouts based on user-set preferences such as time of day, frequency, and type of activity.
+- Displays history of workout entries which includes the workout date, name and description
 
-- Allows users to snooze or reschedule reminders as needed.
+- Clicking on the entry will bring to the workout page that shows the workout and its details
 
-6). Responsive Layout  + Navigate from Android Core ( Kiefer )
-
-Makes app useable on multiple devices
-
-Make easy navigation from one screen to another.
 
 ## Stage 2 Features: 
 
@@ -140,3 +137,51 @@ Make easy navigation from one screen to another.
 - AI will reply Out of Scope if User asks something not related to the app.
 
 - If AI cannot reply, direct to live chat
+
+## User Guide
+
+1) Users will choose to log in or sign up
+![img_1.png](SignIn_SignUp.png)
+2) User chooses log in and can enter their email or sign in by google or in forgot password in that scenario
+![img.png](sign_in.png)
+3) User chooses forget password, prompt appears and user will enter their email. Verificaton email is sent and prompted to change password upon clicking email
+![img.png](forget_password.png)
+4) User chooses sign up and enters a username along with a valid email + password
+![img_2.png](sign_up.png)
+5) After logging in/signing up user enters home page with various options.
+![img.png](home_page.png)
+6) User clicks on profile icon and user can choose to edit profile , change password or log out
+![img.png](profile.png)
+7) User click on edit profile, user can change their username + email, then click save to save changes
+![img.png](edit_profile.png)
+8) User clicks change password
+![img.png](password_change.png)
+9) User clicks logout and gets logged out and brought back to sign in page
+10) User clicks the food tracker icon at the navigation bar, user brought to food tracker page where they can log details, search and add. 
+![img.png](food_tracker.png)
+11) User logs their details and shown their targetted kcals to eat.
+![img.png](log_details.png)
+![img.png](kcal_shown.png)
+12) User clicks on search or add and searches for a food. Results displayed and + sign to add to daily intake
+![img.png](food_search_result.png)
+13) User clicks on the training icon and is given some selections
+![img_1.png](training_options.png)
+14) User clicks on Follow-Along, shown some follow along work outs
+![img.png](follow_along_list.png)
+15) User clicks into one, shown number of sets etc on how to follow along
+![img.png](abs1.png)
+![img_1.png](abs2.png)
+16) User clicks excerise and is shown a list of different excersies
+![img.png](Excerise_list.png)
+17) User clicks into one and is shown details on that specific excerise
+![img.png](squats.png)
+18) User clicks calendar icon and is shown history of activity and able to click the arrow buttons left and right to change months
+![img.png](calendar.png)![img_1.png](calendar_september.png)
+19) User clicks chatbot icon, chatbot shows FAQs for user to answer
+![img.png](chatbot.png)![img_1.png](chatbot_answer.png)
+20) Certain pictures allow users to click into them e.g. the Discover excerises one which brings them to the training selection to find more excerises
+![img.png](img.png)![img_1.png](img_1.png)
+
+## Credits 
+discover_excersies.webp : https://www.vecteezy.com/vector-art/2607268-people-exercising-at-gym
+benefits_excerise.jpg : https://www.pinterest.com/pin/74239093851841853/

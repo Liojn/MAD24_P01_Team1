@@ -74,8 +74,7 @@ public class SearchResultsActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 //Navigate the user back to FoodTracker activity
-                Intent intent = new Intent(SearchResultsActivity.this, FoodTracker.class);
-                startActivity(intent);
+                onBackPressed();
             }
         });
     }
