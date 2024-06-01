@@ -9,6 +9,8 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import sg.edu.np.mad.fitnessultimate.MainActivity;
 import sg.edu.np.mad.fitnessultimate.R;
 import sg.edu.np.mad.fitnessultimate.adapter.MessageAdapter;
 import sg.edu.np.mad.fitnessultimate.model.ResponseMessage;

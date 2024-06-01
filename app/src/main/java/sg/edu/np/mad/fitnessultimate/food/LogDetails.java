@@ -1,4 +1,4 @@
-package sg.edu.np.mad.fitnessultimate;
+package sg.edu.np.mad.fitnessultimate.food;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -15,6 +15,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+
+import sg.edu.np.mad.fitnessultimate.R;
 
 public class LogDetails extends AppCompatActivity {
 
@@ -39,8 +41,17 @@ public class LogDetails extends AppCompatActivity {
         EditText activityText = findViewById(R.id.activityText);
         RadioGroup goalsGroup = findViewById(R.id.radioOption);
         Button saveButton = findViewById(R.id.saveButton);
+        Button cancelButton = findViewById(R.id.cancelButton);
 
-        // Set a click listener for the calculate button
+        // Set a click listener for the cancel button
+        cancelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+        // Set a click listener for the save button
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -85,20 +96,22 @@ public class LogDetails extends AppCompatActivity {
 
                 // Adjust BMR based on goal
                 if (goal.equals("Lose weight")) {
-                    bmr -= 500; // Calorie deficit for weight loss
+                    bmr -= 500; // Calorie adjustments for weight loss
                 } else if (goal.equals("Gain weight")) {
-                    bmr += 500; // Calorie surplus for weight gain
+                    bmr += 500; // Calorie adjustments for weight gain
                 }
-                String formattedBMR = String.format("%.2f", bmr);
+                // Formatting bmr to 1 decimal place and parsing back string to a double
+                String formattedBMR = String.format("%.1f", bmr);
                 calculatedBMR = Double.parseDouble(formattedBMR);
-                returnCalculatedBMR();
+                returnCalculatedBMR(); //Calling the activity to return bmr
             }
 
+            //Prepares the result intent with the bmr and finishes the activity
             private void returnCalculatedBMR() {
-                Intent resultIntent = new Intent();
+                Intent resultIntent = new Intent(); //Intent to hold the reuslt data
                 resultIntent.putExtra("bmr", calculatedBMR);
-                setResult(Activity.RESULT_OK, resultIntent);
-                finish();
+                setResult(Activity.RESULT_OK, resultIntent); //Set the result of activity to RESULT_OK and attach the intent
+                finish(); //Finish the activity and return to the previous one
             }
         });
     }
