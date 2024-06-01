@@ -12,9 +12,7 @@ googleServices = "4.4.1"
 firebaseAuth = "23.0.0"
 firebaseFirestore = "25.0.0"
 
-googleServices = "4.4.1"
-firebaseFirestore = "25.0.0"
-firebaseAuth = "23.0.0"
+
 
 roundedimageview = "2.3.0"
 sdpAndroid = "1.1.1"
