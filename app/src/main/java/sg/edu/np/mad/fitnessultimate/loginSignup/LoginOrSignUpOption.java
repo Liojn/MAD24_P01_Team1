@@ -13,8 +13,9 @@ import androidx.core.view.WindowInsetsCompat;
 
 import sg.edu.np.mad.fitnessultimate.R;
 import sg.edu.np.mad.fitnessultimate.R.id;
+import sg.edu.np.mad.fitnessultimate.calendarPage.BaseActivity;
 
-public class LoginOrSignUpOption extends AppCompatActivity {
+public class LoginOrSignUpOption extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

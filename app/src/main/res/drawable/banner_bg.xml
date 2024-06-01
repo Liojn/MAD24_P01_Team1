@@ -4,6 +4,9 @@
 
     <gradient android:startColor="@color/white"
         android:endColor="@color/app_bg"
-        android:angle="270"/> <!-- fill color, can be transparent -->
+        android:angle="270"/>
+    <corners
+        android:topLeftRadius="@dimen/_20sdp"
+        android:topRightRadius="@dimen/_20sdp"/>
 
 </shape >

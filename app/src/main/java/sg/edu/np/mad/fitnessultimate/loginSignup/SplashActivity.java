@@ -15,8 +15,9 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import sg.edu.np.mad.fitnessultimate.MainActivity;
 import sg.edu.np.mad.fitnessultimate.R;
+import sg.edu.np.mad.fitnessultimate.calendarPage.BaseActivity;
 
-public class SplashActivity extends AppCompatActivity {
+public class SplashActivity extends BaseActivity {
     private static final int SPLASH_DELAY = 1000; // 1 second delay
 
     @Override

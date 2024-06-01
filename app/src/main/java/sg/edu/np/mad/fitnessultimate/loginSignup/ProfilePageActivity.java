@@ -38,8 +38,9 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import sg.edu.np.mad.fitnessultimate.MainActivity;
 import sg.edu.np.mad.fitnessultimate.R;
+import sg.edu.np.mad.fitnessultimate.calendarPage.BaseActivity;
 
-public class ProfilePageActivity extends AppCompatActivity {
+public class ProfilePageActivity extends BaseActivity {
 
     private TextView username;
     private TextView email;

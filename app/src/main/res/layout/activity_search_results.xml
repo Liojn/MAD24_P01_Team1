@@ -5,6 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/app_bg"
     tools:context=".foodtracker.SearchResultsActivity">
 
     <!-- Back button to allow users to navigate back to the FoodTracker page -->
@@ -16,6 +17,8 @@
         android:layout_marginStart="36dp"
         android:layout_marginTop="204dp"
         android:text="Back"
+        android:backgroundTint="#9299BF"
+        android:textColor="@color/white"
         android:fontFamily="sans-serif-condensed-medium"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -26,17 +29,19 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
+        android:background="@color/app_bg"
         android:iconifiedByDefault="false"
         app:layout_constraintTop_toBottomOf="@+id/backBtn"
         app:layout_constraintStart_toStartOf="parent" />
 
     <!-- A layout container that will display the search result -->
     <LinearLayout
+
         android:id="@+id/resultLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:background="#424769"
+        android:background="@color/app_bg"
         android:visibility="invisible"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import sg.edu.np.mad.fitnessultimate.MainActivity;
 import sg.edu.np.mad.fitnessultimate.R;
+import sg.edu.np.mad.fitnessultimate.calendarPage.BaseActivity;
 import sg.edu.np.mad.fitnessultimate.chatbot.adapter.MessageAdapter;
 import sg.edu.np.mad.fitnessultimate.chatbot.model.ResponseMessage;
 import android.view.KeyEvent;
@@ -23,7 +24,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ChatbotActivity extends AppCompatActivity {
+public class ChatbotActivity extends BaseActivity {
 
     EditText userInput;
     RecyclerView recyclerView;

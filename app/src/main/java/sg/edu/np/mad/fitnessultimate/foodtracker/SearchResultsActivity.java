@@ -22,8 +22,9 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 import sg.edu.np.mad.fitnessultimate.R;
+import sg.edu.np.mad.fitnessultimate.calendarPage.BaseActivity;
 
-public class SearchResultsActivity extends AppCompatActivity {
+public class SearchResultsActivity extends BaseActivity {
 
     //UI elements
     private TextView resultTextBox;

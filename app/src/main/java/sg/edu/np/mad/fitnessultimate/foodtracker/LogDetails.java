@@ -17,8 +17,9 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import sg.edu.np.mad.fitnessultimate.R;
+import sg.edu.np.mad.fitnessultimate.calendarPage.BaseActivity;
 
-public class LogDetails extends AppCompatActivity {
+public class LogDetails extends BaseActivity {
 
     private double calculatedBMR;
 

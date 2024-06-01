@@ -44,10 +44,10 @@ import com.google.firebase.auth.GoogleAuthProvider;
 
 import sg.edu.np.mad.fitnessultimate.MainActivity;
 import sg.edu.np.mad.fitnessultimate.R;
+import sg.edu.np.mad.fitnessultimate.calendarPage.BaseActivity;
 
 
-
-public class LoginPageActivity extends AppCompatActivity {
+public class LoginPageActivity extends BaseActivity {
 
     //public static final int GOOGLE_SIGN_IN_CODE = 1234;
     public static GoogleSignInClient client; // Declare client as static

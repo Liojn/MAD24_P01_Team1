@@ -34,8 +34,9 @@ import java.util.Map;
 
 import sg.edu.np.mad.fitnessultimate.MainActivity;
 import sg.edu.np.mad.fitnessultimate.R;
+import sg.edu.np.mad.fitnessultimate.calendarPage.BaseActivity;
 
-public class SignUpPageActivity extends AppCompatActivity {
+public class SignUpPageActivity extends BaseActivity {
     private static final String TAG = "SignUpPageActivity";
     @Override
     protected void onCreate(Bundle savedInstanceState) {

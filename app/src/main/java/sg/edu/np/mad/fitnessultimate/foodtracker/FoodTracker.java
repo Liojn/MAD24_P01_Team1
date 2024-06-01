@@ -18,10 +18,15 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import sg.edu.np.mad.fitnessultimate.MainActivity;
 import sg.edu.np.mad.fitnessultimate.R;
+import sg.edu.np.mad.fitnessultimate.calendarPage.BaseActivity;
+import sg.edu.np.mad.fitnessultimate.calendarPage.CalendarActivity;
+import sg.edu.np.mad.fitnessultimate.chatbot.activity.ChatbotActivity;
+import sg.edu.np.mad.fitnessultimate.training.TrainingMenuActivity;
 
 
-public class FoodTracker extends AppCompatActivity {
+public class FoodTracker extends BaseActivity {
     //UI elements
     private static final int REQUEST_CODE_LOG_DETAILS = 1;
     private TextView totalCalories;
@@ -42,6 +47,12 @@ public class FoodTracker extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        //Back button Intent
+        findViewById(R.id.btnBack).setOnClickListener(v -> {
+            onBackPressed();
+        });
+
 
         //Set up for the date to update every hour
         textToday = findViewById(R.id.textToday);
@@ -120,5 +131,6 @@ public class FoodTracker extends AppCompatActivity {
         SimpleDateFormat sdf = new SimpleDateFormat("MMM d, yyyy (EEEE)", Locale.getDefault());
         return sdf.format(new Date()); //Return the formatted date
     }
+
 
 }

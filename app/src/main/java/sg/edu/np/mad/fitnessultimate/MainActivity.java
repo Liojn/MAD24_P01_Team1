@@ -15,6 +15,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.CircleCrop;
@@ -23,12 +25,20 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.Arrays;
+import java.util.List;
+
+import sg.edu.np.mad.fitnessultimate.HomePage.BannerAdapter;
+import sg.edu.np.mad.fitnessultimate.HomePage.BannerItem;
 import sg.edu.np.mad.fitnessultimate.calendarPage.CalendarActivity;
 import sg.edu.np.mad.fitnessultimate.chatbot.activity.ChatbotActivity;
 import sg.edu.np.mad.fitnessultimate.foodtracker.*;
 import sg.edu.np.mad.fitnessultimate.loginSignup.LoginOrSignUpOption;
 import sg.edu.np.mad.fitnessultimate.loginSignup.ProfilePageActivity;
 import sg.edu.np.mad.fitnessultimate.training.TrainingMenuActivity;
+import sg.edu.np.mad.fitnessultimate.training.exercises.ExerciseCatalogueActivity;
+import sg.edu.np.mad.fitnessultimate.training.workouts.WorkoutsCatalogueActivity;
+
 
 public class MainActivity extends AppCompatActivity {
     private FirebaseAuth fAuth;
@@ -38,6 +48,9 @@ public class MainActivity extends AppCompatActivity {
     private ImageButton profileBtn;
     ImageView changeProfilePic;
     private TextView welcomeTextView;
+
+    private RecyclerView bannerRecyclerView;
+    private BannerAdapter bannerAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +62,8 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        bannerRecyclerView = findViewById(R.id.bannerRecyclerView);
 
         FirebaseAuth fAuth = FirebaseAuth.getInstance();
         fStore = FirebaseFirestore.getInstance();
@@ -108,27 +123,44 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         });
         //For Onclick for Chatbot
-        findViewById(R.id.chat_button).setOnClickListener(v ->{
+        findViewById(R.id.chat_button).setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, ChatbotActivity.class);
             startActivity(intent);
         });
         //For Onclick for Calendar
-        findViewById(R.id.nav_calendar).setOnClickListener(v ->{
+        findViewById(R.id.nav_calendar).setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, CalendarActivity.class);
             startActivity(intent);
         });
         //For Onclick for FoodTracker
-        findViewById(R.id.nav_food).setOnClickListener(v ->{
+        findViewById(R.id.nav_food).setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, FoodTracker.class);
             startActivity(intent);
         });
 
         //For Onclick for HomePage
-        findViewById(R.id.nav_home).setOnClickListener(v ->{
+        findViewById(R.id.nav_home).setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, MainActivity.class);
             startActivity(intent);
             finish();
         });
+
+        //
+
+
+        // Recycler View inside Banner for homepage
+        bannerRecyclerView = findViewById(R.id.bannerRecyclerView);
+        //List of banner images + title + subtitles
+        List<BannerItem> itemList = Arrays.asList(
+                new BannerItem(R.drawable.discover_excersies, "Discover Exercises", "Click Here!", TrainingMenuActivity.class),
+                new BannerItem(R.drawable.benefits_excerise, null, null   , null)
+        );
+
+        bannerAdapter = new BannerAdapter(this, itemList);
+
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        bannerRecyclerView.setLayoutManager(layoutManager);
+        bannerRecyclerView.setAdapter(bannerAdapter);
 
     }
 
@@ -182,5 +214,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 }
+
 
 

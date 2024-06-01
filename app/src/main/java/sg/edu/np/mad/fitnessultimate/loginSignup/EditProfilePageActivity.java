@@ -20,6 +20,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.activity.BackEventCompat;
 import androidx.activity.EdgeToEdge;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
@@ -52,10 +53,11 @@ import com.google.firebase.storage.StorageReference;
 import java.util.HashMap;
 import java.util.Map;
 
+import sg.edu.np.mad.fitnessultimate.calendarPage.BaseActivity;
 import sg.edu.np.mad.fitnessultimate.loginSignup.ProfilePageActivity;
 import sg.edu.np.mad.fitnessultimate.R;
 
-public class EditProfilePageActivity extends AppCompatActivity {
+public class EditProfilePageActivity extends BaseActivity {
     ImageView leftArrow;
     ImageView changeProfilePic;
     EditText resetUsername;

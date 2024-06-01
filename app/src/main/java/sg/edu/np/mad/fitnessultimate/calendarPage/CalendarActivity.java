@@ -41,6 +41,9 @@ import java.util.Map;
 
 import sg.edu.np.mad.fitnessultimate.MainActivity;
 import sg.edu.np.mad.fitnessultimate.R;
+import sg.edu.np.mad.fitnessultimate.chatbot.activity.ChatbotActivity;
+import sg.edu.np.mad.fitnessultimate.foodtracker.FoodTracker;
+import sg.edu.np.mad.fitnessultimate.training.TrainingMenuActivity;
 import sg.edu.np.mad.fitnessultimate.training.helpers.GlobalExerciseData;
 import sg.edu.np.mad.fitnessultimate.calendarPage.DayModel;
 import sg.edu.np.mad.fitnessultimate.training.workouts.Workout;
@@ -48,7 +51,7 @@ import sg.edu.np.mad.fitnessultimate.training.workouts.WorkoutActivity;
 
 
 
-public class CalendarActivity extends MainActivity implements CalendarAdapter.OnItemListener, HistoryAdapter.OnItemListener2 {
+public class CalendarActivity extends BaseActivity implements CalendarAdapter.OnItemListener, HistoryAdapter.OnItemListener2 {
 
     private static final String TAG = "CalendarActivity";
     private TextView monthYearText;
@@ -70,7 +73,13 @@ public class CalendarActivity extends MainActivity implements CalendarAdapter.On
         initWidgets();
         selectedDate = LocalDate.now();
         setMonthView();
+
+        //Back button Intent
+        findViewById(R.id.Back).setOnClickListener(v -> {
+            onBackPressed();
+        });
     }
+
 
     private void initWidgets() {
         calendarRecyclerView = findViewById(R.id.calendarRecyclerView);

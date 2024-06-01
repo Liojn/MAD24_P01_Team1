@@ -67,7 +67,7 @@
             android:textColorHint="@color/white"
             android:textSize="@dimen/_12ssp"
             android:textColor="@color/white"
-            android:background="#424769"
+            android:background="#999EC1"
             android:singleLine="true" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -90,7 +90,7 @@
             android:layout_height="wrap_content"
             android:hint="Email"
             android:textColor="@color/white"
-            android:background="#424769"
+            android:background="#999EC1"
             android:singleLine="true" />
     </com.google.android.material.textfield.TextInputLayout>
 
