@@ -4,6 +4,7 @@
     android:orientation="vertical"
     android:id="@+id/exerciseItem"
     android:padding="8dp">
+
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/exerciseButton"
         android:background="@drawable/exercise_item"

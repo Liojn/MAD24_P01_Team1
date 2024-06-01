@@ -44,6 +44,7 @@
         android:textSize="22sp" />
 
     <androidx.appcompat.widget.AppCompatButton
+
         android:id="@+id/followAlongWorkouts"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -55,22 +56,27 @@
         android:text="Follow-Along Workouts"
         android:textColor="@color/white"
         android:textAllCaps="false"
+
         android:textSize="30sp"
         android:textStyle="normal"
         android:gravity="start|center_vertical" />
 
+
     <androidx.appcompat.widget.AppCompatButton
+
         android:id="@+id/exercises"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:padding="20dp"
         android:layout_margin="20dp"
+
         android:drawableLeft="@drawable/exercise_2d"
         android:drawablePadding="15dp"
         android:background="@drawable/trainingmenu_btn"
         android:text="Exercises"
         android:textColor="@color/white"
         android:textAllCaps="false"
+
         android:textSize="30sp"
         android:textStyle="normal"
         android:gravity="start|center_vertical" />

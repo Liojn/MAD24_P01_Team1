@@ -5,6 +5,7 @@
     android:id="@+id/workoutItem"
     android:padding="8dp">
 
+
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/workoutButton"
         android:background="@drawable/exercise_item"
@@ -16,5 +17,4 @@
         android:textAllCaps="false"
         android:textColor="@color/white"
         android:gravity="start|center_vertical" />
-
 </LinearLayout>
