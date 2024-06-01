@@ -12,6 +12,8 @@ public class CalendarViewHolder extends RecyclerView.ViewHolder implements View.
 {
     public final TextView dayOfMonth;
     public final View dayOfMonthBg;
+    public final View calenderCellOl;
+    public final View smallMarker;
     private final CalendarAdapter.OnItemListener onItemListener;
     private DayModel dayModel;
     public CalendarViewHolder(@NonNull View itemView, CalendarAdapter.OnItemListener onItemListener)
@@ -19,6 +21,8 @@ public class CalendarViewHolder extends RecyclerView.ViewHolder implements View.
         super(itemView);
         dayOfMonth = itemView.findViewById(R.id.cellDayText);
         dayOfMonthBg = itemView.findViewById(R.id.calenderCellBg);
+        calenderCellOl = itemView.findViewById(R.id.calenderCellOl);
+        smallMarker = itemView.findViewById(R.id.smallMarker);
         this.onItemListener = onItemListener;
         itemView.setOnClickListener(this);
     }
