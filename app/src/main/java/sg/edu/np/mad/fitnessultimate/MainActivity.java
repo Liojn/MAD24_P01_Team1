@@ -43,13 +43,13 @@ public class MainActivity extends BaseActivity {
             startActivity(intent);
         });
         //For Onclick for FoodTracker
-        findViewById(R.id.chat_button).setOnClickListener(v ->{
+        findViewById(R.id.nav_food).setOnClickListener(v ->{
             Intent intent = new Intent(MainActivity.this, FoodTracker.class);
             startActivity(intent);
         });
 
         //For Onclick for HomePage
-        findViewById(R.id.chat_button).setOnClickListener(v ->{
+        findViewById(R.id.nav_home).setOnClickListener(v ->{
             Intent intent = new Intent(MainActivity.this, MainActivity.class);
             startActivity(intent);
         });
