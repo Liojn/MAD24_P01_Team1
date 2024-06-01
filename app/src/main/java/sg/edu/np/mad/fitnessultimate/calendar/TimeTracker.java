@@ -1,3 +1,5 @@
+package sg.edu.np.mad.fitnessultimate.calendar;
+
 public class TimeTracker {
     private long startTime;
     private long totalTimeSpent;

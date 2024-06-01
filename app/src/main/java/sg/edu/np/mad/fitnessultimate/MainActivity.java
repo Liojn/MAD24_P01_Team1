@@ -9,11 +9,12 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import java.util.Calendar;
-
+import sg.edu.np.mad.fitnessultimate.calendar.CalendarActivity;
 import sg.edu.np.mad.fitnessultimate.chatbot.activity.ChatbotActivity;
+import sg.edu.np.mad.fitnessultimate.foodtracker.FoodTracker;
 import sg.edu.np.mad.fitnessultimate.training.TrainingMenuActivity;
-public class MainActivity extends BaseActivity {
+
+public class MainActivity extends AppCompatActivity {
 
 
     @Override

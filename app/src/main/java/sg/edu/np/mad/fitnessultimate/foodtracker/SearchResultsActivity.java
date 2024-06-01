@@ -1,3 +1,5 @@
+package sg.edu.np.mad.fitnessultimate.foodtracker;
+
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.widget.SearchView;

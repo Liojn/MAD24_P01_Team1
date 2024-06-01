@@ -1,8 +1,4 @@
-import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.TextView;
-import android.widget.Toast;
+package sg.edu.np.mad.fitnessultimate.calendar;
 
 import androidx.activity.EdgeToEdge;
 import androidx.core.graphics.Insets;
@@ -11,11 +7,18 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.TextView;
+import android.widget.Toast;
+
 import java.time.LocalDate;
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
+import sg.edu.np.mad.fitnessultimate.BaseActivity;
 import sg.edu.np.mad.fitnessultimate.R;
 
 public class CalendarActivity extends BaseActivity implements CalendarAdapter.OnItemListener

@@ -23,6 +23,8 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
+import sg.edu.np.mad.fitnessultimate.calendar.TimeTracker;
+
 public class BaseActivity extends AppCompatActivity {
 
     private static TimeTracker timeTracker = new TimeTracker();
@@ -41,62 +43,67 @@ public class BaseActivity extends AppCompatActivity {
 
     @Override
     protected void onPause() {
-        super.onPause();
+        try {
+            super.onPause();
 
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        FirebaseAuth fAuth = FirebaseAuth.getInstance();
-        String userId = fAuth.getCurrentUser().getUid();
+            FirebaseFirestore db = FirebaseFirestore.getInstance();
+            FirebaseAuth fAuth = FirebaseAuth.getInstance();
+            String userId = fAuth.getCurrentUser().getUid();
 
-        // Get the start time from shared preferences
-        SharedPreferences preferences = getSharedPreferences("TimeTrackerPrefs", MODE_PRIVATE);
-        long startTime = preferences.getLong("startTime", System.currentTimeMillis());
+            // Get the start time from shared preferences
+            SharedPreferences preferences = getSharedPreferences("TimeTrackerPrefs", MODE_PRIVATE);
+            long startTime = preferences.getLong("startTime", System.currentTimeMillis());
 
-        long currentTime = System.currentTimeMillis();
-        Date startDate = new Date(startTime);
-        Date currentDate = new Date(currentTime);
+            long currentTime = System.currentTimeMillis();
+            Date startDate = new Date(startTime);
+            Date currentDate = new Date(currentTime);
 
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
-        String startDateString = sdf.format(startDate);
-        String currentDateString = sdf.format(currentDate);
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+            String startDateString = sdf.format(startDate);
+            String currentDateString = sdf.format(currentDate);
 
-        // Get user's email
-        DocumentReference userDocRef = db.collection("users").document(userId);
-        userDocRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if (task.isSuccessful() && task.getResult() != null) {
-                    DocumentSnapshot document = task.getResult();
-                    String email = document.getString("email");
-                    Log.d("BaseActivity", "email: " + email);
-                    if (email != null) {
-                        if (startDateString.equals(currentDateString)) {
-                            // Same day, update timeSpent for the same date
-                            updateTimeSpent(db, email + "/padding/" + startDateString, startTime, currentTime);
-                        } else {
-                            // Different days, split the time spent
-                            // Update timeSpent for the start day
-                            Calendar calendar = Calendar.getInstance();
-                            calendar.setTime(startDate);
-                            calendar.set(Calendar.HOUR_OF_DAY, 23);
-                            calendar.set(Calendar.MINUTE, 59);
-                            calendar.set(Calendar.SECOND, 59);
-                            long endOfStartDay = calendar.getTimeInMillis();
+            // Get user's email
+            DocumentReference userDocRef = db.collection("users").document(userId);
+            userDocRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                    if (task.isSuccessful() && task.getResult() != null) {
+                        DocumentSnapshot document = task.getResult();
+                        String email = document.getString("email");
+                        Log.d("BaseActivity", "email: " + email);
+                        if (email != null) {
+                            if (startDateString.equals(currentDateString)) {
+                                // Same day, update timeSpent for the same date
+                                updateTimeSpent(db, email + "/padding/" + startDateString, startTime, currentTime);
+                            } else {
+                                // Different days, split the time spent
+                                // Update timeSpent for the start day
+                                Calendar calendar = Calendar.getInstance();
+                                calendar.setTime(startDate);
+                                calendar.set(Calendar.HOUR_OF_DAY, 23);
+                                calendar.set(Calendar.MINUTE, 59);
+                                calendar.set(Calendar.SECOND, 59);
+                                long endOfStartDay = calendar.getTimeInMillis();
 
-                            updateTimeSpent(db, email + "/padding/" + startDateString, startTime, endOfStartDay);
+                                updateTimeSpent(db, email + "/padding/" + startDateString, startTime, endOfStartDay);
 
-                            // Update timeSpent for the current day
-                            calendar.setTime(currentDate);
-                            calendar.set(Calendar.HOUR_OF_DAY, 0);
-                            calendar.set(Calendar.MINUTE, 0);
-                            calendar.set(Calendar.SECOND, 0);
-                            long startOfCurrentDay = calendar.getTimeInMillis();
+                                // Update timeSpent for the current day
+                                calendar.setTime(currentDate);
+                                calendar.set(Calendar.HOUR_OF_DAY, 0);
+                                calendar.set(Calendar.MINUTE, 0);
+                                calendar.set(Calendar.SECOND, 0);
+                                long startOfCurrentDay = calendar.getTimeInMillis();
 
-                            updateTimeSpent(db, email + "/padding/" + currentDateString, startOfCurrentDay, currentTime);
+                                updateTimeSpent(db, email + "/padding/" + currentDateString, startOfCurrentDay, currentTime);
+                            }
                         }
                     }
                 }
-            }
-        });
+            });
+        } catch (Exception e) {
+            Log.e("BaseActivity", "Error stopping time tracker", e);
+        }
+
     }
 
     private void updateTimeSpent(FirebaseFirestore db, String documentPath, long startTime, long endTime) {

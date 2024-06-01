@@ -1,3 +1,5 @@
+package sg.edu.np.mad.fitnessultimate.calendar;
+
 import java.time.LocalDate;
 
 public class DayModel {

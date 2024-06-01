@@ -1,3 +1,5 @@
+package sg.edu.np.mad.fitnessultimate.calendar;
+
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;

@@ -1,6 +1,5 @@
-package sg.edu.np.mad.fitnessultimate;
+package sg.edu.np.mad.fitnessultimate.foodtracker;
 
-import android.app.Activity;
 import android.os.Bundle;
 
 import androidx.activity.EdgeToEdge;
@@ -14,6 +13,7 @@ import android.content.Intent;
 import android.view.View;
 import android.widget.TextView;
 
+import sg.edu.np.mad.fitnessultimate.R;
 
 
 public class FoodTracker extends AppCompatActivity {

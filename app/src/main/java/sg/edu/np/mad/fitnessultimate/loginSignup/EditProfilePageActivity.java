@@ -100,7 +100,7 @@ public class EditProfilePageActivity extends AppCompatActivity {
 
         // Disable save button initially if no changes
         saveButton.setEnabled(false);
-        saveButton.setBackgroundColor(ContextCompat.getColor(this, R.color.disabledButtonColor));
+        saveButton.setBackgroundColor(0xFFD3D3D3); // Set grey background (disabled color)
 
         // Add TextChangedListener to EditText fields to enable/disable save button based on changes
         resetUsername.addTextChangedListener(textWatcher);
@@ -210,11 +210,11 @@ public class EditProfilePageActivity extends AppCompatActivity {
                     !resetEmail.getText().toString().equals(originalEmail)) {
                 // Enable save button if there are changes and set blue background
                 saveButton.setEnabled(true);
-                saveButton.setBackgroundColor(ContextCompat.getColor(EditProfilePageActivity.this, R.color.enabledButtonColor));
+                saveButton.setBackgroundColor(0xFFD3D3D3);
             } else {
                 // Disable save button if no changes and set grey background
                 saveButton.setEnabled(false);
-                saveButton.setBackgroundColor(ContextCompat.getColor(EditProfilePageActivity.this, R.color.disabledButtonColor));
+                saveButton.setBackgroundColor(0xFFD3D3D3);
             }
         }
 

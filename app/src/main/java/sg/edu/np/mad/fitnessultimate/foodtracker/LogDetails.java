@@ -1,17 +1,20 @@
+package sg.edu.np.mad.fitnessultimate.foodtracker;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 
 import sg.edu.np.mad.fitnessultimate.R;
 
@@ -79,6 +82,10 @@ public class LogDetails extends AppCompatActivity {
                         break;
                     case "extreme":
                         bmr *= 1.9;
+                        break;
+
+                    default:
+                        bmr *= 1.2; // default
                         break;
                 }
 
