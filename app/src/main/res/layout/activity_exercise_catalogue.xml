@@ -3,19 +3,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/main"
-    android:orientation="vertical">
 
     <Button
+=======
+    android:orientation="vertical"
+    android:background="@color/app_bg" >
+
+    <androidx.appcompat.widget.AppCompatButton
+
         android:id="@+id/backBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:drawableLeft="@drawable/baseline_arrow_back_24"
-        android:text="@string/back_btn"
-        android:gravity="start|center_vertical"
-        android:textSize="20sp"
-        android:textColor="@color/black"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        />
 
     <TextView
         android:id="@+id/textView"
@@ -26,6 +25,39 @@
         android:text="Exercise Catalogue"
         android:textSize="50sp"
         android:textStyle="bold" />
+
+        android:drawablePadding="10dp"
+        android:text="@string/back_btn"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:textAllCaps="false"
+        android:gravity="start|center_vertical"
+        android:layout_margin="10dp"
+        android:textSize="20sp"
+        android:textColor="@color/black"
+        android:background="@drawable/back_btn" />
+
+    <TextView
+        android:id="@+id/catalogueTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:text="Exercise Catalogue"
+        android:textColor="@color/app_primary_text"
+        android:textSize="60sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/catalogueSubtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:paddingBottom="20dp"
+        android:text="Choose an exercise and get started"
+        android:textColor="@color/app_primary_text"
+        android:textSize="22sp"
+        android:textStyle="italic" />
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/exerciseRecyclerView"

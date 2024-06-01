@@ -10,5 +10,5 @@
     <string name="login_failed">"Login failed"</string>
     <string name="default_web_client_id">609011869979-mjm64te1rs1qduskrvgjqen3k844v61s.apps.googleusercontent.com</string>
     <string name="app_name">FitnessUltimate</string>
-    <string name="back_btn">back</string>
+    <string name="back_btn">Back</string>
 </resources>
