@@ -49,7 +49,12 @@
             android:name=".BaseActivity"
             android:exported="false" />
         <activity
+<<<<<<< HEAD
             android:name=".foodtracker.LogDetails"
+=======
+            android:name=".calendarPage.CalendarActivity"
+            android:name=".LogDetails"
+>>>>>>> c2bf8b5b669f4443abcb052a6ca3a5677416c8e9
             android:exported="false" />
         <activity
             android:name=".foodtracker.SearchResultsActivity"

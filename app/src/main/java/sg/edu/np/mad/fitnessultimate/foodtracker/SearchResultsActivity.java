@@ -1,7 +1,15 @@
+<<<<<<<< HEAD:app/src/main/java/sg/edu/np/mad/fitnessultimate/foodtracker/SearchResultsActivity.java
 package sg.edu.np.mad.fitnessultimate.foodtracker;
+========
+package sg.edu.np.mad.fitnessultimate.food;
+>>>>>>>> c2bf8b5b669f4443abcb052a6ca3a5677416c8e9:app/src/main/java/sg/edu/np/mad/fitnessultimate/food/SearchResultsActivity.java
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.SearchView;
 import android.widget.TextView;
 
@@ -20,8 +28,14 @@ import java.net.URL;
 import sg.edu.np.mad.fitnessultimate.R;
 
 public class SearchResultsActivity extends AppCompatActivity {
+
+    //UI elements
     private TextView resultTextBox;
     private SearchView searchView;
+    private Button backBtn;
+    private LinearLayout resultLayout;
+
+    //API endpoint and key
     private String apiUrl;
     private String apiKey = "sEO/WztkNuDVZfEfyIOLrA==S4xbs1Ybg0QZ5vMd";
 
@@ -30,11 +44,16 @@ public class SearchResultsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_results);
 
+        //Initializing UI elements
         resultTextBox = findViewById(R.id.resultTextBox);
         searchView = findViewById(R.id.searchBar);
+        backBtn = findViewById(R.id.backBtn);
+        resultLayout = findViewById(R.id.resultLayout);
 
+        //API base URL
         apiUrl = "https://api.api-ninjas.com/v1/nutrition?query=";
 
+        //Setting listener for search view query submission
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -52,8 +71,19 @@ public class SearchResultsActivity extends AppCompatActivity {
                 return false;
             }
         });
+
+        //Setting listener for back button click
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Navigate the user back to FoodTracker activity
+                Intent intent = new Intent(SearchResultsActivity.this, FoodTracker.class);
+                startActivity(intent);
+            }
+        });
     }
 
+    //AsyncTask for performing network operation in the background
     private class FetchDataTask extends AsyncTask<String, Void, String> {
 
         @Override
@@ -71,6 +101,7 @@ public class SearchResultsActivity extends AppCompatActivity {
                 // Set request method
                 connection.setRequestMethod("GET");
 
+                //Set API key header
                 connection.setRequestProperty("x-api-key", apiKey);
 
                 // Connect to the API
@@ -106,6 +137,7 @@ public class SearchResultsActivity extends AppCompatActivity {
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
 
+            //Clearing the previous result
             resultTextBox.setText("");
 
             // Check if the result is not null and not empty
@@ -114,8 +146,12 @@ public class SearchResultsActivity extends AppCompatActivity {
                     // Parse the JSON response
                     JSONArray jsonArray = new JSONArray(result);
 
-                    // Create a StringBuilder to format the data
-                    StringBuilder formattedData = new StringBuilder();
+                    //Variables to hold the total nutrition values
+                    double totalCalories = 0;
+                    double totalCarbs = 0;
+                    double totalProteins = 0;
+                    double totalFats = 0;
+                    double totalOthers = 0;
 
                     // Iterate through the JSON array
                     for (int i = 0; i < jsonArray.length(); i++) {
@@ -129,25 +165,39 @@ public class SearchResultsActivity extends AppCompatActivity {
                         double fats = jsonObject.getDouble("fat_total_g");
                         double others = calories - (carbohydrates + proteins + fats);
 
-                        // Append the formatted data to the StringBuilder
-                        formattedData.append("Name: ").append(name).append("\n");
-                        formattedData.append("Total calories: ").append(calories).append(" per 100 g\n");
-                        formattedData.append("Carbohydrates: ").append(carbohydrates).append("\n");
-                        formattedData.append("Protein: ").append(proteins).append("\n");
-                        formattedData.append("Fats: ").append(fats).append("\n");
-                        formattedData.append("Others: ").append(others).append("\n");
-
-
+                        //Adding in each data for total values
+                        totalCalories += calories;
+                        totalCarbs += carbohydrates;
+                        totalProteins += proteins;
+                        totalFats += fats;
+                        totalOthers += others;
                     }
+
+                    // Create a StringBuilder to format the data
+                    StringBuilder formattedData = new StringBuilder();
+
+                    // Append the formatted data to the StringBuilder
+                    String query = searchView.getQuery().toString();
+
+                    formattedData.append("Name: ").append(query).append("\n");
+                    formattedData.append("Total calories: ").append(String.format("%.1f", totalCalories)).append(" kcal per 100 g\n");
+                    formattedData.append("Carbohydrates: ").append(String.format("%.1f",totalCarbs)).append(" g\n");
+                    formattedData.append("Protein: ").append(String.format("%.1f",totalProteins)).append(" g\n");
+                    formattedData.append("Fats: ").append(String.format("%.1f",totalFats)).append(" g\n");
+                    formattedData.append("Others: ").append(String.format("%.1f",totalOthers)).append(" kcal\n");
 
                     // Set the formatted data to the TextView
                     resultTextBox.setText(formattedData.toString());
+
+                    //Make the result layout visible
+                    resultLayout.setVisibility(LinearLayout.VISIBLE);
 
                 } catch (JSONException e) {
                     e.printStackTrace();
                     resultTextBox.setText("Failed to parse data");
                 }
             } else {
+                //Display error message if no result is found
                 resultTextBox.setText("No results found or error fetching data");
             }
         }

@@ -1,0 +1,500 @@
+Index: app/src/main/AndroidManifest.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<manifest xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\">\r\n\r\n    <uses-permission android:name=\"android.permission.INTERNET\" />\r\n\r\n    <application\r\n        android:allowBackup=\"true\"\r\n        android:dataExtractionRules=\"@xml/data_extraction_rules\"\r\n        android:fullBackupContent=\"@xml/backup_rules\"\r\n        android:icon=\"@mipmap/ic_launcher\"\r\n        android:label=\"@string/app_name\"\r\n        android:roundIcon=\"@mipmap/ic_launcher_round\"\r\n        android:supportsRtl=\"true\"\r\n        android:theme=\"@style/Theme.FitnessUltimate\"\r\n        tools:targetApi=\"31\">\r\n        <activity\r\n            android:name=\".activity.EditProfilePageActivity\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".activity.SignUpPageActivity\"\r\n            android:exported=\"true\" />\r\n        <activity\r\n            android:name=\".activity.LoginPageActivity\"\r\n            android:exported=\"true\" />\r\n        <activity\r\n            android:name=\".activity.ProfilePageActivity\"\r\n            android:exported=\"true\" />\r\n        <activity\r\n            android:name=\".training.exercises.ExerciseActivity\"\r\n            android:exported=\"false\" />\r\n        <activity android:name=\".training.workouts.WorkoutActivity\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".training.exercises.ExerciseCatalogueActivity\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".training.workouts.WorkoutsCatalogueActivity\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".training.TrainingMenuActivity\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".BaseActivity\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".LogDetails\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".SearchResultsActivity\"\r\n            android:exported=\"true\" />\r\n        <activity\r\n            android:name=\".MainActivity\"\r\n            android:exported=\"true\" />\r\n        <activity\r\n            android:name=\".FoodTracker\"\r\n            android:exported=\"true\">\r\n        <activity\r\n            android:name=\".CalendarActivity\"\r\n            android:exported=\"true\">\r\n\r\n        </activity>\r\n\r\n        <activity\r\n            android:name=\".activity.ChatbotActivity\"\r\n            android:exported=\"true\" />\r\n        <activity\r\n            android:name=\".activity.SplashActivity\"\r\n            android:exported=\"true\">\r\n            <intent-filter>\r\n                <action android:name=\"android.intent.action.MAIN\" />\r\n\r\n                <category android:name=\"android.intent.category.LAUNCHER\" />\r\n            </intent-filter>\r\n        </activity>\r\n\r\n    </application>\r\n\r\n</manifest>\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/AndroidManifest.xml b/app/src/main/AndroidManifest.xml
+--- a/app/src/main/AndroidManifest.xml	
++++ b/app/src/main/AndroidManifest.xml	
+@@ -15,21 +15,25 @@
+         android:theme="@style/Theme.FitnessUltimate"
+         tools:targetApi="31">
+         <activity
+-            android:name=".activity.EditProfilePageActivity"
++            android:name=".loginSignup.LoginOrSignUpOption"
+             android:exported="false" />
+         <activity
+-            android:name=".activity.SignUpPageActivity"
++            android:name=".loginSignup.EditProfilePageActivity"
++            android:exported="true" />
++        <activity
++            android:name=".loginSignup.SignUpPageActivity"
+             android:exported="true" />
+         <activity
+-            android:name=".activity.LoginPageActivity"
++            android:name=".loginSignup.LoginPageActivity"
+             android:exported="true" />
+         <activity
+-            android:name=".activity.ProfilePageActivity"
++            android:name=".loginSignup.ProfilePageActivity"
+             android:exported="true" />
+         <activity
+             android:name=".training.exercises.ExerciseActivity"
+             android:exported="false" />
+-        <activity android:name=".training.workouts.WorkoutActivity"
++        <activity
++            android:name=".training.workouts.WorkoutActivity"
+             android:exported="false" />
+         <activity
+             android:name=".training.exercises.ExerciseCatalogueActivity"
+@@ -44,28 +48,25 @@
+             android:name=".BaseActivity"
+             android:exported="false" />
+         <activity
+-            android:name=".LogDetails"
++            android:name=".food.LogDetails"
+             android:exported="false" />
+         <activity
+-            android:name=".SearchResultsActivity"
++            android:name=".food.SearchResultsActivity"
+             android:exported="true" />
+         <activity
+             android:name=".MainActivity"
+             android:exported="true" />
+-        <activity
+-            android:name=".FoodTracker"
+-            android:exported="true">
+         <activity
+             android:name=".CalendarActivity"
+-            android:exported="true">
+-
+-        </activity>
+-
++            android:exported="true"/>
+         <activity
+             android:name=".activity.ChatbotActivity"
+             android:exported="true" />
+         <activity
+-            android:name=".activity.SplashActivity"
++            android:name=".loginSignup.SplashActivity"
++            android:exported="true"/>
++        <activity
++            android:name=".food.FoodTracker"
+             android:exported="true">
+             <intent-filter>
+                 <action android:name="android.intent.action.MAIN" />
+@@ -73,7 +74,6 @@
+                 <category android:name="android.intent.category.LAUNCHER" />
+             </intent-filter>
+         </activity>
+-
+     </application>
+ 
+-</manifest>
++</manifest>
+\ No newline at end of file
+Index: app/src/main/java/sg/edu/np/mad/fitnessultimate/MainActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package sg.edu.np.mad.fitnessultimate;\r\n\r\nimport android.content.Intent;\r\nimport android.os.Bundle;\r\nimport android.view.View;\r\nimport android.widget.Button;\r\n\r\nimport androidx.activity.EdgeToEdge;\r\nimport androidx.appcompat.app.AppCompatActivity;\r\nimport androidx.core.graphics.Insets;\r\nimport androidx.core.view.ViewCompat;\r\nimport androidx.core.view.WindowInsetsCompat;\r\nimport sg.edu.np.mad.fitnessultimate.training.TrainingMenuActivity;\r\npublic class MainActivity extends BaseActivity {\r\n\r\nimport com.google.firebase.auth.FirebaseAuth;\r\n\r\nimport sg.edu.np.mad.fitnessultimate.R;\r\n\r\n\r\npublic class MainActivity extends AppCompatActivity {\r\n\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        EdgeToEdge.enable(this);\r\n        setContentView(R.layout.activity_main);\r\n        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {\r\n            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());\r\n            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);\r\n            return insets;\r\n        });\r\n\r\n        Button btnLogin = findViewById(R.id.button_login);\r\n        Button btnSignUp = findViewById(R.id.button_signUp);\r\n\r\n        btnLogin.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n                // Start the MainActivity\r\n                Intent intent = new Intent(MainActivity.this, LoginPageActivity.class);\r\n                startActivity(intent);\r\n            }\r\n        });\r\n\r\n        btnSignUp.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n                // Start the SignUpPageActivity\r\n                Intent intent = new Intent(MainActivity.this, SignUpPageActivity.class);\r\n                startActivity(intent);\r\n            }\r\n        });\r\n\r\n        Intent intent = new Intent(MainActivity.this, TrainingMenuActivity.class);\r\n        startActivity(intent);\r\n\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/sg/edu/np/mad/fitnessultimate/MainActivity.java b/app/src/main/java/sg/edu/np/mad/fitnessultimate/MainActivity.java
+--- a/app/src/main/java/sg/edu/np/mad/fitnessultimate/MainActivity.java	
++++ b/app/src/main/java/sg/edu/np/mad/fitnessultimate/MainActivity.java	
+@@ -4,22 +4,25 @@
+ import android.os.Bundle;
+ import android.view.View;
+ import android.widget.Button;
++import android.widget.ImageView;
+ 
+ import androidx.activity.EdgeToEdge;
+ import androidx.appcompat.app.AppCompatActivity;
+ import androidx.core.graphics.Insets;
+ import androidx.core.view.ViewCompat;
+ import androidx.core.view.WindowInsetsCompat;
++
++import com.google.firebase.auth.FirebaseAuth;
++import com.google.firebase.auth.FirebaseUser;
++
++import sg.edu.np.mad.fitnessultimate.loginSignup.LoginOrSignUpOption;
++import sg.edu.np.mad.fitnessultimate.loginSignup.LoginPageActivity;
++import sg.edu.np.mad.fitnessultimate.loginSignup.ProfilePageActivity;
++import sg.edu.np.mad.fitnessultimate.loginSignup.SignUpPageActivity;
+ import sg.edu.np.mad.fitnessultimate.training.TrainingMenuActivity;
++
+ public class MainActivity extends BaseActivity {
+ 
+-import com.google.firebase.auth.FirebaseAuth;
+-
+-import sg.edu.np.mad.fitnessultimate.R;
+-
+-
+-public class MainActivity extends AppCompatActivity {
+-
+     @Override
+     protected void onCreate(Bundle savedInstanceState) {
+         super.onCreate(savedInstanceState);
+@@ -31,29 +34,27 @@
+             return insets;
+         });
+ 
+-        Button btnLogin = findViewById(R.id.button_login);
+-        Button btnSignUp = findViewById(R.id.button_signUp);
++        FirebaseAuth fAuth = FirebaseAuth.getInstance();
++        FirebaseUser currentUser = fAuth.getCurrentUser();
+ 
+-        btnLogin.setOnClickListener(new View.OnClickListener() {
+-            @Override
+-            public void onClick(View v) {
+-                // Start the MainActivity
+-                Intent intent = new Intent(MainActivity.this, LoginPageActivity.class);
+-                startActivity(intent);
+-            }
+-        });
++        if (currentUser == null) {
++            // User is not logged in, navigate to LoginOrSignUpOption
++            Intent intent = new Intent(MainActivity.this, LoginOrSignUpOption.class);
++            startActivity(intent);
++            return; // Early return to prevent further execution
++        }
+ 
+-        btnSignUp.setOnClickListener(new View.OnClickListener() {
++        ImageView profileIcon = findViewById(R.id.profileButton);
++        profileIcon.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View v) {
+-                // Start the SignUpPageActivity
+-                Intent intent = new Intent(MainActivity.this, SignUpPageActivity.class);
++                Intent intent = new Intent(MainActivity.this, ProfilePageActivity.class);
+                 startActivity(intent);
+             }
+         });
+ 
+-        Intent intent = new Intent(MainActivity.this, TrainingMenuActivity.class);
+-        startActivity(intent);
++        //Intent intent = new Intent(MainActivity.this, TrainingMenuActivity.class);
++        //startActivity(intent);
+ 
+     }
+ }
+\ No newline at end of file
+Index: gradle/libs.versions.toml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>[versions]\r\nagp = \"8.3.2\"\r\ngson = \"2.10.1\"\r\njunit = \"4.13.2\"\r\njunitVersion = \"1.1.5\"\r\nespressoCore = \"3.5.1\"\r\nappcompat = \"1.6.1\"\r\nmaterial = \"1.12.0\"\r\nactivity = \"1.9.0\"\r\nconstraintlayout = \"2.1.4\"\r\ngoogleServices = \"4.4.1\"\r\nfirebaseAuth = \"23.0.0\"\r\nfirebaseFirestore = \"25.0.0\"\r\nroundedimageview = \"2.3.0\"\r\nsdpAndroid = \"1.1.1\"\r\n\r\n\r\n[libraries]\r\ngson = { module = \"com.google.code.gson:gson\", name = \"gson\", version.ref = \"gson\" }\r\njunit = { group = \"junit\", name = \"junit\", version.ref = \"junit\" }\r\next-junit = { group = \"androidx.test.ext\", name = \"junit\", version.ref = \"junitVersion\" }\r\nespresso-core = { group = \"androidx.test.espresso\", name = \"espresso-core\", version.ref = \"espressoCore\" }\r\nappcompat = { group = \"androidx.appcompat\", name = \"appcompat\", version.ref = \"appcompat\" }\r\nmaterial = { group = \"com.google.android.material\", name = \"material\", version.ref = \"material\" }\r\nactivity = { group = \"androidx.activity\", name = \"activity\", version.ref = \"activity\" }\r\nconstraintlayout = { group = \"androidx.constraintlayout\", name = \"constraintlayout\", version.ref = \"constraintlayout\" }\r\ngoogle-services = { group = \"com.google.gms\", name = \"google-services\", version.ref = \"googleServices\" }\r\nfirebase-auth = { group = \"com.google.firebase\", name = \"firebase-auth\", version.ref = \"firebaseAuth\" }\r\nfirebase-firestore = { group = \"com.google.firebase\", name = \"firebase-firestore\", version.ref = \"firebaseFirestore\" }\r\nroundedimageview = { group = \"com.makeramen\", name = \"roundedimageview\", version.ref = \"roundedimageview\" }\r\nsdp-android = { group = \"com.intuit.sdp\", name = \"sdp-android\", version.ref = \"sdpAndroid\" }\r\nssp-android = { group = \"com.intuit.ssp\", name = \"ssp-android\", version.ref = \"sspAndroid\" }\r\n\r\n\r\n[plugins]\r\nandroidApplication = { id = \"com.android.application\", version.ref = \"agp\" }\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/gradle/libs.versions.toml b/gradle/libs.versions.toml
+--- a/gradle/libs.versions.toml	
++++ b/gradle/libs.versions.toml	
+@@ -13,6 +13,7 @@
+ firebaseFirestore = "25.0.0"
+ roundedimageview = "2.3.0"
+ sdpAndroid = "1.1.1"
++sspAndroid = "1.1.1"
+ 
+ 
+ [libraries]
+@@ -30,6 +31,7 @@
+ roundedimageview = { group = "com.makeramen", name = "roundedimageview", version.ref = "roundedimageview" }
+ sdp-android = { group = "com.intuit.sdp", name = "sdp-android", version.ref = "sdpAndroid" }
+ ssp-android = { group = "com.intuit.ssp", name = "ssp-android", version.ref = "sspAndroid" }
++intuit-ssp-android = { group = "com.intuit.ssp", name = "ssp-android", version.ref = "sspAndroid" }
+ 
+ 
+ [plugins]
+Index: app/src/main/res/layout/activity_main.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<androidx.constraintlayout.widget.ConstraintLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:id=\"@+id/main\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\"\r\n    tools:context=\".MainActivity\"\r\n    tools:ignore=\"HardcodedText, ContentDescription\" >\r\n\r\n    <View\r\n        android:id=\"@+id/banner\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"0dp\"\r\n        android:background=\"@drawable/banner_bg\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintHeight_percent=\"0.35\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"parent\" />\r\n\r\n    <ImageView\r\n        android:id=\"@+id/fitness\"\r\n        android:layout_width=\"0dp\"\r\n        android:layout_height=\"45dp\"\r\n        android:background=\"@android:color/transparent\"\r\n        android:layout_marginTop=\"30dp\"\r\n        android:layout_marginStart=\"20dp\"\r\n        app:layout_constraintDimensionRatio=\"3:1\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"parent\"\r\n        app:srcCompat=\"@drawable/fitness_pic\" />\r\n\r\n    <ImageButton\r\n        android:id=\"@+id/notiButton\"\r\n        android:layout_width=\"35dp\"\r\n        android:layout_height=\"0dp\"\r\n        android:background=\"@android:color/transparent\"\r\n        android:padding=\"3dp\"\r\n        android:layout_marginTop=\"40dp\"\r\n        android:layout_marginEnd=\"8dp\"\r\n        android:scaleType=\"centerCrop\"\r\n        app:layout_constraintDimensionRatio=\"1:1\"\r\n        app:layout_constraintTop_toTopOf=\"parent\"\r\n        app:layout_constraintEnd_toStartOf=\"@id/profileButton\"\r\n        app:srcCompat=\"@drawable/noti_pic\" />\r\n\r\n    <ImageButton\r\n        android:id=\"@+id/profileButton\"\r\n        android:layout_width=\"40dp\"\r\n        android:layout_height=\"0dp\"\r\n        android:background=\"@drawable/circle\"\r\n        android:padding=\"0dp\"\r\n        android:layout_marginTop=\"38dp\"\r\n        android:layout_marginEnd=\"15dp\"\r\n        android:scaleType=\"centerCrop\"\r\n        app:layout_constraintDimensionRatio=\"1:1\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"parent\"\r\n        app:srcCompat=\"@drawable/profile_pic\" />\r\n\r\n    <TextView\r\n        android:id=\"@+id/textView\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:text=\"Good Morning ☼\"\r\n        android:textSize=\"30sp\"\r\n        android:textStyle=\"bold\"\r\n        android:textColor=\"@color/black\"\r\n        android:layout_marginTop=\"30dp\"\r\n        android:layout_marginStart=\"60dp\"\r\n        app:layout_constraintStart_toStartOf=\"@+id/banner\"\r\n        app:layout_constraintTop_toBottomOf=\"@+id/fitness\" />\r\n\r\n    <TextView\r\n        android:id=\"@+id/textView2\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:text=\"Welcome back, User!!!!!\\nWhat would you like to do today?\"\r\n        android:textSize=\"20sp\"\r\n        android:textColor=\"@color/black\"\r\n        android:fontFamily=\"sans-serif-medium\"\r\n        android:layout_marginTop=\"15dp\"\r\n        android:layout_marginStart=\"65dp\"\r\n        app:layout_constraintStart_toStartOf=\"@+id/banner\"\r\n        app:layout_constraintTop_toBottomOf=\"@+id/textView\" />\r\n\r\n    <!--    Add buttons for your features here :) -->\r\n\r\n    <!--    -->\r\n\r\n    <ImageButton\r\n        android:id=\"@+id/chat_button\"\r\n        android:layout_width=\"50dp\"\r\n        android:layout_height=\"0dp\"\r\n        android:padding=\"0dp\"\r\n        android:layout_margin=\"20dp\"\r\n        android:scaleType=\"centerCrop\"\r\n        app:layout_constraintDimensionRatio=\"1:1\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintBottom_toTopOf=\"@+id/nav\"\r\n        app:srcCompat=\"@drawable/button_chat\" />\r\n\r\n    <com.google.android.material.bottomnavigation.BottomNavigationView\r\n        android:id=\"@+id/nav\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"65dp\"\r\n        app:layout_constraintBottom_toBottomOf=\"parent\" >\r\n\r\n        <androidx.constraintlayout.widget.ConstraintLayout\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"match_parent\"\r\n            android:paddingTop=\"5dp\"\r\n            android:paddingHorizontal=\"30dp\">\r\n\r\n            <ImageButton\r\n                android:id=\"@+id/nav_home\"\r\n                android:layout_width=\"40dp\"\r\n                android:layout_height=\"0dp\"\r\n                android:padding=\"0dp\"\r\n                android:scaleType=\"centerCrop\"\r\n                app:layout_constraintDimensionRatio=\"1:1\"\r\n                app:layout_constraintStart_toStartOf=\"parent\"\r\n                app:layout_constraintEnd_toStartOf=\"@id/nav_food\"\r\n                app:layout_constraintTop_toTopOf=\"parent\"\r\n                app:layout_constraintHorizontal_chainStyle=\"spread_inside\"\r\n                app:srcCompat=\"@drawable/button_home\" />\r\n\r\n            <ImageButton\r\n                android:id=\"@+id/nav_food\"\r\n                android:layout_width=\"40dp\"\r\n                android:layout_height=\"0dp\"\r\n                android:padding=\"0dp\"\r\n                android:scaleType=\"centerCrop\"\r\n                app:layout_constraintDimensionRatio=\"1:1\"\r\n                app:layout_constraintStart_toEndOf=\"@id/nav_home\"\r\n                app:layout_constraintEnd_toStartOf=\"@id/nav_fitness\"\r\n                app:layout_constraintTop_toTopOf=\"parent\"\r\n                app:layout_constraintHorizontal_chainStyle=\"spread_inside\"\r\n                app:srcCompat=\"@drawable/button_food\" />\r\n\r\n            <ImageButton\r\n                android:id=\"@+id/nav_fitness\"\r\n                android:layout_width=\"40dp\"\r\n                android:layout_height=\"0dp\"\r\n                android:padding=\"0dp\"\r\n                android:scaleType=\"centerCrop\"\r\n                app:layout_constraintDimensionRatio=\"1:1\"\r\n                app:layout_constraintEnd_toStartOf=\"@id/nav_calendar\"\r\n                app:layout_constraintHorizontal_chainStyle=\"spread_inside\"\r\n                app:layout_constraintStart_toEndOf=\"@id/nav_food\"\r\n                app:layout_constraintTop_toTopOf=\"parent\"\r\n                app:srcCompat=\"@drawable/button_dumbbell\" />\r\n\r\n            <ImageButton\r\n                android:id=\"@+id/nav_calendar\"\r\n                android:layout_width=\"40dp\"\r\n                android:layout_height=\"0dp\"\r\n                android:padding=\"0dp\"\r\n                android:scaleType=\"centerCrop\"\r\n                app:layout_constraintDimensionRatio=\"1:1\"\r\n                app:layout_constraintStart_toEndOf=\"@id/nav_fitness\"\r\n                app:layout_constraintEnd_toEndOf=\"parent\"\r\n                app:layout_constraintTop_toTopOf=\"parent\"\r\n                app:layout_constraintHorizontal_chainStyle=\"spread_inside\"\r\n                app:srcCompat=\"@drawable/button_calendar\" />\r\n\r\n        </androidx.constraintlayout.widget.ConstraintLayout>\r\n\r\n    </com.google.android.material.bottomnavigation.BottomNavigationView>\r\n\r\n    <Button\r\n        android:id=\"@+id/button_signUp\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_marginStart=\"10dp\"\r\n        android:layout_marginEnd=\"10dp\"\r\n        android:layout_marginBottom=\"10dp\"\r\n        android:backgroundTint=\"#6495ED\"\r\n        android:padding=\"10sp\"\r\n        android:text=\"SIGN UP\"\r\n        app:layout_constraintBottom_toBottomOf=\"parent\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintHorizontal_bias=\"0.0\"\r\n        app:layout_constraintStart_toStartOf=\"parent\" />\r\n\r\n    <Button\r\n        android:id=\"@+id/button_login\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_marginEnd=\"10dp\"\r\n        android:layout_marginStart=\"10dp\"\r\n        android:layout_marginBottom=\"5dp\"\r\n        android:text=\"LOGIN\"\r\n        android:backgroundTint=\"#87CEFA\"\r\n        android:padding=\"10sp\"\r\n        app:layout_constraintBottom_toTopOf=\"@id/button_signUp\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"/>\r\n\r\n    <androidx.cardview.widget.CardView\r\n        android:layout_width=\"250sp\"\r\n        android:layout_height=\"250sp\"\r\n        app:cardCornerRadius=\"20dp\"\r\n        app:cardElevation=\"10dp\"\r\n        app:layout_constraintTop_toTopOf=\"parent\"\r\n        app:layout_constraintBottom_toTopOf=\"@id/button_login\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\">\r\n\r\n        <ImageView\r\n            android:id=\"@+id/appLogo\"\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"match_parent\"\r\n            android:scaleType=\"centerCrop\"\r\n            android:src=\"@drawable/hi\" />\r\n\r\n    </androidx.cardview.widget.CardView>\r\n\r\n\r\n\r\n</androidx.constraintlayout.widget.ConstraintLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/activity_main.xml b/app/src/main/res/layout/activity_main.xml
+--- a/app/src/main/res/layout/activity_main.xml	
++++ b/app/src/main/res/layout/activity_main.xml	
+@@ -53,6 +53,7 @@
+         android:layout_marginTop="38dp"
+         android:layout_marginEnd="15dp"
+         android:scaleType="centerCrop"
++        android:clickable="true"
+         app:layout_constraintDimensionRatio="1:1"
+         app:layout_constraintEnd_toEndOf="parent"
+         app:layout_constraintTop_toTopOf="parent"
+@@ -183,39 +184,5 @@
+         app:layout_constraintHorizontal_bias="0.0"
+         app:layout_constraintStart_toStartOf="parent" />
+ 
+-    <Button
+-        android:id="@+id/button_login"
+-        android:layout_width="match_parent"
+-        android:layout_height="wrap_content"
+-        android:layout_marginEnd="10dp"
+-        android:layout_marginStart="10dp"
+-        android:layout_marginBottom="5dp"
+-        android:text="LOGIN"
+-        android:backgroundTint="#87CEFA"
+-        android:padding="10sp"
+-        app:layout_constraintBottom_toTopOf="@id/button_signUp"
+-        app:layout_constraintEnd_toEndOf="parent"
+-        app:layout_constraintStart_toStartOf="parent"/>
+-
+-    <androidx.cardview.widget.CardView
+-        android:layout_width="250sp"
+-        android:layout_height="250sp"
+-        app:cardCornerRadius="20dp"
+-        app:cardElevation="10dp"
+-        app:layout_constraintTop_toTopOf="parent"
+-        app:layout_constraintBottom_toTopOf="@id/button_login"
+-        app:layout_constraintStart_toStartOf="parent"
+-        app:layout_constraintEnd_toEndOf="parent">
+-
+-        <ImageView
+-            android:id="@+id/appLogo"
+-            android:layout_width="match_parent"
+-            android:layout_height="match_parent"
+-            android:scaleType="centerCrop"
+-            android:src="@drawable/hi" />
+-
+-    </androidx.cardview.widget.CardView>
+-
+-
+ 
+ </androidx.constraintlayout.widget.ConstraintLayout>
+\ No newline at end of file
+Index: app/src/main/java/sg/edu/np/mad/fitnessultimate/loginSignup/LoginOrSignUpOption.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/sg/edu/np/mad/fitnessultimate/loginSignup/LoginOrSignUpOption.java b/app/src/main/java/sg/edu/np/mad/fitnessultimate/loginSignup/LoginOrSignUpOption.java
+new file mode 100644
+--- /dev/null	
++++ b/app/src/main/java/sg/edu/np/mad/fitnessultimate/loginSignup/LoginOrSignUpOption.java	
+@@ -0,0 +1,50 @@
++package sg.edu.np.mad.fitnessultimate.loginSignup;
++
++import android.content.Intent;
++import android.os.Bundle;
++import android.view.View;
++import android.widget.Button;
++
++import androidx.activity.EdgeToEdge;
++import androidx.appcompat.app.AppCompatActivity;
++import androidx.core.graphics.Insets;
++import androidx.core.view.ViewCompat;
++import androidx.core.view.WindowInsetsCompat;
++
++import sg.edu.np.mad.fitnessultimate.R;
++import sg.edu.np.mad.fitnessultimate.R.id;
++
++public class LoginOrSignUpOption extends AppCompatActivity {
++    @Override
++    protected void onCreate(Bundle savedInstanceState) {
++        super.onCreate(savedInstanceState);
++        EdgeToEdge.enable(this);
++        setContentView(R.layout.activity_login_or_sign_up_option);
++        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
++            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
++            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
++            return insets;
++        });
++
++        Button btnLogin = findViewById(R.id.button_login);
++        Button btnSignUp = findViewById(R.id.button_signUp);
++
++        btnLogin.setOnClickListener(new View.OnClickListener() {
++            @Override
++            public void onClick(View v) {
++                // Start the MainActivity
++                Intent intent = new Intent(LoginOrSignUpOption.this, LoginPageActivity.class);
++                startActivity(intent);
++            }
++        });
++
++        btnSignUp.setOnClickListener(new View.OnClickListener() {
++            @Override
++            public void onClick(View v) {
++                // Start the SignUpPageActivity
++                Intent intent = new Intent(LoginOrSignUpOption.this, SignUpPageActivity.class);
++                startActivity(intent);
++            }
++        });
++    }
++}
+\ No newline at end of file
+Index: app/src/main/res/layout/activity_login_or_sign_up_option.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/activity_login_or_sign_up_option.xml b/app/src/main/res/layout/activity_login_or_sign_up_option.xml
+new file mode 100644
+--- /dev/null	
++++ b/app/src/main/res/layout/activity_login_or_sign_up_option.xml	
+@@ -0,0 +1,60 @@
++<?xml version="1.0" encoding="utf-8"?>
++<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
++    xmlns:app="http://schemas.android.com/apk/res-auto"
++    xmlns:tools="http://schemas.android.com/tools"
++    android:id="@+id/main"
++    android:layout_width="match_parent"
++    android:layout_height="match_parent"
++    tools:context=".loginSignup.LoginOrSignUpOption">
++
++    <Button
++        android:id="@+id/button_login"
++        android:layout_width="match_parent"
++        android:layout_height="wrap_content"
++        android:layout_marginEnd="10dp"
++        android:layout_marginStart="10dp"
++        android:layout_marginBottom="5dp"
++        android:text="LOGIN"
++        android:backgroundTint="#87CEFA"
++        android:padding="10sp"
++        app:layout_constraintBottom_toTopOf="@id/button_signUp"
++        app:layout_constraintEnd_toEndOf="parent"
++        app:layout_constraintStart_toStartOf="parent"/>
++
++    <Button
++        android:id="@+id/button_signUp"
++        android:layout_width="match_parent"
++        android:layout_height="wrap_content"
++        android:layout_marginStart="10dp"
++        android:layout_marginEnd="10dp"
++        android:layout_marginBottom="10dp"
++        android:backgroundTint="#6495ED"
++        android:padding="10sp"
++        android:text="SIGN UP"
++        app:layout_constraintBottom_toBottomOf="parent"
++        app:layout_constraintEnd_toEndOf="parent"
++        app:layout_constraintHorizontal_bias="0.0"
++        app:layout_constraintStart_toStartOf="parent" />
++
++
++
++    <androidx.cardview.widget.CardView
++        android:layout_width="250sp"
++        android:layout_height="250sp"
++        app:cardCornerRadius="20dp"
++        app:cardElevation="10dp"
++        app:layout_constraintTop_toTopOf="parent"
++        app:layout_constraintBottom_toTopOf="@id/button_login"
++        app:layout_constraintStart_toStartOf="parent"
++        app:layout_constraintEnd_toEndOf="parent">
++
++        <ImageView
++            android:id="@+id/appLogo"
++            android:layout_width="match_parent"
++            android:layout_height="match_parent"
++            android:scaleType="centerCrop"
++            android:src="@drawable/hi" />
++
++    </androidx.cardview.widget.CardView>
++
++</androidx.constraintlayout.widget.ConstraintLayout>
+Index: app/build.gradle.kts
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>plugins {\r\n    alias(libs.plugins.androidApplication)\r\n    id(\"com.google.gms.google-services\")\r\n}\r\n\r\nandroid {\r\n    namespace = \"sg.edu.np.mad.fitnessultimate\"\r\n    compileSdk = 34\r\n\r\n    defaultConfig {\r\n        applicationId = \"sg.edu.np.mad.fitnessultimate\"\r\n        minSdk = 33\r\n        targetSdk = 34\r\n        versionCode = 1\r\n        versionName = \"1.0\"\r\n\r\n        testInstrumentationRunner = \"androidx.test.runner.AndroidJUnitRunner\"\r\n    }\r\n\r\n    buildTypes {\r\n        release {\r\n            isMinifyEnabled = false\r\n            proguardFiles(getDefaultProguardFile(\"proguard-android-optimize.txt\"), \"proguard-rules.pro\")\r\n        }\r\n    }\r\n    compileOptions {\r\n        sourceCompatibility = JavaVersion.VERSION_1_8\r\n        targetCompatibility = JavaVersion.VERSION_1_8\r\n    }\r\n}\r\n\r\ndependencies {\r\n    implementation(libs.appcompat)\r\n    implementation(libs.material)\r\n    implementation(libs.activity)\r\n    implementation(libs.constraintlayout)\r\n    implementation(libs.firebase.auth)\r\n\r\n    implementation(libs.firebase.firestore)\r\n    implementation(libs.firebase.auth)\r\n    implementation(libs.gson)\r\n    implementation(libs.roundedimageview)\r\n    implementation(libs.sdp.android)\r\n    implementation(libs.ssp.android)\r\n    testImplementation(libs.junit)\r\n    androidTestImplementation(libs.ext.junit)\r\n    androidTestImplementation(libs.espresso.core)\r\n    //Import firebase\r\n}\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/build.gradle.kts b/app/build.gradle.kts
+--- a/app/build.gradle.kts	
++++ b/app/build.gradle.kts	
+@@ -42,9 +42,13 @@
+     implementation(libs.roundedimageview)
+     implementation(libs.sdp.android)
+     implementation(libs.ssp.android)
++    implementation(libs.intuit.ssp.android)
+     testImplementation(libs.junit)
+     androidTestImplementation(libs.ext.junit)
+     androidTestImplementation(libs.espresso.core)
+-    //Import firebase
++    // Import the Firebase BoM
++    implementation(platform("com.google.firebase:firebase-bom:33.0.0"))
++    implementation("com.google.android.gms:play-services-auth:20.2.0")
++    implementation("androidx.activity:activity-ktx:1.6.1")
+ }
+ 
+Index: app/src/main/res/layout/activity_sign_up_page.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<androidx.constraintlayout.widget.ConstraintLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:id=\"@+id/main\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\"\r\n    tools:context=\".activity.SignUpPageActivity\">\r\n\r\n    <ImageView\r\n        android:id=\"@+id/arrow_left2\"\r\n        android:layout_width=\"28dp\"\r\n        android:layout_height=\"28dp\"\r\n        android:layout_marginStart=\"48dp\"\r\n        android:layout_marginTop=\"60dp\"\r\n        android:clipToOutline=\"true\"\r\n        android:clickable=\"true\"\r\n        android:src=\"@drawable/arrow\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"parent\" />\r\n\r\n    <TextView\r\n        android:id=\"@+id/signUpheader1\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_marginTop=\"36dp\"\r\n        android:text=\"Let’s Register\"\r\n        android:textSize=\"30sp\"\r\n        android:textStyle=\"bold\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintHorizontal_bias=\"0.265\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toBottomOf=\"@id/arrow_left2\" />\r\n\r\n    <TextView\r\n        android:id=\"@+id/signUpheader2\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:text=\"Account\"\r\n        android:textSize=\"30sp\"\r\n        android:textStyle=\"bold\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintHorizontal_bias=\"0.2\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toBottomOf=\"@id/signUpheader1\" />\r\n\r\n    <TextView\r\n        android:id=\"@+id/signUpBody1\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_marginStart=\"60dp\"\r\n        android:layout_marginTop=\"20dp\"\r\n        android:text=\"Hello user, you have a\"\r\n        android:textSize=\"20sp\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toBottomOf=\"@id/signUpheader2\" />\r\n\r\n    <TextView\r\n        android:id=\"@+id/signUpBody2\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_marginStart=\"60dp\"\r\n        android:text=\"greatful journey\"\r\n        android:textSize=\"20sp\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toBottomOf=\"@id/signUpBody1\" />\r\n\r\n    <com.google.android.material.textfield.TextInputLayout\r\n        android:id=\"@+id/textInputUsername\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        app:cardCornerRadius=\"10dp\"\r\n        android:layout_marginTop=\"35dp\"\r\n        android:layout_marginStart=\"58dp\"\r\n        android:layout_marginEnd=\"58dp\"\r\n        app:boxStrokeColor=\"#900090\"\r\n        app:boxBackgroundColor=\"#DDDDDD\"\r\n        app:endIconMode=\"clear_text\"\r\n        app:layout_constraintTop_toBottomOf=\"@id/signUpBody2\">\r\n\r\n        <com.google.android.material.textfield.TextInputEditText\r\n            android:id=\"@+id/inputUsername\"\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:hint=\"Username\"\r\n            android:singleLine=\"true\" />\r\n    </com.google.android.material.textfield.TextInputLayout>\r\n\r\n    <com.google.android.material.textfield.TextInputLayout\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        app:cardCornerRadius=\"10dp\"\r\n        android:layout_marginTop=\"105dp\"\r\n        android:layout_marginStart=\"58dp\"\r\n        android:layout_marginEnd=\"58dp\"\r\n        app:boxStrokeColor=\"#900090\"\r\n        app:boxBackgroundColor=\"#DDDDDD\"\r\n        app:endIconMode=\"clear_text\"\r\n        app:layout_constraintTop_toBottomOf=\"@id/signUpBody2\">\r\n\r\n        <com.google.android.material.textfield.TextInputEditText\r\n            android:id=\"@+id/inputEmail\"\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:hint=\"Email\"\r\n            android:singleLine=\"true\" />\r\n    </com.google.android.material.textfield.TextInputLayout>\r\n\r\n    <com.google.android.material.textfield.TextInputLayout\r\n        android:id=\"@+id/textInputPassword\"\r\n        style=\"@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_marginTop=\"176dp\"\r\n        android:layout_marginStart=\"58dp\"\r\n        android:layout_marginEnd=\"58dp\"\r\n        app:boxStrokeColor=\"#900090\"\r\n        app:boxBackgroundColor=\"#DDDDDD\"\r\n        app:endIconMode=\"password_toggle\"\r\n        app:layout_constraintTop_toBottomOf=\"@id/signUpBody2\">\r\n\r\n        <com.google.android.material.textfield.TextInputEditText\r\n            android:id=\"@+id/inputPassword\"\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:hint=\"Password\"\r\n            android:inputType=\"textPassword\"\r\n            android:singleLine=\"true\" />\r\n    </com.google.android.material.textfield.TextInputLayout>\r\n\r\n    <com.google.android.material.textfield.TextInputLayout\r\n        android:id=\"@+id/textInputConfirmPassword\"\r\n        style=\"@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_marginTop=\"275dp\"\r\n        android:layout_marginStart=\"58dp\"\r\n        android:layout_marginEnd=\"58dp\"\r\n        app:boxStrokeColor=\"#900090\"\r\n        app:boxBackgroundColor=\"#DDDDDD\"\r\n        app:endIconMode=\"password_toggle\"\r\n        app:layout_constraintTop_toTopOf=\"@id/signUpBody2\">\r\n\r\n        <com.google.android.material.textfield.TextInputEditText\r\n            android:id=\"@+id/inputConfirmPassword\"\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:hint=\"Confirm Password\"\r\n            android:inputType=\"textPassword\"\r\n            android:singleLine=\"true\" />\r\n    </com.google.android.material.textfield.TextInputLayout>\r\n\r\n    <Button\r\n        android:id=\"@+id/button_signUp2\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_marginTop=\"370dp\"\r\n        android:layout_marginStart=\"58dp\"\r\n        android:layout_marginEnd=\"58dp\"\r\n        android:text=\"Sign up\"\r\n        android:backgroundTint=\"#6495ED\"\r\n        app:layout_constraintTop_toBottomOf=\"@id/signUpBody2\" />\r\n\r\n    <TextView\r\n        android:id=\"@+id/accountQn2\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_marginEnd=\"50dp\"\r\n        android:layout_marginTop=\"35dp\"\r\n        android:text=\"Already have an account? \"\r\n        android:textSize=\"13sp\"\r\n        android:textStyle=\"bold\"\r\n        app:layout_constraintTop_toBottomOf=\"@id/button_signUp2\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\" />\r\n\r\n    <TextView\r\n        android:id=\"@+id/login\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_marginStart=\"155dp\"\r\n        android:layout_marginTop=\"35dp\"\r\n        android:clickable=\"true\"\r\n        android:text=\"Login\"\r\n        android:textColor=\"#3C74E1\"\r\n        android:textSize=\"13sp\"\r\n        android:textStyle=\"bold\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintHorizontal_bias=\"0.462\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toBottomOf=\"@id/button_signUp2\" />\r\n\r\n    <ProgressBar\r\n        android:id=\"@+id/progressBar\"\r\n        android:layout_width=\"51dp\"\r\n        android:layout_height=\"41dp\"\r\n        android:layout_marginTop=\"90dp\"\r\n        android:visibility=\"invisible\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toBottomOf=\"@id/button_signUp2\" />\r\n\r\n</androidx.constraintlayout.widget.ConstraintLayout>
+===================================================================
+diff --git a/app/src/main/res/layout/activity_sign_up_page.xml b/app/src/main/res/layout/activity_sign_up_page.xml
+--- a/app/src/main/res/layout/activity_sign_up_page.xml	
++++ b/app/src/main/res/layout/activity_sign_up_page.xml	
+@@ -5,7 +5,7 @@
+     android:id="@+id/main"
+     android:layout_width="match_parent"
+     android:layout_height="match_parent"
+-    tools:context=".activity.SignUpPageActivity">
++    tools:context=".loginSignup.SignUpPageActivity">
+ 
+     <ImageView
+         android:id="@+id/arrow_left2"
+Index: app/src/main/res/layout/activity_edit_profile_page.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<androidx.constraintlayout.widget.ConstraintLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:id=\"@+id/main\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\"\r\n    tools:context=\".activity.EditProfilePageActivity\">\r\n\r\n    <ImageView\r\n        android:id=\"@+id/arrow_left1\"\r\n        android:layout_width=\"28dp\"\r\n        android:layout_height=\"28dp\"\r\n        android:layout_marginStart=\"48dp\"\r\n        android:layout_marginTop=\"60dp\"\r\n        android:clipToOutline=\"true\"\r\n        android:clickable=\"true\"\r\n        android:src=\"@drawable/arrow\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"parent\" />\r\n\r\n    <TextView\r\n        android:id=\"@+id/editProfile\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:text=\"Edit Profile\"\r\n        android:textStyle=\"bold\"\r\n        android:textSize=\"22dp\"\r\n        android:layout_marginTop=\"110dp\"\r\n        app:layout_constraintTop_toTopOf=\"parent\"\r\n        app:layout_constraintRight_toRightOf=\"parent\"\r\n        app:layout_constraintLeft_toLeftOf=\"parent\" />\r\n\r\n    <ImageView\r\n        android:id=\"@+id/editProfilePic\"\r\n        android:layout_width=\"130dp\"\r\n        android:layout_height=\"130dp\"\r\n        app:srcCompat=\"@android:drawable/sym_def_app_icon\"\r\n        android:layout_marginTop=\"20dp\"\r\n        app:layout_constraintTop_toBottomOf=\"@id/editProfile\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\" />\r\n\r\n    <com.google.android.material.textfield.TextInputLayout\r\n        android:id=\"@+id/editInputUsername\"\r\n        style=\"@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        app:cardCornerRadius=\"10dp\"\r\n        android:layout_marginTop=\"35dp\"\r\n        android:layout_marginStart=\"58dp\"\r\n        android:layout_marginEnd=\"58dp\"\r\n        app:boxStrokeColor=\"#900090\"\r\n        app:boxBackgroundColor=\"#DDDDDD\"\r\n        app:endIconMode=\"clear_text\"\r\n        app:layout_constraintTop_toBottomOf=\"@id/editProfilePic\">\r\n\r\n        <com.google.android.material.textfield.TextInputEditText\r\n            android:id=\"@+id/inputUsername\"\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:hint=\"Username\"\r\n            android:singleLine=\"true\" />\r\n    </com.google.android.material.textfield.TextInputLayout>\r\n\r\n    <com.google.android.material.textfield.TextInputLayout\r\n        android:id=\"@+id/editInputEmail\"\r\n        style=\"@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_marginTop=\"15dp\"\r\n        android:layout_marginStart=\"58dp\"\r\n        android:layout_marginEnd=\"58dp\"\r\n        app:boxStrokeColor=\"#900090\"\r\n        app:boxBackgroundColor=\"#DDDDDD\"\r\n        app:layout_constraintTop_toBottomOf=\"@id/editInputUsername\">\r\n\r\n        <com.google.android.material.textfield.TextInputEditText\r\n            android:id=\"@+id/inputEmail\"\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:hint=\"Email\"\r\n            android:singleLine=\"true\" />\r\n    </com.google.android.material.textfield.TextInputLayout>\r\n\r\n    <Button\r\n        android:id=\"@+id/saveBtn\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_marginTop=\"540dp\"\r\n        android:text=\"SAVE\"\r\n        android:backgroundTint=\"#141ab8\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toBottomOf=\"@id/editProfile\" />\r\n\r\n\r\n</androidx.constraintlayout.widget.ConstraintLayout>
+===================================================================
+diff --git a/app/src/main/res/layout/activity_edit_profile_page.xml b/app/src/main/res/layout/activity_edit_profile_page.xml
+--- a/app/src/main/res/layout/activity_edit_profile_page.xml	
++++ b/app/src/main/res/layout/activity_edit_profile_page.xml	
+@@ -5,7 +5,7 @@
+     android:id="@+id/main"
+     android:layout_width="match_parent"
+     android:layout_height="match_parent"
+-    tools:context=".activity.EditProfilePageActivity">
++    tools:context=".loginSignup.EditProfilePageActivity">
+ 
+     <ImageView
+         android:id="@+id/arrow_left1"
+Index: app/src/main/res/layout/activity_login_page.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<androidx.constraintlayout.widget.ConstraintLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:id=\"@+id/main\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\"\r\n    tools:context=\".activity.LoginPageActivity\">\r\n\r\n    <ImageView\r\n        android:id=\"@+id/arrow_left1\"\r\n        android:layout_width=\"28dp\"\r\n        android:layout_height=\"28dp\"\r\n        android:layout_marginStart=\"48dp\"\r\n        android:layout_marginTop=\"60dp\"\r\n        android:clipToOutline=\"true\"\r\n        android:clickable=\"true\"\r\n        android:src=\"@drawable/arrow\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"parent\" />\r\n\r\n\r\n    <TextView\r\n        android:id=\"@+id/loginHeader1\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_marginTop=\"36dp\"\r\n        android:text=\"Let's Sign you in.\"\r\n        android:textSize=\"30sp\"\r\n        android:textStyle=\"bold\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintHorizontal_bias=\"0.329\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toBottomOf=\"@id/arrow_left1\" />\r\n\r\n    <TextView\r\n        android:id=\"@+id/body1\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_marginStart=\"60dp\"\r\n        android:layout_marginTop=\"20dp\"\r\n        android:text=\"Welcome Back,\"\r\n        android:textSize=\"20sp\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toBottomOf=\"@id/loginHeader1\" />\r\n\r\n    <TextView\r\n        android:id=\"@+id/body2\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_marginStart=\"60dp\"\r\n        android:text=\"you have been missed\"\r\n        android:textSize=\"20sp\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toBottomOf=\"@id/body1\" />\r\n\r\n    <com.google.android.material.textfield.TextInputLayout\r\n        android:id=\"@+id/textInputEmailUsername\"\r\n        style=\"@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        app:cardCornerRadius=\"10dp\"\r\n        android:layout_marginTop=\"35dp\"\r\n        android:layout_marginStart=\"58dp\"\r\n        android:layout_marginEnd=\"58dp\"\r\n        app:boxStrokeColor=\"#900090\"\r\n        app:boxBackgroundColor=\"#DDDDDD\"\r\n        app:endIconMode=\"clear_text\"\r\n        app:layout_constraintTop_toBottomOf=\"@id/body2\">\r\n\r\n        <com.google.android.material.textfield.TextInputEditText\r\n            android:id=\"@+id/inputEmailUsername\"\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:hint=\"Email, Username\"\r\n            android:singleLine=\"true\" />\r\n    </com.google.android.material.textfield.TextInputLayout>\r\n\r\n    <com.google.android.material.textfield.TextInputLayout\r\n        android:id=\"@+id/textInputLoginPassword\"\r\n        style=\"@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_marginTop=\"105dp\"\r\n        android:layout_marginStart=\"58dp\"\r\n        android:layout_marginEnd=\"58dp\"\r\n        app:boxStrokeColor=\"#900090\"\r\n        app:boxBackgroundColor=\"#DDDDDD\"\r\n        app:endIconMode=\"password_toggle\"\r\n        app:layout_constraintTop_toBottomOf=\"@id/body2\">\r\n\r\n        <com.google.android.material.textfield.TextInputEditText\r\n            android:id=\"@+id/inputLoginPassword\"\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:hint=\"Password\"\r\n            android:inputType=\"textPassword\"\r\n            android:singleLine=\"true\" />\r\n    </com.google.android.material.textfield.TextInputLayout>\r\n\r\n    <TextView\r\n        android:id=\"@+id/forgotPassword\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:text=\"Forgot Password?\"\r\n        android:textSize=\"12dp\"\r\n        android:textStyle=\"bold\"\r\n        android:textColor=\"#3C74E1\"\r\n        android:clickable=\"true\"\r\n        android:layout_marginTop=\"10dp\"\r\n        android:layout_marginLeft=\"190dp\"\r\n        app:layout_constraintTop_toBottomOf=\"@id/textInputLoginPassword\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        />\r\n\r\n    <Button\r\n        android:id=\"@+id/button_signIn\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_marginTop=\"205dp\"\r\n        android:layout_marginStart=\"58dp\"\r\n        android:layout_marginEnd=\"58dp\"\r\n        android:text=\"Sign in\"\r\n        android:backgroundTint=\"#6495ED\"\r\n        app:layout_constraintTop_toBottomOf=\"@id/body2\" />\r\n\r\n    <View\r\n        android:id=\"@+id/divider1\"\r\n        android:layout_width=\"140dp\"\r\n        android:layout_height=\"1dp\"\r\n        android:layout_marginTop=\"288dp\"\r\n        android:layout_marginStart=\"40dp\"\r\n        android:background=\"#000000\"\r\n        app:layout_constraintTop_toBottomOf=\"@id/body2\"\r\n        app:layout_constraintStart_toStartOf=\"parent\" />\r\n\r\n    <View\r\n        android:id=\"@+id/divider2\"\r\n        android:layout_width=\"140dp\"\r\n        android:layout_height=\"1dp\"\r\n        android:layout_marginTop=\"288dp\"\r\n        android:layout_marginStart=\"235dp\"\r\n        android:background=\"#000000\"\r\n        app:layout_constraintTop_toBottomOf=\"@id/body2\"\r\n        app:layout_constraintStart_toStartOf=\"parent\" />\r\n\r\n    <TextView\r\n        android:id=\"@+id/or\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_marginTop=\"275dp\"\r\n        android:text=\"or\"\r\n        android:textSize=\"16sp\"\r\n        app:layout_constraintTop_toBottomOf=\"@id/body2\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\" />\r\n\r\n    <com.google.android.gms.common.SignInButton\r\n        android:id=\"@+id/googleLogo\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_marginTop=\"25dp\"\r\n        android:clickable=\"true\"\r\n        app:buttonSize=\"wide\"\r\n        app:layout_constraintTop_toBottomOf=\"@+id/or\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"/>\r\n\r\n    <TextView\r\n        android:id=\"@+id/accountQn1\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_marginTop=\"44dp\"\r\n        android:layout_marginEnd=\"80dp\"\r\n        android:text=\"Don't have an account?  \"\r\n        android:textSize=\"13sp\"\r\n        android:textStyle=\"bold\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintHorizontal_bias=\"0.482\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toBottomOf=\"@id/googleLogo\" />\r\n\r\n    <TextView\r\n        android:id=\"@+id/registerNow\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_marginStart=\"125dp\"\r\n        android:layout_marginTop=\"45dp\"\r\n        android:text=\"Register Now\"\r\n        android:textSize=\"13sp\"\r\n        android:textStyle=\"bold\"\r\n        android:textColor=\"#3C74E1\"\r\n        android:clickable=\"true\"\r\n        app:layout_constraintTop_toBottomOf=\"@id/googleLogo\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\" />\r\n\r\n    <ProgressBar\r\n        android:id=\"@+id/loginProgressBar\"\r\n        android:layout_width=\"51dp\"\r\n        android:layout_height=\"41dp\"\r\n        android:layout_marginTop=\"200dp\"\r\n        android:visibility=\"invisible\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toBottomOf=\"@id/button_signIn\" />\r\n\r\n\r\n</androidx.constraintlayout.widget.ConstraintLayout>
+===================================================================
+diff --git a/app/src/main/res/layout/activity_login_page.xml b/app/src/main/res/layout/activity_login_page.xml
+--- a/app/src/main/res/layout/activity_login_page.xml	
++++ b/app/src/main/res/layout/activity_login_page.xml	
+@@ -5,7 +5,7 @@
+     android:id="@+id/main"
+     android:layout_width="match_parent"
+     android:layout_height="match_parent"
+-    tools:context=".activity.LoginPageActivity">
++    tools:context=".loginSignup.LoginPageActivity">
+ 
+     <ImageView
+         android:id="@+id/arrow_left1"
+Index: app/src/main/res/layout/activity_profile_page.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<androidx.constraintlayout.widget.ConstraintLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:id=\"@+id/main\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\"\r\n    tools:context=\".activity.ProfilePageActivity\">\r\n\r\n    <ImageView\r\n        android:id=\"@+id/arrow_left1\"\r\n        android:layout_width=\"28dp\"\r\n        android:layout_height=\"28dp\"\r\n        android:layout_marginStart=\"48dp\"\r\n        android:layout_marginTop=\"60dp\"\r\n        android:clipToOutline=\"true\"\r\n        android:clickable=\"true\"\r\n        android:src=\"@drawable/arrow\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"parent\" />\r\n\r\n    <TextView\r\n        android:id=\"@+id/yourProfile\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:text=\"Your Profile\"\r\n        android:textStyle=\"bold\"\r\n        android:textSize=\"22dp\"\r\n        android:layout_marginTop=\"110dp\"\r\n        app:layout_constraintTop_toTopOf=\"parent\"\r\n        app:layout_constraintRight_toRightOf=\"parent\"\r\n        app:layout_constraintLeft_toLeftOf=\"parent\" />\r\n\r\n    <ImageView\r\n        android:id=\"@+id/profilePic\"\r\n        android:layout_width=\"130dp\"\r\n        android:layout_height=\"130dp\"\r\n        app:srcCompat=\"@android:drawable/sym_def_app_icon\"\r\n        android:layout_marginTop=\"20dp\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintTop_toBottomOf=\"@+id/yourProfile\" />\r\n\r\n    <TextView\r\n        android:id=\"@+id/yourUsername\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:text=\"Your Username\"\r\n        android:textSize=\"20dp\"\r\n        android:textStyle=\"bold\"\r\n        android:layout_marginTop=\"20dp\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintTop_toBottomOf=\"@+id/profilePic\" />\r\n\r\n    <TextView\r\n        android:id=\"@+id/yourEmailAddress\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:text=\"Your Email Address\"\r\n        android:textSize=\"14dp\"\r\n        android:layout_marginTop=\"10dp\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintTop_toBottomOf=\"@+id/yourUsername\" />\r\n\r\n    <Button\r\n        android:id=\"@+id/logOutBtn\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_marginTop=\"570dp\"\r\n        android:text=\"LOG OUT\"\r\n        android:onClick=\"logout\"\r\n        android:backgroundTint=\"#141ab8\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toBottomOf=\"@id/yourProfile\" />\r\n\r\n    <Button\r\n        android:id=\"@+id/editProfile\"\r\n        android:layout_width=\"130dp\"\r\n        android:layout_height=\"50dp\"\r\n        android:text=\"Edit Profile\"\r\n        android:backgroundTint=\"#87CEFA\"\r\n        android:layout_marginTop=\"15dp\"\r\n        app:layout_constraintTop_toBottomOf=\"@id/yourEmailAddress\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\" />\r\n\r\n    <LinearLayout\r\n        android:id=\"@+id/buttonWidgets\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:orientation=\"vertical\"\r\n        android:layout_marginStart=\"20dp\"\r\n        android:layout_marginEnd=\"20dp\"\r\n        android:layout_marginTop=\"40dp\"\r\n        android:padding=\"15dp\"\r\n        android:clickable=\"true\"\r\n        android:background=\"@drawable/rounded_background\"\r\n        app:layout_constraintTop_toBottomOf=\"@+id/editProfile\">\r\n\r\n        <!-- Change Password-->\r\n        <RelativeLayout\r\n            android:id=\"@+id/changePassword\"\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:clickable=\"true\">\r\n\r\n            <androidx.cardview.widget.CardView\r\n                android:layout_width=\"40dp\"\r\n                android:layout_height=\"40dp\"\r\n                app:cardCornerRadius=\"20dp\"\r\n                app:cardBackgroundColor=\"#60FFFFFF\"\r\n                app:cardElevation=\"0dp\">\r\n\r\n                <ImageView\r\n                    android:id=\"@+id/icon\"\r\n                    android:layout_width=\"match_parent\"\r\n                    android:layout_height=\"match_parent\"\r\n                    android:scaleType=\"centerInside\"\r\n                    android:src=\"@android:drawable/ic_lock_idle_lock\" />\r\n            </androidx.cardview.widget.CardView>\r\n\r\n            <TextView\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_centerVertical=\"true\"\r\n                android:textSize=\"16dp\"\r\n                android:layout_marginLeft=\"60dp\"\r\n                android:text=\"Change Password\"\r\n                android:textStyle=\"bold\" />\r\n\r\n            <ImageView\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:src=\"@drawable/right_arrow_icon\"\r\n                android:layout_alignParentEnd=\"true\"\r\n                android:layout_centerVertical=\"true\"/>\r\n        </RelativeLayout>\r\n    </LinearLayout>\r\n\r\n\r\n\r\n\r\n</androidx.constraintlayout.widget.ConstraintLayout>
+===================================================================
+diff --git a/app/src/main/res/layout/activity_profile_page.xml b/app/src/main/res/layout/activity_profile_page.xml
+--- a/app/src/main/res/layout/activity_profile_page.xml	
++++ b/app/src/main/res/layout/activity_profile_page.xml	
+@@ -5,7 +5,7 @@
+     android:id="@+id/main"
+     android:layout_width="match_parent"
+     android:layout_height="match_parent"
+-    tools:context=".activity.ProfilePageActivity">
++    tools:context=".loginSignup.ProfilePageActivity">
+ 
+     <ImageView
+         android:id="@+id/arrow_left1"
+Index: app/src/main/res/layout/activity_splash.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<androidx.constraintlayout.widget.ConstraintLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:id=\"@+id/main\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\"\r\n    tools:context=\".activity.SplashActivity\">\r\n\r\n    <androidx.cardview.widget.CardView\r\n        android:layout_width=\"250sp\"\r\n        android:layout_height=\"250sp\"\r\n        app:cardCornerRadius=\"20dp\"\r\n        app:cardElevation=\"10dp\"\r\n        app:layout_constraintTop_toTopOf=\"parent\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintBottom_toBottomOf=\"parent\">\r\n\r\n        <ImageView\r\n            android:id=\"@+id/appLogo\"\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"match_parent\"\r\n            android:scaleType=\"centerCrop\"\r\n            android:src=\"@drawable/hi\" />\r\n\r\n    </androidx.cardview.widget.CardView>\r\n\r\n</androidx.constraintlayout.widget.ConstraintLayout>
+===================================================================
+diff --git a/app/src/main/res/layout/activity_splash.xml b/app/src/main/res/layout/activity_splash.xml
+--- a/app/src/main/res/layout/activity_splash.xml	
++++ b/app/src/main/res/layout/activity_splash.xml	
+@@ -5,7 +5,7 @@
+     android:id="@+id/main"
+     android:layout_width="match_parent"
+     android:layout_height="match_parent"
+-    tools:context=".activity.SplashActivity">
++    tools:context=".loginSignup.SplashActivity">
+ 
+     <androidx.cardview.widget.CardView
+         android:layout_width="250sp"

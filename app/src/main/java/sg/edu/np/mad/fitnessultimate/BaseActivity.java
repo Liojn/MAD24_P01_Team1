@@ -46,9 +46,20 @@ public class BaseActivity extends AppCompatActivity {
         try {
             super.onPause();
 
+<<<<<<< HEAD
             FirebaseFirestore db = FirebaseFirestore.getInstance();
             FirebaseAuth fAuth = FirebaseAuth.getInstance();
             String userId = fAuth.getCurrentUser().getUid();
+=======
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+        if (FirebaseAuth.getInstance().getCurrentUser() == null) {
+            Log.e("BaseActivity", "User is not authenticated. Stopping onPause.");
+            return;
+        }
+
+        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+>>>>>>> c2bf8b5b669f4443abcb052a6ca3a5677416c8e9
 
             // Get the start time from shared preferences
             SharedPreferences preferences = getSharedPreferences("TimeTrackerPrefs", MODE_PRIVATE);

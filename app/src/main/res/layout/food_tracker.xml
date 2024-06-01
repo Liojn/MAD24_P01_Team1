@@ -6,20 +6,28 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+<<<<<<< HEAD
     tools:context=".foodtracker.FoodTracker">
 
+=======
+    android:background="#2D3250"
+    tools:context=".food.FoodTracker">
+>>>>>>> c2bf8b5b669f4443abcb052a6ca3a5677416c8e9
 
+    <!-- Title TextView -->
     <TextView
         android:id="@+id/tvTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Calories Diary"
         android:padding="15dp"
-        android:textSize="30dp"
+        android:textSize="30sp"
         android:textStyle="bold"
+        android:textColor="@color/white"
+        android:fontFamily="sans-serif-condensed-medium"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>
-
+    <!-- Header layout that contain date -->
     <LinearLayout
         android:id="@+id/header"
         android:layout_width="match_parent"
@@ -28,16 +36,20 @@
         android:gravity="center"
         app:layout_constraintTop_toBottomOf="@+id/tvTitle">
 
-        <Button
-            android:id="@+id/btnToday"
+        <TextView
+            android:id="@+id/textToday"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
-            android:text="Today" />
+            android:text="Today"
+            android:textSize="18sp"
+            android:textColor="@color/white"
+            android:fontFamily="sans-serif-condensed-medium" />
 
     </LinearLayout>
 
+    <!-- Layout for displaying daily calories goals and a button -->
     <LinearLayout
         android:id="@+id/caloriesGoal"
         android:layout_width="match_parent"
@@ -52,23 +64,30 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="daily intake /"
-            android:textSize="30dp"/>
+            android:textSize="30sp"
+            android:textColor="@color/white"
+            android:fontFamily="sans-serif-condensed-medium"/>
 
         <TextView
             android:id="@+id/totalCalories"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="total"
-            android:textSize="15dp"/>
+            android:textSize="20sp"
+            android:textColor="@color/white"
+            android:fontFamily="sans-serif-condensed-medium"/>
 
         <Button
             android:id="@+id/btnlogDetails"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Log Details"/>
+            android:text="Log Details"
+            android:textColor="@color/white"
+            android:fontFamily="sans-serif-condensed-medium"/>
 
     </LinearLayout>
 
+    <!-- Layout for displaying nutrients information with progress bars -->
     <LinearLayout
         android:id="@+id/nutrients"
         android:layout_width="match_parent"
@@ -78,7 +97,7 @@
         android:gravity="center"
         app:layout_constraintTop_toBottomOf="@+id/caloriesGoal">
 
-
+        <!-- Carbohydrates -->
         <LinearLayout
             android:id="@+id/carbsContainer"
             android:layout_width="wrap_content"
@@ -90,7 +109,9 @@
                 android:id="@+id/carbs"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Carbs: " />
+                android:text="Carbs: "
+                android:textColor="@color/white"
+                android:fontFamily="sans-serif-condensed-medium"/>
             <ProgressBar
                 android:id="@+id/progressBarCarbs"
                 style="?android:attr/progressBarStyleHorizontal"
@@ -100,6 +121,7 @@
 
         </LinearLayout>
 
+        <!-- Proteins -->
         <LinearLayout
             android:id="@+id/proteinContainer"
             android:layout_width="wrap_content"
@@ -111,7 +133,9 @@
                 android:id="@+id/protein"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Protein: " />
+                android:text="Protein: "
+                android:textColor="@color/white"
+                android:fontFamily="sans-serif-condensed-medium"/>
             <ProgressBar
                 android:id="@+id/progressBarProtein"
                 style="?android:attr/progressBarStyleHorizontal"
@@ -121,6 +145,7 @@
 
         </LinearLayout>
 
+        <!-- Fats -->
         <LinearLayout
             android:id="@+id/fatsContainer"
             android:layout_width="wrap_content"
@@ -132,7 +157,9 @@
                 android:id="@+id/fats"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Fats: " />
+                android:text="Fats: "
+                android:textColor="@color/white"
+                android:fontFamily="sans-serif-condensed-medium" />
             <ProgressBar
                 android:id="@+id/progressBarFats"
                 style="?android:attr/progressBarStyleHorizontal"
@@ -142,6 +169,7 @@
 
         </LinearLayout>
 
+        <!-- Others -->
         <LinearLayout
             android:id="@+id/othersContainer"
             android:layout_width="wrap_content"
@@ -153,7 +181,9 @@
                 android:id="@+id/others"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Others: " />
+                android:text="Others: "
+                android:textColor="@color/white"
+                android:fontFamily="sans-serif-condensed-medium"/>
             <ProgressBar
                 android:id="@+id/progressBarOthers"
                 style="?android:attr/progressBarStyleHorizontal"
@@ -164,6 +194,7 @@
         </LinearLayout>
     </LinearLayout>
 
+    <!-- Layout for meals buttons -->
     <LinearLayout
         android:id="@+id/meals"
         android:layout_width="match_parent"
@@ -180,6 +211,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
             android:text="Breakfast"
+            android:fontFamily="sans-serif-condensed-medium"
             />
 
         <Button
@@ -188,7 +220,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
-            android:text="Lunch" />
+            android:text="Lunch"
+            android:fontFamily="sans-serif-condensed-medium"/>
 
         <Button
             android:id="@+id/btnDinner"
@@ -196,28 +229,35 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
-            android:text="Dinner" />
+            android:text="Dinner"
+            android:fontFamily="sans-serif-condensed-medium"/>
 
     </LinearLayout>
 
+    <!-- Button to add food to the meal -->
     <Button
         android:id="@+id/addMeal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="+"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        android:layout_margin="20dp"
+        android:text="Add"
+        android:fontFamily="sans-serif-condensed-medium"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
 
+    <!-- Button to search for food and relevant information -->
     <Button
         android:id="@+id/btnSearch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Search"
+        android:layout_margin="20dp"
+        android:fontFamily="sans-serif-condensed-medium"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
-
+    <!-- Container to show the added meals -->
     <LinearLayout
         android:id="@+id/mealContainers"
         android:layout_width="wrap_content"
