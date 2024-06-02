@@ -40,13 +40,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import sg.edu.np.mad.fitnessultimate.MainActivity;
+
 import sg.edu.np.mad.fitnessultimate.R;
-import sg.edu.np.mad.fitnessultimate.chatbot.activity.ChatbotActivity;
-import sg.edu.np.mad.fitnessultimate.foodtracker.FoodTracker;
-import sg.edu.np.mad.fitnessultimate.training.TrainingMenuActivity;
 import sg.edu.np.mad.fitnessultimate.training.helpers.GlobalExerciseData;
-import sg.edu.np.mad.fitnessultimate.calendarPage.DayModel;
+import sg.edu.np.mad.fitnessultimate.training.helpers.JsonUtils;
 import sg.edu.np.mad.fitnessultimate.training.workouts.Workout;
 import sg.edu.np.mad.fitnessultimate.training.workouts.WorkoutActivity;
 
@@ -70,6 +67,9 @@ public class CalendarActivity extends BaseActivity implements CalendarAdapter.On
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        // populate singleton class with workout list
+        GlobalExerciseData.getInstance().setWorkoutList(JsonUtils.loadWorkouts(this));
 
         initWidgets();
         selectedDate = LocalDate.now();
@@ -194,13 +194,12 @@ public class CalendarActivity extends BaseActivity implements CalendarAdapter.On
                                 @Override
                                 public void onComplete(@NonNull Task<QuerySnapshot> task1) {
                                     Map<LocalDate, WorkoutPlan> timeSpentMap = new HashMap<>();
-                                    List<Workout> workoutsList = GlobalExerciseData.getInstance().getWorkoutList();
                                     if (task1.isSuccessful()) {
                                         for (QueryDocumentSnapshot document : task1.getResult()) {
                                             LocalDate dateId = LocalDate.parse(document.getId());
                                             Long timeSpent = document.getLong("timeSpent");
 
-                                            Workout workout;
+                                            Workout workout = null;
                                             Map<String, Object> documentData = document.getData();
                                             if (documentData == null || documentData.get("workout") == null) {
                                                 workout = null;
@@ -208,6 +207,11 @@ public class CalendarActivity extends BaseActivity implements CalendarAdapter.On
                                             } else {
                                                 Map<String, String> workoutData = (Map<String, String>) documentData.get("workout");
                                                 Log.d("CalendarActivity", "testing here: " + workoutData);
+                                                Log.d("CalendarActivity", "testing test: " + workoutData.get("name"));
+
+                                                List<Workout> workoutsList = GlobalExerciseData.getInstance().getWorkoutList();
+                                                Log.d("CalendarActivity", "workoutsList here: " + workoutsList);
+
                                                 workout = workoutsList.stream()
                                                         .filter(e -> e.getName().equals(workoutData.get("name")))
                                                         .findFirst()
