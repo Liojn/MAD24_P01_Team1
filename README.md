@@ -8,7 +8,7 @@ Jovan Lim
 
 Kiefer Yew
 
-Elissa
+Elissa Lee
 
 Thet Mon Kris
 
@@ -44,11 +44,11 @@ At Fitness Ultimate, we understand the importance of maintaining a healthy lifes
 
 - Users are able to set workouts to occur every specific day/interval to serve as a reminder to workout
 
-3.)User login / sign up + Profile(Elissa)
+3.)User login / sign up + Profile (Elissa)
 
 - Involves users providing a username and password to access their accounts
 
-- Existing account holders can choose to sign in via a Google Account or fingerprint biometrics
+- Existing account holders can choose to sign in via a Google Account 
 
 - New users can sign up for an account 
 
