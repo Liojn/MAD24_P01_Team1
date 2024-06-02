@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -207,14 +208,15 @@ public class CalendarActivity extends BaseActivity implements CalendarAdapter.On
                                             } else {
                                                 Map<String, String> workoutData = (Map<String, String>) documentData.get("workout");
                                                 Log.d("CalendarActivity", "testing here: " + workoutData);
-                                                Log.d("CalendarActivity", "testing here: " + documentData);
                                                 workout = workoutsList.stream()
                                                         .filter(e -> e.getName().equals(workoutData.get("name")))
                                                         .findFirst()
                                                         .orElse(null);
 
                                                 Log.d("CalendarActivity", "workout here: " + workout);
-                                                Log.d("CalendarActivity", "dateId: " + dateId + " timeSpent: " + timeSpent + " Workout: " + workout.getName());
+                                                if (workout != null){
+                                                    Log.d("CalendarActivity", "dateId: " + dateId + " timeSpent: " + timeSpent + " Workout: " + workout.getName());
+                                                }
                                             }
 
                                             WorkoutPlan workoutPlan = new WorkoutPlan(timeSpent, workout);
@@ -280,7 +282,14 @@ public class CalendarActivity extends BaseActivity implements CalendarAdapter.On
             message = "No Workouts Found";
         } else {
             message = "Workout: " + dayModel.workout.getName() + "\nDescription: " + dayModel.workout.getDescription();
+            // Ensure the text does not go beyond 2 lines
+            alertMessage.setSingleLine(false);
+            alertMessage.setEllipsize(TextUtils.TruncateAt.END);
+            alertMessage.setMaxLines(2);
+            alertMessage.setText(message);
         }
+
+
 
         alertMessage.setText(message);
         builder.setCancelable(true);

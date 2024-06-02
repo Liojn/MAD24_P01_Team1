@@ -1,5 +1,6 @@
 package sg.edu.np.mad.fitnessultimate.calendarPage;
 
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -50,6 +51,13 @@ class HistoryAdapter extends RecyclerView.Adapter<HistoryViewHolder>
         holder.dateLabel.setText(day);
         holder.workoutName.setText(String.valueOf(historyClass.workout.getName()));
         holder.workoutDescription.setText(String.valueOf(historyClass.workout.getDescription()));
+
+        // Ensure the text does not go to the next line
+        holder.workoutDescription.setSingleLine(true);
+        holder.workoutDescription.setEllipsize(TextUtils.TruncateAt.END);
+        holder.workoutDescription.setMaxLines(1);
+        holder.workoutDescription.setHorizontallyScrolling(true);
+
         Log.d("HistoryAdapter", day);
     }
 
