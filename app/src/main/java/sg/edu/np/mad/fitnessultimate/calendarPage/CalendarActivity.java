@@ -70,6 +70,7 @@ public class CalendarActivity extends BaseActivity implements CalendarAdapter.On
 
         // populate singleton class with workout list
         GlobalExerciseData.getInstance().setWorkoutList(JsonUtils.loadWorkouts(this));
+        GlobalExerciseData.getInstance().setExerciseList(JsonUtils.loadExercises(this));
 
         initWidgets();
         selectedDate = LocalDate.now();
