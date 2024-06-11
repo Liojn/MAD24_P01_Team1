@@ -13,6 +13,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import sg.edu.np.mad.fitnessultimate.R;
+import sg.edu.np.mad.fitnessultimate.training.counter.PushupCounterActivity;
 import sg.edu.np.mad.fitnessultimate.training.exercises.ExerciseCatalogueActivity;
 import sg.edu.np.mad.fitnessultimate.training.helpers.GlobalExerciseData;
 import sg.edu.np.mad.fitnessultimate.training.helpers.JsonUtils;
@@ -38,6 +39,7 @@ public class TrainingMenuActivity extends AppCompatActivity {
         // locate buttons
         Button followAlongWorkouts = findViewById(R.id.followAlongWorkouts);
         Button exercises = findViewById(R.id.exercises);
+        Button counter = findViewById(R.id.counter);
         Button backBtn = findViewById(R.id.backBtn);
 
         // set button click listeners
@@ -63,6 +65,18 @@ public class TrainingMenuActivity extends AppCompatActivity {
                         String.format("[%s]: redirecting to activity %s",
                                 TrainingMenuActivity.class.getSimpleName(),
                                 ExerciseCatalogueActivity.class.getSimpleName()));
+                startActivity(intent);
+            }
+        });
+
+        counter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(TrainingMenuActivity.this, PushupCounterActivity.class);
+                Log.i(this.getClass().getSimpleName(),
+                        String.format("[%s]: redirecting to activity %s",
+                                TrainingMenuActivity.class.getSimpleName(),
+                                PushupCounterActivity.class.getSimpleName()));
                 startActivity(intent);
             }
         });
