@@ -18,7 +18,7 @@ Thet Mon Kris
 
 ## Introduction:
 
-Welcome to Fitness Ultimate: Calisthenics King, your ultimate fitness companion! Our app is designed to help you track your nutrition, plan your workouts, monitor your sleep, and stay hydrated. Whether you're a seasoned athlete or just starting your fitness journey, Fitness Ultimate has everything you need to reach your goals.
+Welcome to Fitness Ultimate: Calisthenics King, your ultimate fitness companion! Our app is designed to help you track your nutrition and plan your workouts. Whether you're a seasoned athlete or just starting your fitness journey, Fitness Ultimate has everything you need to reach your goals.
 
 ## Motivation/Objective:
 
