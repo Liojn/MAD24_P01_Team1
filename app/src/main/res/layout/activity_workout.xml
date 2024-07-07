@@ -75,7 +75,7 @@
             android:text="workout description"
             android:textSize="20sp" />
 
-        <sg.edu.np.mad.fitnessultimate.training.helpers.NonScrollableExpandableRecyclerView
+        <sg.edu.np.mad.ultimatefitness.training.helpers.NonScrollableExpandableRecyclerView
             android:id="@+id/routineRecyclerView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -91,7 +91,7 @@
             android:textSize="30sp"
             android:textStyle="bold" />
 
-        <sg.edu.np.mad.fitnessultimate.training.helpers.NonScrollableExpandableRecyclerView
+        <sg.edu.np.mad.ultimatefitness.training.helpers.NonScrollableExpandableRecyclerView
             android:id="@+id/featuredExerciseRecyclerView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

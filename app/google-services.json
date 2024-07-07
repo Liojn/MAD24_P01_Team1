@@ -9,7 +9,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:609011869979:android:35b2da1e369a75b86ecbbe",
         "android_client_info": {
-          "package_name": "sg.edu.np.mad.fitnessultimate"
+          "package_name": "sg.edu.np.mad.ultimatefitness"
         }
       },
       "oauth_client": [
@@ -18,7 +18,7 @@
           "client_id": "609011869979-jrut7etbbj44rg5mb71hdsf1aa1cq0gg.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "sg.edu.np.mad.fitnessultimate",
+            "package_name": "sg.edu.np.mad.ultimatefitness",
             "certificate_hash": "12cbf9579834313fad703ea650fa8a181d8038ba"
           }
         },
