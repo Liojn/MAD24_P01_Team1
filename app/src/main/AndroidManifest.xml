@@ -28,7 +28,14 @@
 
         <activity
             android:name=".training.counter.PushupCounterActivity"
-            android:exported="false" />
+            android:exported="true">
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".loginSignup.EditProfilePageActivity"
             android:exported="false" />
@@ -74,11 +81,7 @@
         <activity
             android:name=".loginSignup.SplashActivity"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".foodtracker.FoodTracker"

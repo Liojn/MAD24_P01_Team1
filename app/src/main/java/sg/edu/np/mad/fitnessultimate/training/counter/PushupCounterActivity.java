@@ -60,6 +60,27 @@ public class PushupCounterActivity extends AppCompatActivity {
             return insets;
         });
 
+        surfaceView = findViewById(R.id.surfaceView);
+        pushupCountTextView = findViewById(R.id.pushupCountTextView);
+
+        surfaceHolder = surfaceView.getHolder();
+        surfaceHolder.addCallback(new SurfaceHolder.Callback() {
+            @Override
+            public void surfaceCreated(@NonNull SurfaceHolder holder) {
+                setupCamera();
+            }
+
+            @Override
+            public void surfaceChanged(@NonNull SurfaceHolder holder, int format, int width, int height) {
+                // Handle surface changes if needed
+            }
+
+            @Override
+            public void surfaceDestroyed(@NonNull SurfaceHolder holder) {
+                // Handle surface destruction if needed
+            }
+        });
+
         try {
             posenet = new PoseNet(this);
         } catch (Exception e) {
@@ -76,15 +97,29 @@ public class PushupCounterActivity extends AppCompatActivity {
     private void setupCamera() {
         CameraManager manager = (CameraManager) getSystemService(Context.CAMERA_SERVICE);
         try {
-            String cameraId = manager.getCameraIdList()[0];
+            String cameraId = null;
+            for (String id : manager.getCameraIdList()) {
+                CameraCharacteristics characteristics = manager.getCameraCharacteristics(id);
+                Integer facing = characteristics.get(CameraCharacteristics.LENS_FACING);
+                if (facing != null && facing == CameraCharacteristics.LENS_FACING_BACK) {
+                    cameraId = id;
+                    break;
+                }
+            }
+
+            if (cameraId == null) {
+                throw new RuntimeException("No back facing camera found.");
+            }
+
             Size[] sizes = manager.getCameraCharacteristics(cameraId).get(CameraCharacteristics.SCALER_STREAM_CONFIGURATION_MAP).getOutputSizes(ImageFormat.YUV_420_888);
             Size size = sizes[0];
-            imageReader = ImageReader.newInstance(size.getWidth(), size.getHeight(), ImageFormat.YUV_420_888, 2);
+            imageReader = ImageReader.newInstance(size.getWidth()*2, size.getHeight()*2, ImageFormat.YUV_420_888, 2);
             imageReader.setOnImageAvailableListener(reader -> {
                 Image image = reader.acquireNextImage();
                 if (image != null) {
                     ByteBuffer buffer = image.getPlanes()[0].getBuffer();
-                    Bitmap bitmap = Bitmap.createBitmap(size.getWidth(), size.getHeight(), Bitmap.Config.ARGB_8888);
+                    Bitmap largeBitmap = Bitmap.createBitmap(size.getWidth(), size.getHeight(), Bitmap.Config.ARGB_8888);
+                    Bitmap bitmap = Bitmap.createScaledBitmap(largeBitmap, size.getWidth() / 2, size.getHeight() / 2, true);
                     bitmap.copyPixelsFromBuffer(buffer);
                     detectPose(bitmap);
                     image.close();
@@ -109,7 +144,8 @@ public class PushupCounterActivity extends AppCompatActivity {
 
                 @Override
                 public void onError(@NonNull CameraDevice camera, int error) {
-                    cameraDevice.close();
+                    if (cameraDevice != null)
+                        cameraDevice.close();
                     cameraDevice = null;
                 }
             }, null);
@@ -158,6 +194,7 @@ public class PushupCounterActivity extends AppCompatActivity {
         Matrix matrix = new Matrix();
         matrix.postRotate(90);
         Bitmap rotatedBitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
+
         float[][][] poses = posenet.detectPoses(rotatedBitmap);
 
         if (poses != null) {

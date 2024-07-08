@@ -2,6 +2,8 @@ package sg.edu.np.mad.fitnessultimate.training.counter;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Matrix;
 
 import org.tensorflow.lite.Interpreter;
 import org.tensorflow.lite.support.common.FileUtil;
@@ -23,16 +25,42 @@ public class PoseNet {
     }
 
     public float[][][] detectPoses(Bitmap bitmap) {
-        inputImageBuffer = TensorImage.fromBitmap(bitmap);
-        outputBuffer = TensorBuffer.createFixedSize(new int[]{1, 1, NUM_KEYPOINTS, 3}, org.tensorflow.lite.DataType.FLOAT32);
-        interpreter.run(inputImageBuffer.getBuffer(), outputBuffer.getBuffer().rewind());
-        float[] output = outputBuffer.getFloatArray();
-        float[][][] poses = new float[1][NUM_KEYPOINTS][3];
+        Bitmap resizedBitmap = resizeAndPadBitmap(bitmap, 256);
 
-        for (int i = 0; i < NUM_KEYPOINTS; i++) {
-            poses[0][i][0] = output[i * 3];
-            poses[0][i][1] = output[i * 3 + 1];
-            poses[0][i][2] = output[i * 3 + 2];
+        inputImageBuffer = TensorImage.fromBitmap(resizedBitmap);
+        outputBuffer = TensorBuffer.createFixedSize(new int[]{1, 6, 56}, org.tensorflow.lite.DataType.FLOAT32);
+        interpreter.run(inputImageBuffer.getBuffer(), outputBuffer.getBuffer().rewind());
+
+        return convertOutputToArray(outputBuffer);
+    }
+
+    private Bitmap resizeAndPadBitmap(Bitmap bitmap, int targetSize) {
+        int width = bitmap.getWidth();
+        int height = bitmap.getHeight();
+        float scale = Math.min((float) targetSize / height, (float) targetSize / width);
+
+        Matrix matrix = new Matrix();
+        matrix.postScale(scale, scale);
+        Bitmap scaledBitmap = Bitmap.createBitmap(bitmap, 0, 0, width, height, matrix, true);
+
+        int targetWidth = (int) Math.ceil(scaledBitmap.getWidth() / 32.0) * 32;
+        int targetHeight = (int) Math.ceil(scaledBitmap.getHeight() / 32.0) * 32;
+
+        Bitmap paddedBitmap = Bitmap.createBitmap(targetWidth, targetHeight, Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(paddedBitmap);
+        canvas.drawBitmap(scaledBitmap, 0, 0, null);
+
+        return paddedBitmap;
+    }
+
+    private float[][][] convertOutputToArray(TensorBuffer outputBuffer) {
+        float[] output = outputBuffer.getFloatArray();
+        float[][][] poses = new float[1][6][56];
+
+        for (int i = 0; i < 6; i++) {
+            for (int j = 0; j < 56; j++) {
+                poses[0][i][j] = output[i * 56 + j];
+            }
         }
 
         return poses;
