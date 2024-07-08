@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import sg.edu.np.mad.ultimatefitness.R;
 import sg.edu.np.mad.ultimatefitness.calendarPage.BaseActivity;
@@ -51,21 +52,31 @@ public class LogDetails extends BaseActivity {
             }
         });
 
-        // Set a click listener for the save button
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Get user input
                 int selectedGenderId = genderGroup.getCheckedRadioButtonId();
                 RadioButton selectedGenderRadioButton = findViewById(selectedGenderId);
-                String gender = selectedGenderRadioButton.getText().toString();
-                int age = Integer.parseInt(ageText.getText().toString());
-                double weight = Double.parseDouble(weightText.getText().toString());
-                double height = Double.parseDouble(heightText.getText().toString());
+                String gender = selectedGenderRadioButton != null ? selectedGenderRadioButton.getText().toString() : "";
+
+                String ageString = ageText.getText().toString();
+                String weightString = weightText.getText().toString();
+                String heightString = heightText.getText().toString();
                 String activityLevel = activityText.getText().toString();
                 int selectedGoalId = goalsGroup.getCheckedRadioButtonId();
                 RadioButton selectedGoalRadioButton = findViewById(selectedGoalId);
-                String goal = selectedGoalRadioButton.getText().toString();
+                String goal = selectedGoalRadioButton != null ? selectedGoalRadioButton.getText().toString() : "";
+
+                if (gender.isEmpty() || ageString.isEmpty() || weightString.isEmpty() || heightString.isEmpty() || activityLevel.isEmpty() || goal.isEmpty()) {
+                    // Show an error message (e.g., a Toast) to the user indicating that all fields are required
+                    Toast.makeText(LogDetails.this, "All fields are required", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                int age = Integer.parseInt(ageString);
+                double weight = Double.parseDouble(weightString);
+                double height = Double.parseDouble(heightString);
 
                 // Calculate BMR based on gender
                 double bmr;
@@ -104,6 +115,7 @@ public class LogDetails extends BaseActivity {
                 } else if (goal.equals("Gain weight")) {
                     bmr += 500; // Calorie adjustments for weight gain
                 }
+
                 // Formatting bmr to 1 decimal place and parsing back string to a double
                 String formattedBMR = String.format("%.1f", bmr);
                 calculatedBMR = Double.parseDouble(formattedBMR);
@@ -118,5 +130,4 @@ public class LogDetails extends BaseActivity {
                 finish(); //Finish the activity and return to the previous one
             }
         });
-    }
-}
+    }}
