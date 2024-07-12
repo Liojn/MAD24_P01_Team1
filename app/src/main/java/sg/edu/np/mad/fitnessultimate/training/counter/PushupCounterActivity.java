@@ -4,8 +4,11 @@ import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.ImageFormat;
 import android.graphics.Matrix;
+import android.graphics.Paint;
 import android.hardware.camera2.CameraAccessException;
 import android.hardware.camera2.CameraCaptureSession;
 import android.hardware.camera2.CameraCharacteristics;
@@ -16,9 +19,11 @@ import android.hardware.camera2.TotalCaptureResult;
 import android.media.Image;
 import android.media.ImageReader;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Surface;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.util.Size;
 import android.widget.Toast;
@@ -43,11 +48,72 @@ public class PushupCounterActivity extends AppCompatActivity {
     private CameraDevice cameraDevice;
     private CameraCaptureSession captureSession;
     private ImageReader imageReader;
+    private ImageView poseImageView;
     private SurfaceView surfaceView;
     private SurfaceHolder surfaceHolder;
     private TextView pushupCountTextView;
     private int pushupCount = 0;
     private boolean isDownPosition = false;
+    private static final float CONFIDENCE_THRESHOLD = 0.5f;
+    private static final float PUSHUP_THRESHOLD = 0.15f;
+
+
+    private enum MoveNetData {
+        // Keypoints
+        NOSE(0),
+        LEFT_EYE(1),
+        RIGHT_EYE(2),
+        LEFT_EAR(3),
+        RIGHT_EAR(4),
+        LEFT_SHOULDER(5),
+        RIGHT_SHOULDER(6),
+        LEFT_ELBOW(7),
+        RIGHT_ELBOW(8),
+        LEFT_WRIST(9),
+        RIGHT_WRIST(10),
+        LEFT_HIP(11),
+        RIGHT_HIP(12),
+        LEFT_KNEE(13),
+        RIGHT_KNEE(14),
+        LEFT_ANKLE(15),
+        RIGHT_ANKLE(16),
+
+        // Bounding box
+        BOUNDING_BOX_YMIN(51),
+        BOUNDING_BOX_XMIN(52),
+        BOUNDING_BOX_YMAX(53),
+        BOUNDING_BOX_XMAX(54),
+        BOUNDING_BOX_SCORE(55);
+
+        private final int index;
+
+        MoveNetData(int index) {
+            this.index = index;
+        }
+
+        public int getIndex() {
+            return index;
+        }
+
+        public float getY(float[] data) {
+            return data[index * 3];
+        }
+
+        public float getX(float[] data) {
+            return data[index * 3 + 1];
+        }
+
+        public float getScore(float[] data) {
+            return data[index * 3 + 2];
+        }
+
+        public static float getBoundingBoxValue(float[] data, MoveNetData boundingBoxItem) {
+            if (boundingBoxItem.getIndex() < BOUNDING_BOX_YMIN.getIndex()) {
+                throw new IllegalArgumentException("Not a bounding box item");
+            }
+            return data[boundingBoxItem.getIndex()];
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +126,7 @@ public class PushupCounterActivity extends AppCompatActivity {
             return insets;
         });
 
+        poseImageView = findViewById(R.id.poseImageView);
         surfaceView = findViewById(R.id.surfaceView);
         pushupCountTextView = findViewById(R.id.pushupCountTextView);
 
@@ -197,21 +264,73 @@ public class PushupCounterActivity extends AppCompatActivity {
 
         float[][][] poses = posenet.detectPoses(rotatedBitmap);
 
-        if (poses != null) {
-            float noseY = poses[0][0][1];
-            float leftShoulderY = poses[0][5][1];
-            float rightShoulderY = poses[0][6][1];
-            float averageShoulderY = (leftShoulderY + rightShoulderY) / 2;
+        if (poses != null && poses[0].length > 0) {
+            float[] person = poses[0][0];
 
-            if (noseY > averageShoulderY + 50) {
-                isDownPosition = true;
-            } else if (noseY < averageShoulderY - 50 && isDownPosition) {
-                isDownPosition = false;
-                pushupCount++;
-                runOnUiThread(() -> pushupCountTextView.setText(String.valueOf(pushupCount)));
+            float noseY = MoveNetData.NOSE.getY(person);
+            float leftShoulderY = MoveNetData.LEFT_SHOULDER.getY(person);
+            float rightShoulderY = MoveNetData.RIGHT_SHOULDER.getY(person);
+            float leftElbowY = MoveNetData.LEFT_ELBOW.getY(person);
+            float rightElbowY = MoveNetData.RIGHT_ELBOW.getY(person);
+
+            float noseScore = MoveNetData.NOSE.getScore(person);
+            float leftShoulderScore = MoveNetData.LEFT_SHOULDER.getScore(person);
+            float rightShoulderScore = MoveNetData.RIGHT_SHOULDER.getScore(person);
+            float leftElbowScore = MoveNetData.LEFT_ELBOW.getScore(person);
+            float rightElbowScore = MoveNetData.RIGHT_ELBOW.getScore(person);
+
+            if (noseScore > CONFIDENCE_THRESHOLD && leftShoulderScore > CONFIDENCE_THRESHOLD &&
+                    rightShoulderScore > CONFIDENCE_THRESHOLD && leftElbowScore > CONFIDENCE_THRESHOLD &&
+                    rightElbowScore > CONFIDENCE_THRESHOLD) {
+
+                float averageShoulderY = (leftShoulderY + rightShoulderY) / 2;
+                float averageElbowY = (leftElbowY + rightElbowY) / 2;
+
+                if (noseY > averageShoulderY + PUSHUP_THRESHOLD && averageElbowY > averageShoulderY) {
+                    isDownPosition = true;
+                } else if (noseY < averageShoulderY - PUSHUP_THRESHOLD && averageElbowY < averageShoulderY && isDownPosition) {
+                    isDownPosition = false;
+                    pushupCount++;
+                    runOnUiThread(() -> pushupCountTextView.setText(String.valueOf(pushupCount)));
+                }
             }
+
+            // Render joints and labels on the bitmap
+            Bitmap poseBitmap = renderPoseWithLabels(rotatedBitmap, person);
+            runOnUiThread(() -> poseImageView.setImageBitmap(poseBitmap));
         }
     }
+
+    private Bitmap renderPoseWithLabels(Bitmap bitmap, float[] pose) {
+        Bitmap mutableBitmap = bitmap.copy(Bitmap.Config.ARGB_8888, true);
+        Canvas canvas = new Canvas(mutableBitmap);
+        Paint paint = new Paint();
+        paint.setTextSize(30f);
+
+        for (MoveNetData keypoint : MoveNetData.values()) {
+            if (keypoint.getIndex() > MoveNetData.RIGHT_ANKLE.getIndex()) {
+                continue;  // Skip bounding box data
+            }
+
+            float x = keypoint.getX(pose) * bitmap.getWidth();
+            float y = keypoint.getY(pose) * bitmap.getHeight();
+            float confidence = keypoint.getScore(pose);
+
+            if (confidence > CONFIDENCE_THRESHOLD) {
+                // Draw joint
+                paint.setColor(Color.RED);
+                canvas.drawCircle(x, y, 10, paint);
+
+                // Draw label
+                paint.setColor(Color.WHITE);
+                canvas.drawText(keypoint.name(), x + 15, y + 15, paint);
+            }
+        }
+
+        return mutableBitmap;
+    }
+
+
 
     @Override
     protected void onDestroy() {

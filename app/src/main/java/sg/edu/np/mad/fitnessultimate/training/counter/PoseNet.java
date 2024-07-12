@@ -2,67 +2,57 @@ package sg.edu.np.mad.fitnessultimate.training.counter;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.graphics.Matrix;
+import android.graphics.Color;
+import android.util.Log;
 
 import org.tensorflow.lite.Interpreter;
 import org.tensorflow.lite.support.common.FileUtil;
-import org.tensorflow.lite.support.image.TensorImage;
-import org.tensorflow.lite.support.tensorbuffer.TensorBuffer;
 
 import java.io.IOException;
-import java.nio.MappedByteBuffer;
+import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
 
 public class PoseNet {
+    private static final String TAG = "PoseNet";
     private Interpreter interpreter;
-    private TensorImage inputImageBuffer;
-    private TensorBuffer outputBuffer;
-    private static final int NUM_KEYPOINTS = 17;
+    private ByteBuffer inputBuffer;
+    private int[] inputShape = {1, 1, 1, 3};  // As per the log output
 
     public PoseNet(Context context) throws IOException {
-        MappedByteBuffer tfliteModel = FileUtil.loadMappedFile(context, "multipose-lightning-tflite-float16.tflite");
-        interpreter = new Interpreter(tfliteModel);
+        Interpreter.Options options = new Interpreter.Options();
+        options.setNumThreads(4);
+        interpreter = new Interpreter(FileUtil.loadMappedFile(context, "multipose-lightning-tflite-float16.tflite"), options);
+
+        // Prepare input buffer
+        int bufferSize = 1 * 1 * 1 * 3; // [1, 1, 1, 3]
+        inputBuffer = ByteBuffer.allocateDirect(bufferSize);
+        inputBuffer.order(ByteOrder.nativeOrder());
     }
 
     public float[][][] detectPoses(Bitmap bitmap) {
-        Bitmap resizedBitmap = resizeAndPadBitmap(bitmap, 256);
+        // Prepare input: average RGB values of the entire image
+        inputBuffer.rewind();
+        int pixelCount = bitmap.getWidth() * bitmap.getHeight();
+        int redSum = 0, greenSum = 0, blueSum = 0;
+        int[] pixels = new int[pixelCount];
+        bitmap.getPixels(pixels, 0, bitmap.getWidth(), 0, 0, bitmap.getWidth(), bitmap.getHeight());
 
-        inputImageBuffer = TensorImage.fromBitmap(resizedBitmap);
-        outputBuffer = TensorBuffer.createFixedSize(new int[]{1, 6, 56}, org.tensorflow.lite.DataType.FLOAT32);
-        interpreter.run(inputImageBuffer.getBuffer(), outputBuffer.getBuffer().rewind());
-
-        return convertOutputToArray(outputBuffer);
-    }
-
-    private Bitmap resizeAndPadBitmap(Bitmap bitmap, int targetSize) {
-        int width = bitmap.getWidth();
-        int height = bitmap.getHeight();
-        float scale = Math.min((float) targetSize / height, (float) targetSize / width);
-
-        Matrix matrix = new Matrix();
-        matrix.postScale(scale, scale);
-        Bitmap scaledBitmap = Bitmap.createBitmap(bitmap, 0, 0, width, height, matrix, true);
-
-        int targetWidth = (int) Math.ceil(scaledBitmap.getWidth() / 32.0) * 32;
-        int targetHeight = (int) Math.ceil(scaledBitmap.getHeight() / 32.0) * 32;
-
-        Bitmap paddedBitmap = Bitmap.createBitmap(targetWidth, targetHeight, Bitmap.Config.ARGB_8888);
-        Canvas canvas = new Canvas(paddedBitmap);
-        canvas.drawBitmap(scaledBitmap, 0, 0, null);
-
-        return paddedBitmap;
-    }
-
-    private float[][][] convertOutputToArray(TensorBuffer outputBuffer) {
-        float[] output = outputBuffer.getFloatArray();
-        float[][][] poses = new float[1][6][56];
-
-        for (int i = 0; i < 6; i++) {
-            for (int j = 0; j < 56; j++) {
-                poses[0][i][j] = output[i * 56 + j];
-            }
+        for (int pixel : pixels) {
+            redSum += Color.red(pixel);
+            greenSum += Color.green(pixel);
+            blueSum += Color.blue(pixel);
         }
 
-        return poses;
+        inputBuffer.put((byte) (redSum / pixelCount));
+        inputBuffer.put((byte) (greenSum / pixelCount));
+        inputBuffer.put((byte) (blueSum / pixelCount));
+
+        // Prepare output
+        float[][][] outputArray = new float[1][6][56];
+
+        // Run inference
+        interpreter.run(inputBuffer, outputArray);
+
+        return outputArray;
     }
 }
