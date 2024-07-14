@@ -62,12 +62,11 @@ public class LoginPageActivity extends BaseActivity {
             return insets;
         });
 
-        EditText mEmailUsername = findViewById(R.id.inputEmailUsername);
+        EditText mEmail = findViewById(R.id.inputEmail);
         EditText mPassword = findViewById(R.id.inputLoginPassword);
         Button mSignInBtn = findViewById(R.id.button_signIn);
         TextView mForgotPassword = findViewById(R.id.forgotPassword);
 
-        TextInputLayout mtextInputLayoutEmailUsername = findViewById(R.id.textInputEmailUsername);
         TextInputLayout mtextInputLoginPassword = findViewById(R.id.textInputLoginPassword);
 
         ProgressBar mLoginProgressBar = findViewById(R.id.loginProgressBar);
@@ -142,17 +141,17 @@ public class LoginPageActivity extends BaseActivity {
         mSignInBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String emailUsername = mEmailUsername.getText().toString().trim();
+                String emailUsername = mEmail.getText().toString().trim();
                 String password = mPassword.getText().toString().trim();
 
                 if (TextUtils.isEmpty(emailUsername)) {
-                    mEmailUsername.setError("Username is Required.");
+                    mEmail.setError("Username is Required.");
                     return;
                 }
 
                 // Check if the input is a valid email address
                 if (!android.util.Patterns.EMAIL_ADDRESS.matcher(emailUsername).matches()) {
-                    mEmailUsername.setError("Invalid Email Address");
+                    mEmail.setError("Invalid Email Address");
                     return;
                 }
 

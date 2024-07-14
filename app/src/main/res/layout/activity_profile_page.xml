@@ -68,7 +68,7 @@
         android:id="@+id/logOutBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="480dp"
+        android:layout_marginTop="550dp"
         android:text="LOG OUT"
         android:onClick="logout"
         android:backgroundTint="#2D3250"
@@ -129,6 +129,63 @@
                 android:textSize="16dp"
                 android:layout_marginLeft="60dp"
                 android:text="Change Password"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/right_arrow_icon"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"/>
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/buttonWidgets1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="130dp"
+        android:padding="15dp"
+        android:clickable="true"
+        android:background="@drawable/rounded_background"
+        app:layout_constraintTop_toBottomOf="@+id/editProfile">
+
+        <!-- Water Reminder Settings -->
+        <RelativeLayout
+            android:id="@+id/waterReminder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="true">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                app:cardCornerRadius="20dp"
+                app:cardBackgroundColor="#60FFFFFF"
+                app:cardElevation="0dp">
+
+                <ImageView
+                    android:id="@+id/icon1"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:scaleType="centerInside"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="10.5dp"
+                    android:src="@android:drawable/ic_popup_reminder" />
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:textSize="16dp"
+                android:layout_marginLeft="60dp"
+                android:text="Water Tracker Reminder"
+                android:textColor="@color/white"
                 android:textStyle="bold" />
 
             <ImageView
