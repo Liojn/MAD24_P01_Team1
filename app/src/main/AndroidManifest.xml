@@ -22,8 +22,12 @@
         <receiver android:name=".waterTracker.alarm.AlarmReceiver" />
         <receiver android:name=".waterTracker.alarm.DismissReceiver" />
         <receiver android:name=".waterTracker.alarm.SnoozeReceiver" />
+
         <service android:name=".waterTracker.alarm.AlarmSoundService" />
 
+        <activity
+            android:name=".waterTracker.water.WaterTrackingActivity"
+            android:exported="false" />
 
         <activity
             android:name=".waterTracker.alarm.ReminderActivity"

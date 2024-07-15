@@ -45,6 +45,7 @@ import java.util.Map;
 
 import sg.edu.np.mad.ultimatefitness.R;
 import sg.edu.np.mad.ultimatefitness.loginSignup.ProfilePageActivity;
+import sg.edu.np.mad.ultimatefitness.waterTracker.water.WaterTrackingActivity;
 
 public class ReminderActivity extends AppCompatActivity {
 
@@ -73,6 +74,11 @@ public class ReminderActivity extends AppCompatActivity {
         // Navigate back to ProfilePage
         findViewById(R.id.backBtn).setOnClickListener(v -> {
             Intent intent = new Intent(ReminderActivity.this, ProfilePageActivity.class);
+            startActivity(intent);
+        });
+
+        findViewById(R.id.button).setOnClickListener(v -> {
+            Intent intent = new Intent(ReminderActivity.this, WaterTrackingActivity.class);
             startActivity(intent);
         });
 
