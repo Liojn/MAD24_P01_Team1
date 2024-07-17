@@ -6,6 +6,8 @@ import androidx.activity.EdgeToEdge;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -14,6 +16,7 @@ import sg.edu.np.mad.ultimatefitness.R;
 import sg.edu.np.mad.ultimatefitness.calendarPage.BaseActivity;
 import sg.edu.np.mad.ultimatefitness.chatbot.adapter.MessageAdapter;
 import sg.edu.np.mad.ultimatefitness.chatbot.model.ResponseMessage;
+
 
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
@@ -31,6 +34,8 @@ public class ChatbotActivity extends BaseActivity {
     List<ResponseMessage> responseMessageList;
     FrameLayout layoutSend;
     ImageView sendIcon;
+
+    private boolean isFragmentActive = false; // Flag to check if fragment is active
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,11 +83,38 @@ public class ChatbotActivity extends BaseActivity {
             String botResponse = getResponseForMessage(userMessage);
             addMessageToChat(botResponse, true);
             userInput.setText(""); // Clear input field
+
+            // Check for specific queries and show fragment
+            if (userMessage.contains("how to do a push up")) {
+                showVideoRecommendationFragment();
+            }
+        }
+    }
+
+    private void showVideoRecommendationFragment() {
+        if (!isFragmentActive) { // Check if fragment is already active
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            video_recommendation_chatbot fragment = new video_recommendation_chatbot();
+            FragmentTransaction transaction = fragmentManager.beginTransaction();
+            transaction.add(R.id.main, fragment);
+            transaction.commit();
+            isFragmentActive = true; // Set flag to true
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (isFragmentActive) {
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.popBackStackImmediate();
+            isFragmentActive = false;
+        } else {
+            super.onBackPressed();
         }
     }
 
     private void displayFaqMessage() {
-        String faqMessage = "Here are some FAQs:\n1) How does the training schedule work?\n2) What is the calendar for?\n3) How to use the food tracking?\n4) What are the benefits of exercise\n5) Display FAQ's again";
+        String faqMessage = "Here are some FAQs:\n1) How does the training schedule work?\n2) What is the calendar for?\n3) How to use the food tracking?\n4) What are the benefits of exercise\n5) Display FAQ's again\n6) How to do a push up";
         addMessageToChat(faqMessage, true);
     }
 
@@ -107,9 +139,12 @@ public class ChatbotActivity extends BaseActivity {
             return "Exercise has many benefits including improving cardiovascular health, strengthening muscles, and enhancing mental health.\n\nEnter 5 to see FAQ again";
         } else if(message.contains("hi") || message.contains("hello")) {
             return "Hello! I am the Fitness Ultimate's Chatbot, choose a question from the FAQ's and I shall answer!";
-        } else if(message.contains("5") || message.contains("faq")) {
-                return "Here are some FAQs:\n1) How does the training schedule work?\n2) What is the calendar for?\n3) How to use the food tracking?\n4) What are the benefits of exercise\n5) Display FAQ's again";
-        } else {
+        } else if(message.contains("6") || message.contains("faq")) {
+            return "Here are some FAQs:\n1) How does the training schedule work?\n2) What is the calendar for?\n3) How to use the food tracking?\n4) What are the benefits of exercise\n5) Display FAQ's again";
+        }else if(message.contains("5") || message.contains("push up")) {
+            showVideoRecommendationFragment();
+            return "To do a push up, you can follow this video guide:";
+        }else {
             return "Sorry, I don't have an answer for that. Please ask another question.";
         }
     }
