@@ -86,15 +86,18 @@ public class ChatbotActivity extends BaseActivity {
 
             // Check for specific queries and show fragment
             if (userMessage.contains("how to do a push up")) {
-                showVideoRecommendationFragment();
+                showVideoRecommendationFragment("push up");
+            } else if (userMessage.contains("how to do a crunch")) {
+                showVideoRecommendationFragment("crunches");
+            } else if (userMessage.contains("how to do pull ups")) {
+                showVideoRecommendationFragment("pull ups");
             }
         }
     }
-
-    private void showVideoRecommendationFragment() {
+    private void showVideoRecommendationFragment(String exercise) {
         if (!isFragmentActive) { // Check if fragment is already active
             FragmentManager fragmentManager = getSupportFragmentManager();
-            video_recommendation_chatbot fragment = new video_recommendation_chatbot();
+            VideoRecommendationChatbot fragment = VideoRecommendationChatbot.newInstance(exercise);
             FragmentTransaction transaction = fragmentManager.beginTransaction();
             transaction.add(R.id.main, fragment);
             transaction.commit();
@@ -130,21 +133,27 @@ public class ChatbotActivity extends BaseActivity {
     private String getResponseForMessage(String message) {
         message = message.toLowerCase();
         if (message.contains("1") || message.contains("training")) {
-            return "You can choose a follow along work out inside has different type of work out sets which you can choose from! Alternatively, you can choose excerises and see how to do each individual excerise.\n\nEnter 5 to see FAQ again";
+            return "You can choose a follow along workout with different types of workout sets!";
         } else if (message.contains("2") || message.contains("calendar")) {
-            return "It displays workouts in a calendar format, allowing users to see their workout history at a glance and differentiates between types of workouts or intensity levels using colour-coding.\n\nEnter 5 to see FAQ again";
+            return "It displays workouts in a calendar format.";
         } else if (message.contains("3") || message.contains("food") || message.contains("tracking")) {
-            return "Users can enter the food they eat by selecting foods from the database and specifying the portion sizes.\n\nEnter 5 to see FAQ again";
+            return "Users can enter the food they eat by selecting foods from the database.";
         } else if (message.contains("4") || message.contains("benefits")) {
-            return "Exercise has many benefits including improving cardiovascular health, strengthening muscles, and enhancing mental health.\n\nEnter 5 to see FAQ again";
-        } else if(message.contains("hi") || message.contains("hello")) {
-            return "Hello! I am the Fitness Ultimate's Chatbot, choose a question from the FAQ's and I shall answer!";
-        } else if(message.contains("6") || message.contains("faq")) {
-            return "Here are some FAQs:\n1) How does the training schedule work?\n2) What is the calendar for?\n3) How to use the food tracking?\n4) What are the benefits of exercise\n5) Display FAQ's again";
-        }else if(message.contains("5") || message.contains("push up")) {
-            showVideoRecommendationFragment();
+            return "Exercise has many benefits including improving cardiovascular health.";
+        } else if (message.contains("hi") || message.contains("hello")) {
+            return "Hello! I am the Fitness Ultimate's Chatbot. Choose a question from the FAQs!";
+        } else if (message.contains("6") || message.contains("faq")) {
+            return "Here are some FAQs:\n1) How does the training schedule work?\n2) What is the calendar for?\n3) How to use the food tracking?\n4) What are the benefits of exercise?\n5) Display FAQs again.";
+        } else if (message.contains("5") || message.contains("push up")) {
+            showVideoRecommendationFragment("push up");
             return "To do a push up, you can follow this video guide:";
-        }else {
+        } else if (message.contains("crunch") || message.contains("how to do a crunch")) {
+            showVideoRecommendationFragment("crunches");
+            return "To do a crunch, here are some videos:";
+        } else if (message.contains("pull up") || message.contains("how to do pull ups")) {
+            showVideoRecommendationFragment("pull ups");
+            return "To do pull ups, here are some video recommendations:";
+        } else {
             return "Sorry, I don't have an answer for that. Please ask another question.";
         }
     }
