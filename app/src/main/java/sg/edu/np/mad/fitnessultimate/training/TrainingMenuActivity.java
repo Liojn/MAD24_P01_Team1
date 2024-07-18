@@ -13,7 +13,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import sg.edu.np.mad.fitnessultimate.R;
-import sg.edu.np.mad.fitnessultimate.training.counter.PushupCounterActivity;
+import sg.edu.np.mad.fitnessultimate.training.counter.SquatCounterActivity;
 import sg.edu.np.mad.fitnessultimate.training.exercises.ExerciseCatalogueActivity;
 import sg.edu.np.mad.fitnessultimate.training.helpers.GlobalExerciseData;
 import sg.edu.np.mad.fitnessultimate.training.helpers.JsonUtils;
@@ -72,11 +72,11 @@ public class TrainingMenuActivity extends AppCompatActivity {
         counter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(TrainingMenuActivity.this, PushupCounterActivity.class);
+                Intent intent = new Intent(TrainingMenuActivity.this, SquatCounterActivity.class);
                 Log.i(this.getClass().getSimpleName(),
                         String.format("[%s]: redirecting to activity %s",
                                 TrainingMenuActivity.class.getSimpleName(),
-                                PushupCounterActivity.class.getSimpleName()));
+                                SquatCounterActivity.class.getSimpleName()));
                 startActivity(intent);
             }
         });

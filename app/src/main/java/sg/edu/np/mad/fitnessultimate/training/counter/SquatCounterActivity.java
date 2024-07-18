@@ -5,11 +5,7 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.ImageFormat;
-import android.graphics.Matrix;
-import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.YuvImage;
 import android.hardware.camera2.CameraAccessException;
@@ -24,7 +20,6 @@ import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.util.Log;
-import android.util.Size;
 import android.view.Surface;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -41,12 +36,11 @@ import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.util.Arrays;
 import java.util.concurrent.Semaphore;
-import java.util.concurrent.TimeUnit;
 
 import sg.edu.np.mad.fitnessultimate.R;
 
-public class PushupCounterActivity extends AppCompatActivity {
-    private static final String TAG = "PushupCounterActivity";
+public class SquatCounterActivity extends AppCompatActivity {
+    private static final String TAG = "SquatCounterActivity";
     private static final int REQUEST_CAMERA_PERMISSION = 200;
     private static final int PREVIEW_WIDTH = 640;
     private static final int PREVIEW_HEIGHT = 480;
@@ -61,17 +55,22 @@ public class PushupCounterActivity extends AppCompatActivity {
     private HandlerThread backgroundThread;
     private Semaphore cameraOpenCloseLock = new Semaphore(1);
 
-    private PoseNet poseNet;
-    private TextView pushupCountTextView;
+    private MoveNet moveNet;
+    private TextView squatCountTextView;
     private TextView countdownTextView;
 
-    private int pushupCount = 0;
-    private boolean isDownPosition = false;
-    private static final float PUSHUP_THRESHOLD = 0.15f;
-    private static final float CONFIDENCE_THRESHOLD = 0.15f;
+    private int squatCount = 0;
+    private boolean isInSquatPosition = false;
+    private static final float SQUAT_THRESHOLD = 0.15f; // 15% movement threshold
+    private static final float RETURN_THRESHOLD = 0.05f; // 5% threshold to consider returned to standing
+    private static final float CONFIDENCE_THRESHOLD = 0.3f;
+    private static final long MIN_SQUAT_DURATION = 500; // Minimum duration of a squat in milliseconds
 
     private boolean countdownFinished = false;
     private CountDownTimer countdownTimer;
+
+    private float highestNoseY = Float.MAX_VALUE;
+    private long squatStartTime = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,22 +78,22 @@ public class PushupCounterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_posenet_workout);
 
         surfaceView = findViewById(R.id.surfaceView);
-        pushupCountTextView = findViewById(R.id.textView8);
+        squatCountTextView = findViewById(R.id.textView8);
         countdownTextView = findViewById(R.id.textView7);
 
         surfaceHolder = surfaceView.getHolder();
         surfaceHolder.addCallback(surfaceHolderCallback);
 
-        initPoseNet();
+        initMoveNet();
         startCountdown();
     }
 
-    private void initPoseNet() {
+    private void initMoveNet() {
         try {
-            poseNet = new PoseNet(this);
+            moveNet = new MoveNet(this);
         } catch (IOException e) {
-            Log.e(TAG, "Error initializing PoseNet", e);
-            Toast.makeText(this, "Failed to initialize PoseNet. Please restart the app.", Toast.LENGTH_LONG).show();
+            Log.e(TAG, "Error initializing MoveNet", e);
+            Toast.makeText(this, "Failed to initialize MoveNet. Please restart the app.", Toast.LENGTH_LONG).show();
             finish();
         }
     }
@@ -117,7 +116,8 @@ public class PushupCounterActivity extends AppCompatActivity {
     private void openCamera() {
         CameraManager manager = (CameraManager) getSystemService(Context.CAMERA_SERVICE);
         try {
-            String cameraId = manager.getCameraIdList()[0];
+            // This should be the back camera
+            String cameraId = manager.getCameraIdList()[1];
             if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
                 ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, REQUEST_CAMERA_PERMISSION);
                 return;
@@ -237,81 +237,48 @@ public class PushupCounterActivity extends AppCompatActivity {
     }
 
     private void processImage(Bitmap bitmap) {
-        PoseNet.Person person = poseNet.estimateSinglePose(bitmap);
-        if (person != null) {
-            Log.d(TAG, "Raw model output:");
-            for (int i = 0; i < person.keyPoints.length; i++) {
-                PoseNet.KeyPoint kp = person.keyPoints[i];
-                Log.d(TAG, String.format("Keypoint %d: x=%.2f, y=%.2f, score=%.2f",
-                        i, kp.position.x, kp.position.y, kp.score));
-            }
-            detectPushup(person);
-            drawPose(person, bitmap);
-        } else {
-            Log.e(TAG, "Pose estimation failed: person is null");
-        }
+        float[][] keypoints = moveNet.estimateSinglePose(bitmap);
+        detectSquat(keypoints);
     }
 
-    private void detectPushup(PoseNet.Person person) {
-        PoseNet.KeyPoint nose = person.keyPoints[PoseNet.BodyPart.NOSE.ordinal()];
-        PoseNet.KeyPoint leftShoulder = person.keyPoints[PoseNet.BodyPart.LEFT_SHOULDER.ordinal()];
-        PoseNet.KeyPoint rightShoulder = person.keyPoints[PoseNet.BodyPart.RIGHT_SHOULDER.ordinal()];
-        PoseNet.KeyPoint leftElbow = person.keyPoints[PoseNet.BodyPart.LEFT_ELBOW.ordinal()];
-        PoseNet.KeyPoint rightElbow = person.keyPoints[PoseNet.BodyPart.RIGHT_ELBOW.ordinal()];
+    private void detectSquat(float[][] keypoints) {
+        float[] nose = keypoints[MoveNet.BodyPart.NOSE.ordinal()];
 
-        // Log keypoint positions and scores
-        Log.d(TAG, String.format("Nose: (%.2f, %.2f), score: %.2f", nose.position.x, nose.position.y, nose.score));
-        Log.d(TAG, String.format("Left Shoulder: (%.2f, %.2f), score: %.2f", leftShoulder.position.x, leftShoulder.position.y, leftShoulder.score));
-        Log.d(TAG, String.format("Right Shoulder: (%.2f, %.2f), score: %.2f", rightShoulder.position.x, rightShoulder.position.y, rightShoulder.score));
-        Log.d(TAG, String.format("Left Elbow: (%.2f, %.2f), score: %.2f", leftElbow.position.x, leftElbow.position.y, leftElbow.score));
-        Log.d(TAG, String.format("Right Elbow: (%.2f, %.2f), score: %.2f", rightElbow.position.x, rightElbow.position.y, rightElbow.score));
+        if (nose[2] > CONFIDENCE_THRESHOLD) {
+            float noseY = nose[0];
 
-        // Use the shoulder with higher confidence
-        PoseNet.KeyPoint bestShoulder = leftShoulder.score > rightShoulder.score ? leftShoulder : rightShoulder;
-        PoseNet.KeyPoint bestElbow = leftElbow.score > rightElbow.score ? leftElbow : rightElbow;
-
-        if (nose.score > CONFIDENCE_THRESHOLD && bestShoulder.score > CONFIDENCE_THRESHOLD && bestElbow.score > CONFIDENCE_THRESHOLD) {
-            float shoulderY = bestShoulder.position.y;
-            float elbowY = bestElbow.position.y;
-
-            Log.d(TAG, String.format("Best Shoulder Y: %.2f, Best Elbow Y: %.2f", shoulderY, elbowY));
-
-            if (nose.position.y > shoulderY + PUSHUP_THRESHOLD && elbowY > shoulderY) {
-                if (!isDownPosition) {
-                    Log.d(TAG, "Down position detected");
-                    isDownPosition = true;
-                }
-            } else if (nose.position.y < shoulderY - PUSHUP_THRESHOLD && elbowY < shoulderY && isDownPosition) {
-                isDownPosition = false;
-                pushupCount++;
-                Log.d(TAG, "Pushup counted. Total: " + pushupCount);
-                runOnUiThread(() -> pushupCountTextView.setText("Pushups: " + pushupCount));
+            // Update the highest nose position (lowest Y value)
+            if (noseY < highestNoseY) {
+                highestNoseY = noseY;
+                Log.d(TAG, "New highest nose position: " + highestNoseY);
             }
-        } else {
-            Log.d(TAG, "Keypoint confidence below threshold");
-        }
-    }
 
+            float movement = (noseY - highestNoseY) / highestNoseY;
 
-    private void drawPose(PoseNet.Person person, Bitmap bitmap) {
-        Canvas canvas = surfaceHolder.lockCanvas();
-        if (canvas != null) {
-            canvas.drawBitmap(bitmap, new Matrix(), null);
-            Paint paint = new Paint();
-            paint.setColor(Color.RED);
-            paint.setStrokeWidth(8f);
+            Log.d(TAG, String.format("Nose Y: %.2f, Highest Y: %.2f, Movement: %.2f", noseY, highestNoseY, movement));
 
-            for (PoseNet.KeyPoint keyPoint : person.keyPoints) {
-                if (keyPoint.score > CONFIDENCE_THRESHOLD) {
-                    canvas.drawCircle(keyPoint.position.x, keyPoint.position.y, 10f, paint);
+            long currentTime = System.currentTimeMillis();
+
+            if (movement > SQUAT_THRESHOLD && !isInSquatPosition) {
+                Log.d(TAG, "Entered squat position");
+                isInSquatPosition = true;
+                squatStartTime = currentTime;
+            } else if (movement < RETURN_THRESHOLD && isInSquatPosition) {
+                if (currentTime - squatStartTime >= MIN_SQUAT_DURATION) {
+                    isInSquatPosition = false;
+                    squatCount++;
+                    Log.d(TAG, "Squat counted. Total: " + squatCount);
+                    runOnUiThread(() -> squatCountTextView.setText("Squats: " + squatCount));
+                } else {
+                    Log.d(TAG, "Squat too short, not counted");
                 }
             }
-
-            surfaceHolder.unlockCanvasAndPost(canvas);
         } else {
-            Log.e(TAG, "Failed to lock canvas: canvas is null");
+            Log.d(TAG, "Nose confidence below threshold");
         }
     }
+
+
 
     private final SurfaceHolder.Callback surfaceHolderCallback = new SurfaceHolder.Callback() {
         @Override
@@ -399,8 +366,8 @@ public class PushupCounterActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (poseNet != null) {
-            poseNet.close();
+        if (moveNet != null) {
+            moveNet.close();
         }
         if (countdownTimer != null) {
             countdownTimer.cancel();

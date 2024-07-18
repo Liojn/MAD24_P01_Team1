@@ -27,7 +27,7 @@
 
 
         <activity
-            android:name=".training.counter.PushupCounterActivity"
+            android:name=".training.counter.SquatCounterActivity"
             android:exported="true">
 
             <intent-filter>
