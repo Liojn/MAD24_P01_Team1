@@ -12,7 +12,7 @@
             android:clipOrientation="vertical"
             android:gravity="bottom">
             <shape android:shape="oval">
-                <solid android:color="@color/blue" /> <!-- Blue color for progress -->
+                <solid android:color="#5fafff" /> <!-- Blue color for progress -->
             </shape>
         </clip>
     </item>

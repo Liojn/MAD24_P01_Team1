@@ -7,4 +7,7 @@
     <color name="app_bg">#E1E4F6</color>
     <color name="app_primary_text">#2d3250</color>
     <color name="blue">#2196F3</color>
+
+    <color name="bar_default">#D6EBF2</color>
+    <color name="bar_progress">#add8e6</color> <!-- Define your desired progress color -->
 </resources>

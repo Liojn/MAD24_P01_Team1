@@ -1,303 +1,424 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
+    android:id="@+id/scrollView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".waterTracker.water.WaterTrackingActivity">
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/backBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:drawableLeft="@drawable/baseline_arrow_back_24"
-        android:drawablePadding="10dp"
-        android:text="@string/back_btn"
-        android:paddingStart="20dp"
-        android:paddingEnd="20dp"
-        android:textAllCaps="false"
-        android:gravity="start|center_vertical"
-        android:layout_margin="20dp"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:textColor="@color/black"
-        android:background="@drawable/back_btn"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    <ImageButton
-        android:id="@+id/infoButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/baseline_info_24"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="36dp"
-        android:layout_marginRight="36dp"
-        android:scaleX="1.2"
-        android:scaleY="1.2"/>
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/backBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/baseline_arrow_back_24"
+            android:drawablePadding="10dp"
+            android:text="@string/back_btn"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:textAllCaps="false"
+            android:gravity="start|center_vertical"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:background="@drawable/back_btn"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- Top TextView for title -->
-    <TextView
-        android:id="@+id/drinkWater"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Drink Water"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="90dp"/>
+        <ImageButton
+            android:id="@+id/infoButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/baseline_info_24"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="36dp"
+            android:layout_marginEnd="36dp"
+            android:scaleX="1.2"
+            android:scaleY="1.2"/>
 
-    <!-- Circular progress bar -->
-    <RelativeLayout
-        android:id="@+id/circleProgress"
-        android:layout_width="250dp"
-        android:layout_height="250dp"
-        app:layout_constraintTop_toBottomOf="@id/drinkWater"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="36dp"
-        android:background="@drawable/vertical_progress_drawable">
+        <!-- Top TextView for title -->
+        <TextView
+            android:id="@+id/drinkWater"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Drink Water"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="90dp"/>
+
+        <!-- Circular progress bar -->
+        <RelativeLayout
+            android:id="@+id/circleProgress"
+            android:layout_width="250dp"
+            android:layout_height="250dp"
+            app:layout_constraintTop_toBottomOf="@id/drinkWater"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="36dp"
+            android:background="@drawable/vertical_progress_drawable">
+
+            <View
+                android:id="@+id/progress_circular"
+                android:layout_width="250dp"
+                android:layout_height="250dp" />
+
+            <TextView
+                android:id="@+id/tvProgress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="0"
+                android:textSize="36sp"
+                android:textStyle="bold"/>
+
+            <!-- Goal Text -->
+            <TextView
+                android:id="@+id/tvGoal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvProgress"
+                android:layout_centerHorizontal="true"
+                android:text="/2500ml"
+                android:textSize="18sp"
+                android:layout_marginTop="4dp"/>
+        </RelativeLayout>
+
+        <!-- Button for saving the water goal -->
+        <Button
+            android:id="@+id/btnSetGoal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Set Goal"
+            android:textSize="13dp"
+            android:backgroundTint="#9299BF"
+            android:paddingStart="5dp"
+            android:paddingEnd="5dp"
+            android:layout_marginTop="10dp"
+            app:layout_constraintTop_toBottomOf="@+id/circleProgress"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <!-- FrameLayout for smallDroplet1 -->
+        <FrameLayout
+            android:id="@+id/smallDroplet1"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.2"
+            android:layout_marginTop="480dp"
+            android:tag="small">
+
+            <ImageView
+                android:id="@+id/ivDroplet1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/water_droplet" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="100ml"
+                android:textSize="10sp"
+                android:textStyle="bold"
+                android:layout_gravity="center"/>
+        </FrameLayout>
+
+        <!-- FrameLayout for smallDroplet2 -->
+        <FrameLayout
+            android:id="@+id/smallDroplet2"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.4"
+            android:layout_marginTop="480dp"
+            android:tag="small">
+
+            <ImageView
+                android:id="@+id/ivDroplet2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/water_droplet"
+                android:scaleType="centerCrop"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="100ml"
+                android:textSize="10sp"
+                android:textStyle="bold"
+                android:layout_gravity="center"/>
+        </FrameLayout>
+
+        <!-- FrameLayout for smallDroplet3 -->
+        <FrameLayout
+            android:id="@+id/smallDroplet3"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.6"
+            android:layout_marginTop="480dp"
+            android:tag="small">
+
+            <ImageView
+                android:id="@+id/ivDroplet3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/water_droplet"
+                android:scaleType="centerCrop"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="100ml"
+                android:textSize="10sp"
+                android:textStyle="bold"
+                android:layout_gravity="center"/>
+        </FrameLayout>
+
+        <!-- FrameLayout for smallDroplet4 -->
+        <FrameLayout
+            android:id="@+id/smallDroplet4"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.8"
+            android:layout_marginTop="480dp"
+            android:tag="small">
+
+            <ImageView
+                android:id="@+id/ivDroplet4"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/water_droplet"
+                android:scaleType="centerCrop"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="100ml"
+                android:textSize="10sp"
+                android:textStyle="bold"
+                android:layout_gravity="center"/>
+        </FrameLayout>
+
+        <!-- FrameLayout for bigDroplet1 -->
+        <FrameLayout
+            android:id="@+id/bigDroplet1"
+            android:layout_width="110dp"
+            android:layout_height="110dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.25"
+            android:layout_marginTop="550dp"
+            android:tag="big">
+
+            <ImageView
+                android:id="@+id/ivDroplet5"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/water_droplet"
+                android:scaleType="centerCrop"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="300ml"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:layout_gravity="center"/>
+        </FrameLayout>
+
+        <!-- FrameLayout for bigDroplet2 -->
+        <FrameLayout
+            android:id="@+id/bigDroplet2"
+            android:layout_width="110dp"
+            android:layout_height="110dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            android:layout_marginTop="550dp"
+            android:tag="big">
+
+            <ImageView
+                android:id="@+id/ivDroplet6"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/water_droplet"
+                android:scaleType="centerCrop"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="300ml"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:layout_gravity="center"/>
+        </FrameLayout>
+
+        <!-- FrameLayout for bigDroplet3 -->
+        <FrameLayout
+            android:id="@+id/bigDroplet3"
+            android:layout_width="110dp"
+            android:layout_height="110dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.75"
+            android:layout_marginTop="550dp"
+            android:tag="big">
+
+            <ImageView
+                android:id="@+id/ivDroplet7"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/water_droplet"
+                android:scaleType="centerCrop"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="300ml"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:layout_gravity="center"/>
+        </FrameLayout>
+
+        <!-- Week TextView -->
+        <TextView
+            android:id="@+id/tvWeek"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Today"
+            android:textSize="18sp"
+            app:layout_constraintTop_toTopOf="@id/drinkWater"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="34dp"/>
+
+        <TextView
+            android:id="@+id/Week"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Week"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            app:layout_constraintTop_toBottomOf="@+id/circleProgress"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="280dp"/>
 
         <View
-            android:id="@+id/progress_circular"
-            android:layout_width="250dp"
-            android:layout_height="250dp" />
+            android:layout_width="50dp"
+            android:layout_height="2dp"
+            android:background="#0000FF"
+            android:layout_marginTop="4dp"
+            app:layout_constraintTop_toBottomOf="@id/Week"
+            app:layout_constraintStart_toStartOf="@id/Week"
+            app:layout_constraintEnd_toEndOf="@id/Week"/>
 
-        <TextView
-            android:id="@+id/tvProgress"
+        <include
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="0"
-            android:textSize="36sp"
-            android:textStyle="bold"/>
+            layout="@layout/activity_week_picker"
+            android:layout_marginTop="25dp"
+            app:layout_constraintTop_toBottomOf="@+id/Week"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
 
-        <!-- Goal Text -->
-        <TextView
-            android:id="@+id/tvGoal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tvProgress"
-            android:layout_centerHorizontal="true"
-            android:text="/2000ml"
-            android:textSize="18sp"
-            android:layout_marginTop="4dp"/>
-    </RelativeLayout>
-
-    <!-- FrameLayout for smallDroplet1 -->
-    <FrameLayout
-        android:id="@+id/smallDroplet1"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.2"
-        android:layout_marginTop="430dp"
-        android:tag="small">
-
-        <ImageView
-            android:id="@+id/ivDroplet1"
+        <com.github.mikephil.charting.charts.BarChart
+            android:id="@+id/barChart"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="centerCrop"
-            android:src="@drawable/water_droplet" />
+            android:layout_height="330dp"
+            android:layout_marginTop="65dp"
+            app:layout_constraintEnd_toStartOf="@id/Week"
+            app:layout_constraintTop_toBottomOf="@id/Week"
+            tools:ignore="MissingClass,MissingConstraints" />
 
         <TextView
+            android:id="@+id/dailyAverage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="100ml"
-            android:textSize="10sp"
+            android:text="Daily Average : 100ml"
             android:textStyle="bold"
-            android:layout_gravity="center"/>
-    </FrameLayout>
-
-    <!-- FrameLayout for smallDroplet2 -->
-    <FrameLayout
-        android:id="@+id/smallDroplet2"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.4"
-        android:layout_marginTop="430dp"
-        android:tag="small">
-
-        <ImageView
-            android:id="@+id/ivDroplet2"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:src="@drawable/water_droplet"
-            android:scaleType="centerCrop"/>
+            android:textSize="16sp"
+            android:textColor="#00afff"
+            app:layout_constraintTop_toBottomOf="@+id/Week"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="405dp"/>
 
         <TextView
+            android:id="@+id/weeklyAverage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="100ml"
-            android:textSize="10sp"
+            android:text="Weekly Average : 100ml"
             android:textStyle="bold"
-            android:layout_gravity="center"/>
-    </FrameLayout>
-
-    <!-- FrameLayout for smallDroplet3 -->
-    <FrameLayout
-        android:id="@+id/smallDroplet3"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.6"
-        android:layout_marginTop="430dp"
-        android:tag="small">
-
-        <ImageView
-            android:id="@+id/ivDroplet3"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:src="@drawable/water_droplet"
-            android:scaleType="centerCrop"/>
+            android:textSize="16sp"
+            android:textColor="#1D8BE3"
+            app:layout_constraintTop_toBottomOf="@+id/Week"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="430dp"/>
 
         <TextView
+            android:id="@+id/intakeHistory"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="100ml"
-            android:textSize="10sp"
+            android:text="━━━━━  Intake History  ━━━━━"
             android:textStyle="bold"
-            android:layout_gravity="center"/>
-    </FrameLayout>
+            android:textSize="16sp"
+            app:layout_constraintTop_toBottomOf="@+id/Week"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="480dp"/>
 
-    <!-- FrameLayout for smallDroplet4 -->
-    <FrameLayout
-        android:id="@+id/smallDroplet4"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.8"
-        android:layout_marginTop="430dp"
-        android:tag="small">
-
-        <ImageView
-            android:id="@+id/ivDroplet4"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:src="@drawable/water_droplet"
-            android:scaleType="centerCrop"/>
+        <!-- RecyclerView for intake history -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/intakeHistory"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:paddingBottom="20dp" />
 
         <TextView
+            android:id="@+id/disclaimer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="100ml"
-            android:textSize="10sp"
-            android:textStyle="bold"
-            android:layout_gravity="center"/>
-    </FrameLayout>
-
-    <!-- FrameLayout for bigDroplet1 -->
-    <FrameLayout
-        android:id="@+id/bigDroplet1"
-        android:layout_width="110dp"
-        android:layout_height="110dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.25"
-        android:layout_marginTop="500dp"
-        android:tag="big">
-
-        <ImageView
-            android:id="@+id/ivDroplet5"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:src="@drawable/water_droplet"
-            android:scaleType="centerCrop"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="300ml"
-            android:textSize="12sp"
-            android:textStyle="bold"
-            android:layout_gravity="center"/>
-    </FrameLayout>
-
-    <!-- FrameLayout for bigDroplet2 -->
-    <FrameLayout
-        android:id="@+id/bigDroplet2"
-        android:layout_width="110dp"
-        android:layout_height="110dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        android:layout_marginTop="500dp"
-        android:tag="big">
-
-        <ImageView
-            android:id="@+id/ivDroplet6"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:src="@drawable/water_droplet"
-            android:scaleType="centerCrop"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="300ml"
-            android:textSize="12sp"
-            android:textStyle="bold"
-            android:layout_gravity="center"/>
-    </FrameLayout>
-
-    <!-- FrameLayout for bigDroplet3 -->
-    <FrameLayout
-        android:id="@+id/bigDroplet3"
-        android:layout_width="110dp"
-        android:layout_height="110dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.75"
-        android:layout_marginTop="500dp"
-        android:tag="big">
-
-        <ImageView
-            android:id="@+id/ivDroplet7"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:src="@drawable/water_droplet"
-            android:scaleType="centerCrop"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="300ml"
-            android:textSize="12sp"
-            android:textStyle="bold"
-            android:layout_gravity="center"/>
-    </FrameLayout>
-
-
-    <!-- Week TextView -->
-    <TextView
-        android:id="@+id/tvWeek"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Today"
-        android:textSize="18sp"
-        app:layout_constraintTop_toTopOf="@id/drinkWater"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="34dp"/>
-
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+            android:text="No Intake History"
+            android:layout_gravity="center"
+            app:layout_constraintTop_toBottomOf="@+id/intakeHistory"
+            android:layout_marginTop="40dp"
+            android:layout_marginBottom="40dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
