@@ -92,7 +92,7 @@
         android:drawableLeft="@drawable/exercise_2d"
         android:drawablePadding="15dp"
         android:background="@drawable/trainingmenu_btn"
-        android:text="Pushup Counter"
+        android:text="Squat Counter"
         android:textColor="@color/white"
         android:textAllCaps="false"
 

@@ -19,11 +19,13 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.HandlerThread;
+import android.os.Looper;
 import android.util.Log;
 import android.view.Surface;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,6 +37,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.concurrent.Semaphore;
 
 import sg.edu.np.mad.fitnessultimate.R;
@@ -45,6 +49,7 @@ public class SquatCounterActivity extends AppCompatActivity {
     private static final int PREVIEW_WIDTH = 640;
     private static final int PREVIEW_HEIGHT = 480;
 
+    private Button backButton;
     private SurfaceView surfaceView;
     private SurfaceHolder surfaceHolder;
     private CameraDevice cameraDevice;
@@ -61,29 +66,43 @@ public class SquatCounterActivity extends AppCompatActivity {
 
     private int squatCount = 0;
     private boolean isInSquatPosition = false;
-    private static final float SQUAT_THRESHOLD = 0.15f; // 15% movement threshold
-    private static final float RETURN_THRESHOLD = 0.05f; // 5% threshold to consider returned to standing
+    private static final float SQUAT_THRESHOLD = 0.50f;
     private static final float CONFIDENCE_THRESHOLD = 0.3f;
-    private static final long MIN_SQUAT_DURATION = 500; // Minimum duration of a squat in milliseconds
+    private static final long MIN_SQUAT_DURATION = 800;
+    private static final int WINDOW_SIZE = 20;
+    private Queue<Float> noseYPositions = new LinkedList<>();
+    private float highestNoseY = Float.MAX_VALUE;
+    private float lowestNoseY = 0;
+    private long squatStartTime = 0;
 
     private boolean countdownFinished = false;
     private CountDownTimer countdownTimer;
+    private boolean isProcessingImage = false;
+    private Handler processingHandler;
+    private static final long PROC_DELAY = 150;
 
-    private float highestNoseY = Float.MAX_VALUE;
-    private long squatStartTime = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_posenet_workout);
+        setContentView(R.layout.activity_squat_counter);
 
         surfaceView = findViewById(R.id.surfaceView);
         squatCountTextView = findViewById(R.id.textView8);
         countdownTextView = findViewById(R.id.textView7);
+        backButton = findViewById(R.id.backbutton);
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+                Toast.makeText(SquatCounterActivity.this, "Congrats! You did " + squatCount + " squats.", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         surfaceHolder = surfaceView.getHolder();
         surfaceHolder.addCallback(surfaceHolderCallback);
 
+        processingHandler = new Handler(Looper.getMainLooper());
         initMoveNet();
         startCountdown();
     }
@@ -194,13 +213,21 @@ public class SquatCounterActivity extends AppCompatActivity {
     private final ImageReader.OnImageAvailableListener imageAvailableListener = new ImageReader.OnImageAvailableListener() {
         @Override
         public void onImageAvailable(ImageReader reader) {
+            if (isProcessingImage) return;
+
             Image image = null;
             try {
                 image = reader.acquireLatestImage();
                 if (image != null && countdownFinished) {
                     Bitmap bitmap = imageToBitmap(image);
                     if (bitmap != null) {
-                        processImage(bitmap);
+                        isProcessingImage = true;
+                        processingHandler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                processImage(bitmap);
+                            }
+                        }, PROC_DELAY);
                     }
                 }
             } catch (Exception e) {
@@ -239,46 +266,56 @@ public class SquatCounterActivity extends AppCompatActivity {
     private void processImage(Bitmap bitmap) {
         float[][] keypoints = moveNet.estimateSinglePose(bitmap);
         detectSquat(keypoints);
+        isProcessingImage = false;
     }
 
     private void detectSquat(float[][] keypoints) {
         float[] nose = keypoints[MoveNet.BodyPart.NOSE.ordinal()];
 
         if (nose[2] > CONFIDENCE_THRESHOLD) {
-            float noseY = nose[0];
+            float noseY = nose[1];
+            updateNosePositions(noseY);
 
-            // Update the highest nose position (lowest Y value)
-            if (noseY < highestNoseY) {
-                highestNoseY = noseY;
-                Log.d(TAG, "New highest nose position: " + highestNoseY);
-            }
+            float currentRange = highestNoseY - lowestNoseY;
+            float currentPosition = noseY - lowestNoseY;
+            float relativePosition = currentPosition / currentRange;
 
-            float movement = (noseY - highestNoseY) / highestNoseY;
-
-            Log.d(TAG, String.format("Nose Y: %.2f, Highest Y: %.2f, Movement: %.2f", noseY, highestNoseY, movement));
+            Log.w(TAG, String.format("Nose Y: %.2f, Relative Position: %.2f", noseY, relativePosition));
 
             long currentTime = System.currentTimeMillis();
 
-            if (movement > SQUAT_THRESHOLD && !isInSquatPosition) {
-                Log.d(TAG, "Entered squat position");
+            if (relativePosition < SQUAT_THRESHOLD && !isInSquatPosition) {
+                Log.w(TAG, "Entered squat position");
                 isInSquatPosition = true;
                 squatStartTime = currentTime;
-            } else if (movement < RETURN_THRESHOLD && isInSquatPosition) {
+            } else if (relativePosition > 1 - SQUAT_THRESHOLD && isInSquatPosition) {
                 if (currentTime - squatStartTime >= MIN_SQUAT_DURATION) {
                     isInSquatPosition = false;
                     squatCount++;
-                    Log.d(TAG, "Squat counted. Total: " + squatCount);
+                    Log.w(TAG, "Squat counted. Total: " + squatCount);
                     runOnUiThread(() -> squatCountTextView.setText("Squats: " + squatCount));
                 } else {
-                    Log.d(TAG, "Squat too short, not counted");
+                    Log.w(TAG, "Squat too short, not counted");
                 }
             }
         } else {
-            Log.d(TAG, "Nose confidence below threshold");
+            Log.e(TAG, "Nose confidence below threshold");
         }
     }
 
+    private void updateNosePositions(float noseY) {
+        noseYPositions.offer(noseY);
+        if (noseYPositions.size() > WINDOW_SIZE) {
+            noseYPositions.poll();
+        }
 
+        highestNoseY = Float.MAX_VALUE;
+        lowestNoseY = 0;
+        for (float y : noseYPositions) {
+            if (y < highestNoseY) highestNoseY = y;
+            if (y > lowestNoseY) lowestNoseY = y;
+        }
+    }
 
     private final SurfaceHolder.Callback surfaceHolderCallback = new SurfaceHolder.Callback() {
         @Override
