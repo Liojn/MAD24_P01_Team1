@@ -176,9 +176,14 @@ public class SquatCounterActivity extends AppCompatActivity {
     private void createCameraPreviewSession() {
         try {
             Surface surface = surfaceHolder.getSurface();
-
-            captureRequestBuilder = cameraDevice.createCaptureRequest(CameraDevice.TEMPLATE_PREVIEW);
-            captureRequestBuilder.addTarget(surface);
+            try {
+                captureRequestBuilder = cameraDevice.createCaptureRequest(CameraDevice.TEMPLATE_PREVIEW);
+                captureRequestBuilder.addTarget(surface);
+            } catch (CameraAccessException e) {
+                Log.e(TAG, "Failed to create capture request", e);
+                Toast.makeText(this, "Failed to create camera preview. Please retry.", Toast.LENGTH_LONG).show();
+                finish();
+            }
 
             imageReader = ImageReader.newInstance(PREVIEW_WIDTH, PREVIEW_HEIGHT, ImageFormat.YUV_420_888, 2);
             imageReader.setOnImageAvailableListener(imageAvailableListener, backgroundHandler);
