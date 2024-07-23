@@ -6,6 +6,8 @@ import android.graphics.Color;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -64,8 +66,12 @@ public class WaterTrackingActivity extends AppCompatActivity {
     private TextView tvProgress;
     private int currentWaterIntake = 0;
     private int userWaterGoal = 2500;
-    private static final int SMALL_WATER_INCREMENT = 100; // Amount of water to increment per small droplet
-    private static final int BIG_WATER_INCREMENT = 300; // Amount of water to increment per big droplet
+    private static final int SMALL_WATER_INCREMENT1 = 20; // 20ml to increment
+    private static final int SMALL_WATER_INCREMENT2 = 50; // 50ml to increment
+    private static final int BIG_WATER_INCREMENT1 = 100; // 100ml to increment
+    private static final int BIG_WATER_INCREMENT2 = 200; // 200ml to increment
+    private static final int BIG_WATER_INCREMENT3 = 300; // 300ml to increment
+
 
     private RecyclerView recyclerView;
     private TextView disclaimer;
@@ -169,8 +175,6 @@ public class WaterTrackingActivity extends AppCompatActivity {
         // Find all droplet FrameLayouts
         FrameLayout smallDroplet1 = findViewById(R.id.smallDroplet1);
         FrameLayout smallDroplet2 = findViewById(R.id.smallDroplet2);
-        FrameLayout smallDroplet3 = findViewById(R.id.smallDroplet3);
-        FrameLayout smallDroplet4 = findViewById(R.id.smallDroplet4);
 
         FrameLayout bigDroplet1 = findViewById(R.id.bigDroplet1);
         FrameLayout bigDroplet2 = findViewById(R.id.bigDroplet2);
@@ -179,8 +183,6 @@ public class WaterTrackingActivity extends AppCompatActivity {
         // Add listeners to each droplet
         smallDroplet1.setOnTouchListener(new MyTouchListener());
         smallDroplet2.setOnTouchListener(new MyTouchListener());
-        smallDroplet3.setOnTouchListener(new MyTouchListener());
-        smallDroplet4.setOnTouchListener(new MyTouchListener());
 
         bigDroplet1.setOnTouchListener(new MyTouchListener());
         bigDroplet2.setOnTouchListener(new MyTouchListener());
@@ -237,11 +239,17 @@ public class WaterTrackingActivity extends AppCompatActivity {
                         // Check if droplet is dropped into the circular progress area
                         if (isViewOverlapping(view, findViewById(R.id.circleProgress))) {
                             // Determine the water increment based on the droplet type
-                            int increment;
-                            if ("big".equals(view.getTag())) {
-                                increment = BIG_WATER_INCREMENT;
-                            } else {
-                                increment = SMALL_WATER_INCREMENT;
+                            int increment = 0;
+                            if ("20ml".equals(view.getTag())) {
+                                increment = SMALL_WATER_INCREMENT1;
+                            } else if ("50ml".equals(view.getTag())) {
+                                increment = SMALL_WATER_INCREMENT2;
+                            } else if ("100ml".equals(view.getTag())) {
+                                increment = BIG_WATER_INCREMENT1;
+                            } else if ("200ml".equals(view.getTag())) {
+                                increment = BIG_WATER_INCREMENT2;
+                            } else if ("300ml".equals(view.getTag())) {
+                                increment = BIG_WATER_INCREMENT3;
                             }
 
                             // Increment water intake
@@ -311,7 +319,10 @@ public class WaterTrackingActivity extends AppCompatActivity {
             int goal = npWaterGoal.getValue() * 100;
             userWaterGoal = goal; // Update the user's goal
 
-            saveGoalToFirestore(goal);
+            // Get the current date in your desired format
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+            String goalDate = dateFormat.format(new Date());
+            saveGoalToFirestore(goal, goalDate);
 
             // Save the goal or do something with it
             Toast.makeText(this, "Water goal set to " + goal + " ml", Toast.LENGTH_SHORT).show();
@@ -375,12 +386,22 @@ public class WaterTrackingActivity extends AppCompatActivity {
         LayoutInflater inflater = getLayoutInflater();
         View layout = inflater.inflate(R.layout.congratulations_toast, findViewById(R.id.custom_toast_container));
 
-        Toast toast = new Toast(getApplicationContext());
+        final Toast toast = new Toast(getApplicationContext());
         toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
-        toast.setDuration(Toast.LENGTH_LONG);
+        toast.setDuration(Toast.LENGTH_SHORT); // Use LENGTH_SHORT for control
+
         toast.setView(layout);
+
+        // Show the toast
         toast.show();
+
+        // Create a handler associated with the main looper
+        Handler mainHandler = new Handler(Looper.getMainLooper());
+        mainHandler.postDelayed(() -> {
+            toast.cancel(); // Hide the toast
+        }, 2000); // 2000 milliseconds = 2 seconds
     }
+
 
     private void addIntakeHistory(String intakeAmount, String increment, int goal) {
         intakeHistoryList.add(new IntakeHistory(intakeAmount, increment, goal));
@@ -414,15 +435,16 @@ public class WaterTrackingActivity extends AppCompatActivity {
         }
     }
 
-    private void saveGoalToFirestore(int goal) {
+    private void saveGoalToFirestore(int goal, String goalDate) {
         FirebaseUser user = auth.getCurrentUser();
         if (user != null) {
             String userId = user.getUid();
             Map<String, Object> goalData = new HashMap<>();
             goalData.put("goal", goal);
+            goalData.put("date", goalDate); // Save the date
 
             // Save the goal in a separate document or update the existing one
-            db.collection("users").document(userId).collection("waterTracker").document("goal")
+            db.collection("users").document(userId).collection("waterTracker").document(goalDate)
                     .set(goalData)
                     .addOnSuccessListener(aVoid -> {
                         // Goal successfully written
@@ -698,7 +720,8 @@ public class WaterTrackingActivity extends AppCompatActivity {
     }
 
     private void loadBarChartData(QuerySnapshot snapshots) {
-        ArrayList<BarEntry> entries = new ArrayList<>();
+        ArrayList<BarEntry> intakeEntries = new ArrayList<>();
+        ArrayList<BarEntry> goalEntries = new ArrayList<>();
         SimpleDateFormat fullDateFormat = new SimpleDateFormat("hh:mm a, MMM dd yyyy", Locale.getDefault());
         SimpleDateFormat dayFormat = new SimpleDateFormat("EEE", Locale.getDefault());
 
@@ -765,9 +788,10 @@ public class WaterTrackingActivity extends AppCompatActivity {
         for (int i = 0; i < daysOfWeek.length; i++) {
             String day = daysOfWeek[i];
             int intakeAmount = waterIntakeMap.getOrDefault(day, 0);
+            intakeEntries.add(new BarEntry(i, intakeAmount));
             // Apply the goal only on the specific day of intake
             int goal = (intakeAmount > 0 && day.equals(getDayOfWeekFromDate(Calendar.getInstance().getTime()))) ? userWaterGoal : 0;
-            entries.add(new BarEntry(i, new float[]{intakeAmount, goal}));
+            goalEntries.add(new BarEntry(i, goal));
         }
 
         // Calculate the daily average
@@ -782,16 +806,20 @@ public class WaterTrackingActivity extends AppCompatActivity {
         TextView weeklyAverageTextView = findViewById(R.id.weeklyAverage);  // Display the weekly average in the TextView
         weeklyAverageTextView.setText(String.format("Weekly Average: %.1f ml", weeklyAverage));
 
-        // Set up the dataset
-        BarDataSet dataSet = new BarDataSet(entries, "");
-        dataSet.setColors(new int[]{Color.parseColor("#add8e6"), Color.parseColor("#D6EBF2")}); // Example colors
-        dataSet.setValueTextColor(Color.BLACK);
-        dataSet.setValueTextSize(12f);
-        dataSet.setStackLabels(new String[]{"Water Intake", "Goal"});
+        // Set up the datasets
+        BarDataSet goalDataSet = new BarDataSet(goalEntries, "Goal");
+        goalDataSet.setColor(Color.parseColor("#D6EBF2")); //
+        goalDataSet.setValueTextSize(12f);
 
-        BarData barData = new BarData(dataSet);
+        BarDataSet intakeDataSet = new BarDataSet(intakeEntries, "Water Intake");
+        intakeDataSet.setColor(Color.parseColor("#add8e6")); //
+        intakeDataSet.setValueTextSize(12f);
+
+        BarData barData = new BarData(goalDataSet, intakeDataSet);
+        barData.setBarWidth(0.7f); // Adjusted bar width
+
+        // Group the bars
         barChart.setData(barData);
-        barData.setBarWidth(0.7f);
 
         // Customize the chart as needed
         Legend legend = barChart.getLegend();
