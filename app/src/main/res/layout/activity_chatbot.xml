@@ -17,6 +17,7 @@
       android:id="@+id/main"
       tools:context=".chatbot.activity.ChatbotActivity">
 
+
     <View
         android:id="@+id/background_chat"
         android:layout_width="match_parent"
@@ -35,7 +36,7 @@
         android:background="#2d3250"
         app:layout_constraintBottom_toTopOf="@+id/conversation"
         app:layout_constraintTop_toTopOf="parent"
-   />
+        />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -58,7 +59,7 @@
         android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@id/userInput"
         app:layout_constraintTop_toTopOf="parent"
-      />
+        />
 
     <FrameLayout
         android:id="@+id/layoutSend"

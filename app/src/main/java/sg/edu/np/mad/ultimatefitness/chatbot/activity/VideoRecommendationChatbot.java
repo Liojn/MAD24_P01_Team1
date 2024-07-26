@@ -52,7 +52,7 @@ public class VideoRecommendationChatbot extends Fragment {
         gestureDetector = new GestureDetector(getContext(), new GestureDetector.SimpleOnGestureListener() {
             @Override
             public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityY, float velocityX) {
-                if (velocityY > 1000) {
+                if (velocityY > 700) {
                     getParentFragmentManager().beginTransaction().remove(VideoRecommendationChatbot.this).commit();
                     return true;
                 }
@@ -86,11 +86,11 @@ public class VideoRecommendationChatbot extends Fragment {
     private List<String> getVideoIdsForExercise(String exercise) {
         switch (exercise) {
             case "push up":
-                return Arrays.asList("fO3dKSQayfg", "eGo4IYlbE5g");
+                return Arrays.asList("IODxDxX7oi4", "zkU6Ok44_CI");
             case "crunches":
                 return Arrays.asList("5ER5Of4MOPI", "MKmrqcoCZ-M");
             case "pull ups":
-                return Arrays.asList("IODxDxX7oi4", "zkU6Ok44_CI");
+                return Arrays.asList("fO3dKSQayfg", "eGo4IYlbE5g");
             default:
                 return Collections.emptyList();
         }

@@ -1,8 +1,12 @@
 package sg.edu.np.mad.ultimatefitness.chatbot.activity;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import androidx.activity.EdgeToEdge;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -17,7 +21,8 @@ import sg.edu.np.mad.ultimatefitness.calendarPage.BaseActivity;
 import sg.edu.np.mad.ultimatefitness.chatbot.adapter.MessageAdapter;
 import sg.edu.np.mad.ultimatefitness.chatbot.model.ResponseMessage;
 
-
+import android.util.Log;
+import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.FrameLayout;
@@ -26,7 +31,12 @@ import android.widget.ImageView;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.speech.RecognizerIntent;
+import android.widget.Toast;
+import java.util.Locale;
+
 public class ChatbotActivity extends BaseActivity {
+
 
     EditText userInput;
     RecyclerView recyclerView;
@@ -34,6 +44,7 @@ public class ChatbotActivity extends BaseActivity {
     List<ResponseMessage> responseMessageList;
     FrameLayout layoutSend;
     ImageView sendIcon;
+    FrameLayout layoutMic;
 
     private boolean isFragmentActive = false; // Flag to check if fragment is active
 
@@ -65,6 +76,10 @@ public class ChatbotActivity extends BaseActivity {
 
         displayFaqMessage();
 
+
+
+
+
         userInput.setOnEditorActionListener((textView, i, keyEvent) -> {
             if (i == EditorInfo.IME_ACTION_SEND) {
                 sendMessage();
@@ -75,6 +90,7 @@ public class ChatbotActivity extends BaseActivity {
 
         layoutSend.setOnClickListener(v -> sendMessage());
     }
+
 
     private void sendMessage() {
         String userMessage = userInput.getText().toString().toLowerCase();
@@ -94,6 +110,7 @@ public class ChatbotActivity extends BaseActivity {
             }
         }
     }
+
     private void showVideoRecommendationFragment(String exercise) {
         if (!isFragmentActive) { // Check if fragment is already active
             FragmentManager fragmentManager = getSupportFragmentManager();
@@ -142,15 +159,15 @@ public class ChatbotActivity extends BaseActivity {
             return "Exercise has many benefits including improving cardiovascular health.";
         } else if (message.contains("hi") || message.contains("hello")) {
             return "Hello! I am the Fitness Ultimate's Chatbot. Choose a question from the FAQs!";
-        } else if (message.contains("6") || message.contains("faq")) {
-            return "Here are some FAQs:\n1) How does the training schedule work?\n2) What is the calendar for?\n3) How to use the food tracking?\n4) What are the benefits of exercise?\n5) Display FAQs again.";
+        } else if (message.contains("8") || message.contains("faq")) {
+            return "Here are some FAQs:\n1) How does the training schedule work?\n2) What is the calendar for?\n3) How to use the food tracking?\n4) What are the benefits of exercise?\n5) How to do a push up? \n6) How to do crunches? \n7) How to do pull ups? \n8) Display FAQs again.";
         } else if (message.contains("5") || message.contains("push up")) {
             showVideoRecommendationFragment("push up");
             return "To do a push up, you can follow this video guide:";
-        } else if (message.contains("crunch") || message.contains("how to do a crunch")) {
+        } else if (message.contains("crunch") || message.contains("how to do a crunch") || message.contains("6")) {
             showVideoRecommendationFragment("crunches");
             return "To do a crunch, here are some videos:";
-        } else if (message.contains("pull up") || message.contains("how to do pull ups")) {
+        } else if (message.contains("pull up") || message.contains("how to do pull ups") || message.contains("7")) {
             showVideoRecommendationFragment("pull ups");
             return "To do pull ups, here are some video recommendations:";
         } else {
@@ -158,10 +175,12 @@ public class ChatbotActivity extends BaseActivity {
         }
     }
 
-    boolean isLastVisible() {
-        LinearLayoutManager layoutManager = ((LinearLayoutManager) recyclerView.getLayoutManager());
-        int pos = layoutManager.findLastCompletelyVisibleItemPosition();
-        int numItems = recyclerView.getAdapter().getItemCount();
-        return (pos >= numItems);
+    private boolean isLastVisible() {
+        if (messageAdapter != null && messageAdapter.getItemCount() != 0) {
+            LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
+            int pos = layoutManager.findLastCompletelyVisibleItemPosition();
+            return pos >= messageAdapter.getItemCount() - 1;
+        }
+        return false;
     }
 }

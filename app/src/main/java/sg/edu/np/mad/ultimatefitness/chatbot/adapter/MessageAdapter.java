@@ -1,5 +1,6 @@
 package sg.edu.np.mad.ultimatefitness.chatbot.adapter;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -51,6 +52,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.CustomVi
 
     @Override
     public void onBindViewHolder(CustomViewHolder holder, int position) {
+        Log.i("MAOMAOO", String.valueOf(holder.textView));
         holder.textView.setText(responseMessages.get(position).getText());
     }
 }
