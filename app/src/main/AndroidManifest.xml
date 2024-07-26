@@ -1,7 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.camera.flash"
+        android:required="false" />
+
+
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.FLASHLIGHT" />
 
     <application
         android:allowBackup="true"
@@ -13,6 +24,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FitnessUltimate"
         tools:targetApi="31">
+
+
+        <activity
+            android:name=".training.counter.SquatCounterActivity"
+            android:exported="true">
+        </activity>
         <activity
             android:name=".loginSignup.EditProfilePageActivity"
             android:exported="false" />
@@ -25,7 +42,8 @@
         <activity
             android:name=".loginSignup.ProfilePageActivity"
             android:exported="true" />
-        <activity android:name=".loginSignup.LoginOrSignUpOption"
+        <activity
+            android:name=".loginSignup.LoginOrSignUpOption"
             android:exported="true" />
 
         <activity
@@ -35,8 +53,8 @@
         <activity
             android:name=".training.exercises.ExerciseActivity"
             android:exported="false" />
-
-        <activity android:name=".training.workouts.WorkoutActivity"
+        <activity
+            android:name=".training.workouts.WorkoutActivity"
             android:exported="false" />
 
         <activity
@@ -75,11 +93,10 @@
 
         <activity
             android:name=".foodtracker.FoodTracker"
-            android:exported="true"/>
-        <meta-data android:name="com.google.ar.core" android:value="required" />
+            android:exported="true" />
         <activity
             android:name=".chatbot.activity.ChatbotActivity"
-            android:exported="true"/>
+            android:exported="true" />
     </application>
 
 </manifest>
