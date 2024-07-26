@@ -2,6 +2,7 @@
 package sg.edu.np.mad.fitnessultimate.calendarPage;
 
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -12,9 +13,9 @@ import sg.edu.np.mad.fitnessultimate.R;
 public class CalendarViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener
 {
     public final TextView dayOfMonth;
-    public final View dayOfMonthBg;
-    public final View calenderCellOl;
-    public final View smallMarker;
+    public final ImageView dayOfMonthBg;
+    public final ImageView calenderCellOl;
+    public final ImageView smallMarker;
     private final CalendarAdapter.OnItemListener onItemListener;
     private DayModel dayModel;
     public CalendarViewHolder(@NonNull View itemView, CalendarAdapter.OnItemListener onItemListener)
