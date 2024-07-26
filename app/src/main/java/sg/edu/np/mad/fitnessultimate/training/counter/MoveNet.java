@@ -2,7 +2,7 @@ package sg.edu.np.mad.fitnessultimate.training.counter;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.util.Log;
+
 
 import org.tensorflow.lite.Interpreter;
 import org.tensorflow.lite.gpu.CompatibilityList;
@@ -13,7 +13,6 @@ import org.tensorflow.lite.support.image.TensorImage;
 import org.tensorflow.lite.support.image.ops.ResizeOp;
 
 import java.io.IOException;
-import java.nio.ByteBuffer;
 
 public class MoveNet {
     private static final String TAG = "MoveNet";

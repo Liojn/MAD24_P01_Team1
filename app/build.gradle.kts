@@ -4,15 +4,15 @@ plugins {
 }
 
 android {
-    namespace = "sg.edu.np.mad.ultimatefitness"
+    namespace = "sg.edu.np.mad.fitnessultimate"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "sg.edu.np.mad.ultimatefitness"
+        applicationId = "sg.edu.np.mad.fitnessultimate"
         minSdk = 33
         targetSdk = 34
-        versionCode = 2
-        versionName = "2"
+        versionCode = 1
+        versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -41,9 +41,6 @@ dependencies {
     implementation(libs.roundedimageview)
     implementation(libs.sdp.android)
     implementation(libs.ssp.android)
-    implementation(libs.core)
-    implementation(libs.room.compiler)
-    implementation(libs.ar.core)
     testImplementation(libs.junit)
     // Import the Firebase BoM
     implementation(platform("com.google.firebase:firebase-bom:33.0.0"))
@@ -52,6 +49,7 @@ dependencies {
     implementation("com.google.android.material:material:1.12.0")
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
+
     implementation("com.github.bumptech.glide:glide:4.12.0")
     implementation("com.google.firebase:firebase-storage:21.0.0")
 
@@ -60,4 +58,3 @@ dependencies {
     implementation("org.tensorflow:tensorflow-lite-support:0.2.0")
     implementation("org.tensorflow:tensorflow-lite-gpu:2.9.0")
 }
-
