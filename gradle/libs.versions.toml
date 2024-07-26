@@ -16,6 +16,10 @@ firebaseFirestore = "25.0.0"
 roundedimageview = "2.3.0"
 sdpAndroid = "1.1.1"
 sspAndroid = "1.1.1"
+core = "1.17.1"
+roomCompiler = "2.6.1"
+sceneformUx = "1.17.1"
+coreVersion = "1.44.0"
 
 [libraries]
 gson = { module = "com.google.code.gson:gson", name = "gson", version.ref = "gson" }
@@ -33,6 +37,10 @@ firebase-auth = { group = "com.google.firebase", name = "firebase-auth", version
 roundedimageview = { group = "com.makeramen", name = "roundedimageview", version.ref = "roundedimageview" }
 sdp-android = { group = "com.intuit.sdp", name = "sdp-android", version.ref = "sdpAndroid" }
 ssp-android = { group = "com.intuit.ssp", name = "ssp-android", version.ref = "sspAndroid" }
+core = { group = "com.google.ar.sceneform", name = "core", version.ref = "core" }
+room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "roomCompiler" }
+sceneform-ux = { group = "com.google.ar.sceneform.ux", name = "sceneform-ux", version.ref = "sceneformUx" }
+ar-core = { group = "com.google.ar", name = "core", version.ref = "coreVersion" }
 
 
 [plugins]
