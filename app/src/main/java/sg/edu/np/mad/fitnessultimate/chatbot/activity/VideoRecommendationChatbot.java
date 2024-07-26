@@ -22,8 +22,6 @@ import sg.edu.np.mad.fitnessultimate.chatbot.adapter.VideoAdapter;
 
 public class VideoRecommendationChatbot extends Fragment {
 
-
-
     private static final String ARG_EXERCISE = "exercise";
 
     private String exercise;
@@ -52,7 +50,7 @@ public class VideoRecommendationChatbot extends Fragment {
             @Override
             public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityY, float velocityX) {
                 if (velocityY > 700) {
-                    getParentFragmentManager().beginTransaction().remove(VideoRecommendationChatbot.this).commit();
+                    dismissFragment();
                     return true;
                 }
                 return false;
@@ -94,5 +92,19 @@ public class VideoRecommendationChatbot extends Fragment {
                 return Collections.emptyList();
         }
     }
-}
 
+
+    private void dismissFragment() {
+        if (getActivity() instanceof ChatbotActivity) {
+            ((ChatbotActivity) getActivity()).setFragmentActive(false);
+        }
+        getParentFragmentManager().beginTransaction().remove(this).commit();
+    }
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (getActivity() instanceof ChatbotActivity) {
+            ((ChatbotActivity) getActivity()).setFragmentActive(false);
+        }
+    }
+}

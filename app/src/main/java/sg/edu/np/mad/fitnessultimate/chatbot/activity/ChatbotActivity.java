@@ -34,7 +34,7 @@ public class ChatbotActivity extends BaseActivity {
     List<ResponseMessage> responseMessageList;
     FrameLayout layoutSend;
     ImageView sendIcon;
-    FrameLayout layoutMic;
+
 
     private boolean isFragmentActive = false; // Flag to check if fragment is active
 
@@ -66,10 +66,6 @@ public class ChatbotActivity extends BaseActivity {
 
         displayFaqMessage();
 
-
-
-
-
         userInput.setOnEditorActionListener((textView, i, keyEvent) -> {
             if (i == EditorInfo.IME_ACTION_SEND) {
                 sendMessage();
@@ -80,7 +76,6 @@ public class ChatbotActivity extends BaseActivity {
 
         layoutSend.setOnClickListener(v -> sendMessage());
     }
-
 
     private void sendMessage() {
         String userMessage = userInput.getText().toString().toLowerCase();
@@ -107,24 +102,32 @@ public class ChatbotActivity extends BaseActivity {
             VideoRecommendationChatbot fragment = VideoRecommendationChatbot.newInstance(exercise);
             FragmentTransaction transaction = fragmentManager.beginTransaction();
             transaction.add(R.id.main, fragment);
+            transaction.addToBackStack(null); // Add this line to handle the back stack correctly
             transaction.commit();
             isFragmentActive = true; // Set flag to true
         }
+    }
+    public void setFragmentActive(boolean isActive) {
+        this.isFragmentActive = isActive;
     }
 
     @Override
     public void onBackPressed() {
         if (isFragmentActive) {
-            FragmentManager fragmentManager = getSupportFragmentManager();
-            fragmentManager.popBackStackImmediate();
-            isFragmentActive = false;
+            closeVideoRecommendationFragment();
         } else {
             super.onBackPressed();
         }
     }
 
+    private void closeVideoRecommendationFragment() {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.popBackStackImmediate();
+        isFragmentActive = false;
+    }
+
     private void displayFaqMessage() {
-        String faqMessage = "Here are some FAQs:\n1) How does the training schedule work?\n2) What is the calendar for?\n3) How to use the food tracking?\n4) What are the benefits of exercise\n5) Display FAQ's again\n6) How to do a push up";
+        String faqMessage = "Here are some FAQs:\n1) How does the training schedule work?\n2) What is the calendar for?\n3) How to use the food tracking?\n4) What are the benefits of exercise?\n5) How to do a push up? \n6) How to do crunches? \n7) How to do pull ups? \n8) Display FAQs again.";
         addMessageToChat(faqMessage, true);
     }
 
