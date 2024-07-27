@@ -106,7 +106,6 @@ public class MiscCalendar extends BaseActivity{
                                             Map<String, Object> documentData = document.getData();
                                             if (documentData == null || documentData.get("workout") == null) {
                                                 workout = null;
-//                                                Log.d("MiscCalendar", "Workout is null");
                                             } else {
                                                 Map<String, String> workoutData = (Map<String, String>) documentData.get("workout");
                                                 List<Workout> workoutsList = GlobalExerciseData.getInstance().getWorkoutList();
@@ -115,10 +114,6 @@ public class MiscCalendar extends BaseActivity{
                                                         .filter(e -> e.getName().equals(workoutData.get("name")))
                                                         .findFirst()
                                                         .orElse(null);
-
-//                                                if (workout != null){
-//                                                    Log.d("MiscCalendar", "dateId: " + dateId + " timeSpent: " + timeSpent + " Workout: " + workout.getName());
-//                                                }
                                             }
 
                                             RetrievedData retrievedData = new RetrievedData(timeSpent, workout);

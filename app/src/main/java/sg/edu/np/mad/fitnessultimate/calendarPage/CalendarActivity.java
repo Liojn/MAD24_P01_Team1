@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
@@ -22,15 +23,30 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.SetOptions;
+
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 
 import sg.edu.np.mad.fitnessultimate.R;
 import sg.edu.np.mad.fitnessultimate.training.helpers.GlobalExerciseData;
 import sg.edu.np.mad.fitnessultimate.training.helpers.JsonUtils;
+import sg.edu.np.mad.fitnessultimate.training.workouts.Workout;
 import sg.edu.np.mad.fitnessultimate.training.workouts.WorkoutActivity;
 
 public class CalendarActivity extends BaseActivity implements CalendarAdapter.OnItemListener, HistoryAdapter.OnItemListener2 {
@@ -56,6 +72,33 @@ public class CalendarActivity extends BaseActivity implements CalendarAdapter.On
         GlobalExerciseData.getInstance().setWorkoutList(JsonUtils.loadWorkouts(this));
         GlobalExerciseData.getInstance().setExerciseList(JsonUtils.loadExercises(this));
 
+        // Set fake workout data
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        if (FirebaseAuth.getInstance().getCurrentUser() == null) {
+            Log.e("WorkoutAdapter", "User is not authenticated. Stopping onPause.");
+            return;
+        }
+        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        Workout workout = GlobalExerciseData.getInstance().getWorkoutList().get(0);
+
+        // Get user's email
+        DocumentReference userDocRef = db.collection("users").document(userId);
+        userDocRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful() && task.getResult() != null) {
+                    DocumentSnapshot document = task.getResult();
+                    String email = document.getString("email");
+
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+                    String todayDate = sdf.format(new Date(System.currentTimeMillis()));
+                    if (email != null) {
+                        updateWorkout(db, email + "/padding/" + todayDate, workout);
+                    }
+                }
+            }
+        });
+
         initWidgets();
         selectedDate = LocalDate.now();
         setMonthView();
@@ -63,6 +106,44 @@ public class CalendarActivity extends BaseActivity implements CalendarAdapter.On
         //Back button Intent
         findViewById(R.id.Back).setOnClickListener(v -> {
             onBackPressed();
+        });
+    }
+
+    private void updateWorkout(FirebaseFirestore db, String documentPath, Workout workout) {
+        DocumentReference docRef = db.collection("timeSpentTracker").document(documentPath);
+        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful() && task.getResult() != null) {
+                    DocumentSnapshot document = task.getResult();
+
+                    Map<String, String> workoutData = new HashMap<>();
+                    workoutData.put("breakTime", String.valueOf(workout.getBreakTimeInMinutes()));
+                    workoutData.put("description", workout.getDescription());
+                    workoutData.put("estimatedTime", String.valueOf(workout.getBreakTimeInMinutes()));
+                    workoutData.put("exercise1", String.valueOf(workout.getExercises().get(0)));
+                    workoutData.put("exercise2", String.valueOf(workout.getExercises().get(1)));
+                    workoutData.put("exercise3", String.valueOf(workout.getExercises().get(2)));
+                    workoutData.put("name", workout.getName());
+                    Map<String, Object> workoutMap = new HashMap<String, Object>() {{
+                        put("workout", workoutData);
+                    }};
+
+                    docRef.set(workoutMap, SetOptions.merge())
+                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    Log.d("WorkoutAdapter", "Workout spent successfully written for document: " + documentPath);
+                                }
+                            })
+                            .addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Log.w("WorkoutAdapter", "Error writing time spent for document: " + documentPath, e);
+                                }
+                            });
+                }
+            }
         });
     }
 
