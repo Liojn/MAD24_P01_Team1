@@ -23,8 +23,6 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
-import sg.edu.np.mad.fitnessultimate.MainActivity;
-
 public class BaseActivity extends AppCompatActivity {
 
     private static TimeTracker timeTracker = new TimeTracker();

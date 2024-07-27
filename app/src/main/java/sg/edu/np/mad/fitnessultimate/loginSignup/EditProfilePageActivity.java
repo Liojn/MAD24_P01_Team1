@@ -1,36 +1,23 @@
 package sg.edu.np.mad.fitnessultimate.loginSignup;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.content.Intent;
-import android.net.Uri;
-import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
-import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Toast;
 
-import androidx.activity.BackEventCompat;
 import androidx.activity.EdgeToEdge;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import androidx.core.graphics.Insets;
@@ -54,7 +41,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import sg.edu.np.mad.fitnessultimate.calendarPage.BaseActivity;
-import sg.edu.np.mad.fitnessultimate.loginSignup.ProfilePageActivity;
 import sg.edu.np.mad.fitnessultimate.R;
 
 public class EditProfilePageActivity extends BaseActivity {

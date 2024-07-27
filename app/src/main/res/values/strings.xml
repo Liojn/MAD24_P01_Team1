@@ -16,4 +16,6 @@
     <string name="app_widget_description">This is a heatmap widget</string>
     <string name="configure">Configure</string>
     <string name="add_widget">Add widget</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

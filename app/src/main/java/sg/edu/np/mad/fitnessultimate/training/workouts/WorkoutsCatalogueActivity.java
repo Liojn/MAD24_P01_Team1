@@ -14,8 +14,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import sg.edu.np.mad.fitnessultimate.R;
-import sg.edu.np.mad.fitnessultimate.training.exercises.ExerciseAdapter;
-import sg.edu.np.mad.fitnessultimate.training.exercises.ExerciseInfo;
 import sg.edu.np.mad.fitnessultimate.training.helpers.GlobalExerciseData;
 
 public class WorkoutsCatalogueActivity extends AppCompatActivity {

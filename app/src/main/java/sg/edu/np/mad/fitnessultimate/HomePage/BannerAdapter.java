@@ -12,7 +12,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
-import sg.edu.np.mad.fitnessultimate.MainActivity;
 import sg.edu.np.mad.fitnessultimate.R;
 
 public class BannerAdapter extends RecyclerView.Adapter<BannerAdapter.BannerViewHolder> {

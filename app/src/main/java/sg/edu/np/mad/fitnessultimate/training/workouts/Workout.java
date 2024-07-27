@@ -4,11 +4,7 @@ import android.os.Parcelable;
 import android.os.Parcel;
 import android.util.Log;
 
-import java.util.ArrayList;
 import java.util.List;
-
-import sg.edu.np.mad.fitnessultimate.training.exercises.ExerciseInfo;
-import sg.edu.np.mad.fitnessultimate.training.helpers.GlobalExerciseData;
 
 public class Workout implements Parcelable {
     private String name;

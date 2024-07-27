@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.os.Handler;
 
 import androidx.activity.EdgeToEdge;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -18,12 +17,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-import sg.edu.np.mad.fitnessultimate.MainActivity;
 import sg.edu.np.mad.fitnessultimate.R;
 import sg.edu.np.mad.fitnessultimate.calendarPage.BaseActivity;
-import sg.edu.np.mad.fitnessultimate.calendarPage.CalendarActivity;
-import sg.edu.np.mad.fitnessultimate.chatbot.activity.ChatbotActivity;
-import sg.edu.np.mad.fitnessultimate.training.TrainingMenuActivity;
 
 
 public class FoodTracker extends BaseActivity {

@@ -36,8 +36,6 @@ import sg.edu.np.mad.fitnessultimate.foodtracker.*;
 import sg.edu.np.mad.fitnessultimate.loginSignup.LoginOrSignUpOption;
 import sg.edu.np.mad.fitnessultimate.loginSignup.ProfilePageActivity;
 import sg.edu.np.mad.fitnessultimate.training.TrainingMenuActivity;
-import sg.edu.np.mad.fitnessultimate.training.exercises.ExerciseCatalogueActivity;
-import sg.edu.np.mad.fitnessultimate.training.workouts.WorkoutsCatalogueActivity;
 
 
 public class MainActivity extends AppCompatActivity {
