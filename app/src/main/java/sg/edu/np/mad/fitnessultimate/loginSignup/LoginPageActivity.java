@@ -62,12 +62,10 @@ public class LoginPageActivity extends BaseActivity {
             return insets;
         });
 
-        EditText mEmailUsername = findViewById(R.id.inputEmailUsername);
+        EditText mEmailUsername = findViewById(R.id.inputEmail);
         EditText mPassword = findViewById(R.id.inputLoginPassword);
         Button mSignInBtn = findViewById(R.id.button_signIn);
         TextView mForgotPassword = findViewById(R.id.forgotPassword);
-
-        TextInputLayout mtextInputLayoutEmailUsername = findViewById(R.id.textInputEmailUsername);
         TextInputLayout mtextInputLoginPassword = findViewById(R.id.textInputLoginPassword);
 
         ProgressBar mLoginProgressBar = findViewById(R.id.loginProgressBar);
