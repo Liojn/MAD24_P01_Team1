@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "sg.edu.np.mad.ultimatefitness"
+    namespace = "sg.edu.np.mad.fitnessultimate"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "sg.edu.np.mad.ultimatefitness"
+        applicationId = "sg.edu.np.mad.fitnessultimate"
         minSdk = 33
         targetSdk = 34
         versionCode = 1
