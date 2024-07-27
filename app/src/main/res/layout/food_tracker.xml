@@ -27,14 +27,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="15dp"
-        android:layout_marginTop="30dp"
         android:text="Calories Diary"
         android:textColor="@color/app_primary_text"
         android:textSize="@dimen/_20ssp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/btnBack" />
     <!-- Header layout that contain date -->
     <LinearLayout
         android:id="@+id/header"
@@ -74,10 +73,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Daily Intake"
-            android:textSize="30sp"
             android:textColor="@color/app_primary_text"
-            android:textStyle="bold"
-            />
+            android:textSize="30sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/totalCalories"

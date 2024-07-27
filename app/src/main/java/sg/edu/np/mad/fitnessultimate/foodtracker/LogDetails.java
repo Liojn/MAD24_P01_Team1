@@ -66,10 +66,10 @@ public class LogDetails extends BaseActivity {
         Button saveButton = findViewById(R.id.saveButton);
         Button cancelButton = findViewById(R.id.cancelButton);
 
-        // Set a click listener for the cancel buttonthi
-        cancelButton.setOnClickListener( v ->{onBackPressed();}
-        );
-
+        // Set a click listener for the cancel button
+        cancelButton.setOnClickListener(v -> {
+            onBackPressed();
+        });
 
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
