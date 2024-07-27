@@ -36,7 +36,7 @@ import sg.edu.np.mad.fitnessultimate.foodtracker.*;
 import sg.edu.np.mad.fitnessultimate.loginSignup.LoginOrSignUpOption;
 import sg.edu.np.mad.fitnessultimate.loginSignup.ProfilePageActivity;
 import sg.edu.np.mad.fitnessultimate.training.TrainingMenuActivity;
-
+import androidx.recyclerview.widget.PagerSnapHelper;
 
 public class MainActivity extends AppCompatActivity {
     private FirebaseAuth fAuth;
@@ -69,52 +69,36 @@ public class MainActivity extends AppCompatActivity {
         userId = user != null ? user.getUid() : null;
 
         welcomeTextView = findViewById(R.id.welcomeTextView);
-
-
         profileBtn = findViewById(R.id.profileButton);
 
         if (user == null) {
-            // User is not logged in, navigate to LoginOrSignUpOption
             Intent intent = new Intent(MainActivity.this, LoginOrSignUpOption.class);
             startActivity(intent);
             finish();
-            return; // Early return to prevent further execution
+            return;
         }
-
-        // Retrieve and set the username
 
         retrieveAndSetUsername();
 
         changeProfilePic = findViewById(R.id.profileButton);
 
-
-        // Retrieve the profile image URI from SharedPreferences
         SharedPreferences prefs = getSharedPreferences("profile", MODE_PRIVATE);
         String profileImageUri = prefs.getString("profileImageUri", null);
         if (profileImageUri != null) {
-            // Set profile picture using URI
             changeProfilePic.setImageURI(Uri.parse(profileImageUri));
         } else {
-            // If no profile image URI is found in SharedPreferences, retrieve it from Firestore
             retrieveProfileImage();
         }
 
-        // Handle the result from EditProfilePageActivity
         if (getIntent().hasExtra("profileImageUri")) {
-            // Get the updated profile picture URI from the result intent
             String updatedProfileImageUri = getIntent().getStringExtra("profileImageUri");
-            // Set the profile picture using the updated URI
             changeProfilePic.setImageURI(Uri.parse(updatedProfileImageUri));
         }
 
-        // Set OnClickListener for the profile icon to navigate to ProfilePageActivity
         ImageView profileIcon = findViewById(R.id.profileButton);
-        profileIcon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, ProfilePageActivity.class);
-                startActivity(intent);
-            }
+        profileIcon.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, ProfilePageActivity.class);
+            startActivity(intent);
         });
 
         findViewById(R.id.nav_fitness).setOnClickListener(v -> {
@@ -127,38 +111,38 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-        //For Onclick for Calendar
         findViewById(R.id.nav_calendar).setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, CalendarActivity.class);
             startActivity(intent);
         });
-        //For Onclick for FoodTracker
+
         findViewById(R.id.nav_food).setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, FoodTracker.class);
             startActivity(intent);
         });
 
-        //For Onclick for HomePage
         findViewById(R.id.nav_home).setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, MainActivity.class);
             startActivity(intent);
             finish();
         });
 
-  // Recycler View inside Banner for homepage
-        bannerRecyclerView = findViewById(R.id.bannerRecyclerView);
-        //List of banner images + title + subtitles
         List<BannerItem> itemList = Arrays.asList(
-                new BannerItem(R.drawable.discover_excersies, "Discover Exercises", "Click Here!", TrainingMenuActivity.class),
-                new BannerItem(R.drawable.benefits_excerise, null, null   , null)
+                new BannerItem(R.drawable.discover_excersies, "Discover Exercises", null, TrainingMenuActivity.class),
+                new BannerItem(R.drawable.why_excersie, "Benefits of Exercise", null, null),
+                new BannerItem(R.drawable.water_facts, "Water Facts", null, null)
         );
 
         bannerAdapter = new BannerAdapter(this, itemList);
 
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         bannerRecyclerView.setLayoutManager(layoutManager);
         bannerRecyclerView.setAdapter(bannerAdapter);
+
+        PagerSnapHelper snapHelper = new PagerSnapHelper();
+        snapHelper.attachToRecyclerView(bannerRecyclerView);
     }
+
 
     private void retrieveProfileImage() {
         if (user != null) {
