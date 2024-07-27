@@ -11,6 +11,8 @@
     <string name="default_web_client_id">609011869979-mjm64te1rs1qduskrvgjqen3k844v61s.apps.googleusercontent.com</string>
     <string name="app_name">FitnessUltimate</string>
     <string name="back_btn">Back</string>
+
+    <string name="menu">Menu</string>
     <string name="appwidget_text">Hi</string>
     <string name="app_calendar_widget_description">This is a calendar widget</string>
     <string name="app_widget_description">This is a heatmap widget</string>

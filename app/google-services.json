@@ -7,14 +7,21 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:609011869979:android:35b2da1e369a75b86ecbbe",
+        "mobilesdk_app_id": "1:609011869979:android:a9121586c31a80ed6ecbbe",
         "android_client_info": {
           "package_name": "sg.edu.np.mad.fitnessultimate"
         }
       },
       "oauth_client": [
         {
-
+          "client_id": "609011869979-jq0gqac1voesur53s5nb305t2vs213o7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "sg.edu.np.mad.fitnessultimate",
+            "certificate_hash": "4d904cc67a8f3a9ee96782180f71a1a416d347c2"
+          }
+        },
+        {
           "client_id": "609011869979-jrut7etbbj44rg5mb71hdsf1aa1cq0gg.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
@@ -23,7 +30,6 @@
           }
         },
         {
-
           "client_id": "609011869979-6gjvu3tluaggg64ui749iklseoq3svcd.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -80,16 +86,23 @@
           ]
         }
       }
-
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:609011869979:android:5f82353821d113036ecbbe",
+        "mobilesdk_app_id": "1:609011869979:android:32c563be88bd61dd6ecbbe",
         "android_client_info": {
-          "package_name": "sg.edu.np.mad.loginsignup"
+          "package_name": "sg.edu.np.mad.ultimatefitness"
         }
       },
       "oauth_client": [
+        {
+          "client_id": "609011869979-h15pltmda2u1c1hc4mpa4pa6v8123tao.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "sg.edu.np.mad.ultimatefitness",
+            "certificate_hash": "12cbf9579834313fad703ea650fa8a181d8038ba"
+          }
+        },
         {
           "client_id": "609011869979-6gjvu3tluaggg64ui749iklseoq3svcd.apps.googleusercontent.com",
           "client_type": 3
@@ -110,7 +123,6 @@
           ]
         }
       }
-
     }
   ],
   "configuration_version": "1"

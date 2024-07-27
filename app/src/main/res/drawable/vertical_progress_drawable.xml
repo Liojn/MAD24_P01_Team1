@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Background layer -->
+    <item android:id="@android:id/background">
+        <shape android:shape="oval">
+            <solid android:color="#e0e0e0" /> <!-- Light gray color for background -->
+        </shape>
+    </item>
+    <!-- Progress layer -->
+    <item android:id="@android:id/progress">
+        <clip
+            android:clipOrientation="vertical"
+            android:gravity="bottom">
+            <shape android:shape="oval">
+                <solid android:color="#5fafff" /> <!-- Blue color for progress -->
+            </shape>
+        </clip>
+    </item>
+</layer-list>

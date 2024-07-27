@@ -38,6 +38,8 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import sg.edu.np.mad.fitnessultimate.MainActivity;
 import sg.edu.np.mad.fitnessultimate.R;
 import sg.edu.np.mad.fitnessultimate.calendarPage.BaseActivity;
+import sg.edu.np.mad.fitnessultimate.waterTracker.alarm.ReminderActivity;
+
 
 public class ProfilePageActivity extends BaseActivity {
 
@@ -46,6 +48,7 @@ public class ProfilePageActivity extends BaseActivity {
     private ImageView backArrow;
     private ImageView profilePicture;
     private RelativeLayout resetPassword;
+    private  RelativeLayout waterReminderBtn;
     private Button editProfileBtn;
 
     private FirebaseAuth fAuth;
@@ -71,6 +74,7 @@ public class ProfilePageActivity extends BaseActivity {
         profilePicture = findViewById(R.id.profilePic);
         resetPassword = findViewById(R.id.changePassword);
         editProfileBtn = findViewById(R.id.editProfile);
+        waterReminderBtn = findViewById(R.id.waterReminder);
 
         // Initialize Firebase instances
         fAuth = FirebaseAuth.getInstance();
@@ -167,6 +171,13 @@ public class ProfilePageActivity extends BaseActivity {
                 });
 
                 passwordResetDialog.create().show();
+            }
+        });
+        waterReminderBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ProfilePageActivity.this, ReminderActivity.class);
+                startActivity(intent);
             }
         });
     }

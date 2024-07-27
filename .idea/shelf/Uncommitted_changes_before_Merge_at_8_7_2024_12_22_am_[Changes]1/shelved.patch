@@ -1,0 +1,910 @@
+Index: app/src/main/AndroidManifest.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<manifest xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\">\r\n\r\n    <uses-permission android:name=\"android.permission.INTERNET\" />\r\n\r\n    <application\r\n        android:allowBackup=\"true\"\r\n        android:dataExtractionRules=\"@xml/data_extraction_rules\"\r\n        android:fullBackupContent=\"@xml/backup_rules\"\r\n        android:icon=\"@mipmap/ic_launcher\"\r\n        android:label=\"@string/app_name\"\r\n        android:roundIcon=\"@mipmap/ic_launcher_round\"\r\n        android:supportsRtl=\"true\"\r\n        android:theme=\"@style/Theme.FitnessUltimate\"\r\n        tools:targetApi=\"31\">\r\n        <activity\r\n            android:name=\".loginSignup.EditProfilePageActivity\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".loginSignup.SignUpPageActivity\"\r\n            android:exported=\"true\" />\r\n        <activity\r\n            android:name=\".loginSignup.LoginPageActivity\"\r\n            android:exported=\"true\" />\r\n        <activity\r\n            android:name=\".loginSignup.ProfilePageActivity\"\r\n            android:exported=\"true\" />\r\n        <activity android:name=\".loginSignup.LoginOrSignUpOption\"\r\n            android:exported=\"true\" />\r\n\r\n        <activity\r\n            android:name=\".MainActivity\"\r\n            android:exported=\"false\" />\r\n\r\n        <activity\r\n            android:name=\".training.exercises.ExerciseActivity\"\r\n            android:exported=\"false\" />\r\n\r\n        <activity android:name=\".training.workouts.WorkoutActivity\"\r\n            android:exported=\"false\" />\r\n\r\n        <activity\r\n            android:name=\".training.exercises.ExerciseCatalogueActivity\"\r\n            android:exported=\"false\" />\r\n\r\n        <activity\r\n            android:name=\".training.workouts.WorkoutsCatalogueActivity\"\r\n            android:exported=\"false\" />\r\n\r\n        <activity\r\n            android:name=\".training.TrainingMenuActivity\"\r\n            android:exported=\"false\" />\r\n\r\n        <activity\r\n            android:name=\".foodtracker.LogDetails\"\r\n            android:exported=\"false\" />\r\n\r\n        <activity\r\n            android:name=\".calendarPage.CalendarActivity\"\r\n            android:exported=\"false\" />\r\n\r\n        <activity\r\n            android:name=\".foodtracker.SearchResultsActivity\"\r\n            android:exported=\"true\" />\r\n\r\n        <activity\r\n            android:name=\".loginSignup.SplashActivity\"\r\n            android:exported=\"true\">\r\n            <intent-filter>\r\n                <action android:name=\"android.intent.action.MAIN\" />\r\n\r\n                <category android:name=\"android.intent.category.LAUNCHER\" />\r\n            </intent-filter>\r\n        </activity>\r\n\r\n        <activity\r\n            android:name=\".foodtracker.FoodTracker\"\r\n            android:exported=\"true\"/>\r\n\r\n        <activity\r\n            android:name=\".chatbot.activity.ChatbotActivity\"\r\n            android:exported=\"true\"/>\r\n    </application>\r\n\r\n</manifest>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/AndroidManifest.xml b/app/src/main/AndroidManifest.xml
+--- a/app/src/main/AndroidManifest.xml	
++++ b/app/src/main/AndroidManifest.xml	
+@@ -15,6 +15,9 @@
+         android:theme="@style/Theme.FitnessUltimate"
+         tools:targetApi="31">
+         <activity
++            android:name=".waterTracker.ReminderActivity"
++            android:exported="false" />
++        <activity
+             android:name=".loginSignup.EditProfilePageActivity"
+             android:exported="false" />
+         <activity
+@@ -26,44 +29,36 @@
+         <activity
+             android:name=".loginSignup.ProfilePageActivity"
+             android:exported="true" />
+-        <activity android:name=".loginSignup.LoginOrSignUpOption"
++        <activity
++            android:name=".loginSignup.LoginOrSignUpOption"
+             android:exported="true" />
+-
+         <activity
+             android:name=".MainActivity"
+             android:exported="false" />
+-
+         <activity
+             android:name=".training.exercises.ExerciseActivity"
+             android:exported="false" />
+-
+-        <activity android:name=".training.workouts.WorkoutActivity"
++        <activity
++            android:name=".training.workouts.WorkoutActivity"
+             android:exported="false" />
+-
+         <activity
+             android:name=".training.exercises.ExerciseCatalogueActivity"
+             android:exported="false" />
+-
+         <activity
+             android:name=".training.workouts.WorkoutsCatalogueActivity"
+             android:exported="false" />
+-
+         <activity
+             android:name=".training.TrainingMenuActivity"
+             android:exported="false" />
+-
+         <activity
+             android:name=".foodtracker.LogDetails"
+             android:exported="false" />
+-
+         <activity
+             android:name=".calendarPage.CalendarActivity"
+             android:exported="false" />
+-
+         <activity
+             android:name=".foodtracker.SearchResultsActivity"
+             android:exported="true" />
+-
+         <activity
+             android:name=".loginSignup.SplashActivity"
+             android:exported="true">
+@@ -73,14 +68,12 @@
+                 <category android:name="android.intent.category.LAUNCHER" />
+             </intent-filter>
+         </activity>
+-
+         <activity
+             android:name=".foodtracker.FoodTracker"
+-            android:exported="true"/>
+-
++            android:exported="true" />
+         <activity
+             android:name=".chatbot.activity.ChatbotActivity"
+-            android:exported="true"/>
++            android:exported="true" />
+     </application>
+ 
+ </manifest>
+\ No newline at end of file
+Index: app/src/main/java/sg/edu/np/mad/fitnessultimate/waterTracker/AlarmClass.java
+===================================================================
+diff --git a/app/src/main/java/sg/edu/np/mad/fitnessultimate/waterTracker/AlarmClass.java b/app/src/main/java/sg/edu/np/mad/fitnessultimate/waterTracker/AlarmClass.java
+new file mode 100644
+--- /dev/null	
++++ b/app/src/main/java/sg/edu/np/mad/fitnessultimate/waterTracker/AlarmClass.java	
+@@ -0,0 +1,35 @@
++package sg.edu.np.mad.fitnessultimate.waterTracker;
++
++import java.text.ParseException;
++import java.text.SimpleDateFormat;
++import java.util.Calendar;
++import java.util.Date;
++import java.util.Locale;
++
++public class AlarmClass {
++    private String time;
++    private String repeat;
++    private String sound;
++    private boolean enabled;
++    private String documentId;
++
++    public AlarmClass(String time, String repeat, String sound, boolean enabled, String documentId) {
++        this.time = time;
++        this.repeat = repeat;
++        this.sound = sound;
++        this.enabled = enabled;
++        this.documentId = documentId;
++    }
++
++    // getters and setters for all fields
++    public String getTime() { return time; }
++    public void setTime(String time) { this.time = time; }
++    public String getRepeat() { return repeat; }
++    public void setRepeat(String repeat) { this.repeat = repeat; }
++    public String getSound() { return sound; }
++    public void setSound(String sound) { this.sound = sound; }
++    public boolean isEnabled() { return enabled; }
++    public void setEnabled(boolean enabled) { enabled = enabled; }
++    public String getDocumentId() { return documentId; }
++    public void setDocumentId(String documentId) { this.documentId = documentId; }
++}
+Index: app/src/main/java/sg/edu/np/mad/fitnessultimate/waterTracker/AlarmAdapter.java
+===================================================================
+diff --git a/app/src/main/java/sg/edu/np/mad/fitnessultimate/waterTracker/AlarmAdapter.java b/app/src/main/java/sg/edu/np/mad/fitnessultimate/waterTracker/AlarmAdapter.java
+new file mode 100644
+--- /dev/null	
++++ b/app/src/main/java/sg/edu/np/mad/fitnessultimate/waterTracker/AlarmAdapter.java	
+@@ -0,0 +1,195 @@
++package sg.edu.np.mad.fitnessultimate.waterTracker;
++
++import android.app.TimePickerDialog;
++import android.content.Context;
++import android.view.LayoutInflater;
++import android.view.MenuItem;
++import android.view.View;
++import android.view.ViewGroup;
++import android.widget.ImageView;
++import android.widget.PopupMenu;
++import android.widget.Switch;
++import android.widget.TextView;
++import android.widget.TimePicker;
++import android.widget.Toast;
++
++import androidx.annotation.NonNull;
++import androidx.recyclerview.widget.RecyclerView;
++
++import com.google.firebase.auth.FirebaseAuth;
++import com.google.firebase.firestore.FirebaseFirestore;
++
++import java.util.HashMap;
++import java.util.List;
++import java.util.Locale;
++import java.util.Map;
++
++import sg.edu.np.mad.fitnessultimate.R;
++
++public class AlarmAdapter extends RecyclerView.Adapter<AlarmAdapter.AlarmViewHolder> {
++
++    private List<AlarmClass> alarmList;
++    private Context context;
++    private FirebaseFirestore db;
++    private FirebaseAuth auth;
++
++    public AlarmAdapter(Context context, List<AlarmClass> alarmList, FirebaseFirestore db, FirebaseAuth auth) {
++        this.context = context;
++        this.alarmList = alarmList;
++        this.db = db;
++        this.auth = auth;
++    }
++
++    @NonNull
++    @Override
++    public AlarmViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
++        View view = LayoutInflater.from(context).inflate(R.layout.alarm_card_item, parent, false);
++        return new AlarmViewHolder(view);
++    }
++
++    @Override
++    public void onBindViewHolder(@NonNull AlarmViewHolder holder, int position) {
++        if (position < alarmList.size()) {
++            AlarmClass alarm = alarmList.get(position);
++            holder.alarmTime.setText(alarm.getTime());
++            holder.alarmRepeat.setText(alarm.getRepeat());
++            holder.alarmSound.setText(alarm.getSound());
++            holder.alarmSwitch.setChecked(alarm.isEnabled());
++
++            // Set onClickListener for menu icon
++            holder.menuIcon.setOnClickListener(v -> {
++                int adapterPosition = holder.getAdapterPosition();
++                if (adapterPosition != RecyclerView.NO_POSITION) {
++                    showPopupMenu(v, adapterPosition);
++                }
++            });
++        }
++    }
++
++
++    @Override
++    public int getItemCount() {
++        return alarmList.size();
++    }
++
++    private void showPopupMenu(View view, final int position) {
++        PopupMenu popupMenu = new PopupMenu(context, view);
++        popupMenu.inflate(R.menu.menu_alarm_options);
++        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
++            @Override
++            public boolean onMenuItemClick(MenuItem item) {
++                int itemId = item.getItemId();
++                if (itemId == R.id.action_edit) {
++                    editAlarm(position);
++                    return true;
++                } else if (itemId == R.id.action_delete) {
++                    deleteAlarm(position);
++                    return true;
++                }
++                return false;
++            }
++        });
++        popupMenu.show();
++    }
++
++    private void editAlarm(final int position) {
++        final AlarmClass alarm = alarmList.get(position);
++
++        String[] timeParts = alarm.getTime().split(":");
++        int currentHour = Integer.parseInt(timeParts[0]);
++        int currentMinute = Integer.parseInt(timeParts[1].split(" ")[0]);
++        String currentPeriod = timeParts[1].split(" ")[1];
++
++        if (currentPeriod.equals("PM") && currentHour != 12) {
++            currentHour += 12;
++        } else if (currentPeriod.equals("AM") && currentHour == 12) {
++            currentHour = 0;
++        }
++
++        TimePickerDialog.OnTimeSetListener onTimeSetListener = new TimePickerDialog.OnTimeSetListener() {
++            @Override
++            public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
++                String period = (selectedHour < 12) ? "AM" : "PM";
++                int hour = (selectedHour == 0 || selectedHour == 12) ? 12 : selectedHour % 12;
++                String newTime = String.format(Locale.getDefault(), "%02d:%02d %s", hour, selectedMinute, period);
++
++                alarm.setTime(newTime);
++                notifyItemChanged(position);
++
++                updateAlarmInFirestore(alarm);
++                Toast.makeText(context, "Alarm time updated to " + newTime, Toast.LENGTH_SHORT).show();
++            }
++        };
++
++        TimePickerDialog timePickerDialog = new TimePickerDialog(
++                context,
++                onTimeSetListener,
++                currentHour,
++                currentMinute,
++                false
++        );
++        timePickerDialog.setTitle("Edit Alarm Time");
++        timePickerDialog.show();
++    }
++
++    private void deleteAlarm(int position) {
++        AlarmClass alarm = alarmList.get(position);
++        String userId = auth.getCurrentUser().getUid();
++        String documentId = alarm.getDocumentId();
++
++        if (documentId != null && !documentId.isEmpty()) {
++            db.collection("users").document(userId).collection("reminders").document(documentId)
++                    .delete()
++                    .addOnSuccessListener(aVoid -> {
++                        alarmList.remove(position);
++                        notifyItemRemoved(position);
++                        Toast.makeText(context, "Alarm for " + alarm.getTime() + " deleted", Toast.LENGTH_SHORT).show();
++
++                        // Show the disclaimer if there are no more alarms
++                        if (alarmList.isEmpty()) {
++                            ((ReminderActivity) context).findViewById(R.id.disclaimer).setVisibility(View.VISIBLE);
++                        }
++
++                    })
++                    .addOnFailureListener(e -> Toast.makeText(context, "Error deleting alarm", Toast.LENGTH_SHORT).show());
++        } else {
++            Toast.makeText(context, "Document ID is not available for this alarm.", Toast.LENGTH_SHORT).show();
++        }
++    }
++
++
++    private void updateAlarmInFirestore(AlarmClass alarm) {
++        String userId = auth.getCurrentUser().getUid();
++        String documentId = alarm.getDocumentId();
++
++        if (documentId != null && !documentId.isEmpty()) {
++            Map<String, Object> updatedAlarmData = new HashMap<>();
++            updatedAlarmData.put("time", alarm.getTime());
++            updatedAlarmData.put("repeat", alarm.getRepeat());
++            updatedAlarmData.put("sound", alarm.getSound());
++            updatedAlarmData.put("isEnabled", alarm.isEnabled());
++
++            db.collection("users").document(userId).collection("reminders").document(documentId)
++                    .update(updatedAlarmData)
++                    .addOnSuccessListener(aVoid -> Toast.makeText(context, "Alarm updated " + alarm.getTime(), Toast.LENGTH_SHORT).show())
++                    .addOnFailureListener(e -> Toast.makeText(context, "Error updating alarm in Firestore", Toast.LENGTH_SHORT).show());
++        } else {
++            Toast.makeText(context, "Document ID is not available for this alarm.", Toast.LENGTH_SHORT).show();
++        }
++    }
++
++    public static class AlarmViewHolder extends RecyclerView.ViewHolder {
++        TextView alarmTime, alarmRepeat, alarmSound;
++        ImageView menuIcon;
++        Switch alarmSwitch;
++
++        public AlarmViewHolder(@NonNull View itemView) {
++            super(itemView);
++            alarmTime = itemView.findViewById(R.id.alarm_item);
++            alarmRepeat = itemView.findViewById(R.id.alarm_repeat);
++            alarmSound = itemView.findViewById(R.id.alarm_sound);
++            alarmSwitch = itemView.findViewById(R.id.alarm_switch);
++            menuIcon = itemView.findViewById(R.id.menu_icon);
++        }
++    }
++}
+Index: app/src/main/res/layout/alarm_card_item.xml
+===================================================================
+diff --git a/app/src/main/res/layout/alarm_card_item.xml b/app/src/main/res/layout/alarm_card_item.xml
+new file mode 100644
+--- /dev/null	
++++ b/app/src/main/res/layout/alarm_card_item.xml	
+@@ -0,0 +1,58 @@
++<?xml version="1.0" encoding="utf-8"?>
++<androidx.cardview.widget.CardView
++    xmlns:app="http://schemas.android.com/apk/res-auto"
++    xmlns:android="http://schemas.android.com/apk/res/android"
++    xmlns:tools="http://schemas.android.com/tools"
++    android:id="@+id/main"
++    android:layout_width="wrap_content"
++    android:layout_height="wrap_content"
++    android:layout_margin="8dp"
++    android:background="?attr/selectableItemBackground"
++    app:cardCornerRadius="8dp">
++
++    <LinearLayout
++        android:layout_width="wrap_content"
++        android:layout_height="match_parent"
++        android:orientation="vertical"
++        android:padding="16dp">
++
++        <TextView
++            android:id="@+id/alarm_item"
++            android:layout_width="wrap_content"
++            android:layout_height="wrap_content"
++            android:text="07:00 AM"
++            android:textAppearance="?attr/textAppearanceHeadline6" />
++
++        <TextView
++            android:id="@+id/alarm_repeat"
++            android:layout_width="wrap_content"
++            android:layout_height="wrap_content"
++            android:text="Repeat: Sat, Sun, Mon"
++            android:textAppearance="?attr/textAppearanceSubtitle2" />
++
++        <TextView
++            android:id="@+id/alarm_sound"
++            android:layout_width="wrap_content"
++            android:layout_height="wrap_content"
++            android:text="Sound: Waves"
++            android:textAppearance="?attr/textAppearanceSubtitle2" />
++
++        <Switch
++            android:id="@+id/alarm_switch"
++            android:layout_width="wrap_content"
++            android:layout_height="wrap_content"
++            android:checked="true"
++            tools:ignore="UseSwitchCompatOrMaterialXml" />
++    </LinearLayout>
++
++    <ImageView
++        android:id="@+id/menu_icon"
++        android:layout_width="wrap_content"
++        android:layout_height="wrap_content"
++        android:src="@drawable/ic_baseline_more_vert_24"
++        android:contentDescription="@string/menu"
++        android:layout_marginTop="8dp"
++        android:layout_marginLeft="160dp"
++        android:layout_alignParentEnd="true"
++        android:layout_alignParentTop="true" />
++</androidx.cardview.widget.CardView>
+\ No newline at end of file
+Index: app/src/main/res/drawable/ic_baseline_more_vert_24.xml
+===================================================================
+diff --git a/app/src/main/res/drawable/ic_baseline_more_vert_24.xml b/app/src/main/res/drawable/ic_baseline_more_vert_24.xml
+new file mode 100644
+--- /dev/null	
++++ b/app/src/main/res/drawable/ic_baseline_more_vert_24.xml	
+@@ -0,0 +1,10 @@
++<vector xmlns:android="http://schemas.android.com/apk/res/android"
++    android:width="24dp"
++    android:height="24dp"
++    android:viewportWidth="24"
++    android:viewportHeight="24"
++    android:tint="?attr/colorControlNormal">
++    <path
++        android:fillColor="@android:color/white"
++        android:pathData="M12,8c1.1,0 2,-0.9 2,-2s-0.9,-2 -2,-2 -2,0.9 -2,2 0.9,2 2,2zM12,10c-1.1,0 -2,0.9 -2,2s0.9,2 2,2 2,-0.9 2,-2 -0.9,-2 -2,-2zM12,16c-1.1,0 -2,0.9 -2,2s0.9,2 2,2 2,-0.9 2,-2 -0.9,-2 -2,-2z"/>
++</vector>
+\ No newline at end of file
+Index: app/src/main/res/values/strings.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><resources>\r\n    <string name=\"title_activity_login\">LoginActivity</string>\r\n    <string name=\"prompt_email\">Email</string>\r\n    <string name=\"prompt_password\">Password</string>\r\n    <string name=\"action_sign_in\">Sign in or register</string>\r\n    <string name=\"action_sign_in_short\">Sign in</string>\r\n    <string name=\"welcome\">\"Welcome !\"</string>\r\n    <string name=\"invalid_username\">Not a valid username</string>\r\n    <string name=\"invalid_password\">Password must be >5 characters</string>\r\n    <string name=\"login_failed\">\"Login failed\"</string>\r\n    <string name=\"default_web_client_id\">609011869979-mjm64te1rs1qduskrvgjqen3k844v61s.apps.googleusercontent.com</string>\r\n    <string name=\"app_name\">FitnessUltimate</string>\r\n    <string name=\"back_btn\">Back</string>\r\n</resources>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/values/strings.xml b/app/src/main/res/values/strings.xml
+--- a/app/src/main/res/values/strings.xml	
++++ b/app/src/main/res/values/strings.xml	
+@@ -11,4 +11,5 @@
+     <string name="default_web_client_id">609011869979-mjm64te1rs1qduskrvgjqen3k844v61s.apps.googleusercontent.com</string>
+     <string name="app_name">FitnessUltimate</string>
+     <string name="back_btn">Back</string>
++    <string name="menu">Menu</string>
+ </resources>
+\ No newline at end of file
+Index: app/src/main/res/menu/menu_alarm_options.xml
+===================================================================
+diff --git a/app/src/main/res/menu/menu_alarm_options.xml b/app/src/main/res/menu/menu_alarm_options.xml
+new file mode 100644
+--- /dev/null	
++++ b/app/src/main/res/menu/menu_alarm_options.xml	
+@@ -0,0 +1,9 @@
++<?xml version="1.0" encoding="utf-8"?>
++<menu xmlns:android="http://schemas.android.com/apk/res/android">
++    <item
++        android:id="@+id/action_edit"
++        android:title="Edit"/>
++    <item
++        android:id="@+id/action_delete"
++        android:title="Delete"/>
++</menu>
+Index: app/src/main/res/layout/activity_profile_page.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<androidx.constraintlayout.widget.ConstraintLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:id=\"@+id/main\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\"\r\n    tools:context=\".loginSignup.ProfilePageActivity\">\r\n\r\n    <ImageView\r\n        android:id=\"@+id/arrow_left1\"\r\n        android:layout_width=\"28dp\"\r\n        android:layout_height=\"28dp\"\r\n        android:layout_marginStart=\"48dp\"\r\n        android:layout_marginTop=\"60dp\"\r\n        android:clipToOutline=\"true\"\r\n        android:clickable=\"true\"\r\n        android:src=\"@drawable/arrow\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"parent\" />\r\n\r\n    <TextView\r\n        android:id=\"@+id/yourProfile\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:text=\"Your Profile\"\r\n        android:textStyle=\"bold\"\r\n        android:textSize=\"22dp\"\r\n        android:layout_marginTop=\"110dp\"\r\n        app:layout_constraintTop_toTopOf=\"parent\"\r\n        app:layout_constraintRight_toRightOf=\"parent\"\r\n        app:layout_constraintLeft_toLeftOf=\"parent\" />\r\n\r\n    <ImageView\r\n        android:id=\"@+id/profilePic\"\r\n        android:layout_width=\"130dp\"\r\n        android:layout_height=\"130dp\"\r\n        app:srcCompat=\"@drawable/baseline_account_circle_24\"\r\n        android:layout_marginTop=\"20dp\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintTop_toBottomOf=\"@+id/yourProfile\" />\r\n\r\n    <TextView\r\n        android:id=\"@+id/yourUsername\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:text=\"Your Username\"\r\n        android:textSize=\"20dp\"\r\n        android:textStyle=\"bold\"\r\n        android:layout_marginTop=\"20dp\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintTop_toBottomOf=\"@+id/profilePic\" />\r\n\r\n    <TextView\r\n        android:id=\"@+id/yourEmailAddress\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:text=\"Your Email Address\"\r\n        android:textSize=\"14dp\"\r\n        android:layout_marginTop=\"10dp\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintTop_toBottomOf=\"@+id/yourUsername\" />\r\n\r\n    <Button\r\n        android:id=\"@+id/logOutBtn\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_marginTop=\"480dp\"\r\n        android:text=\"LOG OUT\"\r\n        android:onClick=\"logout\"\r\n        android:backgroundTint=\"#2D3250\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toBottomOf=\"@id/yourProfile\" />\r\n\r\n    <Button\r\n        android:id=\"@+id/editProfile\"\r\n        android:layout_width=\"130dp\"\r\n        android:layout_height=\"50dp\"\r\n        android:text=\"Edit Profile\"\r\n        android:backgroundTint=\"#424769FF\"\r\n        android:layout_marginTop=\"15dp\"\r\n        app:layout_constraintTop_toBottomOf=\"@id/yourEmailAddress\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\" />\r\n\r\n    <LinearLayout\r\n        android:id=\"@+id/buttonWidgets\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:orientation=\"vertical\"\r\n        android:layout_marginStart=\"20dp\"\r\n        android:layout_marginEnd=\"20dp\"\r\n        android:layout_marginTop=\"40dp\"\r\n        android:padding=\"15dp\"\r\n        android:clickable=\"true\"\r\n        android:background=\"@drawable/rounded_background\"\r\n        app:layout_constraintTop_toBottomOf=\"@+id/editProfile\">\r\n\r\n        <!-- Change Password-->\r\n        <RelativeLayout\r\n            android:id=\"@+id/changePassword\"\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:clickable=\"true\">\r\n\r\n            <androidx.cardview.widget.CardView\r\n                android:layout_width=\"40dp\"\r\n                android:layout_height=\"40dp\"\r\n                app:cardCornerRadius=\"20dp\"\r\n                app:cardBackgroundColor=\"#60FFFFFF\"\r\n                app:cardElevation=\"0dp\">\r\n\r\n                <ImageView\r\n                    android:id=\"@+id/icon\"\r\n                    android:layout_width=\"match_parent\"\r\n                    android:layout_height=\"match_parent\"\r\n                    android:scaleType=\"centerInside\"\r\n                    android:src=\"@android:drawable/ic_lock_idle_lock\" />\r\n            </androidx.cardview.widget.CardView>\r\n\r\n            <TextView\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_centerVertical=\"true\"\r\n                android:textSize=\"16dp\"\r\n                android:layout_marginLeft=\"60dp\"\r\n                android:text=\"Change Password\"\r\n                android:textStyle=\"bold\" />\r\n\r\n            <ImageView\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:src=\"@drawable/right_arrow_icon\"\r\n                android:layout_alignParentEnd=\"true\"\r\n                android:layout_centerVertical=\"true\"/>\r\n        </RelativeLayout>\r\n    </LinearLayout>\r\n</androidx.constraintlayout.widget.ConstraintLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/activity_profile_page.xml b/app/src/main/res/layout/activity_profile_page.xml
+--- a/app/src/main/res/layout/activity_profile_page.xml	
++++ b/app/src/main/res/layout/activity_profile_page.xml	
+@@ -68,7 +68,7 @@
+         android:id="@+id/logOutBtn"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+-        android:layout_marginTop="480dp"
++        android:layout_marginTop="550dp"
+         android:text="LOG OUT"
+         android:onClick="logout"
+         android:backgroundTint="#2D3250"
+@@ -129,6 +129,63 @@
+                 android:textSize="16dp"
+                 android:layout_marginLeft="60dp"
+                 android:text="Change Password"
++                android:textColor="@color/white"
++                android:textStyle="bold" />
++
++            <ImageView
++                android:layout_width="wrap_content"
++                android:layout_height="wrap_content"
++                android:src="@drawable/right_arrow_icon"
++                android:layout_alignParentEnd="true"
++                android:layout_centerVertical="true"/>
++        </RelativeLayout>
++    </LinearLayout>
++
++    <LinearLayout
++        android:id="@+id/buttonWidgets1"
++        android:layout_width="match_parent"
++        android:layout_height="wrap_content"
++        android:orientation="vertical"
++        android:layout_marginStart="20dp"
++        android:layout_marginEnd="20dp"
++        android:layout_marginTop="130dp"
++        android:padding="15dp"
++        android:clickable="true"
++        android:background="@drawable/rounded_background"
++        app:layout_constraintTop_toBottomOf="@+id/editProfile">
++
++        <!-- Water Reminder Settings -->
++        <RelativeLayout
++            android:id="@+id/waterReminder"
++            android:layout_width="match_parent"
++            android:layout_height="wrap_content"
++            android:clickable="true">
++
++            <androidx.cardview.widget.CardView
++                android:layout_width="40dp"
++                android:layout_height="40dp"
++                app:cardCornerRadius="20dp"
++                app:cardBackgroundColor="#60FFFFFF"
++                app:cardElevation="0dp">
++
++                <ImageView
++                    android:id="@+id/icon1"
++                    android:layout_width="20dp"
++                    android:layout_height="20dp"
++                    android:scaleType="centerInside"
++                    android:layout_marginTop="10dp"
++                    android:layout_marginLeft="10.5dp"
++                    android:src="@android:drawable/ic_popup_reminder" />
++            </androidx.cardview.widget.CardView>
++
++            <TextView
++                android:layout_width="wrap_content"
++                android:layout_height="wrap_content"
++                android:layout_centerVertical="true"
++                android:textSize="16dp"
++                android:layout_marginLeft="60dp"
++                android:text="Water Tracker Reminder"
++                android:textColor="@color/white"
+                 android:textStyle="bold" />
+ 
+             <ImageView
+Index: app/google-services.json
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>{\r\n  \"project_info\": {\r\n    \"project_number\": \"609011869979\",\r\n    \"project_id\": \"login-signup-page-a743e\",\r\n    \"storage_bucket\": \"login-signup-page-a743e.appspot.com\"\r\n  },\r\n  \"client\": [\r\n    {\r\n      \"client_info\": {\r\n        \"mobilesdk_app_id\": \"1:609011869979:android:35b2da1e369a75b86ecbbe\",\r\n        \"android_client_info\": {\r\n          \"package_name\": \"sg.edu.np.mad.fitnessultimate\"\r\n        }\r\n      },\r\n      \"oauth_client\": [\r\n        {\r\n\r\n          \"client_id\": \"609011869979-jrut7etbbj44rg5mb71hdsf1aa1cq0gg.apps.googleusercontent.com\",\r\n          \"client_type\": 1,\r\n          \"android_info\": {\r\n            \"package_name\": \"sg.edu.np.mad.fitnessultimate\",\r\n            \"certificate_hash\": \"12cbf9579834313fad703ea650fa8a181d8038ba\"\r\n          }\r\n        },\r\n        {\r\n\r\n          \"client_id\": \"609011869979-6gjvu3tluaggg64ui749iklseoq3svcd.apps.googleusercontent.com\",\r\n          \"client_type\": 3\r\n        }\r\n      ],\r\n      \"api_key\": [\r\n        {\r\n          \"current_key\": \"AIzaSyBoWvWa-fKONIQmNCh9sxKVbV9GIZ8yBzM\"\r\n        }\r\n      ],\r\n      \"services\": {\r\n        \"appinvite_service\": {\r\n          \"other_platform_oauth_client\": [\r\n            {\r\n              \"client_id\": \"609011869979-6gjvu3tluaggg64ui749iklseoq3svcd.apps.googleusercontent.com\",\r\n              \"client_type\": 3\r\n            }\r\n          ]\r\n        }\r\n      }\r\n    },\r\n    {\r\n      \"client_info\": {\r\n        \"mobilesdk_app_id\": \"1:609011869979:android:034dc744c1636f0a6ecbbe\",\r\n        \"android_client_info\": {\r\n          \"package_name\": \"sg.edu.np.mad.login_signuppage\"\r\n        }\r\n      },\r\n      \"oauth_client\": [\r\n        {\r\n          \"client_id\": \"609011869979-mjm64te1rs1qduskrvgjqen3k844v61s.apps.googleusercontent.com\",\r\n          \"client_type\": 1,\r\n          \"android_info\": {\r\n            \"package_name\": \"sg.edu.np.mad.login_signuppage\",\r\n            \"certificate_hash\": \"12cbf9579834313fad703ea650fa8a181d8038ba\"\r\n          }\r\n        },\r\n        {\r\n          \"client_id\": \"609011869979-6gjvu3tluaggg64ui749iklseoq3svcd.apps.googleusercontent.com\",\r\n          \"client_type\": 3\r\n        }\r\n      ],\r\n      \"api_key\": [\r\n        {\r\n          \"current_key\": \"AIzaSyBoWvWa-fKONIQmNCh9sxKVbV9GIZ8yBzM\"\r\n        }\r\n      ],\r\n      \"services\": {\r\n        \"appinvite_service\": {\r\n          \"other_platform_oauth_client\": [\r\n            {\r\n              \"client_id\": \"609011869979-6gjvu3tluaggg64ui749iklseoq3svcd.apps.googleusercontent.com\",\r\n              \"client_type\": 3\r\n            }\r\n          ]\r\n        }\r\n      }\r\n\r\n    },\r\n    {\r\n      \"client_info\": {\r\n        \"mobilesdk_app_id\": \"1:609011869979:android:5f82353821d113036ecbbe\",\r\n        \"android_client_info\": {\r\n          \"package_name\": \"sg.edu.np.mad.loginsignup\"\r\n        }\r\n      },\r\n      \"oauth_client\": [\r\n        {\r\n          \"client_id\": \"609011869979-6gjvu3tluaggg64ui749iklseoq3svcd.apps.googleusercontent.com\",\r\n          \"client_type\": 3\r\n        }\r\n      ],\r\n      \"api_key\": [\r\n        {\r\n          \"current_key\": \"AIzaSyBoWvWa-fKONIQmNCh9sxKVbV9GIZ8yBzM\"\r\n        }\r\n      ],\r\n      \"services\": {\r\n        \"appinvite_service\": {\r\n          \"other_platform_oauth_client\": [\r\n            {\r\n              \"client_id\": \"609011869979-6gjvu3tluaggg64ui749iklseoq3svcd.apps.googleusercontent.com\",\r\n              \"client_type\": 3\r\n            }\r\n          ]\r\n        }\r\n      }\r\n\r\n    }\r\n  ],\r\n  \"configuration_version\": \"1\"\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/google-services.json b/app/google-services.json
+--- a/app/google-services.json	
++++ b/app/google-services.json	
+@@ -7,14 +7,21 @@
+   "client": [
+     {
+       "client_info": {
+-        "mobilesdk_app_id": "1:609011869979:android:35b2da1e369a75b86ecbbe",
++        "mobilesdk_app_id": "1:609011869979:android:a9121586c31a80ed6ecbbe",
+         "android_client_info": {
+           "package_name": "sg.edu.np.mad.fitnessultimate"
+         }
+       },
+       "oauth_client": [
+         {
+-
++          "client_id": "609011869979-jq0gqac1voesur53s5nb305t2vs213o7.apps.googleusercontent.com",
++          "client_type": 1,
++          "android_info": {
++            "package_name": "sg.edu.np.mad.fitnessultimate",
++            "certificate_hash": "4d904cc67a8f3a9ee96782180f71a1a416d347c2"
++          }
++        },
++        {
+           "client_id": "609011869979-jrut7etbbj44rg5mb71hdsf1aa1cq0gg.apps.googleusercontent.com",
+           "client_type": 1,
+           "android_info": {
+@@ -23,7 +30,6 @@
+           }
+         },
+         {
+-
+           "client_id": "609011869979-6gjvu3tluaggg64ui749iklseoq3svcd.apps.googleusercontent.com",
+           "client_type": 3
+         }
+@@ -80,37 +86,6 @@
+           ]
+         }
+       }
+-
+-    },
+-    {
+-      "client_info": {
+-        "mobilesdk_app_id": "1:609011869979:android:5f82353821d113036ecbbe",
+-        "android_client_info": {
+-          "package_name": "sg.edu.np.mad.loginsignup"
+-        }
+-      },
+-      "oauth_client": [
+-        {
+-          "client_id": "609011869979-6gjvu3tluaggg64ui749iklseoq3svcd.apps.googleusercontent.com",
+-          "client_type": 3
+-        }
+-      ],
+-      "api_key": [
+-        {
+-          "current_key": "AIzaSyBoWvWa-fKONIQmNCh9sxKVbV9GIZ8yBzM"
+-        }
+-      ],
+-      "services": {
+-        "appinvite_service": {
+-          "other_platform_oauth_client": [
+-            {
+-              "client_id": "609011869979-6gjvu3tluaggg64ui749iklseoq3svcd.apps.googleusercontent.com",
+-              "client_type": 3
+-            }
+-          ]
+-        }
+-      }
+-
+     }
+   ],
+   "configuration_version": "1"
+Index: app/src/main/java/sg/edu/np/mad/fitnessultimate/waterTracker/ReminderActivity.java
+===================================================================
+diff --git a/app/src/main/java/sg/edu/np/mad/fitnessultimate/waterTracker/ReminderActivity.java b/app/src/main/java/sg/edu/np/mad/fitnessultimate/waterTracker/ReminderActivity.java
+new file mode 100644
+--- /dev/null	
++++ b/app/src/main/java/sg/edu/np/mad/fitnessultimate/waterTracker/ReminderActivity.java	
+@@ -0,0 +1,178 @@
++package sg.edu.np.mad.fitnessultimate.waterTracker;
++
++import android.app.TimePickerDialog;
++import android.content.Intent;
++import android.os.Bundle;
++import android.util.Log;
++import android.view.View;
++import android.widget.TimePicker;
++import android.widget.Toast;
++
++import androidx.appcompat.app.AppCompatActivity;
++import androidx.core.graphics.Insets;
++import androidx.core.view.ViewCompat;
++import androidx.core.view.WindowInsetsCompat;
++import androidx.recyclerview.widget.LinearLayoutManager;
++import androidx.recyclerview.widget.RecyclerView;
++
++import com.google.android.material.floatingactionbutton.FloatingActionButton;
++import com.google.firebase.auth.FirebaseAuth;
++import com.google.firebase.auth.FirebaseUser;
++import com.google.firebase.firestore.FirebaseFirestore;
++import com.google.firebase.firestore.QueryDocumentSnapshot;
++
++import java.util.ArrayList;
++import java.util.Calendar;
++import java.util.HashMap;
++import java.util.List;
++import java.util.Locale;
++import java.util.Map;
++
++import sg.edu.np.mad.fitnessultimate.R;
++import sg.edu.np.mad.fitnessultimate.loginSignup.ProfilePageActivity;
++
++public class ReminderActivity extends AppCompatActivity {
++
++    private RecyclerView recyclerView;
++    private AlarmAdapter alarmAdapter;
++    private List<AlarmClass> alarmList;
++    private FloatingActionButton addAlarmButton;
++    private FirebaseFirestore db;
++    private FirebaseAuth auth;
++
++    @Override
++    protected void onCreate(Bundle savedInstanceState) {
++        super.onCreate(savedInstanceState);
++        setContentView(R.layout.activity_reminder);
++        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
++            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
++            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
++            return insets;
++        });
++
++        // Navigate back to ProfilePage
++        findViewById(R.id.backBtn).setOnClickListener(v -> {
++            Intent intent = new Intent(ReminderActivity.this, ProfilePageActivity.class);
++            startActivity(intent);
++        });
++
++        // Initialize Firebase
++        db = FirebaseFirestore.getInstance();
++        auth = FirebaseAuth.getInstance();
++
++        // Initialize views
++        recyclerView = findViewById(R.id.recyclerView);
++        addAlarmButton = findViewById(R.id.addAlarmButton);
++
++        // Set up RecyclerView
++        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
++
++        alarmList = new ArrayList<>();
++        alarmAdapter = new AlarmAdapter(this, alarmList, db, auth);
++        recyclerView.setAdapter(alarmAdapter);
++
++        // Load existing alarms from Firestore
++        loadAlarms();
++
++        // Set onClickListener for addAlarmButton to show TimePickerDialog
++        addAlarmButton.setOnClickListener(v -> showTimePickerDialog());
++    }
++
++    // Method to load alarms from Firestore
++    private void loadAlarms() {
++        FirebaseUser currentUser = auth.getCurrentUser();
++        if (currentUser != null) {
++            String userId = currentUser.getUid();
++            db.collection("users").document(userId).collection("reminders").get()
++                    .addOnCompleteListener(task -> {
++                        if (task.isSuccessful()) {
++                            alarmList.clear();
++                            for (QueryDocumentSnapshot document : task.getResult()) {
++                                String time = document.getString("time");
++                                String repeat = document.getString("repeat");
++                                String sound = document.getString("sound");
++                                boolean isEnabled = document.getBoolean("isEnabled");
++                                String documentId = document.getId();
++                                alarmList.add(new AlarmClass(time, repeat, sound, isEnabled, documentId));
++                            }
++                            alarmAdapter.notifyDataSetChanged();
++
++                            // Hide disclaimer if there are alarms
++                            if (!alarmList.isEmpty()) {
++                                findViewById(R.id.disclaimer).setVisibility(View.GONE);
++                            } else {
++                                findViewById(R.id.disclaimer).setVisibility(View.VISIBLE);
++                            }
++                        } else {
++                            Toast.makeText(ReminderActivity.this, "Error getting alarms.", Toast.LENGTH_SHORT).show();
++                        }
++                    });
++        }
++    }
++
++
++    // Method to show TimePickerDialog
++    private void showTimePickerDialog() {
++        Calendar currentTime = Calendar.getInstance();
++        int hour = currentTime.get(Calendar.HOUR_OF_DAY);
++        int minute = currentTime.get(Calendar.MINUTE);
++        boolean is24HourFormat = false;
++
++        TimePickerDialog.OnTimeSetListener onTimeSetListener = (timePicker, selectedHour, selectedMinute) -> {
++            String timeFormat = (selectedHour < 12) ? "AM" : "PM";
++            String time;
++            if (selectedHour == 0) {
++                time = String.format(Locale.getDefault(), "12:%02d %s", selectedMinute, timeFormat);
++            } else if (selectedHour > 12) {
++                time = String.format(Locale.getDefault(), "%02d:%02d %s", selectedHour - 12, selectedMinute, timeFormat);
++            } else {
++                time = String.format(Locale.getDefault(), "%d:%02d %s", selectedHour, selectedMinute, timeFormat);
++            }
++
++            findViewById(R.id.disclaimer).setVisibility(View.GONE);
++
++            AlarmClass newAlarm = new AlarmClass(time, "Repeat: None", "Sound: Default", true, "");
++
++            saveAlarmToFirestore(newAlarm);
++
++            Toast.makeText(ReminderActivity.this, "Alarm set for " + time, Toast.LENGTH_SHORT).show();
++        };
++
++        TimePickerDialog timePickerDialog = new TimePickerDialog(this, onTimeSetListener, hour, minute, is24HourFormat);
++        timePickerDialog.setTitle("Select Time");
++        timePickerDialog.show();
++    }
++
++    private void saveAlarmToFirestore(AlarmClass alarm) {
++        FirebaseUser currentUser = auth.getCurrentUser();
++        if (currentUser != null) {
++            String userId = currentUser.getUid();
++            Map<String, Object> alarmData = new HashMap<>();
++            alarmData.put("time", alarm.getTime());
++            alarmData.put("repeat", alarm.getRepeat());
++            alarmData.put("sound", alarm.getSound());
++            alarmData.put("isEnabled", alarm.isEnabled());
++
++            db.collection("users").document(userId).collection("reminders").add(alarmData)
++                    .addOnSuccessListener(documentReference -> {
++                        // Get the document ID and update the AlarmClass object
++                        String documentId = documentReference.getId();
++                        alarm.setDocumentId(documentId);
++
++                        // Update the list and notify the adapter
++                        alarmList.add(alarm);
++                        alarmAdapter.notifyItemInserted(alarmList.size() - 1);
++
++                        // Hide the disclaimer
++                        findViewById(R.id.disclaimer).setVisibility(View.GONE);
++
++                        Toast.makeText(ReminderActivity.this, "Alarm saved.", Toast.LENGTH_SHORT).show();
++                    })
++                    .addOnFailureListener(e -> {
++                        Toast.makeText(ReminderActivity.this, "Error saving alarm.", Toast.LENGTH_SHORT).show();
++                    });
++        } else {
++            Log.d("ReminderActivity", "No authenticated user found.");
++        }
++    }
++}
+Index: app/src/main/res/layout/activity_reminder.xml
+===================================================================
+diff --git a/app/src/main/res/layout/activity_reminder.xml b/app/src/main/res/layout/activity_reminder.xml
+new file mode 100644
+--- /dev/null	
++++ b/app/src/main/res/layout/activity_reminder.xml	
+@@ -0,0 +1,75 @@
++<?xml version="1.0" encoding="utf-8"?>
++<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
++    xmlns:app="http://schemas.android.com/apk/res-auto"
++    xmlns:tools="http://schemas.android.com/tools"
++    android:id="@+id/main"
++    android:layout_width="match_parent"
++    android:layout_height="match_parent"
++    tools:context=".waterTracker.ReminderActivity">
++
++    <androidx.appcompat.widget.AppCompatButton
++        android:id="@+id/backBtn"
++        android:layout_width="wrap_content"
++        android:layout_height="wrap_content"
++        android:drawableLeft="@drawable/baseline_arrow_back_24"
++        android:drawablePadding="10dp"
++        android:text="@string/back_btn"
++        android:paddingStart="20dp"
++        android:paddingEnd="20dp"
++        android:textAllCaps="false"
++        android:gravity="start|center_vertical"
++        android:layout_margin="20dp"
++        android:textSize="20sp"
++        android:textStyle="bold"
++        android:textColor="@color/black"
++        android:background="@drawable/back_btn"
++        app:layout_constraintStart_toStartOf="parent"
++        app:layout_constraintTop_toTopOf="parent" />
++
++    <TextView
++        android:id="@+id/ReminderSettings"
++        android:layout_width="wrap_content"
++        android:layout_height="wrap_content"
++        android:text="Water Tracker Reminder"
++        android:textStyle="bold"
++        android:textSize="22dp"
++        android:layout_marginTop="110dp"
++        app:layout_constraintTop_toTopOf="parent"
++        app:layout_constraintRight_toRightOf="parent"
++        app:layout_constraintLeft_toLeftOf="parent" />
++
++    <TextView
++        android:id="@+id/disclaimer"
++        android:layout_width="wrap_content"
++        android:layout_height="wrap_content"
++        android:text="No Reminders"
++        android:textStyle="bold"
++        app:layout_constraintTop_toTopOf="parent"
++        app:layout_constraintBottom_toBottomOf="parent"
++        app:layout_constraintEnd_toEndOf="parent"
++        app:layout_constraintStart_toStartOf="parent"/>
++
++    <androidx.recyclerview.widget.RecyclerView
++        android:id="@+id/recyclerView"
++        android:layout_width="0dp"
++        android:layout_height="0dp"
++        android:orientation="vertical"
++        android:layout_marginTop="170dp"
++        app:layout_constraintTop_toTopOf="parent"
++        app:layout_constraintBottom_toBottomOf="parent"
++        app:layout_constraintStart_toStartOf="parent"
++        app:layout_constraintEnd_toEndOf="parent"
++        android:layout_marginLeft="10dp"
++        android:layout_marginBottom="16dp"/>
++
++    <com.google.android.material.floatingactionbutton.FloatingActionButton
++        android:id="@+id/addAlarmButton"
++        android:layout_width="wrap_content"
++        android:layout_height="wrap_content"
++        android:layout_marginEnd="20dp"
++        android:layout_marginBottom="20dp"
++        app:layout_constraintBottom_toBottomOf="parent"
++        app:layout_constraintEnd_toEndOf="parent"
++        app:srcCompat="@android:drawable/ic_input_add"/>
++
++</androidx.constraintlayout.widget.ConstraintLayout>
+Index: app/src/main/res/layout/activity_login_page.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<androidx.constraintlayout.widget.ConstraintLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:id=\"@+id/main\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\"\r\n    tools:context=\".loginSignup.LoginPageActivity\">\r\n\r\n    <ImageView\r\n        android:id=\"@+id/arrow_left1\"\r\n        android:layout_width=\"28dp\"\r\n        android:layout_height=\"28dp\"\r\n        android:layout_marginStart=\"48dp\"\r\n        android:layout_marginTop=\"60dp\"\r\n        android:clipToOutline=\"true\"\r\n        android:clickable=\"true\"\r\n        android:src=\"@drawable/arrow\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"parent\" />\r\n\r\n\r\n    <TextView\r\n        android:id=\"@+id/loginHeader1\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_marginTop=\"36dp\"\r\n        android:text=\"Let's Sign you in.\"\r\n        android:textSize=\"30sp\"\r\n        android:textStyle=\"bold\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintHorizontal_bias=\"0.329\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toBottomOf=\"@id/arrow_left1\" />\r\n\r\n    <TextView\r\n        android:id=\"@+id/body1\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_marginStart=\"60dp\"\r\n        android:layout_marginTop=\"20dp\"\r\n        android:text=\"Welcome Back,\"\r\n        android:textSize=\"20sp\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toBottomOf=\"@id/loginHeader1\" />\r\n\r\n    <TextView\r\n        android:id=\"@+id/body2\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_marginStart=\"60dp\"\r\n        android:text=\"you have been missed\"\r\n        android:textSize=\"20sp\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toBottomOf=\"@id/body1\" />\r\n\r\n    <com.google.android.material.textfield.TextInputLayout\r\n        android:id=\"@+id/textInputEmailUsername\"\r\n        style=\"@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        app:cardCornerRadius=\"10dp\"\r\n        android:layout_marginTop=\"35dp\"\r\n        android:layout_marginStart=\"58dp\"\r\n        android:layout_marginEnd=\"58dp\"\r\n        app:boxStrokeColor=\"#900090\"\r\n        app:boxBackgroundColor=\"#DDDDDD\"\r\n        app:endIconMode=\"clear_text\"\r\n        app:layout_constraintTop_toBottomOf=\"@id/body2\">\r\n\r\n        <com.google.android.material.textfield.TextInputEditText\r\n            android:id=\"@+id/inputEmailUsername\"\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:hint=\"Email, Username\"\r\n            android:singleLine=\"true\" />\r\n    </com.google.android.material.textfield.TextInputLayout>\r\n\r\n    <com.google.android.material.textfield.TextInputLayout\r\n        android:id=\"@+id/textInputLoginPassword\"\r\n        style=\"@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_marginTop=\"105dp\"\r\n        android:layout_marginStart=\"58dp\"\r\n        android:layout_marginEnd=\"58dp\"\r\n        app:boxStrokeColor=\"#900090\"\r\n        app:boxBackgroundColor=\"#DDDDDD\"\r\n        app:endIconMode=\"password_toggle\"\r\n        app:layout_constraintTop_toBottomOf=\"@id/body2\">\r\n\r\n        <com.google.android.material.textfield.TextInputEditText\r\n            android:id=\"@+id/inputLoginPassword\"\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:hint=\"Password\"\r\n            android:inputType=\"textPassword\"\r\n            android:singleLine=\"true\" />\r\n    </com.google.android.material.textfield.TextInputLayout>\r\n\r\n    <TextView\r\n        android:id=\"@+id/forgotPassword\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:text=\"Forgot Password?\"\r\n        android:textSize=\"12dp\"\r\n        android:textStyle=\"bold\"\r\n        android:textColor=\"#3C74E1\"\r\n        android:clickable=\"true\"\r\n        android:layout_marginTop=\"10dp\"\r\n        android:layout_marginLeft=\"190dp\"\r\n        app:layout_constraintTop_toBottomOf=\"@id/textInputLoginPassword\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        />\r\n\r\n    <Button\r\n        android:id=\"@+id/button_signIn\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_marginTop=\"205dp\"\r\n        android:layout_marginStart=\"58dp\"\r\n        android:layout_marginEnd=\"58dp\"\r\n        android:text=\"Sign in\"\r\n        android:backgroundTint=\"#676F9D\"\r\n        app:layout_constraintTop_toBottomOf=\"@id/body2\" />\r\n\r\n    <View\r\n        android:id=\"@+id/divider1\"\r\n        android:layout_width=\"140dp\"\r\n        android:layout_height=\"1dp\"\r\n        android:layout_marginTop=\"288dp\"\r\n        android:layout_marginStart=\"40dp\"\r\n        android:background=\"#000000\"\r\n        app:layout_constraintTop_toBottomOf=\"@id/body2\"\r\n        app:layout_constraintStart_toStartOf=\"parent\" />\r\n\r\n    <View\r\n        android:id=\"@+id/divider2\"\r\n        android:layout_width=\"140dp\"\r\n        android:layout_height=\"1dp\"\r\n        android:layout_marginTop=\"288dp\"\r\n        android:layout_marginStart=\"235dp\"\r\n        android:background=\"#000000\"\r\n        app:layout_constraintTop_toBottomOf=\"@id/body2\"\r\n        app:layout_constraintStart_toStartOf=\"parent\" />\r\n\r\n    <TextView\r\n        android:id=\"@+id/or\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_marginTop=\"275dp\"\r\n        android:text=\"or\"\r\n        android:textSize=\"16sp\"\r\n        app:layout_constraintTop_toBottomOf=\"@id/body2\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\" />\r\n\r\n    <com.google.android.gms.common.SignInButton\r\n        android:id=\"@+id/googleLogo\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_marginTop=\"25dp\"\r\n        android:clickable=\"true\"\r\n        app:buttonSize=\"wide\"\r\n        app:layout_constraintTop_toBottomOf=\"@+id/or\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"/>\r\n\r\n    <TextView\r\n        android:id=\"@+id/accountQn1\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_marginTop=\"44dp\"\r\n        android:layout_marginEnd=\"80dp\"\r\n        android:text=\"Don't have an account?  \"\r\n        android:textSize=\"13sp\"\r\n        android:textStyle=\"bold\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintHorizontal_bias=\"0.482\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toBottomOf=\"@id/googleLogo\" />\r\n\r\n    <TextView\r\n        android:id=\"@+id/registerNow\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_marginStart=\"125dp\"\r\n        android:layout_marginTop=\"45dp\"\r\n        android:text=\"Register Now\"\r\n        android:textSize=\"13sp\"\r\n        android:textStyle=\"bold\"\r\n        android:textColor=\"#3C74E1\"\r\n        android:clickable=\"true\"\r\n        app:layout_constraintTop_toBottomOf=\"@id/googleLogo\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\" />\r\n\r\n    <ProgressBar\r\n        android:id=\"@+id/loginProgressBar\"\r\n        android:layout_width=\"51dp\"\r\n        android:layout_height=\"41dp\"\r\n        android:layout_marginTop=\"200dp\"\r\n        android:visibility=\"invisible\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toBottomOf=\"@id/button_signIn\" />\r\n\r\n\r\n</androidx.constraintlayout.widget.ConstraintLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/activity_login_page.xml b/app/src/main/res/layout/activity_login_page.xml
+--- a/app/src/main/res/layout/activity_login_page.xml	
++++ b/app/src/main/res/layout/activity_login_page.xml	
+@@ -55,7 +55,7 @@
+         app:layout_constraintTop_toBottomOf="@id/body1" />
+ 
+     <com.google.android.material.textfield.TextInputLayout
+-        android:id="@+id/textInputEmailUsername"
++        android:id="@+id/textInputEmail"
+         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+@@ -69,10 +69,10 @@
+         app:layout_constraintTop_toBottomOf="@id/body2">
+ 
+         <com.google.android.material.textfield.TextInputEditText
+-            android:id="@+id/inputEmailUsername"
++            android:id="@+id/inputEmail"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+-            android:hint="Email, Username"
++            android:hint="Email"
+             android:singleLine="true" />
+     </com.google.android.material.textfield.TextInputLayout>
+ 

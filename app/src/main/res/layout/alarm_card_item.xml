@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    android:background="?attr/selectableItemBackground"
+    app:cardCornerRadius="8dp">
+
+    <RelativeLayout
+        android:id="@+id/parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/alarm_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="07:00 AM"
+            android:textSize="25dp"
+            android:textAppearance="?attr/textAppearanceHeadline6" />
+
+        <TextView
+            android:id="@+id/alarm_repeat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/alarm_item"
+            android:text="Repeat: Sat, Sun, Mon"
+            android:textAppearance="?attr/textAppearanceSubtitle2"
+            android:layout_marginTop="1dp" />
+
+        <Switch
+            android:id="@+id/alarm_switch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:layout_below="@id/parent"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="57dp"
+            android:layout_alignParentEnd="true"
+            tools:ignore="NotSibling,UseSwitchCompatOrMaterialXml" />
+
+        <ImageView
+            android:id="@+id/menu_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="3dp"
+            android:layout_marginEnd="3dp"
+            android:contentDescription="@string/menu"
+            android:src="@drawable/ic_baseline_more_vert_24" />
+
+        <TextView
+            android:id="@+id/text_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Delete"
+            android:textColor="@android:color/holo_red_dark"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:visibility="gone" />
+
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>

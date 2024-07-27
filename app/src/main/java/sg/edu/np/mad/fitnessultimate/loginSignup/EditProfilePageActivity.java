@@ -3,6 +3,13 @@ package sg.edu.np.mad.fitnessultimate.loginSignup;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextUtils;
+import android.text.TextWatcher;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -19,7 +26,6 @@ import androidx.activity.result.contract.ActivityResultContracts;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
-
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -39,6 +45,7 @@ import com.google.firebase.storage.StorageReference;
 
 import java.util.HashMap;
 import java.util.Map;
+
 
 import sg.edu.np.mad.fitnessultimate.calendarPage.BaseActivity;
 import sg.edu.np.mad.fitnessultimate.R;
@@ -284,7 +291,9 @@ public class EditProfilePageActivity extends BaseActivity {
         }
     }
     //updating user information in Firestore
+
     private void updateEmailInFirestore(String newEmail, boolean isEmailEdited) {
+
         if (isEmailEdited) {
             FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
             if (currentUser != null) {

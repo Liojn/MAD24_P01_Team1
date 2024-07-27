@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="400dp"
+    android:layout_height="wrap_content"
+    android:padding="30dp"
+    android:layout_gravity="center"
+    android:background="@drawable/rounded_border_info">
+
+    <TextView
+        android:id="@+id/instructionTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:text="Instructions"
+        android:gravity="center"
+        android:textSize="26sp"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/instuctions"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="1. Drag the water droplets into the water tank to track your daily water intake.\n2. Each small droplet adds 100ml.\n3. Each large droplet adds 300ml.\n4. Try to reach your daily goal of 2000ml!"
+        android:gravity="left"
+        android:layout_marginTop="16dp"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@+id/instructionTitle" />
+
+    <TextView
+        android:id="@+id/funFactTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Fun Fact!"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="#ff0000"
+        android:gravity="center"
+        android:layout_marginTop="20dp"
+        app:layout_constraintTop_toBottomOf="@+id/instuctions"/>
+
+    <TextView
+        android:id="@+id/funFact"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:text="1. The recommended amount of water for men is 3.7 liters per day.\n2. The recommended amount of water for women is 2.7 liters per day."
+        app:layout_constraintTop_toBottomOf="@+id/funFactTitle"/>
+
+    <Button
+        android:id="@+id/btnOk"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="OK"
+        android:backgroundTint="#DDDD"
+        android:textColor="@color/black"
+        android:paddingStart="5dp"
+        android:paddingEnd="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/funFact"/>
+</androidx.constraintlayout.widget.ConstraintLayout>
+
