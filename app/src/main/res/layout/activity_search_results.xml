@@ -53,7 +53,10 @@
             android:layout_height="wrap_content"
             android:gravity="start|top"
             android:padding="16dp"
-            android:textSize="23sp"
+            android:layout_marginTop="25dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:textSize="35sp"
             android:fontFamily="sans-serif-condensed-medium"
             android:textColor="@color/app_primary_text"
             android:textIsSelectable="true" />

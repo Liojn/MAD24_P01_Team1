@@ -17,8 +17,8 @@
         android:text = "Back"
         android:backgroundTint="#9299BF"
         android:textColor="@color/white"
-        android:layout_margin="20dp"
-
+        android:layout_marginTop="40dp"
+        android:layout_marginStart="20dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>
 
@@ -27,6 +27,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="15dp"
+        android:layout_marginTop="30dp"
         android:text="Calories Diary"
         android:textColor="@color/app_primary_text"
         android:textSize="@dimen/_20ssp"
@@ -206,48 +207,38 @@
         </LinearLayout>
     </LinearLayout>
 
-    <!-- Layout for meals buttons -->
-    <LinearLayout
-        android:id="@+id/meals"
-        android:layout_width="match_parent"
+    <com.google.android.material.button.MaterialButtonToggleGroup
+        android:id="@+id/mealTypeToggle"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="10dp"
-        android:gravity="center"
-        app:layout_constraintTop_toBottomOf="@+id/nutrients">
-
+        app:singleSelection="true"
+        app:selectionRequired="true"
+        app:layout_constraintTop_toBottomOf="@+id/nutrients"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
         <Button
             android:id="@+id/btnBreakfast"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:backgroundTint="#9299BF"
-            android:layout_marginEnd="8dp"
             android:text="Breakfast"
-
-            />
+            style="?attr/materialButtonOutlinedStyle"/>
 
         <Button
             android:id="@+id/btnLunch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:backgroundTint="#9299BF"
             android:text="Lunch"
-            />
+            style="?attr/materialButtonOutlinedStyle"/>
 
         <Button
             android:id="@+id/btnDinner"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:backgroundTint="#9299BF"
             android:text="Dinner"
-            />
-
-    </LinearLayout>
+            style="?attr/materialButtonOutlinedStyle"/>
+    </com.google.android.material.button.MaterialButtonToggleGroup>
 
     <!-- Button to add food to the meal -->
     <Button
@@ -270,23 +261,22 @@
         android:text="Search"
         android:backgroundTint="#9299BF"
         android:textColor="@color/white"
-        android:layout_margin="20dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="20dp"
 
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
     <!-- Container to show the added meals -->
-    <LinearLayout
-        android:id="@+id/mealContainers"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/mealsRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
         android:padding="10dp"
-        android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@+id/meals"
+        app:layout_constraintTop_toBottomOf="@+id/mealTypeToggle"
+        app:layout_constraintBottom_toTopOf="@+id/addMeal"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
-
-    </LinearLayout>
+        app:layout_constraintEnd_toEndOf="parent"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

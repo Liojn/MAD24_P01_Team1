@@ -74,16 +74,61 @@ public class LogDetails extends BaseActivity {
                     return;
                 }
 
-                int age = Integer.parseInt(ageString);
-                double weight = Double.parseDouble(weightString);
-                double height = Double.parseDouble(heightString);
+                // Validate age
+                int age;
+                try {
+                    age = Integer.parseInt(ageString);
+                    if (age < 13 || age > 120) {
+                        Toast.makeText(LogDetails.this, "Age must be between 13 and 120", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                } catch (NumberFormatException e) {
+                    Toast.makeText(LogDetails.this, "Invalid age format", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                // Validate weight
+                double weight;
+                try {
+                    weight = Double.parseDouble(weightString);
+                    if (weight < 30 || weight > 300) {
+                        Toast.makeText(LogDetails.this, "Weight must be between 30 and 300 kg", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                } catch (NumberFormatException e) {
+                    Toast.makeText(LogDetails.this, "Invalid weight format", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                // Validate height
+                double height;
+                try {
+                    height = Double.parseDouble(heightString);
+                    if (height < 100 || height > 250) {
+                        Toast.makeText(LogDetails.this, "Height must be between 100 and 250 cm", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                } catch (NumberFormatException e) {
+                    Toast.makeText(LogDetails.this, "Invalid height format", Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
                 // Calculate BMR based on gender
                 double bmr;
                 if (gender.equals("Male")) {
                     bmr = 88.362 + (13.397 * weight) + (4.799 * height) - (5.677 * age);
-                } else {
+                } else if (gender.equals("Female")) {
                     bmr = 447.593 + (9.247 * weight) + (3.098 * height) - (4.330 * age);
+                } else {
+                    Toast.makeText(LogDetails.this, "Invalid gender selection", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                // Validate activity level
+                if (!activityLevel.equals("no") && !activityLevel.equals("low") && !activityLevel.equals("moderate") &&
+                        !activityLevel.equals("high") && !activityLevel.equals("extreme")) {
+                    Toast.makeText(LogDetails.this, "Invalid activity level", Toast.LENGTH_SHORT).show();
+                    return;
                 }
 
                 // Adjust BMR based on activity level
@@ -114,6 +159,9 @@ public class LogDetails extends BaseActivity {
                     bmr -= 500; // Calorie adjustments for weight loss
                 } else if (goal.equals("Gain weight")) {
                     bmr += 500; // Calorie adjustments for weight gain
+                } else {
+                    Toast.makeText(LogDetails.this, "Invalid goal selection", Toast.LENGTH_SHORT).show();
+                    return;
                 }
 
                 // Formatting bmr to 1 decimal place and parsing back string to a double
