@@ -18,7 +18,6 @@
         app:layout_constraintTop_toBottomOf="@+id/welcomeTextView"/>
 
 
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/bannerRecyclerView"
         android:layout_width="match_parent"
