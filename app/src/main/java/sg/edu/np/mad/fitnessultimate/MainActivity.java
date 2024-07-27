@@ -82,9 +82,11 @@ public class MainActivity extends AppCompatActivity {
         }
 
         // Retrieve and set the username
+
         retrieveAndSetUsername();
 
         changeProfilePic = findViewById(R.id.profileButton);
+
 
         // Retrieve the profile image URI from SharedPreferences
         SharedPreferences prefs = getSharedPreferences("profile", MODE_PRIVATE);
@@ -115,16 +117,16 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        //For Onclick for Training Schedule
         findViewById(R.id.nav_fitness).setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, TrainingMenuActivity.class);
             startActivity(intent);
         });
-        //For Onclick for Chatbot
+
         findViewById(R.id.chat_button).setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, ChatbotActivity.class);
             startActivity(intent);
         });
+
         //For Onclick for Calendar
         findViewById(R.id.nav_calendar).setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, CalendarActivity.class);
@@ -143,10 +145,7 @@ public class MainActivity extends AppCompatActivity {
             finish();
         });
 
-        //
-
-
-        // Recycler View inside Banner for homepage
+  // Recycler View inside Banner for homepage
         bannerRecyclerView = findViewById(R.id.bannerRecyclerView);
         //List of banner images + title + subtitles
         List<BannerItem> itemList = Arrays.asList(
@@ -159,11 +158,11 @@ public class MainActivity extends AppCompatActivity {
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         bannerRecyclerView.setLayoutManager(layoutManager);
         bannerRecyclerView.setAdapter(bannerAdapter);
-
     }
 
     private void retrieveProfileImage() {
         if (user != null) {
+
             // Retrieve the user document from Firestore
             DocumentReference userRef = fStore.collection("users").document(user.getUid());
             userRef.get().addOnSuccessListener(documentSnapshot -> {
@@ -206,7 +205,6 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(MainActivity.this, "User document does not exist.", Toast.LENGTH_SHORT).show();
                 }
             }).addOnFailureListener(e -> {
-                // Handle any errors that occur while fetching user document
                 Toast.makeText(MainActivity.this, "Failed to retrieve username: " + e.getMessage(), Toast.LENGTH_SHORT).show();
             });
         }

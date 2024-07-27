@@ -40,6 +40,7 @@ import sg.edu.np.mad.fitnessultimate.R;
 import sg.edu.np.mad.fitnessultimate.calendarPage.BaseActivity;
 import sg.edu.np.mad.fitnessultimate.waterTracker.alarm.ReminderActivity;
 
+
 public class ProfilePageActivity extends BaseActivity {
 
     private TextView username;
@@ -172,7 +173,6 @@ public class ProfilePageActivity extends BaseActivity {
                 passwordResetDialog.create().show();
             }
         });
-
         waterReminderBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

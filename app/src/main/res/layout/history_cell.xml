@@ -13,6 +13,7 @@
         android:layout_height="match_parent"
         android:text="12 Feb 2024\nWed"
         android:textSize="15sp"
+        android:textColor="@color/black"
         android:gravity="center"/>
 
     <LinearLayout

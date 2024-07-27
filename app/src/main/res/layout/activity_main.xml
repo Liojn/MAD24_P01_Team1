@@ -17,6 +17,8 @@
         android:layout_marginTop = "@dimen/_10sdp"
         app:layout_constraintTop_toBottomOf="@+id/welcomeTextView"/>
 
+
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/bannerRecyclerView"
         android:layout_width="match_parent"
@@ -72,26 +74,26 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_40sdp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="36dp"
         android:text="Good Morning ☼"
         android:textColor="#424769"
         android:textSize="45sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/banner"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/fitness" />
 
     <TextView
         android:id="@+id/welcomeTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="70dp"
         android:layout_marginTop="15dp"
         android:fontFamily="sans-serif-medium"
         android:text="Welcome back, User!!!!!\nWhat would you like to do today?"
         android:textColor="#2d3250"
         android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="@+id/banner"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
 
@@ -177,4 +179,5 @@
             app:srcCompat="@drawable/button_calendar"
             app:tint="#676f9d" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

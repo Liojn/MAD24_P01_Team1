@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="20dp"
+    android:layout_height="20dp"
+    android:id="@+id/calendar_widget_cell">
+
+    <ImageView
+        android:id="@+id/widgetCellBg"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:src="@drawable/rounded_square"
+        android:layout_gravity="center"/>
+
+    <ImageView
+        android:id="@+id/calenderCellOl"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:background="@drawable/rounded_square_outline"
+        android:layout_gravity="center"
+        android:visibility="gone" />
+
+    <ImageView
+        android:id="@+id/smallTick"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:background="@drawable/tick"
+        android:layout_gravity="center"
+        android:visibility="gone" />
+
+</FrameLayout>

@@ -1,12 +1,31 @@
 package sg.edu.np.mad.fitnessultimate.foodtracker;
 
+import android.app.DatePickerDialog;
+import android.graphics.Color;
+import android.graphics.Typeface;
+import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.SearchView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.cardview.widget.CardView;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -17,46 +36,56 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLEncoder;
+import java.util.Calendar;
 
 import sg.edu.np.mad.fitnessultimate.R;
 import sg.edu.np.mad.fitnessultimate.calendarPage.BaseActivity;
 
 public class SearchResultsActivity extends BaseActivity {
 
-    //UI elements
-    private TextView resultTextBox;
+    private TextView resultTextBox, selectedDateText;
     private SearchView searchView;
-    private Button backBtn;
+    private Button backBtn, addButton, selectDateButton;
     private LinearLayout resultLayout;
+    private PopupWindow popupWindow;
+    private RadioGroup radioGroupMealType;
+    private Button btnConfirmAdd;
+    private String selectedFoodName;
+    private double selectedFoodCalories, selectedCarbs, selectedProteins, selectedFats, selectedOthers;
+    private FirebaseAuth mAuth;
+    private DatabaseReference databaseReference;
 
-    //API endpoint and key
-    private String apiUrl;
-    private String apiKey = "sEO/WztkNuDVZfEfyIOLrA==S4xbs1Ybg0QZ5vMd";
+    private String apiUrl = "https://api.calorieninjas.com/v1/nutrition?query=";
+    private String apiKey = "sEO/WztkNuDVZfEfyIOLrA==SrkmlTyHRD33WiTi";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_results);
 
-        //Initializing UI elements
+        initializeViews();
+        setupListeners();
+        setupFirebase();
+    }
+
+    private void initializeViews() {
         resultTextBox = findViewById(R.id.resultTextBox);
         searchView = findViewById(R.id.searchBar);
         backBtn = findViewById(R.id.backBtn);
+        addButton = findViewById(R.id.addButton);
         resultLayout = findViewById(R.id.resultLayout);
+    }
 
-        //API base URL
-        apiUrl = "https://api.api-ninjas.com/v1/nutrition?query=";
-
-        //Setting listener for search view query submission
+    private void setupListeners() {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                // Concatenate the query with the API URL
-                String fullUrl = apiUrl + query;
-
-                // Execute AsyncTask to perform network operation in the background
-                new FetchDataTask().execute(fullUrl);
-
+                if (!query.trim().isEmpty()) {
+                    fetchNutritionData(query);
+                } else {
+                    Toast.makeText(SearchResultsActivity.this, "Please enter a food item", Toast.LENGTH_SHORT).show();
+                }
                 return true;
             }
 
@@ -66,133 +95,210 @@ public class SearchResultsActivity extends BaseActivity {
             }
         });
 
-        //Setting listener for back button click
-        backBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //Navigate the user back to FoodTracker activity
-                onBackPressed();
-            }
-        });
+        backBtn.setOnClickListener(v -> onBackPressed());
+
     }
 
-    //AsyncTask for performing network operation in the background
-    private class FetchDataTask extends AsyncTask<String, Void, String> {
+    private void setupFirebase() {
+        mAuth = FirebaseAuth.getInstance();
+        databaseReference = FirebaseDatabase.getInstance().getReference("meals");
+    }
 
-        @Override
-        protected String doInBackground(String... urls) {
-            // String to hold the JSON response
-            StringBuilder response = new StringBuilder();
-
+    private void fetchNutritionData(String query) {
+        new Thread(() -> {
             try {
-                // Create URL object from the provided URL string
-                URL url = new URL(urls[0]);
-
-                // Create HttpURLConnection object
+                String encodedQuery = URLEncoder.encode(query, "UTF-8");
+                URL url = new URL(apiUrl + encodedQuery);
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-
-                // Set request method
                 connection.setRequestMethod("GET");
+                connection.setRequestProperty("X-Api-Key", apiKey);
 
-                //Set API key header
-                connection.setRequestProperty("x-api-key", apiKey);
-
-                // Connect to the API
-                connection.connect();
-
-                // Check if the response code is successful (200)
-                if (connection.getResponseCode() == HttpURLConnection.HTTP_OK) {
-                    // Create BufferedReader to read the response
-                    BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-
-                    // Read the response line by line and append it to the StringBuilder
-                    String line;
-                    while ((line = reader.readLine()) != null) {
-                        response.append(line);
-                    }
-
-                    // Close the reader
-                    reader.close();
+                BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                StringBuilder response = new StringBuilder();
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    response.append(line);
                 }
+                reader.close();
 
-                // Disconnect the HttpURLConnection
-                connection.disconnect();
+                String result = response.toString();
+                runOnUiThread(() -> processApiResult(result));
 
-            } catch (IOException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
+                runOnUiThread(() -> Toast.makeText(SearchResultsActivity.this, "Error fetching data", Toast.LENGTH_SHORT).show());
             }
+        }).start();
+    }
 
-            // Return the JSON response as a String
-            return response.toString();
-        }
 
-        @Override
-        protected void onPostExecute(String result) {
-            super.onPostExecute(result);
+    private void processApiResult(String result) {
+        resultTextBox.setText("");
+        resultLayout.removeAllViews();
 
-            //Clearing the previous result
-            resultTextBox.setText("");
+        if (result != null && !result.isEmpty()) {
+            try {
+                JSONObject jsonResponse = new JSONObject(result);
+                JSONArray jsonArray = jsonResponse.getJSONArray("items");
 
-            // Check if the result is not null and not empty
-            if (result != null && !result.isEmpty()) {
-                try {
-                    // Parse the JSON response
-                    JSONArray jsonArray = new JSONArray(result);
+                double totalCalories = 0;
+                double totalCarbs = 0;
+                double totalProteins = 0;
+                double totalFats = 0;
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    JSONObject jsonObject = jsonArray.getJSONObject(i);
+                    String name = jsonObject.getString("name");
+                    double calories = jsonObject.getDouble("calories");
+                    double carbohydrates = jsonObject.getDouble("carbohydrates_total_g");
+                    double proteins = jsonObject.getDouble("protein_g");
+                    double fats = jsonObject.getDouble("fat_total_g");
 
-                    //Variables to hold the total nutrition values
-                    double totalCalories = 0;
-                    double totalCarbs = 0;
-                    double totalProteins = 0;
-                    double totalFats = 0;
-                    double totalOthers = 0;
+                    totalCalories += calories;
+                    totalCarbs += carbohydrates;
+                    totalProteins += proteins;
+                    totalFats += fats;
+                    double others = totalCalories - (totalCarbs + totalProteins + totalFats);
 
-                    // Iterate through the JSON array
-                    for (int i = 0; i < jsonArray.length(); i++) {
-                        JSONObject jsonObject = jsonArray.getJSONObject(i);
-
-                        // Extract data from the JSON object
-                        String name = jsonObject.getString("name");
-                        double calories = jsonObject.getDouble("calories");
-                        double carbohydrates = jsonObject.getDouble("carbohydrates_total_g");
-                        double proteins = jsonObject.getDouble("protein_g");
-                        double fats = jsonObject.getDouble("fat_total_g");
-                        double others = calories - (carbohydrates + proteins + fats);
-
-                        //Adding in each data for total values
-                        totalCalories += calories;
-                        totalCarbs += carbohydrates;
-                        totalProteins += proteins;
-                        totalFats += fats;
-                        totalOthers += others;
-                    }
-
-                    // Create a StringBuilder to format the data
-                    StringBuilder formattedData = new StringBuilder();
-
-                    // Append the formatted data to the StringBuilder
-                    String query = searchView.getQuery().toString();
-
-                    formattedData.append("Name: ").append(query).append("\n");
-                    formattedData.append("Total calories: ").append(String.format("%.1f", totalCalories)).append(" kcal per 100 g\n");
-                    formattedData.append("Carbohydrates: ").append(String.format("%.1f",totalCarbs)).append(" g\n");
-                    formattedData.append("Protein: ").append(String.format("%.1f",totalProteins)).append(" g\n");
-                    formattedData.append("Fats: ").append(String.format("%.1f",totalFats)).append(" g\n");
-                    formattedData.append("Others: ").append(String.format("%.1f",totalOthers)).append(" kcal\n");
-
-                    // Set the formatted data to the TextView
-                    resultTextBox.setText(formattedData.toString());
-
-                    //Make the result layout visible
-                    resultLayout.setVisibility(LinearLayout.VISIBLE);
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                    resultTextBox.setText("Failed to parse data");
+                    addFoodItemToLayout(name, totalCalories, totalCarbs, totalProteins, totalFats, others);
                 }
-            } else {
-                //Display error message if no result is found
-                resultTextBox.setText("No results found or error fetching data");
+
+                resultLayout.setVisibility(View.VISIBLE);
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+                resultTextBox.setText("Failed to parse data");
             }
+        } else {
+            resultTextBox.setText("No results found or error fetching data");
+        }
+    }
+
+    private void addFoodItemToLayout(String name, double calories, double carbs, double proteins, double fats, double others) {
+        CardView cardView = new CardView(this);
+        CardView.LayoutParams cardParams = new CardView.LayoutParams(
+                CardView.LayoutParams.MATCH_PARENT,
+                CardView.LayoutParams.WRAP_CONTENT
+        );
+        cardParams.setMargins(16, 16, 16, 16);
+        cardView.setLayoutParams(cardParams);
+        cardView.setCardElevation(8);
+        cardView.setRadius(16);
+
+        LinearLayout itemLayout = new LinearLayout(this);
+        itemLayout.setOrientation(LinearLayout.VERTICAL);
+        itemLayout.setPadding(16, 16, 16, 16);
+
+        TextView foodTextView = new TextView(this);
+        String summary = String.format(
+            "╔══════════════════════════════════╗\n" +
+            "║ %s\n" +
+            "╠══════════════════════════════════╣\n" +
+            "║ Total Calories: %.1f kcal\n" +
+            "╠══════════════════════════════════╣\n" +
+            "║ Nutrients Breakdown:\n" +
+            "║   • Carbohydrates: %.1f g\n" +
+            "║   • Protein:       %.1f g\n" +
+            "║   • Fats:          %.1f g\n" +
+            "║   • Others:        %.1f g\n" +
+            "╚══════════════════════════════════╝",
+            name.toUpperCase(), calories, carbs, proteins, fats, others);
+
+        foodTextView.setTypeface(Typeface.DEFAULT_BOLD);
+        foodTextView.setTextSize(14);
+        foodTextView.setText(summary);
+
+        addButton = new Button(this);
+        addButton.setText("Add");
+        //addButton.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+        addButton.setTextColor(Color.WHITE);
+        addButton.setOnClickListener(v -> showPopup(v, name, calories, carbs, proteins, fats, others));
+
+        itemLayout.addView(foodTextView);
+        itemLayout.addView(addButton);
+
+        cardView.addView(itemLayout);
+        resultLayout.addView(cardView);
+    }
+    private void showPopup(View view, String foodName, double foodCalories, double carbs, double proteins, double fats, double others) {
+        selectedFoodName = foodName;
+        selectedFoodCalories = foodCalories;
+        selectedCarbs = carbs;
+        selectedProteins = proteins;
+        selectedFats = fats;
+        selectedOthers = others;
+
+        LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
+        View popupView = inflater.inflate(R.layout.popup_meal_type_selection, null);
+        int width = ViewGroup.LayoutParams.WRAP_CONTENT;
+        int height = ViewGroup.LayoutParams.WRAP_CONTENT;
+        boolean focusable = true;
+        popupWindow = new PopupWindow(popupView, width, height, focusable);
+
+        popupWindow.setBackgroundDrawable(new ColorDrawable(Color.WHITE));
+        popupView.setElevation(20);
+
+        radioGroupMealType = popupView.findViewById(R.id.radioGroupMealType);
+        selectDateButton = popupView.findViewById(R.id.selectDateButton);
+        selectedDateText = popupView.findViewById(R.id.selectedDateText);
+        btnConfirmAdd = popupView.findViewById(R.id.btnConfirmAdd);
+
+        TextView titleTextView = popupView.findViewById(R.id.popupTitle);
+        titleTextView.setText("Add " + foodName);
+        final String[] selectedDate = {""};
+        selectDateButton.setOnClickListener(v -> showDatePicker(selectedDate));
+
+        btnConfirmAdd.setOnClickListener(v -> {
+            if (validateInput(selectedDate[0])) {
+                addMealToDatabase(selectedDate[0]);
+                popupWindow.dismiss();
+            }
+        });
+
+        popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
+    }
+
+    private void showDatePicker(String[] selectedDate) {
+        final Calendar calendar = Calendar.getInstance();
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(this,
+                (view, year1, monthOfYear, dayOfMonth) -> {
+                    selectedDate[0] = dayOfMonth + "/" + (monthOfYear + 1) + "/" + year1;
+                    selectedDateText.setText("Selected date: " + selectedDate[0]);
+                }, year, month, day);
+        datePickerDialog.show();
+    }
+
+    private boolean validateInput(String date) {
+        if (radioGroupMealType.getCheckedRadioButtonId() == -1) {
+            Toast.makeText(this, "Please select a meal type", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if (date.isEmpty()) {
+            Toast.makeText(this, "Please select a date", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        return true;
+    }
+
+    private void addMealToDatabase(String date) {
+        int selectedId = radioGroupMealType.getCheckedRadioButtonId();
+        RadioButton selectedRadioButton = popupWindow.getContentView().findViewById(selectedId);
+        String selectedMealType = selectedRadioButton.getText().toString();
+        FirebaseUser user = mAuth.getCurrentUser();
+
+        if (user != null) {
+            Meal meal = new Meal(selectedFoodName, selectedFoodCalories, selectedCarbs, selectedProteins, selectedFats, selectedOthers, selectedMealType, date);
+            databaseReference.child(user.getUid()).push().setValue(meal)
+                    .addOnSuccessListener(aVoid -> {
+                        Toast.makeText(this, "Meal added successfully", Toast.LENGTH_SHORT).show();
+                        popupWindow.dismiss();
+                    })
+                    .addOnFailureListener(e -> Toast.makeText(this, "Failed to add meal", Toast.LENGTH_SHORT).show());
+        } else {
+            Toast.makeText(this, "User not logged in", Toast.LENGTH_SHORT).show();
         }
     }
 }

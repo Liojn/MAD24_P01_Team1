@@ -80,4 +80,23 @@
         android:textSize="30sp"
         android:textStyle="normal"
         android:gravity="start|center_vertical" />
+
+    <androidx.appcompat.widget.AppCompatButton
+
+        android:id="@+id/counter"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp"
+        android:layout_margin="20dp"
+
+        android:drawableLeft="@drawable/exercise_2d"
+        android:drawablePadding="15dp"
+        android:background="@drawable/trainingmenu_btn"
+        android:text="Squat Counter"
+        android:textColor="@color/white"
+        android:textAllCaps="false"
+
+        android:textSize="30sp"
+        android:textStyle="normal"
+        android:gravity="start|center_vertical" />
 </LinearLayout>

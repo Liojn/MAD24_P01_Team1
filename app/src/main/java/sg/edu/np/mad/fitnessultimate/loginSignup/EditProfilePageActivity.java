@@ -10,12 +10,20 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.text.Editable;
+import android.text.TextUtils;
+import android.text.TextWatcher;
+import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.core.graphics.Insets;
@@ -38,8 +46,9 @@ import com.google.firebase.storage.StorageReference;
 import java.util.HashMap;
 import java.util.Map;
 
-import sg.edu.np.mad.fitnessultimate.R;
+
 import sg.edu.np.mad.fitnessultimate.calendarPage.BaseActivity;
+import sg.edu.np.mad.fitnessultimate.R;
 
 public class EditProfilePageActivity extends BaseActivity {
     ImageView leftArrow;
@@ -144,6 +153,8 @@ public class EditProfilePageActivity extends BaseActivity {
                                 // Inform the user to check their new email and complete the verification
                                 // The actual email update will be handled by Firebase upon email verification
                                 updateProfile(usernameText, emailText, true);
+                                startActivity(new Intent(EditProfilePageActivity.this, ProfilePageActivity.class));
+                                finish(); // Finish current activity
                             } else {
                                 // Error sending verification email
                                 Toast.makeText(EditProfilePageActivity.this, "Failed to send verification email: " + emailTask.getException().getMessage(), Toast.LENGTH_SHORT).show();
@@ -151,7 +162,9 @@ public class EditProfilePageActivity extends BaseActivity {
                         }
                     });
                 } else {
-                    updateProfile(usernameText, emailText, false);
+                    updateProfile(usernameText, emailText, true);
+                    startActivity(new Intent(EditProfilePageActivity.this, ProfilePageActivity.class));
+                    finish(); // Finish current activity
                 }
             }
         });
@@ -278,7 +291,9 @@ public class EditProfilePageActivity extends BaseActivity {
         }
     }
     //updating user information in Firestore
-    private void updateEmailI4nFirestore(String newEmail, boolean isEmailEdited) {
+
+    private void updateEmailInFirestore(String newEmail, boolean isEmailEdited) {
+
         if (isEmailEdited) {
             FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
             if (currentUser != null) {

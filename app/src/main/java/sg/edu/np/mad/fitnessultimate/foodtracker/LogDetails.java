@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import sg.edu.np.mad.fitnessultimate.R;
 import sg.edu.np.mad.fitnessultimate.calendarPage.BaseActivity;
@@ -51,28 +52,83 @@ public class LogDetails extends BaseActivity {
             }
         });
 
-        // Set a click listener for the save button
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Get user input
                 int selectedGenderId = genderGroup.getCheckedRadioButtonId();
                 RadioButton selectedGenderRadioButton = findViewById(selectedGenderId);
-                String gender = selectedGenderRadioButton.getText().toString();
-                int age = Integer.parseInt(ageText.getText().toString());
-                double weight = Double.parseDouble(weightText.getText().toString());
-                double height = Double.parseDouble(heightText.getText().toString());
+                String gender = selectedGenderRadioButton != null ? selectedGenderRadioButton.getText().toString() : "";
+
+                String ageString = ageText.getText().toString();
+                String weightString = weightText.getText().toString();
+                String heightString = heightText.getText().toString();
                 String activityLevel = activityText.getText().toString();
                 int selectedGoalId = goalsGroup.getCheckedRadioButtonId();
                 RadioButton selectedGoalRadioButton = findViewById(selectedGoalId);
-                String goal = selectedGoalRadioButton.getText().toString();
+                String goal = selectedGoalRadioButton != null ? selectedGoalRadioButton.getText().toString() : "";
+
+                if (gender.isEmpty() || ageString.isEmpty() || weightString.isEmpty() || heightString.isEmpty() || activityLevel.isEmpty() || goal.isEmpty()) {
+                    // Show an error message (e.g., a Toast) to the user indicating that all fields are required
+                    Toast.makeText(LogDetails.this, "All fields are required", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                // Validate age
+                int age;
+                try {
+                    age = Integer.parseInt(ageString);
+                    if (age < 13 || age > 120) {
+                        Toast.makeText(LogDetails.this, "Age must be between 13 and 120", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                } catch (NumberFormatException e) {
+                    Toast.makeText(LogDetails.this, "Invalid age format", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                // Validate weight
+                double weight;
+                try {
+                    weight = Double.parseDouble(weightString);
+                    if (weight < 30 || weight > 300) {
+                        Toast.makeText(LogDetails.this, "Weight must be between 30 and 300 kg", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                } catch (NumberFormatException e) {
+                    Toast.makeText(LogDetails.this, "Invalid weight format", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                // Validate height
+                double height;
+                try {
+                    height = Double.parseDouble(heightString);
+                    if (height < 100 || height > 250) {
+                        Toast.makeText(LogDetails.this, "Height must be between 100 and 250 cm", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                } catch (NumberFormatException e) {
+                    Toast.makeText(LogDetails.this, "Invalid height format", Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
                 // Calculate BMR based on gender
                 double bmr;
                 if (gender.equals("Male")) {
                     bmr = 88.362 + (13.397 * weight) + (4.799 * height) - (5.677 * age);
-                } else {
+                } else if (gender.equals("Female")) {
                     bmr = 447.593 + (9.247 * weight) + (3.098 * height) - (4.330 * age);
+                } else {
+                    Toast.makeText(LogDetails.this, "Invalid gender selection", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                // Validate activity level
+                if (!activityLevel.equals("no") && !activityLevel.equals("low") && !activityLevel.equals("moderate") &&
+                        !activityLevel.equals("high") && !activityLevel.equals("extreme")) {
+                    Toast.makeText(LogDetails.this, "Invalid activity level", Toast.LENGTH_SHORT).show();
+                    return;
                 }
 
                 // Adjust BMR based on activity level
@@ -103,7 +159,11 @@ public class LogDetails extends BaseActivity {
                     bmr -= 500; // Calorie adjustments for weight loss
                 } else if (goal.equals("Gain weight")) {
                     bmr += 500; // Calorie adjustments for weight gain
+                } else {
+                    Toast.makeText(LogDetails.this, "Invalid goal selection", Toast.LENGTH_SHORT).show();
+                    return;
                 }
+
                 // Formatting bmr to 1 decimal place and parsing back string to a double
                 String formattedBMR = String.format("%.1f", bmr);
                 calculatedBMR = Double.parseDouble(formattedBMR);
@@ -118,5 +178,4 @@ public class LogDetails extends BaseActivity {
                 finish(); //Finish the activity and return to the previous one
             }
         });
-    }
-}
+    }}
