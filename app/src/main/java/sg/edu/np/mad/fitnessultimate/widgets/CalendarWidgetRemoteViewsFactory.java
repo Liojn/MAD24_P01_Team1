@@ -30,6 +30,7 @@ public class CalendarWidgetRemoteViewsFactory implements RemoteViewsService.Remo
     private ArrayList<DayModel> mDaysInMonth = new ArrayList<>(); // Initialize to an empty list
     private LocalDate currentDate;
     private int onMonth;
+    private int sizeOfWidget;
     private String month;
 
     public CalendarWidgetRemoteViewsFactory(Context context, Intent intent) {
@@ -42,6 +43,7 @@ public class CalendarWidgetRemoteViewsFactory implements RemoteViewsService.Remo
         // Retrieve the bundle
         Bundle bundle = mIntent.getExtras();
         onMonth = bundle.getInt("key");
+        sizeOfWidget = bundle.getInt("sizeOfWidget");
 
         // Load the data
         currentDate = LocalDate.now();
@@ -83,11 +85,20 @@ public class CalendarWidgetRemoteViewsFactory implements RemoteViewsService.Remo
 
         RemoteViews views = new RemoteViews(mContext.getPackageName(), R.layout.calendar_cell);
 
+        Log.i("herehere", String.valueOf(sizeOfWidget));
         // Set Height
-        if (mDaysInMonth.size() > 40) {
-            views.setViewLayoutHeight(R.id.calenderCell, 55, TypedValue.COMPLEX_UNIT_DIP);
+        if (sizeOfWidget == 4) {
+            if (mDaysInMonth.size() > 40) {
+                views.setViewLayoutHeight(R.id.calenderCell, 55, TypedValue.COMPLEX_UNIT_DIP);
+            } else {
+                views.setViewLayoutHeight(R.id.calenderCell, 65, TypedValue.COMPLEX_UNIT_DIP);
+            }
         } else {
-            views.setViewLayoutHeight(R.id.calenderCell, 65, TypedValue.COMPLEX_UNIT_DIP);
+            if (mDaysInMonth.size() > 40) {
+                views.setViewLayoutHeight(R.id.calenderCell, 75, TypedValue.COMPLEX_UNIT_DIP);
+            } else {
+                views.setViewLayoutHeight(R.id.calenderCell, 85, TypedValue.COMPLEX_UNIT_DIP);
+            }
         }
 
 
@@ -115,7 +126,6 @@ public class CalendarWidgetRemoteViewsFactory implements RemoteViewsService.Remo
         }
         // Check Workout
         if (mDaysInMonth.get(position).workout != null){
-            Log.i("herehere", "hi " + mDaysInMonth.get(position).workout);
             views.setViewVisibility(R.id.cellDayText, View.GONE);
             views.setViewVisibility(R.id.smallTick, View.VISIBLE);
         }
