@@ -44,14 +44,20 @@ import java.util.concurrent.Semaphore;
 import sg.edu.np.mad.fitnessultimate.R;
 
 public class SquatCounterActivity extends AppCompatActivity {
+    // constants for logging, permissions, and camera preview
     private static final String TAG = "SquatCounterActivity";
     private static final int REQUEST_CAMERA_PERMISSION = 200;
     private static final int PREVIEW_WIDTH = 640;
     private static final int PREVIEW_HEIGHT = 480;
 
+    // ui elements
     private Button backButton;
     private SurfaceView surfaceView;
     private SurfaceHolder surfaceHolder;
+    private TextView squatCountTextView;
+    private TextView countdownTextView;
+
+    // camera-related objects
     private CameraDevice cameraDevice;
     private CameraCaptureSession captureSession;
     private CaptureRequest.Builder captureRequestBuilder;
@@ -60,10 +66,10 @@ public class SquatCounterActivity extends AppCompatActivity {
     private HandlerThread backgroundThread;
     private Semaphore cameraOpenCloseLock = new Semaphore(1);
 
+    // movenet model for pose estimation
     private MoveNet moveNet;
-    private TextView squatCountTextView;
-    private TextView countdownTextView;
 
+    // squat detection parameters
     private int squatCount = 0;
     private boolean isInSquatPosition = false;
     private static final float SQUAT_THRESHOLD = 0.50f;
@@ -75,6 +81,7 @@ public class SquatCounterActivity extends AppCompatActivity {
     private float lowestNoseY = 0;
     private long squatStartTime = 0;
 
+    // countdown and processing flags
     private boolean countdownFinished = false;
     private CountDownTimer countdownTimer;
     private boolean isProcessingImage = false;
@@ -95,6 +102,7 @@ public class SquatCounterActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 finish();
+                // provide summary of workout to user
                 Toast.makeText(SquatCounterActivity.this, "Congrats! You did " + squatCount + " squats.", Toast.LENGTH_SHORT).show();
             }
         });
@@ -107,6 +115,7 @@ public class SquatCounterActivity extends AppCompatActivity {
         startCountdown();
     }
 
+    // initialise the model
     private void initMoveNet() {
         try {
             moveNet = new MoveNet(this);
@@ -117,6 +126,7 @@ public class SquatCounterActivity extends AppCompatActivity {
         }
     }
 
+    // start countdown before the model starts counting
     private void startCountdown() {
         countdownTimer = new CountDownTimer(6000, 1000) {
             @Override
@@ -132,10 +142,11 @@ public class SquatCounterActivity extends AppCompatActivity {
         }.start();
     }
 
+    // initialise the camera
     private void openCamera() {
         CameraManager manager = (CameraManager) getSystemService(Context.CAMERA_SERVICE);
         try {
-            // This should be the back camera
+            // this should be the back camera
             String cameraId = manager.getCameraIdList()[1];
             if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
                 ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, REQUEST_CAMERA_PERMISSION);
@@ -143,12 +154,14 @@ public class SquatCounterActivity extends AppCompatActivity {
             }
             manager.openCamera(cameraId, stateCallback, backgroundHandler);
         } catch (CameraAccessException e) {
+            // KNOWN ISSUE: this error always happens on the first time using the app - relaunching the counter will fix it
             Log.e(TAG, "Failed to open camera", e);
             Toast.makeText(this, "Failed to open camera. Please restart the app.", Toast.LENGTH_LONG).show();
             finish();
         }
     }
 
+    // camera state callback
     private final CameraDevice.StateCallback stateCallback = new CameraDevice.StateCallback() {
         @Override
         public void onOpened(@NonNull CameraDevice camera) {
@@ -173,6 +186,7 @@ public class SquatCounterActivity extends AppCompatActivity {
         }
     };
 
+    // create camera preview
     private void createCameraPreviewSession() {
         try {
             Surface surface = surfaceHolder.getSurface();
@@ -185,6 +199,7 @@ public class SquatCounterActivity extends AppCompatActivity {
                 finish();
             }
 
+            // setup image reader for pose estimation
             imageReader = ImageReader.newInstance(PREVIEW_WIDTH, PREVIEW_HEIGHT, ImageFormat.YUV_420_888, 2);
             imageReader.setOnImageAvailableListener(imageAvailableListener, backgroundHandler);
             captureRequestBuilder.addTarget(imageReader.getSurface());
@@ -215,6 +230,7 @@ public class SquatCounterActivity extends AppCompatActivity {
         }
     }
 
+    // listener to process frames
     private final ImageReader.OnImageAvailableListener imageAvailableListener = new ImageReader.OnImageAvailableListener() {
         @Override
         public void onImageAvailable(ImageReader reader) {
@@ -245,6 +261,7 @@ public class SquatCounterActivity extends AppCompatActivity {
         }
     };
 
+    // convert image to bitmap for processing
     private Bitmap imageToBitmap(Image image) {
         ByteBuffer yBuffer = image.getPlanes()[0].getBuffer();
         ByteBuffer uBuffer = image.getPlanes()[1].getBuffer();
@@ -268,12 +285,14 @@ public class SquatCounterActivity extends AppCompatActivity {
         return BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
     }
 
+    // process image for pose estimation
     private void processImage(Bitmap bitmap) {
         float[][] keypoints = moveNet.estimateSinglePose(bitmap);
         detectSquat(keypoints);
         isProcessingImage = false;
     }
 
+    // detect squat using nose position
     private void detectSquat(float[][] keypoints) {
         float[] nose = keypoints[MoveNet.BodyPart.NOSE.ordinal()];
 
@@ -308,6 +327,7 @@ public class SquatCounterActivity extends AppCompatActivity {
         }
     }
 
+    // update nose positions for detection
     private void updateNosePositions(float noseY) {
         noseYPositions.offer(noseY);
         if (noseYPositions.size() > WINDOW_SIZE) {

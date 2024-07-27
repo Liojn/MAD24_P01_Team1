@@ -31,6 +31,7 @@ public class MoveNet {
         LEFT_KNEE, RIGHT_KNEE, LEFT_ANKLE, RIGHT_ANKLE
     }
 
+    // initialise singlepose-lightning.tflite model
     public MoveNet(Context context) throws IOException {
         Interpreter.Options options = new Interpreter.Options();
         CompatibilityList compatList = new CompatibilityList();
@@ -49,6 +50,7 @@ public class MoveNet {
         inputImage = new TensorImage(interpreter.getInputTensor(0).dataType());
     }
 
+    // perform inference on the input image using hardware
     public float[][] estimateSinglePose(Bitmap bitmap) {
         inputImage.load(bitmap);
         TensorImage processedImage = imageProcessor.process(inputImage);
