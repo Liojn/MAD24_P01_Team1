@@ -20,6 +20,7 @@ core = "1.17.1"
 roomCompiler = "2.6.1"
 sceneformUx = "1.17.1"
 coreVersion = "1.44.0"
+firebaseDatabase = "21.0.0"
 
 [libraries]
 gson = { module = "com.google.code.gson:gson", name = "gson", version.ref = "gson" }
@@ -41,6 +42,7 @@ core = { group = "com.google.ar.sceneform", name = "core", version.ref = "core" 
 room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "roomCompiler" }
 sceneform-ux = { group = "com.google.ar.sceneform.ux", name = "sceneform-ux", version.ref = "sceneformUx" }
 ar-core = { group = "com.google.ar", name = "core", version.ref = "coreVersion" }
+firebase-database = { group = "com.google.firebase", name = "firebase-database", version.ref = "firebaseDatabase" }
 
 
 [plugins]
