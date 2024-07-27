@@ -57,8 +57,6 @@ class HistoryAdapter extends RecyclerView.Adapter<HistoryViewHolder>
         holder.workoutDescription.setEllipsize(TextUtils.TruncateAt.END);
         holder.workoutDescription.setMaxLines(1);
         holder.workoutDescription.setHorizontallyScrolling(true);
-
-        Log.d("HistoryAdapter", day);
     }
 
 
