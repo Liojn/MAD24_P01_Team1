@@ -36,7 +36,6 @@ public class BannerAdapter extends RecyclerView.Adapter<BannerAdapter.BannerView
         BannerItem item = itemList.get(position);
         holder.imageView.setImageResource(item.getImageResourceId());
         holder.textViewTitle.setText(item.getTitle());
-        holder.textViewSubtitle.setText(item.getSubtitle());
 
         holder.itemView.setOnClickListener(v -> {
             if (item.getTargetActivity() != null) {
@@ -54,13 +53,11 @@ public class BannerAdapter extends RecyclerView.Adapter<BannerAdapter.BannerView
     public static class BannerViewHolder extends RecyclerView.ViewHolder {
         ImageView imageView;
         TextView textViewTitle;
-        TextView textViewSubtitle;
 
         public BannerViewHolder(@NonNull View itemView) {
             super(itemView);
             imageView = itemView.findViewById(R.id.imageView);
             textViewTitle = itemView.findViewById(R.id.textViewTitle);
-            textViewSubtitle = itemView.findViewById(R.id.textViewSubtitle);
         }
     }
 }
