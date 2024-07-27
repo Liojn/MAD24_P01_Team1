@@ -7,13 +7,11 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
-import android.util.TypedValue;
 import android.view.View;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.Objects;
@@ -24,15 +22,15 @@ import sg.edu.np.mad.fitnessultimate.calendarPage.MiscCalendar;
 import sg.edu.np.mad.fitnessultimate.calendarPage.RetrievedData;
 import sg.edu.np.mad.fitnessultimate.training.workouts.Workout;
 
-public class CalendarWidgetRemoteViewsFactory implements RemoteViewsService.RemoteViewsFactory {
+public class CalendarHeatmapWidgetRemoteViewsFactory implements RemoteViewsService.RemoteViewsFactory {
     private final Context mContext;
     private final Intent mIntent;
     private ArrayList<DayModel> mDaysInMonth = new ArrayList<>(); // Initialize to an empty list
     private LocalDate currentDate;
-    private int onMonth;
-    private String month;
+    private LocalDate startDate;
+    private int numOfCols;
 
-    public CalendarWidgetRemoteViewsFactory(Context context, Intent intent) {
+    public CalendarHeatmapWidgetRemoteViewsFactory(Context context, Intent intent) {
         mContext = context;
         mIntent = intent;
     }
@@ -41,15 +39,42 @@ public class CalendarWidgetRemoteViewsFactory implements RemoteViewsService.Remo
     public void onCreate() {
         // Retrieve the bundle
         Bundle bundle = mIntent.getExtras();
-        onMonth = bundle.getInt("key");
+        numOfCols = bundle.getInt("key");
 
         // Load the data
         currentDate = LocalDate.now();
 
         MiscCalendar.getTimeSpentForDate(new MiscCalendar.FirestoreCallback() {
             public void onCallback(Map<LocalDate, RetrievedData> dateDataMap) {
-                mDaysInMonth = MiscCalendar.createDaysInMonthArray(currentDate.plusMonths(onMonth), dateDataMap);
-                month = mDaysInMonth.get(15).fullDate.format(DateTimeFormatter.ofPattern("MMMM"));
+                int dayOfWeek = currentDate.getDayOfWeek().getValue();
+                int daysInCaln = 7 * (numOfCols - 1) + dayOfWeek;
+                startDate = currentDate.minusDays(daysInCaln);
+                int totalCells = 7 * numOfCols - 1;
+
+                for (int i = 0; i <= totalCells; i++) {
+                    int test = (int) (Math.floor((double) i / numOfCols) + (i % numOfCols * 7));
+                    LocalDate onDate = startDate.plusDays(test);
+
+                    Long timeSpent = 0L;
+                    Workout workout = null;
+                    if (dateDataMap.containsKey(onDate)) {
+                        RetrievedData retrievedData = dateDataMap.get(onDate);
+                        if (retrievedData.timeSpent == null) {
+                            timeSpent = 0L;
+                        } else {
+                            timeSpent = retrievedData.timeSpent;
+                        }
+                        workout = retrievedData.workout;
+                    }
+
+                    Boolean shown = true;
+                    if (onDate.isAfter(currentDate)) {
+                        shown = false;
+                    }
+
+                    mDaysInMonth.add(new DayModel(String.valueOf(onDate.getDayOfMonth()), shown, onDate, timeSpent, workout));
+                }
+
                 notifyAppWidgetViewDataChanged(); // Notify that the data has changed
             }
         });
@@ -68,9 +93,7 @@ public class CalendarWidgetRemoteViewsFactory implements RemoteViewsService.Remo
     @Override
     public int getCount() {
         if (!mDaysInMonth.isEmpty()) {
-            if (Objects.equals(mDaysInMonth.get(15).fullDate.format(DateTimeFormatter.ofPattern("MMMM")), month)){
-                CalendarDataRepository.getInstance().setDaysInMonth(mDaysInMonth);
-            }
+            CalendarDataRepository.getInstance().setDaysInMonth(mDaysInMonth); // Store data in singleton
         }
         return mDaysInMonth != null ? mDaysInMonth.size() : 0;
     }
@@ -81,42 +104,19 @@ public class CalendarWidgetRemoteViewsFactory implements RemoteViewsService.Remo
             return null; // Return null if data is not available
         }
 
-        RemoteViews views = new RemoteViews(mContext.getPackageName(), R.layout.calendar_cell);
-
-        // Set Height
-        if (mDaysInMonth.size() > 40) {
-            views.setViewLayoutHeight(R.id.calenderCell, 55, TypedValue.COMPLEX_UNIT_DIP);
-        } else {
-            views.setViewLayoutHeight(R.id.calenderCell, 65, TypedValue.COMPLEX_UNIT_DIP);
-        }
-
+        RemoteViews views = new RemoteViews(mContext.getPackageName(), R.layout.calendar_heatmap_widget_cell);
 
         // Set your views here based on mDaysInMonth.get(position)
-        // Remove backgrounds
-        views.setViewLayoutHeight(R.id.calenderCellOl, 40, TypedValue.COMPLEX_UNIT_DIP);
-        views.setViewLayoutWidth(R.id.calenderCellOl, 40, TypedValue.COMPLEX_UNIT_DIP);
-        views.setViewLayoutHeight(R.id.calenderCellBg, 40, TypedValue.COMPLEX_UNIT_DIP);
-        views.setViewLayoutWidth(R.id.calenderCellBg, 40, TypedValue.COMPLEX_UNIT_DIP);
-        views.setInt(R.id.calenderCellBg, "setBackgroundColor", Color.TRANSPARENT);
-        views.setImageViewResource(R.id.calenderCellBg, R.drawable.circle);
-        views.setViewVisibility(R.id.smallMarker, View.GONE);
-
-        //set cell height
-
-        // Set date text
-        views.setTextViewText(R.id.cellDayText, mDaysInMonth.get(position).dayText);
-        // Date color
+        // Set Grid Cell Visibility
         if (!mDaysInMonth.get(position).isCurrentMonth) {
-            views.setTextColor(R.id.cellDayText, Color.rgb(190, 190, 190));
+            views.setViewVisibility(R.id.widgetCellBg, View.GONE);
         }
-        // Set if today
-        if (String.valueOf(mDaysInMonth.get(position).fullDate).equals(String.valueOf(LocalDate.now()))) {
+        // set first day of month
+        if (Objects.equals(mDaysInMonth.get(position).dayText, "1")){
             views.setViewVisibility(R.id.calenderCellOl, View.VISIBLE);
         }
         // Check Workout
         if (mDaysInMonth.get(position).workout != null){
-            Log.i("herehere", "hi " + mDaysInMonth.get(position).workout);
-            views.setViewVisibility(R.id.cellDayText, View.GONE);
             views.setViewVisibility(R.id.smallTick, View.VISIBLE);
         }
         // Get Color
@@ -124,9 +124,10 @@ public class CalendarWidgetRemoteViewsFactory implements RemoteViewsService.Remo
         long timeSpent = dayModel.timeSpent/1000;
         int newColor = MiscCalendar.getColorForTimeSpent(timeSpent);
         if (newColor == Color.TRANSPARENT){
-            newColor = Color.parseColor("#E1E4F6");
+            newColor = Color.parseColor("#1f252f");
         }
-        views.setInt(R.id.calenderCellBg, "setColorFilter", newColor);
+        // Set Color
+        views.setInt(R.id.widgetCellBg, "setColorFilter", newColor);
 
         return views;
     }
@@ -154,7 +155,7 @@ public class CalendarWidgetRemoteViewsFactory implements RemoteViewsService.Remo
     private void notifyAppWidgetViewDataChanged() {
         // Notify the app widget manager that the data has changed
         AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(mContext);
-        ComponentName componentName = new ComponentName(mContext, CalendarWidget.class);
-        appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetManager.getAppWidgetIds(componentName), R.id.calendar_widget_gridView);
+        ComponentName componentName = new ComponentName(mContext, CalendarHeatmapWidget.class);
+        appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetManager.getAppWidgetIds(componentName), R.id.calendar_heatmap_widget_gridView);
     }
 }

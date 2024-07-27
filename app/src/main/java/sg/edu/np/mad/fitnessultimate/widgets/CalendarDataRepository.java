@@ -26,6 +26,7 @@ public class CalendarDataRepository {
         }
     }
 
+
     public void setDaysReadyListener(DaysReadyListener listener) {
         this.daysReadyListener = listener;
     }

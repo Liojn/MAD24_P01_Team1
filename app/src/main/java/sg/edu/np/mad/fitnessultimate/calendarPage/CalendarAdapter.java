@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,28 +51,18 @@ class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder>
 
     @Override
     public void onBindViewHolder(@NonNull CalendarViewHolder holder, int position) {
-        // Set remote view
-        RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.calendar_cell);
-
         DayModel dayModel = daysOfMonth.get(position);
         holder.setDayModel(dayModel);
         holder.dayOfMonth.setText(dayModel.dayText);
 
         // Background size
-        holder.dayOfMonthBg.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-            @Override
-            public void onGlobalLayout() {
-                // Remove the listener to prevent multiple calls
-                holder.dayOfMonthBg.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-                holder.calenderCellOl.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-
-                // Set the height equal to the width
-                FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) holder.dayOfMonthBg.getLayoutParams();
-                params.height = holder.dayOfMonthBg.getWidth();
-                holder.dayOfMonthBg.setLayoutParams(params);
-                holder.calenderCellOl.setLayoutParams(params);
-            }
-        });
+        FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) holder.dayOfMonthBg.getLayoutParams();
+        params.height = 102;
+        int marginDp = 10;
+        int marginPx = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, marginDp, holder.itemView.getResources().getDisplayMetrics());
+        params.setMargins(marginPx, marginPx, marginPx, marginPx);
+        holder.dayOfMonthBg.setLayoutParams(params);
+        holder.calenderCellOl.setLayoutParams(params);
 
         // Date color
         if (!dayModel.isCurrentMonth) {

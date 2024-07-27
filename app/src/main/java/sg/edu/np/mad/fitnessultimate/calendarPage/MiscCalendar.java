@@ -35,6 +35,7 @@ public class MiscCalendar extends BaseActivity{
         LocalDate firstOfMonth = date.withDayOfMonth(1);
         int dayOfWeek = firstOfMonth.getDayOfWeek().getValue();
 
+        int counter = 0;
         for (int i = 1; i <= 42; i++) {
             if (i > daysInMonth + dayOfWeek && i % 7 == 1) {
                 break;
@@ -44,6 +45,7 @@ public class MiscCalendar extends BaseActivity{
                 int past = yearMonth.minusMonths(1).lengthOfMonth() - dayOfWeek + i;
                 LocalDate pastDate = date.minusMonths(1).withDayOfMonth(past);
                 daysInMonthArray.add(new DayModel(String.valueOf(past), false, pastDate, 0, null));
+                counter += 1;
             } else if (i > daysInMonth + dayOfWeek) {
                 int next = i - daysInMonth - dayOfWeek;
                 LocalDate nextDate = date.plusMonths(1).withDayOfMonth(next);
@@ -65,6 +67,9 @@ public class MiscCalendar extends BaseActivity{
 
                 daysInMonthArray.add(new DayModel(String.valueOf(i - dayOfWeek), true, currentDate, timeSpent, workout));
             }
+        }
+        if (counter == 7){
+            daysInMonthArray = new ArrayList<>(daysInMonthArray.subList(7, daysInMonthArray.size()));
         }
         return daysInMonthArray;
     }

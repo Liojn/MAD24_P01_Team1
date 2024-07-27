@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/calenderCell"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="60dp">
 
     <ImageView
         android:id="@+id/calenderCellBg"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
+        android:layout_height="match_parent"
         android:scaleType="centerCrop"
         android:layout_gravity="center"
         android:background="@drawable/circle" />
@@ -15,8 +15,7 @@
     <ImageView
         android:id="@+id/calenderCellOl"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
+        android:layout_height="match_parent"
         android:scaleType="centerCrop"
         android:layout_gravity="center"
         android:background="@drawable/today_border"
@@ -39,5 +38,13 @@
         android:layout_marginBottom="5dp"
         android:background="@drawable/circle"
         android:layout_gravity="center_horizontal|bottom" />
+
+    <ImageView
+        android:id="@+id/smallTick"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:background="@drawable/tick"
+        android:layout_gravity="center"
+        android:visibility="gone" />
 
 </FrameLayout>
