@@ -1,5 +1,7 @@
 package sg.edu.np.mad.fitnessultimate.foodtracker;
 
+import static android.content.ContentValues.TAG;
+
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
@@ -13,6 +15,7 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.widget.Button;
 import android.content.Intent;
 import android.view.View;
@@ -20,15 +23,20 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.button.MaterialButtonToggleGroup;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -130,9 +138,15 @@ public class FoodTracker extends BaseActivity {
         mealTypeToggle = findViewById(R.id.mealTypeToggle);
         mealsRecyclerView = findViewById(R.id.mealsRecyclerView);
 
-        setupMealTypeToggle();
-        setupRecyclerView();
-        fetchMealsFromDatabase();
+        try {
+            setupMealTypeToggle();
+            setupRecyclerView();
+            fetchMealsFromDatabase();
+        } catch (Exception e) {
+            Log.e("FoodTracker", "Error occured: ", e);
+            Toast.makeText(this, "An error occured. Please try again.", Toast.LENGTH_SHORT).show();
+        }
+
 
         progressBarCarbs = findViewById(R.id.progressBarCarbs);
         progressBarProtein = findViewById(R.id.progressBarProtein);
@@ -144,6 +158,7 @@ public class FoodTracker extends BaseActivity {
         textViewFats = findViewById(R.id.fats);
         textViewOthers = findViewById(R.id.others);
 
+        updateNutrientInfo();
     }
 
     //Method is called when an activity lunched exists, giving back requestCode, resultCode, and other additional data if it exists
@@ -152,9 +167,7 @@ public class FoodTracker extends BaseActivity {
         super.onActivityResult(requestCode, resultCode, data);
         //Handles the result from the LogDetails activity
         if (requestCode == REQUEST_CODE_LOG_DETAILS && resultCode == RESULT_OK) {
-            double bmr = data.getDoubleExtra("bmr", 0.0); //Get bmr value from result
-            storeSuggestedCalorieIntake(bmr);
-            totalCalories.setText(String.valueOf(bmr) + " kcals"); //Update total calories TextView
+            getBMRFromFirebase(); // Fetch the bmr/daily calories limit from the database
             updateDailyIntake(); //Update daily intake TextView
         }
     }
@@ -170,6 +183,48 @@ public class FoodTracker extends BaseActivity {
     private String getCurrentDate() {
         SimpleDateFormat sdf = new SimpleDateFormat("MMM d, yyyy (EEEE)", Locale.getDefault());
         return sdf.format(new Date()); //Return the formatted date
+    }
+
+    private void getBMRFromFirebase() {
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        if (currentUser != null) {
+            String userID = currentUser.getUid();
+            DocumentReference documentReference = FirebaseFirestore.getInstance().collection("users").document(userID);
+            documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                    if (task.isSuccessful()) {
+                        DocumentSnapshot document = task.getResult();
+                        if (document.exists()) {
+                            Double bmr = document.getDouble("dailyCalorieIntake");
+                            if (bmr != null) {
+                                // Use the fetched BMR value as needed
+                                Log.d(TAG, "BMR fetched successfully: " + bmr);
+                                // For example, store it in a variable or update the UI
+                                updateUIWithBMR(bmr);
+                            } else {
+                                Log.d(TAG, "No BMR value found");
+                            }
+                        } else {
+                            Log.d(TAG, "No such document");
+                        }
+                    } else {
+                        Log.d(TAG, "get failed with ", task.getException());
+                    }
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Log.d(TAG, "Error fetching BMR: ", e);
+                }
+            });
+        } else {
+            Toast.makeText(FoodTracker.this, "No user logged in", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void updateUIWithBMR(double bmr) {
+        totalCalories.setText(String.valueOf(bmr) + " kcals");
     }
 
     private void setupMealTypeToggle() {
@@ -199,6 +254,7 @@ public class FoodTracker extends BaseActivity {
     private void fetchMealsFromDatabase() {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
+            Log.d("FoodTracker", "User ID: " + user.getUid());
             DatabaseReference userMealsRef = FirebaseDatabase.getInstance().getReference()
                     .child("users")
                     .child(user.getUid())
@@ -213,15 +269,22 @@ public class FoodTracker extends BaseActivity {
                             mealList.add(meal);
                         }
                     }
+
+                    Log.d("FoodTracker", "Fetched" + mealList.size() + " meals");
                     updateMealList(getMealTypeFromButtonId(mealTypeToggle.getCheckedButtonId()));
                     updateDailyIntake();
                 }
 
                 @Override
                 public void onCancelled(@NonNull DatabaseError databaseError) {
+                    Log.e("FoodTracker", "Database error: " + databaseError.getMessage());
+                    Log.e("FoodTracker", "Error details: " + databaseError.getDetails());
+                    Log.e("FoodTracker", "Error code: " + databaseError.getCode());
                     Toast.makeText(FoodTracker.this, "Failed to load meals", Toast.LENGTH_SHORT).show();
                 }
             });
+        } else {
+            Log.e("Food Tracker", "User is not authenticated");
         }
     }
 

@@ -19,12 +19,17 @@ import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 
 import org.json.JSONArray;
@@ -38,6 +43,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 
 import sg.edu.np.mad.fitnessultimate.R;
 import sg.edu.np.mad.fitnessultimate.calendarPage.BaseActivity;
@@ -54,6 +61,7 @@ public class SearchResultsActivity extends BaseActivity {
     private String selectedFoodName;
     private double selectedFoodCalories, selectedCarbs, selectedProteins, selectedFats, selectedOthers;
     private FirebaseAuth mAuth;
+    private FirebaseFirestore fStore;
     private DatabaseReference databaseReference;
 
     private String apiUrl = "https://api.calorieninjas.com/v1/nutrition?query=";
@@ -101,7 +109,7 @@ public class SearchResultsActivity extends BaseActivity {
 
     private void setupFirebase() {
         mAuth = FirebaseAuth.getInstance();
-        databaseReference = FirebaseDatabase.getInstance().getReference("meals");
+        fStore = FirebaseFirestore.getInstance();
     }
 
     private void fetchNutritionData(String query) {
@@ -249,8 +257,7 @@ public class SearchResultsActivity extends BaseActivity {
 
         btnConfirmAdd.setOnClickListener(v -> {
             if (validateInput(selectedDate[0])) {
-                addMealToDatabase(selectedDate[0]);
-                popupWindow.dismiss();
+                addMealToFirestore(selectedDate[0]);
             }
         });
 
@@ -283,20 +290,36 @@ public class SearchResultsActivity extends BaseActivity {
         return true;
     }
 
-    private void addMealToDatabase(String date) {
+    private void addMealToFirestore(String date) {
         int selectedId = radioGroupMealType.getCheckedRadioButtonId();
         RadioButton selectedRadioButton = popupWindow.getContentView().findViewById(selectedId);
         String selectedMealType = selectedRadioButton.getText().toString();
         FirebaseUser user = mAuth.getCurrentUser();
 
         if (user != null) {
-            Meal meal = new Meal(selectedFoodName, selectedFoodCalories, selectedCarbs, selectedProteins, selectedFats, selectedOthers, selectedMealType, date);
-            databaseReference.child(user.getUid()).push().setValue(meal)
-                    .addOnSuccessListener(aVoid -> {
-                        Toast.makeText(this, "Meal added successfully", Toast.LENGTH_SHORT).show();
-                        popupWindow.dismiss();
-                    })
-                    .addOnFailureListener(e -> Toast.makeText(this, "Failed to add meal", Toast.LENGTH_SHORT).show());
+            Map<String, Object> meal = new HashMap<>();
+            meal.put("foodName", selectedFoodName);
+            meal.put("calories", selectedFoodCalories);
+            meal.put("carbs", selectedCarbs);
+            meal.put("proteins", selectedProteins);
+            meal.put("fats", selectedFats);
+            meal.put("others", selectedOthers);
+            meal.put("mealType", selectedMealType);
+            meal.put("date", date);
+
+            fStore.collection("users").document(user.getUid())
+                    .collection("meals").add(meal)
+                    .addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+                        @Override
+                        public void onComplete(@NonNull Task<DocumentReference> task) {
+                            if (task.isSuccessful()) {
+                                Toast.makeText(SearchResultsActivity.this, "Meal added successfully", Toast.LENGTH_SHORT).show();
+                                popupWindow.dismiss();
+                            } else {
+                                Toast.makeText(SearchResultsActivity.this, "Failed to add meal: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
         } else {
             Toast.makeText(this, "User not logged in", Toast.LENGTH_SHORT).show();
         }
