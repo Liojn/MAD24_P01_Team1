@@ -271,7 +271,7 @@
 
             <ImageView
                 android:layout_width="match_parent"
-                android:layout_height="59dp"
+                android:layout_height="105dp"
                 android:layout_gravity="center"
                 android:background="@drawable/water_flow"
                 android:scaleType="centerCrop"

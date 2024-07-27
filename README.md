@@ -95,15 +95,13 @@ At Fitness Ultimate, we understand the importance of maintaining a healthy lifes
 
 2.)Widgets (Jovan)
 
-- The widgets will display the user's progress towards fitness goals and show metrics within a graphic such as a chart or graph ect..
+- The widgets will display the user's progress displaying a calendar with whether they have worked out that day and a heat map 
 
-- Metrics include calories burned, calorie intake, Water intake, active minutes, sleep data and training tracker.
+- Metrics include how much time spent on working out.
 
 - This widget will also provide easy access into the specific functions in the app by pressing the different widgets/parts of the widgets.
 
-- The widget can also provide control over certain features in the app, example pausing and playing the workout
-
-- The data on the widget will be updated whenever there is a manual input of new data or once every few mins for live fed data.
+- The data on the widget will be updated once every few mins for live fed data.
 
 3.)Advanced Food Tracker (Kris)
 
@@ -120,23 +118,19 @@ At Fitness Ultimate, we understand the importance of maintaining a healthy lifes
 
 - Users can set a daily goal for how much water they want to drink
 
-- To enhance user engagement, users can drag and drop water droplets into a virtual cup. Each water droplet represents 100 ml of water
+- To enhance user engagement, users can drag and drop water droplets into a progress cicrle bar. Each water droplet represents an amount of water
 
-- To remind users, the app will send periodic notifications reminding them to drink water if they haven't updated their water intake after a while (e.g., every hour)
+- Users can set reminders and have the option to edit or delete them. They can also snooze or dismiss reminders, with each snooze extending by an hour. Each alarm not only rings but also sends a notification.
 
-- Fluidity feature that will make the water appear to move and flow as the phone is tilted, creating a motion effect
+5.) RecyclerView in Fragment Video Recommendation + Google Map Api for nearest gym (Kiefer)
 
-5.)AI chatbot (Kiefer)
+- Users can ask how to do a push up, pull up or crunches which will cause the fragment to appear.
 
-- Users can choose from predefined questions from FAQ or they can type their own questions
+- The fragment is scrollable and will snap to each video. The user can swipe down the fragment to close it.
 
-- AI chatbot wil check to see if it's a predefined question. It uses the predefined answer. Else the ai will reply to the users own question on their own.
+- Users can ask to find the nearest gym and it will open a map fragment.
 
-- Users can retype their question if they are not satisfied with the answer.
-
-- AI will reply Out of Scope if User asks something not related to the app.
-
-- If AI cannot reply, direct to live chat
+- User clicks on the find nearest gym button and it will show a route and markers of the bus stops / MRT needed to get to the gym.
 
 ## User Guide
 
@@ -183,5 +177,6 @@ At Fitness Ultimate, we understand the importance of maintaining a healthy lifes
 ![img.png](img.png)![img_1.png](img_1.png)
 
 ## Credits 
+
 discover_excersies.webp : https://www.vecteezy.com/vector-art/2607268-people-exercising-at-gym
 benefits_excerise.jpg : https://www.pinterest.com/pin/74239093851841853/
