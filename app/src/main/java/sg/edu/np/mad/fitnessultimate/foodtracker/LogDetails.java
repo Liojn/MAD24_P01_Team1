@@ -5,10 +5,12 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,12 +18,28 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
+
 import sg.edu.np.mad.fitnessultimate.R;
 import sg.edu.np.mad.fitnessultimate.calendarPage.BaseActivity;
 
 public class LogDetails extends BaseActivity {
-
+    private static final String TAG = "LogDetails";
     private double calculatedBMR;
+    private FirebaseAuth mAuth;
+    private FirebaseFirestore fStore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +52,10 @@ public class LogDetails extends BaseActivity {
             return insets;
         });
 
+        // Initialize Firebase Auth and Database
+        mAuth = FirebaseAuth.getInstance();
+        fStore = FirebaseFirestore.getInstance();
+
         //Initializing views
         RadioGroup genderGroup = findViewById(R.id.genderRadio);
         EditText ageText = findViewById(R.id.ageText);
@@ -44,13 +66,10 @@ public class LogDetails extends BaseActivity {
         Button saveButton = findViewById(R.id.saveButton);
         Button cancelButton = findViewById(R.id.cancelButton);
 
-        // Set a click listener for the cancel button
-        cancelButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        // Set a click listener for the cancel buttonthi
+        cancelButton.setOnClickListener( v ->{onBackPressed();}
+        );
+
 
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -167,15 +186,46 @@ public class LogDetails extends BaseActivity {
                 // Formatting bmr to 1 decimal place and parsing back string to a double
                 String formattedBMR = String.format("%.1f", bmr);
                 calculatedBMR = Double.parseDouble(formattedBMR);
-                returnCalculatedBMR(); //Calling the activity to return bmr
+                saveBMRToFirebase(calculatedBMR);
             }
 
-            //Prepares the result intent with the bmr and finishes the activity
-            private void returnCalculatedBMR() {
-                Intent resultIntent = new Intent(); //Intent to hold the reuslt data
-                resultIntent.putExtra("bmr", calculatedBMR);
-                setResult(Activity.RESULT_OK, resultIntent); //Set the result of activity to RESULT_OK and attach the intent
-                finish(); //Finish the activity and return to the previous one
-            }
         });
-    }}
+    }
+    private void saveBMRToFirebase(double bmr) {
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if (currentUser != null) {
+            String userID = currentUser.getUid();
+            DocumentReference documentReference = fStore.collection("users").document(userID);
+            Map<String, Object> user = new HashMap<>();
+            user.put("dailyCalorieIntake", bmr);
+            documentReference.update(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    if (task.isSuccessful()) {
+                        Toast.makeText(LogDetails.this, "BMR saved successfully", Toast.LENGTH_SHORT).show();
+                        Log.d(TAG, "onSuccess: BMR is updated for " + userID);
+                        returnCalculatedBMR();
+                    } else {
+                        Toast.makeText(LogDetails.this, "Error! " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Log.d(TAG, "onFailure: " + e.toString());
+                    Toast.makeText(LogDetails.this, "Error saving BMR", Toast.LENGTH_SHORT).show();
+                }
+            });
+        } else {
+            Toast.makeText(LogDetails.this, "No user logged in", Toast.LENGTH_SHORT).show();
+        }
+    }
+    //Prepares the result intent with the bmr and finishes the activity
+    private void returnCalculatedBMR() {
+        Intent resultIntent = new Intent(); //Intent to hold the reuslt data
+        resultIntent.putExtra("bmr", calculatedBMR);
+        setResult(Activity.RESULT_OK, resultIntent); //Set the result of activity to RESULT_OK and attach the intent
+        finish(); //Finish the activity and return to the previous one
+    }
+
+}

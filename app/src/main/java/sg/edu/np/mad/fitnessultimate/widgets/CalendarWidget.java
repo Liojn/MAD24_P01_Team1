@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 import sg.edu.np.mad.fitnessultimate.R;
+import sg.edu.np.mad.fitnessultimate.calendarPage.CalendarActivity;
 import sg.edu.np.mad.fitnessultimate.calendarPage.DayModel;
 import sg.edu.np.mad.fitnessultimate.training.helpers.GlobalExerciseData;
 import sg.edu.np.mad.fitnessultimate.training.helpers.JsonUtils;
@@ -81,6 +82,11 @@ public class CalendarWidget extends AppWidgetProvider {
         buttonIntent.putExtra("option", options);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, buttonIntent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
         views.setOnClickPendingIntent(R.id.nextMonthButton, pendingIntent);
+
+        // Create an Intent to trigger the update
+        Intent updateIntent = new Intent(context, CalendarActivity.class);
+        PendingIntent pendIntent = PendingIntent.getActivity(context, 0, updateIntent, PendingIntent.FLAG_IMMUTABLE);
+        views.setOnClickPendingIntent(R.id.calendar, pendIntent);
 
         // Instruct the widget manager to update the widget
         appWidgetManager.updateAppWidget(appWidgetId, views);

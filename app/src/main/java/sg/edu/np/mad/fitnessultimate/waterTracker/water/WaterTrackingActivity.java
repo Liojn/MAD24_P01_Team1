@@ -125,8 +125,7 @@ public class WaterTrackingActivity extends AppCompatActivity {
 
         // Navigate back to ProfilePage
         findViewById(R.id.backBtn).setOnClickListener(v -> {
-            Intent intent = new Intent(WaterTrackingActivity.this, ReminderActivity.class);
-            startActivity(intent);
+            onBackPressed();
         });
 
         // Initialize the calendar to the current date
