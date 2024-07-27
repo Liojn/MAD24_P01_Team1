@@ -1,10 +1,17 @@
 package sg.edu.np.mad.fitnessultimate.calendarPage;
 
+import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
+import android.util.Log;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
+import android.widget.FrameLayout;
+import android.widget.RelativeLayout;
+import android.widget.RemoteViews;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -19,11 +26,14 @@ class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder>
 {
     private final ArrayList<DayModel> daysOfMonth;
     private final OnItemListener onItemListener;
+    private final Context context;
 
-    public CalendarAdapter(ArrayList<DayModel> daysOfMonth, OnItemListener onItemListener)
+    public CalendarAdapter(Context context, ArrayList<DayModel> daysOfMonth, OnItemListener onItemListener)
     {
+        this.context = context;
         this.daysOfMonth = daysOfMonth;
         this.onItemListener = onItemListener;
+
     }
 
     @NonNull
@@ -45,6 +55,15 @@ class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder>
         holder.setDayModel(dayModel);
         holder.dayOfMonth.setText(dayModel.dayText);
 
+        // Background size
+        FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) holder.dayOfMonthBg.getLayoutParams();
+        params.height = 102;
+        int marginDp = 10;
+        int marginPx = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, marginDp, holder.itemView.getResources().getDisplayMetrics());
+        params.setMargins(marginPx, marginPx, marginPx, marginPx);
+        holder.dayOfMonthBg.setLayoutParams(params);
+        holder.calenderCellOl.setLayoutParams(params);
+
         // Date color
         if (!dayModel.isCurrentMonth) {
             holder.dayOfMonth.setTextColor(Color.rgb(190, 190, 190));
@@ -53,7 +72,7 @@ class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder>
         // Set background color based on time spent
         long timeSpent = dayModel.timeSpent/1000;
         GradientDrawable background = (GradientDrawable) holder.dayOfMonthBg.getBackground();
-        background.setColor(getColorForTimeSpent(timeSpent));
+        background.setColor(MiscCalendar.getColorForTimeSpent(timeSpent));
         if (timeSpent >= 30){
             holder.dayOfMonth.setTextColor(Color.WHITE);
         }
@@ -71,22 +90,6 @@ class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder>
             smallMarker.setColor(Color.rgb(252, 162, 93));
         } else {
             smallMarker.setColor(Color.TRANSPARENT);
-        }
-    }
-
-    private int getColorForTimeSpent(long timeSpent) {
-        // Replace this logic with your desired color coding
-        if (timeSpent < 30) {
-            return Color.TRANSPARENT;
-        } else if (timeSpent < 600) {
-            return Color.rgb(159, 166, 212);
-//            return Color.rgb(180, 237, 180);
-        } else if (timeSpent < 1800) {
-            return Color.rgb(109, 118, 181);
-//            return Color.rgb(98, 227, 98);
-        } else {
-            return Color.rgb(73, 82, 138);
-//            return Color.rgb(36, 200, 36);
         }
     }
 

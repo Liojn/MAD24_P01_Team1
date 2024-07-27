@@ -6,4 +6,8 @@
     <color name="enabledButtonColor">#141abb</color>
     <color name="app_bg">#E1E4F6</color>
     <color name="app_primary_text">#2d3250</color>
+    <color name="light_blue_50">#FFE1F5FE</color>
+    <color name="light_blue_200">#FF81D4FA</color>
+    <color name="light_blue_600">#FF039BE5</color>
+    <color name="light_blue_900">#FF01579B</color>
 </resources>
