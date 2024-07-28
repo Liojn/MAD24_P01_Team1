@@ -95,13 +95,15 @@ At Fitness Ultimate, we understand the importance of maintaining a healthy lifes
 
 2.)Widgets (Jovan)
 
-- The widgets will display the user's progress displaying a calendar with whether they have worked out that day and a heat map 
+- The widgets will display the user's progress displaying a calendar with whether they have worked out that day and a heat map.
 
 - Metrics include how much time spent on working out.
 
-- This widget will also provide easy access into the specific functions in the app by pressing the different widgets/parts of the widgets.
+- The data will be displayed on 2 different widgets, a calendar widget and a heatmap widget depending on the users preference.
 
-- The data on the widget will be updated once every few mins for live fed data.
+- This widget will also provide easy access into the calendar part of the app by pressing on the widgets it self.
+
+- The data on the widget will be updated once every few hours for live fed data.
 
 3.)Advanced Food Tracker (Kris)
 
